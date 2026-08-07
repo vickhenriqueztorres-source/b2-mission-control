@@ -1,0 +1,341 @@
+{
+  "release_status": "STABLE",
+  "status_text": "RELEASE_STATUS = STABLE; VERSION = 1.0.0",
+  "environment": "production",
+  "version": "1.0.0",
+  "previous_version": "1.0.0-rc3",
+  "released_at": "2026-08-07T02:35:44.761Z",
+  "critical_file_paths": [
+    {
+      "role": "node package metadata",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\package.json",
+      "exists": true,
+      "sha256": "1595771e74dcea1aaf1778899c918552b7048fe21f9a68cfd35edf74509dfa0f",
+      "size_bytes": 1442
+    },
+    {
+      "role": "node package lock",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\package-lock.json",
+      "exists": true,
+      "sha256": "62d2123e6c5cf0ada7f09b53231b3364c1c1f9ed6c54c8c65b91f0fd3ae56c2a",
+      "size_bytes": 61333
+    },
+    {
+      "role": "typescript configuration",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\tsconfig.json",
+      "exists": true,
+      "sha256": "28bf1cf77dd835e4c7c798f49c463fcc021d68a632c13b0b23a3e5cc0fa1cfc1",
+      "size_bytes": 335
+    },
+    {
+      "role": "mission-control environment configuration",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\config\\environment.ts",
+      "exists": true,
+      "sha256": "15b99e76fb051c417f9cac14bd1f64ee8774393441e0fb46a1a3e1d13e91c9be",
+      "size_bytes": 889
+    },
+    {
+      "role": "production safety guard configuration",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\config\\productionSafetyGuard.ts",
+      "exists": true,
+      "sha256": "ce86832e5599e07084c4263e5bc6d36c39e54f9c6c5c03b8686479da46311a6d",
+      "size_bytes": 3604
+    },
+    {
+      "role": "media backup policy configuration",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\config\\media-full-backup.json",
+      "exists": true,
+      "sha256": "9dc45544c455e6d006220aedabdd5e0e7bb65ee960000d84ec0fa1bb7cd2bcdf",
+      "size_bytes": 197
+    },
+    {
+      "role": "mission-control database schema",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\database\\schema.sql",
+      "exists": true,
+      "sha256": "dae8a6379d71f97d448fb671576f14498f98010dfeebdb5e9c127a70e831eaad",
+      "size_bytes": 1911
+    },
+    {
+      "role": "mission-control database adapter",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\database\\db.ts",
+      "exists": true,
+      "sha256": "0c352c7c3a22bd68a6d75b853465d9194a0932f1b9c865a500a81546ea4dba17",
+      "size_bytes": 595
+    },
+    {
+      "role": "resilience scenario schema",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\resilience\\contracts\\scenario-contract.schema.json",
+      "exists": true,
+      "sha256": "714a560a88fb9f875d84ca36ea337e9b4b05daf965b342339ee3ef6d58da8ef0",
+      "size_bytes": 1686
+    },
+    {
+      "role": "production runner",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\orchestrator\\productionRunner.ts",
+      "exists": true,
+      "sha256": "6e5b63488328ac932c783a4830c89e87417d995c16c4c7f55e71f6ddbf4a476c",
+      "size_bytes": 4826
+    },
+    {
+      "role": "pilot runner",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\production\\productionPilotRunner.ts",
+      "exists": true,
+      "sha256": "dc44349e8617ba1a420927c608194854e4babc9e6bcd98ce7cd60d3001f31fd1",
+      "size_bytes": 7573
+    },
+    {
+      "role": "soak runner",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\production\\soakTestRunner.ts",
+      "exists": true,
+      "sha256": "8029d29b991f9d2e41e4a633d13d41aab5b0aeaf1311b01f7cb41e9cc5e9e6c2",
+      "size_bytes": 2531
+    },
+    {
+      "role": "motion to firefly bridge",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\production-bridge\\motionToFirefly.ts",
+      "exists": true,
+      "sha256": "fc51cfb804bf715d693b4ac4604f892a681fef167e322be30d4ce12a83d9911e",
+      "size_bytes": 3205
+    },
+    {
+      "role": "firefly intake bridge",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\production-bridge\\fireflyToIntake.ts",
+      "exists": true,
+      "sha256": "daa4db3886dd550da67aae8656895054b28e9ebd13f2aa017890416eff5f8bef",
+      "size_bytes": 2722
+    },
+    {
+      "role": "media backup manager",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\backup\\mediaBackupManager.ts",
+      "exists": true,
+      "sha256": "1c072e1d1bd1de405c3a48f56218ce7d7e48a17e3aff4c4fc9a339e668760b51",
+      "size_bytes": 14530
+    },
+    {
+      "role": "media backup cli",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\backup\\mediaBackupCli.ts",
+      "exists": true,
+      "sha256": "c28a96e4375d008c04158f5a7373028675119dfd38e36e58d8a82a311156341f",
+      "size_bytes": 1521
+    },
+    {
+      "role": "mission-control preview/event server",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\event-hub\\wsServer.ts",
+      "exists": true,
+      "sha256": "b0dfcd1ced2c22dd3413ccc5b3ccbbc39c13e85bf4b48d0889051902afc6de76",
+      "size_bytes": 5893
+    },
+    {
+      "role": "firefly configuration",
+      "path": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\firefly_bot\\config.py",
+      "exists": true,
+      "sha256": "9215ac70fa856720e4d666f1e7d32760c1b29c360705593ff33b8d09676f0691",
+      "size_bytes": 5225
+    },
+    {
+      "role": "firefly worker",
+      "path": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\firefly_bot\\worker.py",
+      "exists": true,
+      "sha256": "ece668fd29c9650a01e33e595c7f43b04a33e4a2128b8ea40f6e7c7183c76e81",
+      "size_bytes": 37027
+    },
+    {
+      "role": "firefly state reader",
+      "path": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\firefly_bot\\state_reader.py",
+      "exists": true,
+      "sha256": "bbd65b82210547e9e8662f2f937d99a38e937bf5dca0229a54696e7169df29da",
+      "size_bytes": 9644
+    },
+    {
+      "role": "firefly job store",
+      "path": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\firefly_bot\\job_store.py",
+      "exists": true,
+      "sha256": "e71aa7109029a1c3b091598d57ef5124b57d157087a2bd2697fdf9b8ac0b251b",
+      "size_bytes": 23273
+    },
+    {
+      "role": "firefly export flow",
+      "path": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\firefly_bot\\export_flow.py",
+      "exists": true,
+      "sha256": "c023f0c71e7bcf53e13fc7687225611d096de3690827396fceba331434bf93d0",
+      "size_bytes": 1959
+    },
+    {
+      "role": "firefly downloads",
+      "path": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\firefly_bot\\downloads.py",
+      "exists": true,
+      "sha256": "a434bb40d509496485259986162fff3e02ddd6c3fe84faba526fc37126d67c71",
+      "size_bytes": 6237
+    },
+    {
+      "role": "firefly cli entrypoint",
+      "path": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\firefly_bot\\main.py",
+      "exists": true,
+      "sha256": "8a307d025bc241981dedc872c6f0aa5edeed2e6c8b2c0e930ae754919f4591b8",
+      "size_bytes": 4788
+    },
+    {
+      "role": "RC3 timeout inventory",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\timeout_inventory.json",
+      "exists": true,
+      "sha256": "fdb2578fb8478755db10fb464be3f0ef34707a901f8633437854575bde5b1a10",
+      "size_bytes": 412
+    }
+  ],
+  "schemas": [
+    {
+      "role": "schema",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\database\\schema.sql",
+      "exists": true,
+      "sha256": "dae8a6379d71f97d448fb671576f14498f98010dfeebdb5e9c127a70e831eaad",
+      "size_bytes": 1911
+    },
+    {
+      "role": "schema",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\resilience\\contracts\\scenario-contract.schema.json",
+      "exists": true,
+      "sha256": "714a560a88fb9f875d84ca36ea337e9b4b05daf965b342339ee3ef6d58da8ef0",
+      "size_bytes": 1686
+    }
+  ],
+  "production_configuration": [
+    {
+      "role": "production configuration",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\config\\environment.ts",
+      "exists": true,
+      "sha256": "15b99e76fb051c417f9cac14bd1f64ee8774393441e0fb46a1a3e1d13e91c9be",
+      "size_bytes": 889
+    },
+    {
+      "role": "production configuration",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\config\\productionSafetyGuard.ts",
+      "exists": true,
+      "sha256": "ce86832e5599e07084c4263e5bc6d36c39e54f9c6c5c03b8686479da46311a6d",
+      "size_bytes": 3604
+    },
+    {
+      "role": "production configuration",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\config\\media-full-backup.json",
+      "exists": true,
+      "sha256": "9dc45544c455e6d006220aedabdd5e0e7bb65ee960000d84ec0fa1bb7cd2bcdf",
+      "size_bytes": 197
+    },
+    {
+      "role": "production configuration",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\pilot_config.json",
+      "exists": true,
+      "sha256": "3b133f46e5f2af6b149f79dcafc46a799f961838620894155ff5be2c327f72b3",
+      "size_bytes": 2375
+    },
+    {
+      "role": "production configuration",
+      "path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\timeout_inventory.json",
+      "exists": true,
+      "sha256": "fdb2578fb8478755db10fb464be3f0ef34707a901f8633437854575bde5b1a10",
+      "size_bytes": 412
+    }
+  ],
+  "runtime": {
+    "node_version": "v22.17.0",
+    "npm_version": "10.9.2",
+    "python_version": "Python 3.13.5"
+  },
+  "dependencies": {
+    "declared": {
+      "dependencies": {
+        "ajv": "^8.17.1",
+        "ajv-formats": "^3.0.1",
+        "better-sqlite3": "^11.8.0",
+        "dotenv": "^16.4.7",
+        "express": "^4.21.2",
+        "ws": "^8.18.0"
+      },
+      "devDependencies": {
+        "@types/better-sqlite3": "^7.6.12",
+        "@types/express": "^5.0.0",
+        "@types/node": "^22.13.1",
+        "@types/ws": "^8.5.14",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.7.3"
+      }
+    },
+    "installed_versions": {
+      "ajv": "8.20.0",
+      "ajv-formats": "3.0.1",
+      "better-sqlite3": "11.10.0",
+      "dotenv": "16.6.1",
+      "express": "4.22.2",
+      "ws": "8.21.2",
+      "@types/better-sqlite3": "7.6.13",
+      "@types/express": "5.0.6",
+      "@types/node": "22.20.1",
+      "@types/ws": "8.18.1",
+      "ts-node": "10.9.2",
+      "typescript": "5.9.3"
+    }
+  },
+  "database_paths": {
+    "mission_control": "C:\\B2-AI-STUDIO\\mission-control\\database\\mission_control.db",
+    "mission_control_wal": "C:\\B2-AI-STUDIO\\mission-control\\database\\mission_control.db-wal",
+    "mission_control_shm": "C:\\B2-AI-STUDIO\\mission-control\\database\\mission_control.db-shm",
+    "firefly_jobs": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\data\\firefly_jobs.db",
+    "firefly_jobs_wal": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\data\\firefly_jobs.db-wal",
+    "firefly_jobs_shm": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\data\\firefly_jobs.db-shm",
+    "telemetry": "C:\\B2-AI-STUDIO\\mission-control\\database\\telemetry.db",
+    "telemetry_exists": false
+  },
+  "rc3_evidence_paths": {
+    "closure_audit": "C:\\B2-AI-STUDIO\\mission-control\\PHASE-5-RC3-CLOSURE-AUDIT.md",
+    "media_e2e": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-MEDIA-E2E-001",
+    "pilot": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001",
+    "pilot_summary": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\media_validation_summary.json",
+    "backup": "C:\\B2-AI-STUDIO\\mission-control\\runs\\MEDIA-BACKUP-RC3-001",
+    "backup_summary": "C:\\B2-AI-STUDIO\\mission-control\\runs\\MEDIA-BACKUP-RC3-001\\backup_summary.json"
+  },
+  "backup_id": "MEDIA_FULL_BACKUP_1786060865379",
+  "backup_destination_root": "D:\\motion b2 backup",
+  "timeout_configuration": {
+    "path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\timeout_inventory.json",
+    "sha256": "fdb2578fb8478755db10fb464be3f0ef34707a901f8633437854575bde5b1a10",
+    "inventory": {
+      "navigation_timeout_ms": 90000,
+      "browser_action_timeout_ms": 60000,
+      "state_reader_timeout_ms": 15000,
+      "poll_interval_ms": 3000,
+      "generation_budget_ms": 600000,
+      "watchdog_wall_clock_ms": 800000,
+      "per_slot_wall_clock_ms": 770000,
+      "download_timeout_ms": 120000,
+      "mission_control_worker_timeout_ms": null,
+      "selector_micro_timeout_ms": 500,
+      "concurrency": 1,
+      "policy": "unchanged_from_rc3"
+    }
+  },
+  "firefly_concurrency_configured": 1,
+  "rc3_results": {
+    "RC3-MEDIA-E2E-001": "PASS",
+    "RC3-PILOT-001": "PASS",
+    "MEDIA-BACKUP-RC3-001": "PASS",
+    "productions": 5,
+    "real_mp4s": "20/20",
+    "ffprobe_pass": "20/20",
+    "unique_sha256": "20/20",
+    "duplicate_hashes": 0,
+    "part_files": 0,
+    "active_jobs_at_end": 0,
+    "backup_copied": "20/20",
+    "backup_restored": "20/20",
+    "backup_restored_hashes_valid": "20/20",
+    "backup_restored_ffprobe_pass": "20/20"
+  },
+  "validation": {
+    "npm_build_exit_code": 0,
+    "python_compileall_exit_code": 0,
+    "final_build_pass": true
+  },
+  "git": {
+    "repository_existed_before_release": false,
+    "note": "No Git tag was invented before release documentation. Git initialization/commit/tag is a separate post-release step requested by the user."
+  }
+}

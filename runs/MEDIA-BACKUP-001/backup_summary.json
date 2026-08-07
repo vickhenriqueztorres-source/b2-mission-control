@@ -1,0 +1,45 @@
+{
+  "run_id": "MEDIA-BACKUP-001",
+  "backup_id": "MEDIA_FULL_BACKUP_1786049097442",
+  "policy": "media-full-backup",
+  "destination_root": "D:\\motion b2 backup",
+  "restore_root": "D:\\B2-MEDIA-RESTORE-TEST\\MEDIA_FULL_BACKUP_1786049097442_20260806174756",
+  "destination_is_external_drive": true,
+  "drive_evidence": {
+    "c_drive": {
+      "disk_index": 0,
+      "partition": "Disk #0, Partition #1"
+    },
+    "d_drive": {
+      "disk_index": 1,
+      "partition": "Disk #1, Partition #1"
+    },
+    "confirmed_different_disk_index": true
+  },
+  "verify_sha256": true,
+  "media_files_included": true,
+  "total_source_files": 370,
+  "total_destination_files": 370,
+  "total_restored_files": 370,
+  "total_source_size_bytes": 82723359,
+  "total_destination_size_bytes": 82723359,
+  "total_restored_size_bytes": 82723359,
+  "source_mp4_discovered_total": 60,
+  "source_mp4_valid_count": 12,
+  "source_mp4_invalid_count": 48,
+  "mp4_copied_count": 12,
+  "mp4_destination_hash_pass_count": 12,
+  "mp4_restored_count": 12,
+  "mp4_restore_hash_pass_count": 12,
+  "mp4_restore_ffprobe_pass_count": 12,
+  "skipped_invalid_mp4_count": 48,
+  "missing_files": 0,
+  "hash_mismatches": 0,
+  "backup_command_exit_code": 0,
+  "verify_command_exit_code": 0,
+  "restore_command_exit_code": 0,
+  "result": "BACKUP_MECHANISM_PASS_GATE_BLOCKED_ON_20_VALID_MP4_SOURCE_SET",
+  "rc2_req8_pass": false,
+  "note": "Physical backup, SHA-256 verification, D: restore, and ffprobe validation passed for the 12 currently valid MP4 files. Repeat media-backup:create, verify, and restore after RC2-REQ-9 produces 20 new valid MP4s.",
+  "rc2_req8_blocked_reason": "Original RC2-REQ-8 acceptance requires 20 ffprobe-valid MP4 files. The current source roots contain only 12 valid MP4 files; 48 legacy/placeholder MP4 files were invalid and skipped."
+}

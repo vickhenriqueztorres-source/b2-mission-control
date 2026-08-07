@@ -1,0 +1,48 @@
+{
+  "captured_at": "2026-08-06T19:06:09.157Z",
+  "feed": {
+    "command": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\.venv\\Scripts\\python.exe -m firefly_bot.main --feed-guide C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-MEDIA-E2E-001\\firefly_guide.json",
+    "exit_code": 0,
+    "signal": null,
+    "stdout": "",
+    "stderr": "2026-08-06 16:01:48,539 | INFO  | action=guide_fed count=1 status=pending\r\n2026-08-06 16:01:48,539 | INFO  | action=guide_enqueued count=1 guide=C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-MEDIA-E2E-001\\firefly_guide.json\r\n",
+    "error": null
+  },
+  "run": {
+    "command": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\.venv\\Scripts\\python.exe -m firefly_bot.main --run",
+    "exit_code": 10,
+    "signal": null,
+    "stdout": "",
+    "stderr": "2026-08-06 16:01:51,406 | INFO  | action=jobs_reconciled claimed_reset=0 expired_reset=0 stale=0\r\n2026-08-06 16:01:51,406 | INFO  | action=reconciliation claimed_reset=0 expired_reset=0 stale=0\r\n2026-08-06 16:01:54,519 | INFO  | action=job_claimed job_id=55 status=claimed\r\n2026-08-06 16:01:54,519 | INFO  | action=slot_claimed slot_id=1 job_id=55\r\n2026-08-06 16:01:57,422 | INFO  | action=parallel_batch_started concurrency=1 jobs=[55]\r\n2026-08-06 16:01:57,433 | INFO  | action=slot_started slot_id=1 job_id=55 start_delay_seconds=0.0\r\n2026-08-06 16:01:57,455 | INFO  | action=slot_preparation_started slot_id=1 job_id=55\r\n2026-08-06 16:02:53,883 | INFO  | action=first_frame_uploaded job_id=55 image=C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-MEDIA-E2E-001\\imagens\\RC2_MEDIA_E2E_001_start.png\r\n2026-08-06 16:03:03,368 | INFO  | action=job_transition job_id=55 status=generating\r\n2026-08-06 16:03:03,368 | INFO  | action=generation_started job_id=55 state=generating\r\n2026-08-06 16:03:03,368 | INFO  | action=slot_preparation_finished slot_id=1 job_id=55\r\n2026-08-06 16:03:07,096 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:03:07,096 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=3.7\r\n2026-08-06 16:03:10,668 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:03:10,669 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=7.3\r\n2026-08-06 16:03:15,945 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:03:15,945 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=12.6\r\n2026-08-06 16:03:19,513 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:03:19,513 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=16.1\r\n2026-08-06 16:03:22,996 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:03:22,997 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=19.6\r\n2026-08-06 16:03:27,394 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:03:27,394 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=24.0\r\n2026-08-06 16:03:31,852 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:03:31,853 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=28.5\r\n2026-08-06 16:03:35,758 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:03:35,759 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=32.4\r\n2026-08-06 16:03:39,354 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:03:39,354 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=36.0\r\n2026-08-06 16:03:43,081 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:03:43,082 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=39.7\r\n2026-08-06 16:03:46,554 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:03:46,555 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=43.2\r\n2026-08-06 16:03:50,057 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:03:50,057 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=46.7\r\n2026-08-06 16:03:53,526 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:03:53,526 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=50.1\r\n2026-08-06 16:03:58,359 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:03:58,359 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=55.0\r\n2026-08-06 16:04:02,749 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:04:02,749 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=59.4\r\n2026-08-06 16:04:06,338 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:04:06,338 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=63.0\r\n2026-08-06 16:04:09,750 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:04:09,750 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=66.4\r\n2026-08-06 16:04:13,405 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:04:13,405 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=70.0\r\n2026-08-06 16:04:31,433 | WARNING | action=screen_state_read_timeout slot_id=1 job_id=55\r\n2026-08-06 16:04:32,798 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:04:32,799 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=89.4\r\n2026-08-06 16:04:36,278 | INFO  | action=screen_state_read job_id=55 state=still_generating\r\n2026-08-06 16:04:36,278 | INFO  | action=generation_poll job_id=55 state=still_generating elapsed_seconds=92.9\r\n2026-08-06 16:04:39,815 | INFO  | action=screen_state_read job_id=55 state=result_ready\r\n2026-08-06 16:04:39,862 | INFO  | action=download_click_attempt job_id=55\r\n2026-08-06 16:04:47,735 | INFO  | action=export_transition job_id=55 export_state=download_started\r\n2026-08-06 16:04:47,735 | INFO  | action=export_transition job_id=55 export_state=download_complete\r\n2026-08-06 16:04:52,138 | INFO  | action=job_transition job_id=55 status=done\r\n2026-08-06 16:04:52,138 | INFO  | action=job_done job_id=55 output_path=C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\RC2_MEDIA_E2E_001.mp4 file_size_bytes=3830391 sha256=2c644bcb0e6b1b3b84c1cef8dc4211540430fbce874813271380e375399c1b49 width=720 height=1280 duration_seconds=5.041667 codec=h264\r\n2026-08-06 16:04:52,258 | INFO  | action=parallel_batch_finished results=[0] jobs=[55]\r\n2026-08-06 16:05:51,398 | INFO  | action=between_jobs_delay delay_seconds=11.29 configured_concurrency=1\r\n2026-08-06 16:06:04,365 | INFO  | action=jobs_reconciled claimed_reset=0 expired_reset=0 stale=0\r\n2026-08-06 16:06:04,366 | INFO  | action=reconciliation claimed_reset=0 expired_reset=0 stale=0\r\n2026-08-06 16:06:08,351 | INFO  | action=claim_empty status=pending\r\n2026-08-06 16:06:08,351 | INFO  | action=queue_empty \r\n",
+    "error": null
+  },
+  "job": {
+    "id": 55,
+    "prompt": "Medium side-profile shot of a man looking calmly toward office window, soft rim lighting, 50mm lens",
+    "image_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-MEDIA-E2E-001\\imagens\\RC2_MEDIA_E2E_001_start.png",
+    "status": "done",
+    "attempts": 1,
+    "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\RC2_MEDIA_E2E_001.mp4",
+    "error": null,
+    "claimed_at": 1786042914.5167773,
+    "generation_started_at": 1786042983.353782,
+    "updated_at": 1786043092.112629,
+    "model": "Kling 3.0",
+    "resolution": "720p",
+    "aspect_ratio": "9:16",
+    "duration_seconds": 5,
+    "name": "RC2_MEDIA_E2E_001",
+    "download_started_at": 1786043092.1125667,
+    "download_completed_at": 1786043092.1125667,
+    "media_validated_at": 1786043092.1125667,
+    "media_validation_status": "PASS",
+    "media_validation_error": null,
+    "file_size_bytes": 3830391,
+    "sha256": "2c644bcb0e6b1b3b84c1cef8dc4211540430fbce874813271380e375399c1b49",
+    "width": 720,
+    "height": 1280,
+    "codec": "h264"
+  },
+  "source_output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\RC2_MEDIA_E2E_001.mp4",
+  "copied_to_run": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-MEDIA-E2E-001\\video_result.mp4"
+}

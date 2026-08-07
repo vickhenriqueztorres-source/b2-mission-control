@@ -1,0 +1,16 @@
+{
+  "production_id": "a5ee3190-bae8-479d-ac4b-2cd9d3420332",
+  "imported_at": "2026-08-06T14:40:12.060Z",
+  "clips": [
+    {
+      "shot_id": "SHOT_01",
+      "take_id": "TAKE_01",
+      "file_path": "C:\\B2-AI-STUDIO\\productions\\a5ee3190-bae8-479d-ac4b-2cd9d3420332\\SHOT_01_TAKE_01.mp4",
+      "file_hash_sha256": "545f9f63e6d420d7ec1c068200a3902e85472ed6e15d022ebd9908ff4958ede7",
+      "resolution": "720p",
+      "fps": 30,
+      "duration_seconds": 5,
+      "is_real_video": true
+    }
+  ]
+}

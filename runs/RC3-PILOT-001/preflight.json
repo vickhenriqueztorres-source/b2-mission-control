@@ -1,0 +1,196 @@
+{
+  "run_id": "RC3-PILOT-001",
+  "captured_at": "2026-08-06T22:56:47.269Z",
+  "candidate_version": "1.0.0-rc3",
+  "version_confirmed": true,
+  "npm_build_passed": true,
+  "python_compileall_passed": true,
+  "queuePaused": false,
+  "emergencyStopped": false,
+  "queuePaused_expected_false": true,
+  "emergencyStopped_expected_false": true,
+  "firefly_authenticated": true,
+  "firefly_auth_check": {
+    "checked_at": "2026-08-06T22:53:41Z",
+    "firefly_url": "https://firefly.adobe.com/generate/video",
+    "closed_existing_profile_chrome": [],
+    "authenticated": true,
+    "final_url": "https://firefly.adobe.com/generate/video",
+    "screenshot": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\screenshots\\preflight_firefly_authenticated.png"
+  },
+  "only_one_worker_active_before_start": true,
+  "worker_processes_before_start": [],
+  "old_reclaimable_jobs_absent": true,
+  "active_reclaimable_jobs": [],
+  "rc2_jobs_preserved": [
+    {
+      "id": 59,
+      "name": "RC2_PILOT_001_PROD_01_TAKE_01",
+      "status": "failed-infra",
+      "attempts": 1,
+      "error": "TimeoutError: ",
+      "output_path": null
+    },
+    {
+      "id": 60,
+      "name": "RC2_PILOT_001_PROD_01_TAKE_02",
+      "status": "dead",
+      "attempts": 1,
+      "error": "RC2-PILOT-001 stopped after first gate failure",
+      "output_path": null
+    },
+    {
+      "id": 61,
+      "name": "RC2_PILOT_001_PROD_01_TAKE_03",
+      "status": "dead",
+      "attempts": 0,
+      "error": "RC2-PILOT-001 stopped after first gate failure",
+      "output_path": null
+    },
+    {
+      "id": 62,
+      "name": "RC2_PILOT_001_PROD_01_TAKE_04",
+      "status": "dead",
+      "attempts": 0,
+      "error": "RC2-PILOT-001 stopped after first gate failure",
+      "output_path": null
+    }
+  ],
+  "rc3_existing_jobs_before_pilot": [
+    {
+      "id": 63,
+      "name": "RC3_MEDIA_E2E_001_TAKE_01",
+      "status": "done",
+      "attempts": 1,
+      "error": null,
+      "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\RC3_MEDIA_E2E_001_TAKE_01.mp4",
+      "media_validation_status": "PASS",
+      "sha256": "05473e9cf1ba0b5447a799b55724c1eacf4bc40be93da4a5ed52547284e27a8d"
+    }
+  ],
+  "part_files_absent": true,
+  "part_files": [],
+  "free_space": [
+    {
+      "Name": "C",
+      "Root": "C:\\",
+      "Used": 398787919872,
+      "Free": 81207177216
+    },
+    {
+      "Name": "D",
+      "Root": "D:\\",
+      "Used": 432451817472,
+      "Free": 66998226944
+    }
+  ],
+  "backup_destination": "D:/motion b2 backup",
+  "backup_destination_accessible": true,
+  "timeout_inventory": {
+    "navigation_timeout_ms": 90000,
+    "browser_action_timeout_ms": 60000,
+    "state_reader_timeout_ms": 15000,
+    "poll_interval_ms": 3000,
+    "generation_budget_ms": 600000,
+    "watchdog_wall_clock_ms": 800000,
+    "per_slot_wall_clock_ms": 770000,
+    "download_timeout_ms": 120000,
+    "mission_control_worker_timeout_ms": null,
+    "selector_micro_timeout_ms": 500,
+    "concurrency": 1,
+    "policy": "unchanged_from_rc3"
+  },
+  "executable_and_config_hashes": [
+    {
+      "file": "C:\\B2-AI-STUDIO\\mission-control\\package.json",
+      "sha256": "a5fd7ee5569cb9d6f485e2da6a4b4f86e58a97bda819f29138ceef7f6afc4cc7"
+    },
+    {
+      "file": "C:\\B2-AI-STUDIO\\mission-control\\package-lock.json",
+      "sha256": "f8a9e840cb161aa93cf3fd8e1d617c798ace2153547b7905dc6a2b916e646595"
+    },
+    {
+      "file": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\firefly_bot\\config.py",
+      "sha256": "9215ac70fa856720e4d666f1e7d32760c1b29c360705593ff33b8d09676f0691"
+    },
+    {
+      "file": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\firefly_bot\\worker.py",
+      "sha256": "ece668fd29c9650a01e33e595c7f43b04a33e4a2128b8ea40f6e7c7183c76e81"
+    },
+    {
+      "file": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\firefly_bot\\state_reader.py",
+      "sha256": "bbd65b82210547e9e8662f2f937d99a38e937bf5dca0229a54696e7169df29da"
+    },
+    {
+      "file": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\firefly_bot\\job_store.py",
+      "sha256": "e71aa7109029a1c3b091598d57ef5124b57d157087a2bd2697fdf9b8ac0b251b"
+    },
+    {
+      "file": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\firefly_bot\\export_flow.py",
+      "sha256": "c023f0c71e7bcf53e13fc7687225611d096de3690827396fceba331434bf93d0"
+    },
+    {
+      "file": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\.venv\\Scripts\\python.exe",
+      "sha256": "935016795f3e6908e75acbc2040a01e2e4cdb494a57c42f63a0d6eedb2372256"
+    }
+  ],
+  "database_snapshots": {
+    "mission_control_db": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\database_snapshots\\mission_control_preflight.db",
+    "firefly_jobs_db": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\database_snapshots\\firefly_jobs_preflight.db",
+    "telemetry_db": null,
+    "telemetry_db_note": "not_found_in_workspace"
+  },
+  "firefly_system_state": {
+    "singleton": 1,
+    "status": "running",
+    "reason": null,
+    "updated_at": 1786054943.646
+  },
+  "mission_control_state": {
+    "singleton": 1,
+    "queue_paused": 0,
+    "emergency_stopped": 0,
+    "emergency_reason": "RC2_EMERGENCY_RESTART_PERSISTENCE",
+    "requested_by": "user",
+    "activated_at": "2026-08-06T19:32:21.058Z",
+    "released_at": "2026-08-06T19:32:29.259Z",
+    "updated_at": "2026-08-06T19:32:29.259Z"
+  },
+  "preview_server_processes": [
+    {
+      "ProcessId": 2272,
+      "Name": "powershell.exe",
+      "CommandLine": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -Command Set-Location \"C:\\B2-AI-STUDIO\\mission-control\"; npx ts-node event-hub/wsServer.ts "
+    },
+    {
+      "ProcessId": 9672,
+      "Name": "node.exe",
+      "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" \"C:\\Program Files\\nodejs/node_modules/npm/bin/npx-cli.js\" ts-node event-hub/wsServer.ts"
+    },
+    {
+      "ProcessId": 4324,
+      "Name": "cmd.exe",
+      "CommandLine": "C:\\Windows\\system32\\cmd.exe /d /s /c ts-node event-hub/wsServer.ts"
+    },
+    {
+      "ProcessId": 9776,
+      "Name": "node.exe",
+      "CommandLine": "\"node\"   \"C:\\B2-AI-STUDIO\\mission-control\\node_modules\\.bin\\\\..\\ts-node\\dist\\bin.js\" event-hub/wsServer.ts"
+    },
+    {
+      "ProcessId": 17380,
+      "Name": "powershell.exe",
+      "CommandLine": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -Command \"try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}\n@'\nconst fs = require('fs');\nconst path = require('path');\nconst crypto = require('crypto');\nconst os = require('os');\nconst { execFileSync } = require('child_process');\nconst Database = require('better-sqlite3');\n\nconst root = 'C:/B2-AI-STUDIO/mission-control';\nconst runDir = path.join(root, 'runs/RC3-PILOT-001');\nconst fireflyRoot = 'C:/B2-AI-STUDIO/links/firefly-automation';\nconst fireflyDbPath = path.join(fireflyRoot, 'data/firefly_jobs.db');\nconst missionDbPath = path.join(root, 'database/mission_control.db');\nconst telemetryDbPath = path.join(root, 'database/telemetry.db');\nconst backupDest = 'D:/motion b2 backup';\nconst now = new Date().toISOString();\nfunction sha(file) { return fs.existsSync(file) ? crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex') : null; }\nfunction ps(cmd) { return execFileSync('powershell.exe', ['-NoProfile','-Command', cmd], { encoding: 'utf8' }).trim(); }\nfunction tryJsonPs(cmd) { const text = ps(cmd); return text ? JSON.parse(text) : null; }\nfunction copyIfExists(src, dest) { if (fs.existsSync(src)) { fs.mkdirSync(path.dirname(dest), { recursive: true }); fs.copyFileSync(src, dest); return dest; } return null; }\n\nconst pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));\nconst fireflyDb = new Database(fireflyDbPath, { readonly: true });\nconst activeJobs = fireflyDb.prepare(\\\"select id,name,status,attempts,error,output_path from jobs where status in ('pending','claimed','generating','stale_generating') order by id\\\").all();\nconst rc2Jobs = fireflyDb.prepare(\\\"select id,name,status,attempts,error,output_path from jobs where name like 'RC2_PILOT_001_%' order by id\\\").all();\nconst rc3Jobs = fireflyDb.prepare(\\\"select id,name,status,attempts,error,output_path,media_validation_status,sha256 from jobs where name like 'RC3_%' order by id\\\").all();\nconst fireflySystem = fireflyDb.prepare('select * from system_state where singleton=1').get();\nfireflyDb.close();\nconst missionDb = new Database(missionDbPath, { readonly: true });\nconst controlState = missionDb.prepare('select * from operational_control_state where singleton=1').get();\nmissionDb.close();\nconst partFiles = tryJsonPs(\\\"Get-ChildItem -Path 'C:\\\\B2-AI-STUDIO' -Recurse -Filter '*.part' -ErrorAction SilentlyContinue | Select-Object FullName,Length,LastWriteTime | ConvertTo-Json -Depth 3\\\");\nconst drives = tryJsonPs(\\\"Get-PSDrive -Name C,D | Select-Object Name,Root,Used,Free | ConvertTo-Json -Depth 3\\\");\nconst workerProcesses = tryJsonPs(\\\"Get-CimInstance Win32_Process | Where-Object { ($_.Name -match 'python|powershell') -and ($_.CommandLine -like '*firefly_bot.main*' -or $_.CommandLine -like '*worker-once*' -or $_.CommandLine -like '*firefly-automation*') } | Select-Object ProcessId,Name,CommandLine | ConvertTo-Json -Depth 4\\\");\nconst previewProcesses = tryJsonPs(\\\"Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -like '*event-hub/wsServer.ts*' -or $_.CommandLine -like '*wsServer.ts*' } | Select-Object ProcessId,Name,CommandLine | ConvertTo-Json -Depth 4\\\");\nconst authCheck = JSON.parse(fs.readFileSync(path.join(runDir, 'firefly_auth_check.json'), 'utf8'));\nconst buildOutput = fs.existsSync(path.join(runDir, 'preflight_build_output.txt')) ? fs.readFileSync(path.join(runDir, 'preflight_build_output.txt'), 'utf8') : null;\n\nconst timeoutInventory = {\n  navigation_timeout_ms: 90000,\n  browser_action_timeout_ms: 60000,\n  state_reader_timeout_ms: 15000,\n  poll_interval_ms: 3000,\n  generation_budget_ms: 600000,\n  watchdog_wall_clock_ms: 800000,\n  per_slot_wall_clock_ms: 770000,\n  download_timeout_ms: 120000,\n  mission_control_worker_timeout_ms: null,\n  selector_micro_timeout_ms: 500,\n  concurrency: 1,\n  policy: 'unchanged_from_rc3'\n};\nfs.writeFileSync(path.join(runDir, 'timeout_inventory.json'), JSON.stringify(timeoutInventory, null, 2));\nconst snapshotsDir = path.join(runDir, 'database_snapshots');\nconst snapshots = {\n  mission_control_db: copyIfExists(missionDbPath, path.join(snapshotsDir, 'mission_control_preflight.db')),\n  firefly_jobs_db: copyIfExists(fireflyDbPath, path.join(snapshotsDir, 'firefly_jobs_preflight.db')),\n  telemetry_db: copyIfExists(telemetryDbPath, path.join(snapshotsDir, 'telemetry_preflight.db')),\n  telemetry_db_note: fs.existsSync(telemetryDbPath) ? 'copied' : 'not_found_in_workspace'\n};\nconst hashes = [\n  path.join(root, 'package.json'),\n  path.join(root, 'package-lock.json'),\n  path.join(fireflyRoot, 'firefly_bot/config.py'),\n  path.join(fireflyRoot, 'firefly_bot/worker.py'),\n  path.join(fireflyRoot, 'firefly_bot/state_reader.py'),\n  path.join(fireflyRoot, 'firefly_bot/job_store.py'),\n  path.join(fireflyRoot, 'firefly_bot/export_flow.py'),\n  path.join(fireflyRoot, '.venv/Scripts/python.exe')\n].map(file => ({ file, sha256: sha(file) }));\nconst preflight = {\n  run_id: 'RC3-PILOT-001',\n  captured_at: now,\n  candidate_version: pkg.version,\n  version_confirmed: pkg.version === '1.0.0-rc3',\n  npm_build_passed: true,\n  python_compileall_passed: true,\n  queuePaused: Boolean(controlState.queue_paused),\n  emergencyStopped: Boolean(controlState.emergency_stopped),\n  queuePaused_expected_false: !Boolean(controlState.queue_paused),\n  emergencyStopped_expected_false: !Boolean(controlState.emergency_stopped),\n  firefly_authenticated: Boolean(authCheck.authenticated),\n  firefly_auth_check: authCheck,\n  only_one_worker_active_before_start: !workerProcesses || (Array.isArray(workerProcesses) ? workerProcesses.length === 0 : false),\n  worker_processes_before_start: workerProcesses || [],\n  old_reclaimable_jobs_absent: activeJobs.length === 0,\n  active_reclaimable_jobs: activeJobs,\n  rc2_jobs_preserved: rc2Jobs,\n  rc3_existing_jobs_before_pilot: rc3Jobs,\n  part_files_absent: !partFiles || (Array.isArray(partFiles) ? partFiles.length === 0 : false),\n  part_files: partFiles || [],\n  free_space: drives,\n  backup_destination: backupDest,\n  backup_destination_accessible: fs.existsSync(backupDest),\n  timeout_inventory: timeoutInventory,\n  executable_and_config_hashes: hashes,\n  database_snapshots: snapshots,\n  firefly_system_state: fireflySystem,\n  mission_control_state: controlState,\n  preview_server_processes: previewProcesses || [],\n  build_output_recorded: Boolean(buildOutput)\n};\nfs.writeFileSync(path.join(runDir, 'preflight.json'), JSON.stringify(preflight, null, 2));\nfs.writeFileSync(path.join(runDir, 'environment_snapshot.json'), JSON.stringify({ captured_at: now, os: { platform: os.platform(), release: os.release(), arch: os.arch(), hostname: os.hostname(), cpus: os.cpus().length, totalmem: os.totalmem(), freemem: os.freemem() }, env: { MEDIA_BACKUP_DESTINATION: process.env.MEDIA_BACKUP_DESTINATION || null }, drives, workerProcesses, previewProcesses }, null, 2));\nconsole.log(JSON.stringify({ preflight_pass: preflight.version_confirmed && preflight.npm_build_passed && preflight.python_compileall_passed && !preflight.queuePaused && !preflight.emergencyStopped && preflight.firefly_authenticated && preflight.old_reclaimable_jobs_absent && preflight.part_files_absent && preflight.backup_destination_accessible, preflight: path.join(runDir,'preflight.json') }, null, 2));\n'@ | node\""
+    },
+    {
+      "ProcessId": 14364,
+      "Name": "powershell.exe",
+      "CommandLine": "powershell.exe -NoProfile -Command \"Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -like '*event-hub/wsServer.ts*' -or $_.CommandLine -like '*wsServer.ts*' } | Select-Object ProcessId,Name,CommandLine | ConvertTo-Json -Depth 4\""
+    }
+  ],
+  "build_output_recorded": true,
+  "preflight_build_output": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\preflight_build_output.txt",
+  "preflight_compileall_output": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\preflight_compileall_output.txt",
+  "compileall_output_recorded": true,
+  "preflight_pass": true
+}

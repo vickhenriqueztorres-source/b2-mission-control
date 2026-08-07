@@ -1,0 +1,666 @@
+{
+  "run_id": "RC3-TIMEOUT-DIAG-001",
+  "source_log": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PILOT-001\\productions\\PROD-01\\worker_output.txt",
+  "source_log_encoding": "utf16le",
+  "generated_at": "2026-08-06T22:20:52.576Z",
+  "job_id": 59,
+  "job_name": "RC2_PILOT_001_PROD_01_TAKE_01",
+  "reconstructed_events": [
+    {
+      "timestamp": "2026-08-06T21:14:03.120Z",
+      "local_timestamp": "2026-08-06 18:14:03,120",
+      "level": "INFO",
+      "action": "jobs_reconciled",
+      "claimed_reset": "0",
+      "expired_reset": "0",
+      "stale": "0"
+    },
+    {
+      "timestamp": "2026-08-06T21:14:03.120Z",
+      "local_timestamp": "2026-08-06 18:14:03,120",
+      "level": "INFO",
+      "action": "reconciliation",
+      "claimed_reset": "0",
+      "expired_reset": "0",
+      "stale": "0"
+    },
+    {
+      "timestamp": "2026-08-06T21:14:07.827Z",
+      "local_timestamp": "2026-08-06 18:14:07,827",
+      "level": "INFO",
+      "action": "job_claimed",
+      "job_id": "59",
+      "status": "claimed"
+    },
+    {
+      "timestamp": "2026-08-06T21:14:07.827Z",
+      "local_timestamp": "2026-08-06 18:14:07,827",
+      "level": "INFO",
+      "action": "slot_claimed",
+      "slot_id": "1",
+      "job_id": "59"
+    },
+    {
+      "timestamp": "2026-08-06T21:14:15.017Z",
+      "local_timestamp": "2026-08-06 18:14:15,017",
+      "level": "INFO",
+      "action": "parallel_batch_started",
+      "concurrency": "1",
+      "jobs": "[59]"
+    },
+    {
+      "timestamp": "2026-08-06T21:14:15.031Z",
+      "local_timestamp": "2026-08-06 18:14:15,031",
+      "level": "INFO",
+      "action": "slot_started",
+      "slot_id": "1",
+      "job_id": "59",
+      "start_delay_seconds": "0.0"
+    },
+    {
+      "timestamp": "2026-08-06T21:14:15.290Z",
+      "local_timestamp": "2026-08-06 18:14:15,290",
+      "level": "INFO",
+      "action": "slot_preparation_started",
+      "slot_id": "1",
+      "job_id": "59"
+    },
+    {
+      "timestamp": "2026-08-06T21:16:07.369Z",
+      "local_timestamp": "2026-08-06 18:16:07,369",
+      "level": "INFO",
+      "action": "first_frame_uploaded",
+      "job_id": "59"
+    },
+    {
+      "timestamp": "2026-08-06T21:16:22.360Z",
+      "local_timestamp": "2026-08-06 18:16:22,360",
+      "level": "INFO",
+      "action": "job_transition",
+      "job_id": "59",
+      "status": "generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:16:22.360Z",
+      "local_timestamp": "2026-08-06 18:16:22,360",
+      "level": "INFO",
+      "action": "generation_started",
+      "job_id": "59",
+      "state": "generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:16:22.360Z",
+      "local_timestamp": "2026-08-06 18:16:22,360",
+      "level": "INFO",
+      "action": "slot_preparation_finished",
+      "slot_id": "1",
+      "job_id": "59"
+    },
+    {
+      "timestamp": "2026-08-06T21:16:22.934Z",
+      "local_timestamp": "2026-08-06 18:16:22,934",
+      "level": "INFO",
+      "action": "screen_state_read",
+      "job_id": "59",
+      "state": "still_generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:16:22.934Z",
+      "local_timestamp": "2026-08-06 18:16:22,934",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "0.6"
+    },
+    {
+      "timestamp": "2026-08-06T21:16:34.553Z",
+      "local_timestamp": "2026-08-06 18:16:34,553",
+      "level": "INFO",
+      "action": "screen_state_read",
+      "job_id": "59",
+      "state": "still_generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:16:34.553Z",
+      "local_timestamp": "2026-08-06 18:16:34,553",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "12.2"
+    },
+    {
+      "timestamp": "2026-08-06T21:16:38.158Z",
+      "local_timestamp": "2026-08-06 18:16:38,158",
+      "level": "INFO",
+      "action": "screen_state_read",
+      "job_id": "59",
+      "state": "still_generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:16:38.158Z",
+      "local_timestamp": "2026-08-06 18:16:38,158",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "15.8"
+    },
+    {
+      "timestamp": "2026-08-06T21:16:41.828Z",
+      "local_timestamp": "2026-08-06 18:16:41,828",
+      "level": "INFO",
+      "action": "screen_state_read",
+      "job_id": "59",
+      "state": "still_generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:16:41.828Z",
+      "local_timestamp": "2026-08-06 18:16:41,828",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "19.5"
+    },
+    {
+      "timestamp": "2026-08-06T21:16:49.153Z",
+      "local_timestamp": "2026-08-06 18:16:49,153",
+      "level": "INFO",
+      "action": "screen_state_read",
+      "job_id": "59",
+      "state": "still_generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:16:49.153Z",
+      "local_timestamp": "2026-08-06 18:16:49,153",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "26.8"
+    },
+    {
+      "timestamp": "2026-08-06T21:16:52.895Z",
+      "local_timestamp": "2026-08-06 18:16:52,895",
+      "level": "INFO",
+      "action": "screen_state_read",
+      "job_id": "59",
+      "state": "still_generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:16:52.895Z",
+      "local_timestamp": "2026-08-06 18:16:52,895",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "30.5"
+    },
+    {
+      "timestamp": "2026-08-06T21:16:58.168Z",
+      "local_timestamp": "2026-08-06 18:16:58,168",
+      "level": "INFO",
+      "action": "screen_state_read",
+      "job_id": "59",
+      "state": "still_generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:16:58.169Z",
+      "local_timestamp": "2026-08-06 18:16:58,169",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "35.8"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:02.156Z",
+      "local_timestamp": "2026-08-06 18:17:02,156",
+      "level": "INFO",
+      "action": "screen_state_read",
+      "job_id": "59",
+      "state": "still_generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:02.156Z",
+      "local_timestamp": "2026-08-06 18:17:02,156",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "39.8"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:06.521Z",
+      "local_timestamp": "2026-08-06 18:17:06,521",
+      "level": "INFO",
+      "action": "screen_state_read",
+      "job_id": "59",
+      "state": "still_generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:06.521Z",
+      "local_timestamp": "2026-08-06 18:17:06,521",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "44.2"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:13.288Z",
+      "local_timestamp": "2026-08-06 18:17:13,288",
+      "level": "INFO",
+      "action": "screen_state_read",
+      "job_id": "59",
+      "state": "still_generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:13.288Z",
+      "local_timestamp": "2026-08-06 18:17:13,288",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "50.9"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:18.556Z",
+      "local_timestamp": "2026-08-06 18:17:18,556",
+      "level": "INFO",
+      "action": "screen_state_read",
+      "job_id": "59",
+      "state": "still_generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:18.557Z",
+      "local_timestamp": "2026-08-06 18:17:18,557",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "56.2"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:23.027Z",
+      "local_timestamp": "2026-08-06 18:17:23,027",
+      "level": "INFO",
+      "action": "screen_state_read",
+      "job_id": "59",
+      "state": "still_generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:23.027Z",
+      "local_timestamp": "2026-08-06 18:17:23,027",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "60.7"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:26.695Z",
+      "local_timestamp": "2026-08-06 18:17:26,695",
+      "level": "INFO",
+      "action": "screen_state_read",
+      "job_id": "59",
+      "state": "still_generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:26.695Z",
+      "local_timestamp": "2026-08-06 18:17:26,695",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "64.3"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:34.212Z",
+      "local_timestamp": "2026-08-06 18:17:34,212",
+      "level": "INFO",
+      "action": "screen_state_read",
+      "job_id": "59",
+      "state": "still_generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:34.212Z",
+      "local_timestamp": "2026-08-06 18:17:34,212",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "71.9"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:39.588Z",
+      "local_timestamp": "2026-08-06 18:17:39,588",
+      "level": "INFO",
+      "action": "screen_state_read",
+      "job_id": "59",
+      "state": "still_generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:39.588Z",
+      "local_timestamp": "2026-08-06 18:17:39,588",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "77.2"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:43.484Z",
+      "local_timestamp": "2026-08-06 18:17:43,484",
+      "level": "INFO",
+      "action": "screen_state_read",
+      "job_id": "59",
+      "state": "still_generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:43.484Z",
+      "local_timestamp": "2026-08-06 18:17:43,484",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "81.1"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:47.419Z",
+      "local_timestamp": "2026-08-06 18:17:47,419",
+      "level": "INFO",
+      "action": "screen_state_read",
+      "job_id": "59",
+      "state": "still_generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:47.419Z",
+      "local_timestamp": "2026-08-06 18:17:47,419",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "85.1"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:51.987Z",
+      "local_timestamp": "2026-08-06 18:17:51,987",
+      "level": "INFO",
+      "action": "screen_state_read",
+      "job_id": "59",
+      "state": "still_generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:17:51.988Z",
+      "local_timestamp": "2026-08-06 18:17:51,988",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "89.6"
+    },
+    {
+      "timestamp": "2026-08-06T21:18:10.293Z",
+      "local_timestamp": "2026-08-06 18:18:10,293",
+      "level": "WARNING",
+      "action": "screen_state_read_timeout",
+      "slot_id": "1",
+      "job_id": "59"
+    },
+    {
+      "timestamp": "2026-08-06T21:18:43.852Z",
+      "local_timestamp": "2026-08-06 18:18:43,852",
+      "level": "ERROR",
+      "action": "transition_conflict",
+      "job_id": "59",
+      "status": "failed-infra"
+    },
+    {
+      "timestamp": "2026-08-06T21:18:43.854Z",
+      "local_timestamp": "2026-08-06 18:18:43,854",
+      "level": "INFO",
+      "action": "job_transition",
+      "job_id": "59",
+      "status": "failed-infra"
+    },
+    {
+      "timestamp": "2026-08-06T21:18:43.854Z",
+      "local_timestamp": "2026-08-06 18:18:43,854",
+      "level": "ERROR",
+      "action": "job_failed_infra",
+      "job_id": "59",
+      "error": "TimeoutError:"
+    },
+    {
+      "timestamp": "2026-08-06T21:18:44.006Z",
+      "local_timestamp": "2026-08-06 18:18:44,006",
+      "level": "INFO",
+      "action": "parallel_batch_finished",
+      "results": "[30]",
+      "jobs": "[59]"
+    },
+    {
+      "timestamp": "2026-08-06T21:18:44.136Z",
+      "local_timestamp": "2026-08-06 18:18:44,136",
+      "level": "WARNING",
+      "action": "browser_context_already_closed",
+      "error": "TargetClosedError"
+    },
+    {
+      "timestamp": "2026-08-06T21:19:05.433Z",
+      "local_timestamp": "2026-08-06 18:19:05,433",
+      "level": "WARNING",
+      "action": "watchdog_restart",
+      "delay_seconds": "2"
+    },
+    {
+      "timestamp": "2026-08-06T21:19:11.829Z",
+      "local_timestamp": "2026-08-06 18:19:11,829",
+      "level": "INFO",
+      "action": "jobs_reconciled",
+      "claimed_reset": "0",
+      "expired_reset": "0",
+      "stale": "0"
+    },
+    {
+      "timestamp": "2026-08-06T21:19:11.829Z",
+      "local_timestamp": "2026-08-06 18:19:11,829",
+      "level": "INFO",
+      "action": "reconciliation",
+      "claimed_reset": "0",
+      "expired_reset": "0",
+      "stale": "0"
+    },
+    {
+      "timestamp": "2026-08-06T21:19:13.647Z",
+      "local_timestamp": "2026-08-06 18:19:13,647",
+      "level": "INFO",
+      "action": "job_claimed",
+      "job_id": "60",
+      "status": "claimed"
+    },
+    {
+      "timestamp": "2026-08-06T21:19:13.647Z",
+      "local_timestamp": "2026-08-06 18:19:13,647",
+      "level": "INFO",
+      "action": "slot_claimed",
+      "slot_id": "1",
+      "job_id": "60"
+    },
+    {
+      "timestamp": "2026-08-06T21:19:16.081Z",
+      "local_timestamp": "2026-08-06 18:19:16,081",
+      "level": "INFO",
+      "action": "parallel_batch_started",
+      "concurrency": "1",
+      "jobs": "[60]"
+    },
+    {
+      "timestamp": "2026-08-06T21:19:16.096Z",
+      "local_timestamp": "2026-08-06 18:19:16,096",
+      "level": "INFO",
+      "action": "slot_started",
+      "slot_id": "1",
+      "job_id": "60",
+      "start_delay_seconds": "0.0"
+    },
+    {
+      "timestamp": "2026-08-06T21:19:16.107Z",
+      "local_timestamp": "2026-08-06 18:19:16,107",
+      "level": "INFO",
+      "action": "slot_preparation_started",
+      "slot_id": "1",
+      "job_id": "60"
+    },
+    {
+      "timestamp": "2026-08-06T21:20:23.436Z",
+      "local_timestamp": "2026-08-06 18:20:23,436",
+      "level": "INFO",
+      "action": "first_frame_uploaded",
+      "job_id": "60"
+    },
+    {
+      "timestamp": "2026-08-06T21:20:32.115Z",
+      "local_timestamp": "2026-08-06 18:20:32,115",
+      "level": "ERROR",
+      "action": "transition_conflict",
+      "job_id": "60",
+      "status": "generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:20:32.115Z",
+      "local_timestamp": "2026-08-06 18:20:32,115",
+      "level": "ERROR",
+      "action": "concurrent_transition",
+      "job_id": "60",
+      "target_status": "generating"
+    },
+    {
+      "timestamp": "2026-08-06T21:20:32.241Z",
+      "local_timestamp": "2026-08-06 18:20:32,241",
+      "level": "INFO",
+      "action": "parallel_batch_finished",
+      "results": "[30]",
+      "jobs": "[60]"
+    }
+  ],
+  "milestones": {
+    "job_submitted": null,
+    "job_claimed": {
+      "timestamp": "2026-08-06T21:14:07.827Z",
+      "local_timestamp": "2026-08-06 18:14:07,827",
+      "level": "INFO",
+      "action": "job_claimed",
+      "job_id": "59",
+      "status": "claimed"
+    },
+    "browser_started": {
+      "timestamp": "2026-08-06T21:14:15.017Z",
+      "local_timestamp": "2026-08-06 18:14:15,017",
+      "level": "INFO",
+      "action": "parallel_batch_started",
+      "concurrency": "1",
+      "jobs": "[59]"
+    },
+    "page_opened": {
+      "timestamp": "2026-08-06T21:14:15.290Z",
+      "local_timestamp": "2026-08-06 18:14:15,290",
+      "level": "INFO",
+      "action": "slot_preparation_started",
+      "slot_id": "1",
+      "job_id": "59"
+    },
+    "model_configured": null,
+    "frame_uploaded": {
+      "timestamp": "2026-08-06T21:16:07.369Z",
+      "local_timestamp": "2026-08-06 18:16:07,369",
+      "level": "INFO",
+      "action": "first_frame_uploaded",
+      "job_id": "59"
+    },
+    "prompt_inserted": null,
+    "generate_clicked": {
+      "timestamp": "2026-08-06T21:16:22.360Z",
+      "local_timestamp": "2026-08-06 18:16:22,360",
+      "level": "INFO",
+      "action": "generation_started",
+      "job_id": "59",
+      "state": "generating"
+    },
+    "generation_started": {
+      "timestamp": "2026-08-06T21:16:22.360Z",
+      "local_timestamp": "2026-08-06 18:16:22,360",
+      "level": "INFO",
+      "action": "generation_started",
+      "job_id": "59",
+      "state": "generating"
+    },
+    "last_still_generating": {
+      "timestamp": "2026-08-06T21:17:51.988Z",
+      "local_timestamp": "2026-08-06 18:17:51,988",
+      "level": "INFO",
+      "action": "generation_poll",
+      "job_id": "59",
+      "state": "still_generating",
+      "elapsed_seconds": "89.6"
+    },
+    "timeout_started": {
+      "timestamp": "2026-08-06T21:18:10.293Z",
+      "local_timestamp": "2026-08-06 18:18:10,293",
+      "level": "WARNING",
+      "action": "screen_state_read_timeout",
+      "slot_id": "1",
+      "job_id": "59"
+    },
+    "timeout_fired": {
+      "timestamp": "2026-08-06T21:18:43.854Z",
+      "local_timestamp": "2026-08-06 18:18:43,854",
+      "level": "ERROR",
+      "action": "job_failed_infra",
+      "job_id": "59",
+      "error": "TimeoutError:"
+    },
+    "worker_failed": {
+      "timestamp": "2026-08-06T21:18:44.006Z",
+      "local_timestamp": "2026-08-06 18:18:44,006",
+      "level": "INFO",
+      "action": "parallel_batch_finished",
+      "results": "[30]",
+      "jobs": "[59]"
+    },
+    "job_failed_infra": {
+      "timestamp": "2026-08-06T21:18:43.854Z",
+      "local_timestamp": "2026-08-06 18:18:43,854",
+      "level": "ERROR",
+      "action": "job_failed_infra",
+      "job_id": "59",
+      "error": "TimeoutError:"
+    },
+    "worker_closed": {
+      "timestamp": "2026-08-06T21:18:44.136Z",
+      "local_timestamp": "2026-08-06 18:18:44,136",
+      "level": "WARNING",
+      "action": "browser_context_already_closed",
+      "error": "TargetClosedError"
+    },
+    "watchdog_restart": {
+      "timestamp": "2026-08-06T21:19:05.433Z",
+      "local_timestamp": "2026-08-06 18:19:05,433",
+      "level": "WARNING",
+      "action": "watchdog_restart",
+      "delay_seconds": "2"
+    }
+  },
+  "elapsed_seconds_from_generation_started_to_failed_infra": 141.494,
+  "missing_milestones_due_observability_gap": [
+    "model_configured",
+    "prompt_inserted",
+    "per-poll URL before RC3 patch",
+    "selectors_found_absent before RC3 patch",
+    "failure_page.html before RC3 patch",
+    "failure_dom_summary.json before RC3 patch"
+  ]
+}

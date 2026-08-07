@@ -1,0 +1,587 @@
+{
+  "generated_at": "2026-08-06T20:37:59.749Z",
+  "scheduled_task": {
+    "last_task_result": 3221225786,
+    "note": "Task Scheduler reported 0xC000013A, but post-reboot evidence files were written. Evidence is evaluated by persisted files and boot identity."
+  },
+  "boot_identity": {
+    "last_boot_time_before": "2026-08-06T17:02:18.5000000Z",
+    "last_boot_time_after": "2026-08-06T20:31:02.5000000Z",
+    "physical_reboot_confirmed": true
+  },
+  "physical_reboot_confirmed": true,
+  "run_id_preserved": true,
+  "production_id_preserved": true,
+  "mission_control_pids_different": true,
+  "overlapping_mission_control_pids": [],
+  "history_preserved": true,
+  "mission_control_db_hash_unchanged": true,
+  "firefly_db_hash_unchanged": true,
+  "no_job_duplicate": true,
+  "duplicate_job_names_after": [
+    [
+      "mateo-final-discipline",
+      2
+    ],
+    [
+      "SHOT_REAL_E2E_001_TAKE_01",
+      2
+    ],
+    [
+      "SHOT_01_TAKE_01_TAKE_01",
+      2
+    ]
+  ],
+  "no_media_duplicate": true,
+  "duplicate_outputs_after": [
+    {
+      "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo\\agente firefly\\saida\\mateo-final-discipline.mp4",
+      "first_job_id": 6,
+      "duplicate_job_id": 8
+    },
+    {
+      "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\SHOT_REAL_E2E_001_TAKE_01.mp4",
+      "first_job_id": 24,
+      "duplicate_job_id": 26
+    },
+    {
+      "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\SHOT_01_TAKE_01_TAKE_01.mp4",
+      "first_job_id": 45,
+      "duplicate_job_id": 51
+    }
+  ],
+  "no_ambiguous_job_auto_resent": true,
+  "ambiguous_jobs_after_reboot": [],
+  "recovery_required_used_when_external_state_not_proven": true,
+  "boot_reconciler_result": {
+    "reconciled": true,
+    "active_jobs_found": 0,
+    "ambiguous_jobs_flagged": 0,
+    "valid_mp4s_verified": 3,
+    "actions_taken": [
+      "Iniciando reconciliação de boot do B2 Mission Control.",
+      "Reconciliação entre telemetry.db e firefly_jobs.db concluída sem divergências.",
+      "Zero jobs ambíguos reenviados automaticamente."
+    ]
+  },
+  "mission_before": {
+    "exists": true,
+    "sha256": "9023a36ea884076f9afb5ff151be709b5e8dd5d23ec5dfee57d79bbaccd10551",
+    "tables": [
+      "agent_events",
+      "artifacts",
+      "operational_control_state",
+      "productions",
+      "scenes"
+    ],
+    "counts": {
+      "agent_events": 4339,
+      "artifacts": 0,
+      "operational_control_state": 1,
+      "productions": 8,
+      "scenes": 0
+    },
+    "fireflyJobs": [],
+    "missionEventCount": 0,
+    "lastMissionEvent": null
+  },
+  "mission_after": {
+    "exists": true,
+    "sha256": "9023a36ea884076f9afb5ff151be709b5e8dd5d23ec5dfee57d79bbaccd10551",
+    "tables": [
+      "agent_events",
+      "artifacts",
+      "operational_control_state",
+      "productions",
+      "scenes"
+    ],
+    "counts": {
+      "agent_events": 4339,
+      "artifacts": 0,
+      "operational_control_state": 1,
+      "productions": 8,
+      "scenes": 0
+    },
+    "fireflyJobs": [],
+    "missionEventCount": 0,
+    "lastMissionEvent": null
+  },
+  "firefly_before": {
+    "exists": true,
+    "sha256": "1ec1a17ba352d72218477724c91a6106ac8e4599c55fc5f0a5f6944e11535849",
+    "tables": [
+      "jobs",
+      "system_state"
+    ],
+    "counts": {
+      "jobs": 23,
+      "system_state": 1
+    },
+    "fireflyJobs": [
+      {
+        "id": 1,
+        "name": "imagem test 1",
+        "status": "done",
+        "output_path": "saida/imagem test 1.mp4",
+        "error": null
+      },
+      {
+        "id": 4,
+        "name": "mateo-permission-control",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo\\agente firefly\\saida\\mateo-permission-control.mp4",
+        "error": null
+      },
+      {
+        "id": 6,
+        "name": "mateo-final-discipline",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo\\agente firefly\\saida\\mateo-final-discipline.mp4",
+        "error": null
+      },
+      {
+        "id": 8,
+        "name": "mateo-final-discipline",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo\\agente firefly\\saida\\mateo-final-discipline.mp4",
+        "error": null
+      },
+      {
+        "id": 9,
+        "name": "video_teste_1",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\video_teste_1.mp4",
+        "error": null
+      },
+      {
+        "id": 10,
+        "name": "video_teste_2",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\video_teste_2.mp4",
+        "error": null
+      },
+      {
+        "id": 11,
+        "name": "video_teste_3",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\video_teste_3.mp4",
+        "error": null
+      },
+      {
+        "id": 12,
+        "name": "P01_ORANGE_ESCAPE-T01",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\P01_ORANGE_ESCAPE-T01.mp4",
+        "error": null
+      },
+      {
+        "id": 13,
+        "name": "P01_ORANGE_ESCAPE-T02",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\P01_ORANGE_ESCAPE-T02.mp4",
+        "error": null
+      },
+      {
+        "id": 14,
+        "name": "P01_ORANGE_ESCAPE-T03",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\P01_ORANGE_ESCAPE-T03.mp4",
+        "error": null
+      },
+      {
+        "id": 21,
+        "name": "P04_ELEVATOR_LEAVES-T01",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\P04_ELEVATOR_LEAVES-T01.mp4",
+        "error": null
+      },
+      {
+        "id": 22,
+        "name": "P04_ELEVATOR_LEAVES-T02",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\P04_ELEVATOR_LEAVES-T02.mp4",
+        "error": null
+      },
+      {
+        "id": 23,
+        "name": "P04_ELEVATOR_LEAVES-T03",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\P04_ELEVATOR_LEAVES-T03.mp4",
+        "error": null
+      },
+      {
+        "id": 24,
+        "name": "SHOT_REAL_E2E_001_TAKE_01",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\SHOT_REAL_E2E_001_TAKE_01.mp4",
+        "error": null
+      },
+      {
+        "id": 26,
+        "name": "SHOT_REAL_E2E_001_TAKE_01",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\SHOT_REAL_E2E_001_TAKE_01.mp4",
+        "error": null
+      },
+      {
+        "id": 45,
+        "name": "SHOT_01_TAKE_01_TAKE_01",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\SHOT_01_TAKE_01_TAKE_01.mp4",
+        "error": null
+      },
+      {
+        "id": 51,
+        "name": "SHOT_01_TAKE_01_TAKE_01",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\SHOT_01_TAKE_01_TAKE_01.mp4",
+        "error": null
+      },
+      {
+        "id": 52,
+        "name": "SHOT_01_TAKE_02_TAKE_01",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\SHOT_01_TAKE_02_TAKE_01.mp4",
+        "error": null
+      },
+      {
+        "id": 53,
+        "name": "SHOT_01_TAKE_03_TAKE_01",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\SHOT_01_TAKE_03_TAKE_01.mp4",
+        "error": null
+      },
+      {
+        "id": 55,
+        "name": "RC2_MEDIA_E2E_001",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\RC2_MEDIA_E2E_001.mp4",
+        "error": null
+      },
+      {
+        "id": 56,
+        "name": "RC2_PAUSE_LIVE_01",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\RC2_PAUSE_LIVE_01.mp4",
+        "error": null
+      },
+      {
+        "id": 57,
+        "name": "RC2_PAUSE_LIVE_02",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\RC2_PAUSE_LIVE_02.mp4",
+        "error": null
+      },
+      {
+        "id": 58,
+        "name": "RC2_PAUSE_LIVE_03",
+        "status": "pending",
+        "output_path": null,
+        "error": null
+      }
+    ],
+    "missionEventCount": 0,
+    "lastMissionEvent": null
+  },
+  "firefly_after": {
+    "exists": true,
+    "sha256": "1ec1a17ba352d72218477724c91a6106ac8e4599c55fc5f0a5f6944e11535849",
+    "tables": [
+      "jobs",
+      "system_state"
+    ],
+    "counts": {
+      "jobs": 23,
+      "system_state": 1
+    },
+    "fireflyJobs": [
+      {
+        "id": 1,
+        "name": "imagem test 1",
+        "status": "done",
+        "output_path": "saida/imagem test 1.mp4",
+        "error": null
+      },
+      {
+        "id": 4,
+        "name": "mateo-permission-control",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo\\agente firefly\\saida\\mateo-permission-control.mp4",
+        "error": null
+      },
+      {
+        "id": 6,
+        "name": "mateo-final-discipline",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo\\agente firefly\\saida\\mateo-final-discipline.mp4",
+        "error": null
+      },
+      {
+        "id": 8,
+        "name": "mateo-final-discipline",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo\\agente firefly\\saida\\mateo-final-discipline.mp4",
+        "error": null
+      },
+      {
+        "id": 9,
+        "name": "video_teste_1",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\video_teste_1.mp4",
+        "error": null
+      },
+      {
+        "id": 10,
+        "name": "video_teste_2",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\video_teste_2.mp4",
+        "error": null
+      },
+      {
+        "id": 11,
+        "name": "video_teste_3",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\video_teste_3.mp4",
+        "error": null
+      },
+      {
+        "id": 12,
+        "name": "P01_ORANGE_ESCAPE-T01",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\P01_ORANGE_ESCAPE-T01.mp4",
+        "error": null
+      },
+      {
+        "id": 13,
+        "name": "P01_ORANGE_ESCAPE-T02",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\P01_ORANGE_ESCAPE-T02.mp4",
+        "error": null
+      },
+      {
+        "id": 14,
+        "name": "P01_ORANGE_ESCAPE-T03",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\P01_ORANGE_ESCAPE-T03.mp4",
+        "error": null
+      },
+      {
+        "id": 21,
+        "name": "P04_ELEVATOR_LEAVES-T01",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\P04_ELEVATOR_LEAVES-T01.mp4",
+        "error": null
+      },
+      {
+        "id": 22,
+        "name": "P04_ELEVATOR_LEAVES-T02",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\P04_ELEVATOR_LEAVES-T02.mp4",
+        "error": null
+      },
+      {
+        "id": 23,
+        "name": "P04_ELEVATOR_LEAVES-T03",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\P04_ELEVATOR_LEAVES-T03.mp4",
+        "error": null
+      },
+      {
+        "id": 24,
+        "name": "SHOT_REAL_E2E_001_TAKE_01",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\SHOT_REAL_E2E_001_TAKE_01.mp4",
+        "error": null
+      },
+      {
+        "id": 26,
+        "name": "SHOT_REAL_E2E_001_TAKE_01",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\SHOT_REAL_E2E_001_TAKE_01.mp4",
+        "error": null
+      },
+      {
+        "id": 45,
+        "name": "SHOT_01_TAKE_01_TAKE_01",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\SHOT_01_TAKE_01_TAKE_01.mp4",
+        "error": null
+      },
+      {
+        "id": 51,
+        "name": "SHOT_01_TAKE_01_TAKE_01",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\SHOT_01_TAKE_01_TAKE_01.mp4",
+        "error": null
+      },
+      {
+        "id": 52,
+        "name": "SHOT_01_TAKE_02_TAKE_01",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\SHOT_01_TAKE_02_TAKE_01.mp4",
+        "error": null
+      },
+      {
+        "id": 53,
+        "name": "SHOT_01_TAKE_03_TAKE_01",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\SHOT_01_TAKE_03_TAKE_01.mp4",
+        "error": null
+      },
+      {
+        "id": 55,
+        "name": "RC2_MEDIA_E2E_001",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\RC2_MEDIA_E2E_001.mp4",
+        "error": null
+      },
+      {
+        "id": 56,
+        "name": "RC2_PAUSE_LIVE_01",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\RC2_PAUSE_LIVE_01.mp4",
+        "error": null
+      },
+      {
+        "id": 57,
+        "name": "RC2_PAUSE_LIVE_02",
+        "status": "done",
+        "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\RC2_PAUSE_LIVE_02.mp4",
+        "error": null
+      },
+      {
+        "id": 58,
+        "name": "RC2_PAUSE_LIVE_03",
+        "status": "pending",
+        "output_path": null,
+        "error": null
+      }
+    ],
+    "missionEventCount": 0,
+    "lastMissionEvent": null
+  },
+  "process_comparison": {
+    "mission_control_pids_before": [
+      6644,
+      10776
+    ],
+    "mission_control_pids_after": 10292,
+    "python_worker_pids_before": {},
+    "python_worker_pids_after": {},
+    "chrome_pids_before": [
+      1184,
+      1912,
+      2500,
+      3120,
+      4444,
+      6008,
+      8436,
+      8664,
+      8864,
+      9236,
+      9924,
+      10012,
+      12928,
+      14684,
+      14964,
+      15000,
+      15112,
+      15460,
+      15708,
+      16396,
+      16696,
+      17028,
+      17076,
+      17304,
+      17524,
+      17888,
+      17892
+    ],
+    "chrome_pids_after": [
+      5276,
+      6316,
+      6600,
+      9272,
+      9388,
+      10000,
+      10752,
+      10768,
+      10832,
+      10988,
+      11004,
+      11012,
+      11020,
+      11028,
+      12376,
+      12392,
+      12444,
+      12720,
+      13068
+    ]
+  },
+  "pass": true,
+  "preexisting_duplicate_job_names_before": [
+    {
+      "name": "mateo-final-discipline",
+      "count": 2
+    },
+    {
+      "name": "SHOT_REAL_E2E_001_TAKE_01",
+      "count": 2
+    },
+    {
+      "name": "SHOT_01_TAKE_01_TAKE_01",
+      "count": 2
+    }
+  ],
+  "preexisting_duplicate_job_names_after": [
+    {
+      "name": "mateo-final-discipline",
+      "count": 2
+    },
+    {
+      "name": "SHOT_REAL_E2E_001_TAKE_01",
+      "count": 2
+    },
+    {
+      "name": "SHOT_01_TAKE_01_TAKE_01",
+      "count": 2
+    }
+  ],
+  "preexisting_duplicate_outputs_before": [
+    {
+      "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo\\agente firefly\\saida\\mateo-final-discipline.mp4",
+      "first_job_id": 6,
+      "duplicate_job_id": 8
+    },
+    {
+      "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\SHOT_REAL_E2E_001_TAKE_01.mp4",
+      "first_job_id": 24,
+      "duplicate_job_id": 26
+    },
+    {
+      "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\SHOT_01_TAKE_01_TAKE_01.mp4",
+      "first_job_id": 45,
+      "duplicate_job_id": 51
+    }
+  ],
+  "preexisting_duplicate_outputs_after": [
+    {
+      "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo\\agente firefly\\saida\\mateo-final-discipline.mp4",
+      "first_job_id": 6,
+      "duplicate_job_id": 8
+    },
+    {
+      "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\SHOT_REAL_E2E_001_TAKE_01.mp4",
+      "first_job_id": 24,
+      "duplicate_job_id": 26
+    },
+    {
+      "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\SHOT_01_TAKE_01_TAKE_01.mp4",
+      "first_job_id": 45,
+      "duplicate_job_id": 51
+    }
+  ],
+  "no_new_job_duplicate_after_reboot": true,
+  "no_new_media_duplicate_after_reboot": true
+}

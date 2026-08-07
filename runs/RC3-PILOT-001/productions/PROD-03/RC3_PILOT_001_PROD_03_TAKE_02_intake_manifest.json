@@ -1,0 +1,15 @@
+{
+  "run_id": "RC3-PILOT-001",
+  "production_id": "RC3-PILOT-PROD-03",
+  "job_id": 73,
+  "job_name": "RC3_PILOT_001_PROD_03_TAKE_02",
+  "media_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\productions\\PROD-03\\RC3_PILOT_001_PROD_03_TAKE_02.mp4",
+  "source_output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\RC3_PILOT_001_PROD_03_TAKE_02.mp4",
+  "sha256": "c94a9c39fb9d17ea3f7823240b34a504bdf1c33b1e0de395b08d57ab4ffd88eb",
+  "ffprobe_pass": true,
+  "video_stream_count": 1,
+  "width": 720,
+  "height": 1280,
+  "duration_seconds": 5.041667,
+  "codec": "h264"
+}

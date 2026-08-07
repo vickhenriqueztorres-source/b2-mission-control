@@ -1,0 +1,5 @@
+{
+  "result": "FAIL",
+  "reason": "Prerequisite not met: media backup destination missing.",
+  "fake_mp4_generation_removed": true
+}

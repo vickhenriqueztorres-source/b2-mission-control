@@ -1,0 +1,2 @@
+{"timestamp":"2026-08-06T21:13:25.277Z","type":"PILOT_CONFIG_CREATED","run_id":"RC2-PILOT-001"}
+{"timestamp":"2026-08-06T21:22:14.962Z","type":"PILOT_ABORTED_ON_FIRST_FAILURE","job_id":59,"result":"FAIL","reason":"First production failed before producing any validated MP4. Job 59 entered failed-infra with TimeoutError; pilot stopped per gate rule."}

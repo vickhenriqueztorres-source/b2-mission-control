@@ -1,0 +1,29 @@
+{
+  "resume_before_pause": {
+    "ok": true,
+    "queuePaused": false,
+    "emergencyStopped": false,
+    "emergencyReason": "RC2_ENDPOINT_TEST",
+    "requestedBy": "user",
+    "activatedAt": "2026-08-06T19:11:07.128Z",
+    "releasedAt": "2026-08-06T19:11:07.162Z"
+  },
+  "pause": {
+    "ok": true,
+    "queuePaused": true,
+    "emergencyStopped": false,
+    "emergencyReason": "RC2_ENDPOINT_TEST",
+    "requestedBy": "user",
+    "activatedAt": "2026-08-06T19:11:07.128Z",
+    "releasedAt": "2026-08-06T19:11:07.162Z"
+  },
+  "resume_after_pause": {
+    "ok": true,
+    "queuePaused": false,
+    "emergencyStopped": false,
+    "emergencyReason": "RC2_ENDPOINT_TEST",
+    "requestedBy": "user",
+    "activatedAt": "2026-08-06T19:11:07.128Z",
+    "releasedAt": "2026-08-06T19:11:07.162Z"
+  }
+}

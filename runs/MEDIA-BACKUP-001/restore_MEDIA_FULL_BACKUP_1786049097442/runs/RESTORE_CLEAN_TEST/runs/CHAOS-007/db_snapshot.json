@@ -1,0 +1,46 @@
+{
+  "events_count": 3,
+  "events": [
+    {
+      "event_id": "EVT_CHAOS-007_START",
+      "run_id": "RUN_CHAOS-007_STAGING",
+      "production_id": "CHAOS-007",
+      "agent_id": "AntigravityBuilder",
+      "provider": "ANTIGRAVITY",
+      "task_id": "START_CHAOS_SCENARIO",
+      "timestamp": "2026-08-06T17:34:10.574Z",
+      "type": "AGENT_STARTED",
+      "status": "RUNNING",
+      "message": "Iniciando Cenário de Caos: Desconexão do WebSocket e Replay do Histórico (CHAOS-007)",
+      "attempt": 1,
+      "idempotency_key": "IDEM_CHAOS-007_START",
+      "composite_key": "CHAOS-007_SHOT_01_TAKE_01"
+    },
+    {
+      "event_id": "EVT_CHAOS-007_INTERRUPT",
+      "run_id": "RUN_CHAOS-007_STAGING",
+      "production_id": "CHAOS-007",
+      "agent_id": "WSServer",
+      "provider": "MISSION_CONTROL",
+      "task_id": "SIMULATE_INTERRUPT",
+      "timestamp": "2026-08-06T17:34:10.585Z",
+      "type": "AGENT_RETRYING",
+      "status": "RUNNING",
+      "message": "Falha temporária em WSServer. Reiniciando worker...",
+      "attempt": 1
+    },
+    {
+      "event_id": "EVT_CHAOS-007_RECOVERED",
+      "run_id": "RUN_CHAOS-007_STAGING",
+      "production_id": "CHAOS-007",
+      "agent_id": "WSServer",
+      "provider": "MISSION_CONTROL",
+      "task_id": "RECOVER_STATE",
+      "timestamp": "2026-08-06T17:34:10.590Z",
+      "type": "AGENT_COMPLETED",
+      "status": "SUCCESS",
+      "message": "Estado retomado com sucesso mantendo o mesmo run_id (RUN_CHAOS-007_STAGING).",
+      "attempt": 2
+    }
+  ]
+}

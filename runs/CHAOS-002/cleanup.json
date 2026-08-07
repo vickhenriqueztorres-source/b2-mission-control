@@ -1,0 +1,7 @@
+{
+  "timestamp": "2026-08-06T17:34:10.120Z",
+  "strategy": "PURGE_RUN_FOLDER",
+  "actions": [
+    "Ambiente de staging limpo com sucesso."
+  ]
+}

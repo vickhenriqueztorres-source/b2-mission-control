@@ -1,0 +1,33 @@
+{
+  "events_count": 2,
+  "events": [
+    {
+      "event_id": "EVT_CHAOS-010_START",
+      "run_id": "RUN_CHAOS-010_STAGING",
+      "production_id": "CHAOS-010",
+      "agent_id": "AntigravityBuilder",
+      "provider": "ANTIGRAVITY",
+      "task_id": "START_CHAOS_SCENARIO",
+      "timestamp": "2026-08-06T17:34:10.863Z",
+      "type": "AGENT_STARTED",
+      "status": "RUNNING",
+      "message": "Iniciando Cenário de Caos: Esgotamento de Espaço em Disco (Simulado) (CHAOS-010)",
+      "attempt": 1,
+      "idempotency_key": "IDEM_CHAOS-010_START",
+      "composite_key": "CHAOS-010_SHOT_01_TAKE_01"
+    },
+    {
+      "event_id": "EVT_CHAOS-010_DISK_FAIL",
+      "run_id": "RUN_CHAOS-010_STAGING",
+      "production_id": "CHAOS-010",
+      "agent_id": "DiskSpaceProvider",
+      "provider": "MISSION_CONTROL",
+      "task_id": "WRITE_VIDEO",
+      "timestamp": "2026-08-06T17:34:10.872Z",
+      "type": "AGENT_FAILED",
+      "status": "FAILED",
+      "message": "Espaço em disco insuficiente (Disponível: 10737418240 bytes).",
+      "attempt": 1
+    }
+  ]
+}

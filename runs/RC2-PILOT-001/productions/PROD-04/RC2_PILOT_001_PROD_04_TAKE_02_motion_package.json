@@ -1,0 +1,14 @@
+{
+  "run_id": "RC2-PILOT-001",
+  "production_id": "RC2-PILOT-001-PROD-04",
+  "shot_id": "SHOT_02",
+  "take_id": "TAKE_01",
+  "firefly_output_name": "RC2_PILOT_001_PROD_04_TAKE_02",
+  "start_frame_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PILOT-001\\productions\\PROD-04\\imagens\\RC2_PILOT_001_PROD_04_TAKE_02.png",
+  "prompt": "A professional founder pauses beside a modern workspace window, subtle dolly-in, clean corporate documentary style, realistic facial motion, soft daylight, production 4, take 2, unique micro gesture 4-2.",
+  "model": "Kling 3.0",
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "duration_seconds": 5,
+  "created_at": "2026-08-06T21:13:25.170Z"
+}

@@ -1,0 +1,116 @@
+2026-08-06 16:26:25,354 | INFO  | action=jobs_reconciled claimed_reset=0 expired_reset=0 stale=0
+2026-08-06 16:26:25,355 | INFO  | action=reconciliation claimed_reset=0 expired_reset=0 stale=0
+2026-08-06 16:26:26,660 | INFO  | action=job_claimed job_id=57 status=claimed
+2026-08-06 16:26:26,661 | INFO  | action=slot_claimed slot_id=1 job_id=57
+2026-08-06 16:26:29,251 | INFO  | action=parallel_batch_started concurrency=1 jobs=[57]
+2026-08-06 16:26:29,264 | INFO  | action=slot_started slot_id=1 job_id=57 start_delay_seconds=0.0
+2026-08-06 16:26:29,274 | INFO  | action=slot_preparation_started slot_id=1 job_id=57
+2026-08-06 16:27:07,428 | INFO  | action=first_frame_uploaded job_id=57 image=C:\B2-AI-STUDIO\mission-control\runs\RC2-PAUSE-LIVE-001\imagens\RC2_PAUSE_LIVE_02.png
+2026-08-06 16:27:16,281 | INFO  | action=job_transition job_id=57 status=generating
+2026-08-06 16:27:16,282 | INFO  | action=generation_started job_id=57 state=generating
+2026-08-06 16:27:16,282 | INFO  | action=slot_preparation_finished slot_id=1 job_id=57
+2026-08-06 16:27:17,731 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:27:17,731 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=1.4
+2026-08-06 16:27:21,441 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:27:21,441 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=5.2
+2026-08-06 16:27:24,777 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:27:24,777 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=8.5
+2026-08-06 16:27:28,074 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:27:28,075 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=11.8
+2026-08-06 16:27:32,031 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:27:32,031 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=15.7
+2026-08-06 16:27:35,399 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:27:35,399 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=19.1
+2026-08-06 16:27:38,726 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:27:38,727 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=22.4
+2026-08-06 16:27:42,049 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:27:42,050 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=25.8
+2026-08-06 16:27:46,359 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:27:46,360 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=30.1
+2026-08-06 16:27:49,676 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:27:49,676 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=33.4
+2026-08-06 16:27:52,962 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:27:52,962 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=36.7
+2026-08-06 16:27:56,379 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:27:56,379 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=40.1
+2026-08-06 16:27:59,684 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:27:59,684 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=43.4
+2026-08-06 16:28:03,391 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:28:03,391 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=47.1
+2026-08-06 16:28:06,739 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:28:06,739 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=50.4
+2026-08-06 16:28:10,103 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:28:10,104 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=53.8
+2026-08-06 16:28:13,414 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:28:13,414 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=57.1
+2026-08-06 16:28:17,095 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:28:17,095 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=60.8
+2026-08-06 16:28:20,480 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:28:20,480 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=64.2
+2026-08-06 16:28:23,777 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:28:23,777 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=67.5
+2026-08-06 16:28:27,065 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:28:27,065 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=70.8
+2026-08-06 16:28:30,402 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:28:30,402 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=74.1
+2026-08-06 16:28:33,675 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:28:33,675 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=77.4
+2026-08-06 16:28:37,000 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:28:37,000 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=80.7
+2026-08-06 16:28:40,812 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:28:40,813 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=84.5
+2026-08-06 16:28:44,143 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:28:44,144 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=87.8
+2026-08-06 16:28:47,514 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:28:47,515 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=91.2
+2026-08-06 16:28:51,065 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:28:51,065 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=94.8
+2026-08-06 16:28:54,826 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:28:54,826 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=98.5
+2026-08-06 16:28:58,129 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:28:58,129 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=101.8
+2026-08-06 16:29:01,441 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:29:01,441 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=105.1
+2026-08-06 16:29:04,771 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:29:04,771 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=108.5
+2026-08-06 16:29:08,335 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:29:08,335 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=112.0
+2026-08-06 16:29:11,668 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:29:11,668 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=115.4
+2026-08-06 16:29:14,959 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:29:14,959 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=118.7
+2026-08-06 16:29:18,865 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:29:18,865 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=122.6
+2026-08-06 16:29:22,208 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:29:22,208 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=125.9
+2026-08-06 16:29:25,538 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:29:25,538 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=129.2
+2026-08-06 16:29:28,826 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:29:28,826 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=132.5
+2026-08-06 16:29:32,514 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:29:32,514 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=136.2
+2026-08-06 16:29:35,839 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:29:35,840 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=139.5
+2026-08-06 16:29:39,149 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:29:39,149 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=142.8
+2026-08-06 16:29:42,488 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:29:42,488 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=146.2
+2026-08-06 16:29:46,003 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:29:46,003 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=149.7
+2026-08-06 16:29:49,309 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:29:49,309 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=153.0
+2026-08-06 16:29:52,706 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:29:52,706 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=156.4
+2026-08-06 16:29:56,936 | INFO  | action=screen_state_read job_id=57 state=still_generating
+2026-08-06 16:29:56,936 | INFO  | action=generation_poll job_id=57 state=still_generating elapsed_seconds=160.6
+2026-08-06 16:30:03,664 | INFO  | action=screen_state_read job_id=57 state=result_ready
+2026-08-06 16:30:03,676 | INFO  | action=download_click_attempt job_id=57
+2026-08-06 16:30:10,231 | INFO  | action=export_transition job_id=57 export_state=download_started
+2026-08-06 16:30:10,231 | INFO  | action=export_transition job_id=57 export_state=download_complete
+2026-08-06 16:30:12,568 | INFO  | action=job_transition job_id=57 status=done
+2026-08-06 16:30:12,569 | INFO  | action=job_done job_id=57 output_path=C:\Users\brend\OneDrive\Desktop\B2 ENTERPRISE\Canais_\Mateo - Copia\agente firefly\saida\RC2_PAUSE_LIVE_02.mp4 file_size_bytes=9275019 sha256=49d3fb5ce4aee95533437510bc442bd26e98219a111b703dcf63c51cc9e64b8d width=720 height=1280 duration_seconds=5.041667 codec=h264
+2026-08-06 16:30:12,680 | INFO  | action=parallel_batch_finished results=[0] jobs=[57]
+2026-08-06 16:30:13,740 | INFO  | action=between_jobs_delay delay_seconds=11.13 configured_concurrency=1
+2026-08-06 16:30:25,728 | INFO  | action=jobs_reconciled claimed_reset=0 expired_reset=0 stale=0
+2026-08-06 16:30:25,728 | INFO  | action=reconciliation claimed_reset=0 expired_reset=0 stale=0
+2026-08-06 16:30:25,731 | WARNING | action=worker_paused status=emergency-stop

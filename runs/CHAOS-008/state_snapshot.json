@@ -1,0 +1,8 @@
+{
+  "scenario_id": "CHAOS-008",
+  "run_id": "RUN_CHAOS-008_STAGING",
+  "production_id": "CHAOS-008",
+  "terminal_state": "FAILED",
+  "retries": 1,
+  "events_count": 2
+}

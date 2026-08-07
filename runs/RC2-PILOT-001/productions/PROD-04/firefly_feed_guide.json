@@ -1,0 +1,28 @@
+{
+  "model": "Kling 3.0",
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "duration_seconds": 5,
+  "items": [
+    {
+      "image": "RC2_PILOT_001_PROD_04_TAKE_01.png",
+      "prompt": "A composed Brazilian business presenter turns slightly toward camera in a refined office, natural window light, cinematic but realistic motion, 50mm lens, calm confident expression, production 4, take 1, unique micro gesture 4-1.",
+      "name": "RC2_PILOT_001_PROD_04_TAKE_01"
+    },
+    {
+      "image": "RC2_PILOT_001_PROD_04_TAKE_02.png",
+      "prompt": "A professional founder pauses beside a modern workspace window, subtle dolly-in, clean corporate documentary style, realistic facial motion, soft daylight, production 4, take 2, unique micro gesture 4-2.",
+      "name": "RC2_PILOT_001_PROD_04_TAKE_02"
+    },
+    {
+      "image": "RC2_PILOT_001_PROD_04_TAKE_03.png",
+      "prompt": "A thoughtful executive reviews a point off camera then returns focus forward, gentle shoulder movement, premium editorial lighting, realistic office ambience, production 4, take 3, unique micro gesture 4-3.",
+      "name": "RC2_PILOT_001_PROD_04_TAKE_03"
+    },
+    {
+      "image": "RC2_PILOT_001_PROD_04_TAKE_04.png",
+      "prompt": "A calm entrepreneur breathes and gives a small assured nod, vertical social video framing, natural skin texture, modern workspace, understated motion, production 4, take 4, unique micro gesture 4-4.",
+      "name": "RC2_PILOT_001_PROD_04_TAKE_04"
+    }
+  ]
+}

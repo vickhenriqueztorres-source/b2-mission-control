@@ -1,0 +1,15 @@
+{
+  "status": "KLING_CLIP_IMPORTED",
+  "shot_id": "SHOT_REAL",
+  "take_id": "E2E_001_TAKE_01",
+  "video_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-001\\video_result.mp4",
+  "mime_type": "video/mp4",
+  "sha256": "94e24e7c91ea190c802e8fabfcf07048d73006ae1c51b38081edf34aac1d8d70",
+  "motion_package_hash": "eec4cf8678854489dafc6e66e6f7f3378bb888756b100105e9b3e7cf696a98d3",
+  "start_frame_sha256": "eec4cf8678854489dafc6e66e6f7f3378bb888756b100105e9b3e7cf696a98d3",
+  "observed_duration_seconds": 5,
+  "fps": 30,
+  "width": 720,
+  "height": 1280,
+  "manual_external_origin": "USER_MANUAL_KLING"
+}

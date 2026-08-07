@@ -1,0 +1,17 @@
+{
+  "id": "CHAOS-012",
+  "name": "Cotas/Créditos de Vídeo Esgotados",
+  "batch": 3,
+  "injection_point": "FireflyStateReader",
+  "initial_state": "FIREFLY_CANVAS_POLLING",
+  "injected_fault": "quota_exhausted",
+  "expected_terminal_state": "FAILED",
+  "mandatory_events": ["JOB_SUBMITTED", "AGENT_FAILED"],
+  "forbidden_events": ["AGENT_COMPLETED"],
+  "retry_limit": 0,
+  "recovery_expectation": {
+    "recoverable": false,
+    "same_run_id_required": false
+  },
+  "cleanup_strategy": "PURGE_RUN_FOLDER"
+}

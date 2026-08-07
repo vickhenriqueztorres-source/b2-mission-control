@@ -1,0 +1,293 @@
+{
+  "generated_at": "2026-08-07T00:01:21.885Z",
+  "files": [
+    {
+      "source": "C:\\B2-AI-STUDIO\\productions\\188a7a12-0533-4b55-83db-3e19e8828eb3\\FINAL_RAFA_LOBO_VIDEO.mp4",
+      "size_bytes": 34,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 0000022c70487e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\productions\\188a7a12-0533-4b55-83db-3e19e8828eb3\\FINAL_RAFA_LOBO_VIDEO.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\productions\\188a7a12-0533-4b55-83db-3e19e8828eb3\\SHOT_01_TAKE_01.mp4",
+      "size_bytes": 25,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 00000163c5d97e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\productions\\188a7a12-0533-4b55-83db-3e19e8828eb3\\SHOT_01_TAKE_01.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\productions\\a5ee3190-bae8-479d-ac4b-2cd9d3420332\\FINAL_RAFA_LOBO_VIDEO.mp4",
+      "size_bytes": 34,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 0000021ca35b7e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\productions\\a5ee3190-bae8-479d-ac4b-2cd9d3420332\\FINAL_RAFA_LOBO_VIDEO.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\productions\\a5ee3190-bae8-479d-ac4b-2cd9d3420332\\SHOT_01_TAKE_01.mp4",
+      "size_bytes": 25,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000002de28397e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\productions\\a5ee3190-bae8-479d-ac4b-2cd9d3420332\\SHOT_01_TAKE_01.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\productions\\REAL-E2E-001\\FINAL_RAFA_LOBO_VIDEO.mp4",
+      "size_bytes": 34,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000001a326727e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\productions\\REAL-E2E-001\\FINAL_RAFA_LOBO_VIDEO.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\productions\\REAL-E2E-003\\FINAL_RAFA_LOBO_VIDEO.mp4",
+      "size_bytes": 34,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000002ce3def7e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\productions\\REAL-E2E-003\\FINAL_RAFA_LOBO_VIDEO.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-005\\corrupted_video.mp4",
+      "size_bytes": 33,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-005\\corrupted_video.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\video_result_take_1.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 00000188df9e7e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\video_result_take_1.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\video_result_take_2.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000002537c437e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\video_result_take_2.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\video_result_take_3.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 0000020099d17e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\video_result_take_3.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\video_result_take_4.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000001e57e0c7e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\video_result_take_4.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-002\\video_result_take_1.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000001f9e37d7e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-002\\video_result_take_1.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-002\\video_result_take_2.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 0000017efa057e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-002\\video_result_take_2.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-002\\video_result_take_3.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 0000019e40ef7e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-002\\video_result_take_3.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-002\\video_result_take_4.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000002317ee37e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-002\\video_result_take_4.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-003\\video_result_take_1.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000002234a807e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-003\\video_result_take_1.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-003\\video_result_take_2.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000001ce98d07e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-003\\video_result_take_2.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-003\\video_result_take_3.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000001ef2c127e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-003\\video_result_take_3.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-003\\video_result_take_4.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000001b8b6827e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-003\\video_result_take_4.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_1.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 00000142eee67e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_1.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_2.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 0000023ccae47e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_2.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_3.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 0000024dd4a57e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_3.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_4.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 00000119000f7e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_4.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-005\\video_result_take_1.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000001640e5a7e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-005\\video_result_take_1.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-005\\video_result_take_2.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000001a0dbaf7e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-005\\video_result_take_2.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-005\\video_result_take_3.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 0000022b56e27e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-005\\video_result_take_3.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-005\\video_result_take_4.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000001f1a7fa7e00] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-005\\video_result_take_4.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-005\\corrupted_video.mp4",
+      "size_bytes": 33,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-005\\corrupted_video.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-001\\video_result_take_1.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000001419df97e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-001\\video_result_take_1.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-001\\video_result_take_2.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 00000139aa157e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-001\\video_result_take_2.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-001\\video_result_take_3.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000002193ce77e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-001\\video_result_take_3.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-001\\video_result_take_4.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 0000020a15e97e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-001\\video_result_take_4.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-002\\video_result_take_1.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000001f4e7d87e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-002\\video_result_take_1.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-002\\video_result_take_2.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000002deb6ca7e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-002\\video_result_take_2.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-002\\video_result_take_3.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 0000026f30ce7e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-002\\video_result_take_3.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-002\\video_result_take_4.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000001c09edf7e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-002\\video_result_take_4.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-003\\video_result_take_1.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 0000025623347e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-003\\video_result_take_1.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-003\\video_result_take_2.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 0000027f57cd7e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-003\\video_result_take_2.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-003\\video_result_take_3.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 00000256c2327e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-003\\video_result_take_3.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-003\\video_result_take_4.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 0000020cb6ba7e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-003\\video_result_take_4.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-004\\video_result_take_1.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 0000016e71997e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-004\\video_result_take_1.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-004\\video_result_take_2.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 0000022466df7e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-004\\video_result_take_2.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-004\\video_result_take_3.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000001b9b3d87e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-004\\video_result_take_3.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-004\\video_result_take_4.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 00000240e0537e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-004\\video_result_take_4.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-005\\video_result_take_1.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 00000225af3a7e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-005\\video_result_take_1.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-005\\video_result_take_2.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000001cf35b57e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-005\\video_result_take_2.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-005\\video_result_take_3.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000002c60efb7e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-005\\video_result_take_3.mp4: Invalid data found when processing input\r\n"
+    },
+    {
+      "source": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-005\\video_result_take_4.mp4",
+      "size_bytes": 73,
+      "ffprobe_exit_code": 1,
+      "ffprobe_stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 000001da9e307e40] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-005\\video_result_take_4.mp4: Invalid data found when processing input\r\n"
+    }
+  ]
+}

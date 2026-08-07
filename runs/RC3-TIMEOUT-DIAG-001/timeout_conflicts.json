@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-08-06T22:20:52.576Z",
+  "conflicts": [
+    {
+      "id": "STATE_READER_TIMEOUT_ESCALATED_TO_JOB_FAILURE",
+      "severity": "HIGH",
+      "observed": true,
+      "details": "A stalled StateReader foreground retry raised TimeoutError and propagated to _run_claimed_page, causing failed-infra after 141.494s although generation_budget_ms=600000 and watchdog_wall_clock_ms=800000."
+    },
+    {
+      "id": "OBSERVABILITY_GAP_NO_TRACEBACK_OR_DOM_ON_RC2_FAILURE",
+      "severity": "HIGH",
+      "observed": true,
+      "details": "RC2 worker_output only stored TimeoutError and a screenshot path; no traceback, HTML, URL file, DOM summary, selector evidence, or per-poll read duration was captured."
+    },
+    {
+      "id": "WATCHDOG_TIMEOUT_LESS_THAN_GENERATION_BUDGET",
+      "severity": "NONE",
+      "observed": false,
+      "details": "watchdog_wall_clock_ms=800000 and per_slot_wall_clock_ms=770000 are greater than generation_budget_ms=600000."
+    },
+    {
+      "id": "MISSION_CONTROL_TIMEOUT_LESS_THAN_GENERATION_BUDGET",
+      "severity": "UNKNOWN",
+      "observed": false,
+      "details": "No Mission Control wrapper timeout was observed for this direct Firefly worker run."
+    }
+  ]
+}

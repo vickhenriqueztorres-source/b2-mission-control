@@ -1,0 +1,5 @@
+[2026-08-06T19:32:28.904Z] [INFO] [WSServer] B2 Mission Control dashboard running at http://localhost:3333 
+[2026-08-06T19:32:29.272Z] [INFO] [EventBus] [MISSION_CONTROL] ControlService: AGENT_ACTIVITY (SYSTEM) 
+[2026-08-06T19:32:29.273Z] [INFO] [AgentTelemetryAdapter] [MISSION_CONTROL] ControlService: AGENT_ACTIVITY -> Emergency stop released by explicit human action. 
+[2026-08-06T20:28:46.690Z] [INFO] [WSServer] Dashboard client connected. 
+[2026-08-06T20:28:58.586Z] [INFO] [WSServer] Dashboard client connected. 

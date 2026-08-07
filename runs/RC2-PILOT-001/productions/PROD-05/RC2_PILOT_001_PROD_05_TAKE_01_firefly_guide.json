@@ -1,0 +1,13 @@
+{
+  "model": "Kling 3.0",
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "duration_seconds": 5,
+  "items": [
+    {
+      "image": "RC2_PILOT_001_PROD_05_TAKE_01.png",
+      "prompt": "A composed Brazilian business presenter turns slightly toward camera in a refined office, natural window light, cinematic but realistic motion, 50mm lens, calm confident expression, production 5, take 1, unique micro gesture 5-1.",
+      "name": "RC2_PILOT_001_PROD_05_TAKE_01"
+    }
+  ]
+}

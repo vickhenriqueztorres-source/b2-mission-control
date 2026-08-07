@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-08-07T00:00:42.722Z",
+  "run_id": "RC3-PILOT-001",
+  "candidate_version": "1.0.0-rc3",
+  "expected_productions": 5,
+  "expected_videos": 20,
+  "jobs_total": 20,
+  "jobs_done": 20,
+  "jobs_pass": 20,
+  "ffprobe_pass_count": 20,
+  "hash_match_count": 20,
+  "evidence_mp4_count": 20,
+  "mp4s_in_run_tree": 20,
+  "unique_sha256_count": 20,
+  "total_size_bytes": 98133374,
+  "failed_jobs": [],
+  "active_jobs_after_pilot": [],
+  "pass": true
+}

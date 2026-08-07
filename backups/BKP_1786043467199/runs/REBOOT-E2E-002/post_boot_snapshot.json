@@ -1,0 +1,149 @@
+{
+  "phase": "POST-REBOOT-NOT-EXECUTED",
+  "captured_at": "2026-08-06T18:11:29.163Z",
+  "run_id": null,
+  "production_id": null,
+  "mission_control_pids": [
+    {
+      "ProcessName": "chrome",
+      "Id": 1976,
+      "StartTime": "/Date(1786037695669)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "chrome",
+      "Id": 6104,
+      "StartTime": "/Date(1786037691625)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "chrome",
+      "Id": 6420,
+      "StartTime": "/Date(1786037686800)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "chrome",
+      "Id": 6584,
+      "StartTime": "/Date(1786039481291)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "chrome",
+      "Id": 6960,
+      "StartTime": "/Date(1786037686520)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "chrome",
+      "Id": 8392,
+      "StartTime": "/Date(1786038888757)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "chrome",
+      "Id": 9260,
+      "StartTime": "/Date(1786037686791)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "chrome",
+      "Id": 10256,
+      "StartTime": "/Date(1786037686798)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "chrome",
+      "Id": 11876,
+      "StartTime": "/Date(1786038774793)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "chrome",
+      "Id": 12840,
+      "StartTime": "/Date(1786037686810)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "chrome",
+      "Id": 13720,
+      "StartTime": "/Date(1786037704025)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "chrome",
+      "Id": 13784,
+      "StartTime": "/Date(1786037685519)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "chrome",
+      "Id": 14248,
+      "StartTime": "/Date(1786037686443)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "chrome",
+      "Id": 14976,
+      "StartTime": "/Date(1786037686437)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "chrome",
+      "Id": 15044,
+      "StartTime": "/Date(1786037704025)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "chrome",
+      "Id": 15164,
+      "StartTime": "/Date(1786038889116)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "chrome",
+      "Id": 15296,
+      "StartTime": "/Date(1786037715827)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "chrome",
+      "Id": 15480,
+      "StartTime": "/Date(1786037685538)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "chrome",
+      "Id": 18236,
+      "StartTime": "/Date(1786039829895)/",
+      "Path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    {
+      "ProcessName": "node",
+      "Id": 5600,
+      "StartTime": "/Date(1786036376253)/",
+      "Path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "ProcessName": "node",
+      "Id": 10776,
+      "StartTime": "/Date(1786035772940)/",
+      "Path": "C:\\Program Files\\Adobe\\Adobe Creative Cloud Experience\\libs\\node.exe"
+    },
+    {
+      "ProcessName": "node",
+      "Id": 12680,
+      "StartTime": "/Date(1786036375437)/",
+      "Path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "ProcessName": "node",
+      "Id": 15800,
+      "StartTime": "/Date(1786039880760)/",
+      "Path": "C:\\Program Files\\nodejs\\node.exe"
+    }
+  ],
+  "last_boot_time": "2026-08-06T17:02:18.5000000Z",
+  "scheduled_task_resumed": false,
+  "note": "POST-REBOOT was not executed after a physical reboot."
+}

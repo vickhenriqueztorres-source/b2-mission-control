@@ -1,0 +1,17 @@
+{
+  "id": "CHAOS-015",
+  "name": "Navegador Chrome Travado (Hang/Freeze)",
+  "batch": 3,
+  "injection_point": "FireflyWatchdog",
+  "initial_state": "FIREFLY_WORKER_GENERATING",
+  "injected_fault": "chrome_frozen",
+  "expected_terminal_state": "RECOVERED",
+  "mandatory_events": ["JOB_SUBMITTED", "AGENT_RETRYING", "AGENT_COMPLETED"],
+  "forbidden_events": ["AGENT_FAILED"],
+  "retry_limit": 2,
+  "recovery_expectation": {
+    "recoverable": true,
+    "same_run_id_required": true
+  },
+  "cleanup_strategy": "KILL_ORPHAN_PROCESSES"
+}

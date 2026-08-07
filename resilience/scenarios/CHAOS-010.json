@@ -1,0 +1,17 @@
+{
+  "id": "CHAOS-010",
+  "name": "Esgotamento de Espaço em Disco (Simulado)",
+  "batch": 2,
+  "injection_point": "DiskSpaceProvider",
+  "initial_state": "WRITING_ARTIFACT",
+  "injected_fault": "disk_space_exhausted",
+  "expected_terminal_state": "FAILED",
+  "mandatory_events": ["AGENT_STARTED", "AGENT_FAILED"],
+  "forbidden_events": ["FINAL_VIDEO_RENDERED"],
+  "retry_limit": 0,
+  "recovery_expectation": {
+    "recoverable": false,
+    "same_run_id_required": false
+  },
+  "cleanup_strategy": "PURGE_RUN_FOLDER"
+}

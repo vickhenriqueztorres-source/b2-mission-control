@@ -1,0 +1,58 @@
+{
+  "generated_at": "2026-08-06T19:24:02.248Z",
+  "system_state": [
+    {
+      "singleton": 1,
+      "status": "paused-control",
+      "reason": "queuePaused=true",
+      "updated_at": 1786044116
+    }
+  ],
+  "jobs": [
+    {
+      "id": 56,
+      "name": "RC2_PAUSE_LIVE_01",
+      "status": "generating",
+      "attempts": 1,
+      "output_path": null,
+      "error": null,
+      "claimed_at": 1786043990.3716738,
+      "generation_started_at": 1786044081.3844,
+      "media_validation_status": null,
+      "file_size_bytes": null,
+      "width": null,
+      "height": null,
+      "codec": null
+    },
+    {
+      "id": 57,
+      "name": "RC2_PAUSE_LIVE_02",
+      "status": "pending",
+      "attempts": 0,
+      "output_path": null,
+      "error": null,
+      "claimed_at": null,
+      "generation_started_at": null,
+      "media_validation_status": null,
+      "file_size_bytes": null,
+      "width": null,
+      "height": null,
+      "codec": null
+    },
+    {
+      "id": 58,
+      "name": "RC2_PAUSE_LIVE_03",
+      "status": "pending",
+      "attempts": 0,
+      "output_path": null,
+      "error": null,
+      "claimed_at": null,
+      "generation_started_at": null,
+      "media_validation_status": null,
+      "file_size_bytes": null,
+      "width": null,
+      "height": null,
+      "codec": null
+    }
+  ]
+}

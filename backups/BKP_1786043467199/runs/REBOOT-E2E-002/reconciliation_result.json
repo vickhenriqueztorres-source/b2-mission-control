@@ -1,0 +1,5 @@
+{
+  "executed_at": "2026-08-06T18:11:29.870Z",
+  "result": "FAIL",
+  "reason": "No physical reboot confirmation and no controlled generating job state were available."
+}

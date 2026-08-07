@@ -1,0 +1,5 @@
+{
+  "captured_at": "2026-08-06T18:11:48.445Z",
+  "result": "FAIL",
+  "reason": "No real active controlled production was used to attempt and prove blocked pipeline transitions after emergency stop."
+}

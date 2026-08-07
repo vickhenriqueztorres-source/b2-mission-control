@@ -1,0 +1,9 @@
+{
+  "result": "BLOCKED",
+  "reason": "Physical Windows reboot has not been performed and scheduled task registration was denied by Windows access control.",
+  "pre_reboot_snapshot": "pre_boot_snapshot.json",
+  "last_boot_time_before": "2026-08-06T17:02:18.5000000Z",
+  "scheduled_task_registration": "DENIED",
+  "physical_reboot_confirmed": false,
+  "required_user_action": "AUDITORIA PRE-REBOOT PREPARADA. Salve seus trabalhos e confirme o reinicio manual do Windows."
+}

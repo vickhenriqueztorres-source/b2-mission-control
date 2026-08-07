@@ -1,0 +1,6 @@
+{
+  "generated_at": "2026-08-06T18:13:50.840Z",
+  "policy": "media-full-backup",
+  "result": "BLOCKED",
+  "reason": "No external destination_root configured. Set config/media-full-backup.json or MEDIA_FULL_BACKUP_DESTINATION."
+}

@@ -1,0 +1,205 @@
+{
+  "generated_at": "2026-08-06T18:57:35.755Z",
+  "files": [
+    {
+      "production_id": "PILOT-001",
+      "job_name": "SHOT_01_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\video_result_take_1.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-001",
+      "job_name": "SHOT_02_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\video_result_take_2.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-001",
+      "job_name": "SHOT_03_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\video_result_take_3.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-001",
+      "job_name": "SHOT_04_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\video_result_take_4.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-002",
+      "job_name": "SHOT_01_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-002\\video_result_take_1.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-002",
+      "job_name": "SHOT_02_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-002\\video_result_take_2.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-002",
+      "job_name": "SHOT_03_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-002\\video_result_take_3.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-002",
+      "job_name": "SHOT_04_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-002\\video_result_take_4.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-003",
+      "job_name": "SHOT_01_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-003\\video_result_take_1.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-003",
+      "job_name": "SHOT_02_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-003\\video_result_take_2.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-003",
+      "job_name": "SHOT_03_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-003\\video_result_take_3.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-003",
+      "job_name": "SHOT_04_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-003\\video_result_take_4.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-004",
+      "job_name": "SHOT_01_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_1.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-004",
+      "job_name": "SHOT_02_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_2.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-004",
+      "job_name": "SHOT_03_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_3.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-004",
+      "job_name": "SHOT_04_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_4.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-005",
+      "job_name": "SHOT_01_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-005\\video_result_take_1.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-005",
+      "job_name": "SHOT_02_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-005\\video_result_take_2.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-005",
+      "job_name": "SHOT_03_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-005\\video_result_take_3.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    },
+    {
+      "production_id": "PILOT-005",
+      "job_name": "SHOT_04_TAKE_01",
+      "absolute_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-005\\video_result_take_4.mp4",
+      "classification": "INVALID_CONTAINER",
+      "contains_html": false,
+      "contains_json_error": false,
+      "contains_simulated_marker": true,
+      "note": "File content is UTF-8 marker text written by productionPilotRunner, not an MP4 container."
+    }
+  ]
+}

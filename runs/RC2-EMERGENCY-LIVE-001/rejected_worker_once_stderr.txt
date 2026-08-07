@@ -1,0 +1,3 @@
+2026-08-06 16:32:21,672 | INFO  | action=jobs_reconciled claimed_reset=0 expired_reset=0 stale=0
+2026-08-06 16:32:21,673 | INFO  | action=reconciliation claimed_reset=0 expired_reset=0 stale=0
+2026-08-06 16:32:21,677 | WARNING | action=worker_paused status=emergency-stop

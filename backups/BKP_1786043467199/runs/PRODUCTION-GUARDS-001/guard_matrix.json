@@ -1,0 +1,125 @@
+{
+  "generated_at": "2026-08-06T18:11:47.180Z",
+  "cases": [
+    {
+      "case_id": "CHAOS_MODE",
+      "command": "node -e require(ts-node/register); EnvironmentConfig.assertNoChaosInProduction()",
+      "environment": {
+        "NODE_ENV": "production",
+        "CHAOS_MODE": "true"
+      },
+      "expected_error": "CHAOS_MODE_FORBIDDEN_IN_PRODUCTION",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "C:\\B2-AI-STUDIO\\mission-control\\config\\environment.ts:22\n        throw new Error('VIOLAÇÃO CRÍTICA DE SEGURANÇA: CHAOS_MODE=true é estritamente proibido em ambiente de PRODUÇÃO!');\n              ^\nC:\\B2-AI-STUDIO\\mission-control\\config\\environment.ts:22\n                throw new Error('VIOLAÇÃO CRÍTICA DE SEGURANÇA: CHAOS_MODE=true é estritamente proibido em ambiente de PRODUÇÃO!');\n                ^\n\nError: VIOLAÇÃO CRÍTICA DE SEGURANÇA: CHAOS_MODE=true é estritamente proibido em ambiente de PRODUÇÃO!\n    at Function.assertNoChaosInProduction (C:\\B2-AI-STUDIO\\mission-control\\config\\environment.ts:22:15)\n    at [eval]:1:111\n    at runScriptInThisContext (node:internal/vm:209:10)\n    at node:internal/process/execution:449:12\n    at [eval]-wrapper:6:24\n    at runScriptInContext (node:internal/process/execution:447:60)\n    at evalFunction (node:internal/process/execution:87:30)\n    at evalScript (node:internal/process/execution:99:3)\n    at node:internal/main/eval_string:74:3\n",
+      "rejected_before_worker": true,
+      "browser_opened": false,
+      "worker_started": false,
+      "job_created": false,
+      "result": "PASS"
+    },
+    {
+      "case_id": "FAULT_INJECTOR",
+      "command": "node -e require(ts-node/register); EnvironmentConfig.assertNoChaosInProduction()",
+      "environment": {
+        "NODE_ENV": "production",
+        "FAULT_INJECTOR": "true"
+      },
+      "expected_error": "FAULT_INJECTOR_FORBIDDEN_IN_PRODUCTION",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "rejected_before_worker": false,
+      "browser_opened": false,
+      "worker_started": false,
+      "job_created": false,
+      "result": "FAIL"
+    },
+    {
+      "case_id": "MOCK_PROVIDER",
+      "command": "node -e require(ts-node/register); EnvironmentConfig.assertNoChaosInProduction()",
+      "environment": {
+        "NODE_ENV": "production",
+        "PROVIDER": "mock"
+      },
+      "expected_error": "MOCK_PROVIDER_FORBIDDEN_IN_PRODUCTION",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "rejected_before_worker": false,
+      "browser_opened": false,
+      "worker_started": false,
+      "job_created": false,
+      "result": "FAIL"
+    },
+    {
+      "case_id": "SIMULATED_EVENT",
+      "command": "node -e require(ts-node/register); EnvironmentConfig.assertNoChaosInProduction()",
+      "environment": {
+        "NODE_ENV": "production",
+        "SIMULATED_EVENT": "true"
+      },
+      "expected_error": "SIMULATED_EVENT_FORBIDDEN_IN_PRODUCTION",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "rejected_before_worker": false,
+      "browser_opened": false,
+      "worker_started": false,
+      "job_created": false,
+      "result": "FAIL"
+    },
+    {
+      "case_id": "STAGING_DATABASE",
+      "command": "node -e require(ts-node/register); EnvironmentConfig.assertNoChaosInProduction()",
+      "environment": {
+        "NODE_ENV": "production",
+        "SQLITE_DB_PATH": "C:/B2-AI-STUDIO/staging/telemetry.db"
+      },
+      "expected_error": "STAGING_DATABASE_FORBIDDEN_IN_PRODUCTION",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "rejected_before_worker": false,
+      "browser_opened": false,
+      "worker_started": false,
+      "job_created": false,
+      "result": "FAIL"
+    },
+    {
+      "case_id": "STAGING_CHROME_PROFILE",
+      "command": "node -e require(ts-node/register); EnvironmentConfig.assertNoChaosInProduction()",
+      "environment": {
+        "NODE_ENV": "production",
+        "CHROME_PROFILE": "C:/B2-AI-STUDIO/staging/chrome_profile"
+      },
+      "expected_error": "STAGING_CHROME_PROFILE_FORBIDDEN_IN_PRODUCTION",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "rejected_before_worker": false,
+      "browser_opened": false,
+      "worker_started": false,
+      "job_created": false,
+      "result": "FAIL"
+    },
+    {
+      "case_id": "STAGING_OUTPUT",
+      "command": "node -e require(ts-node/register); EnvironmentConfig.assertNoChaosInProduction()",
+      "environment": {
+        "NODE_ENV": "production",
+        "PRODUCTION_OUTPUT_DIR": "C:/B2-AI-STUDIO/staging/output"
+      },
+      "expected_error": "STAGING_OUTPUT_FORBIDDEN_IN_PRODUCTION",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "rejected_before_worker": false,
+      "browser_opened": false,
+      "worker_started": false,
+      "job_created": false,
+      "result": "FAIL"
+    }
+  ],
+  "overall_result": "FAIL"
+}

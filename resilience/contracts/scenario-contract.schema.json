@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://b2-mission-control.com/schemas/scenario-contract.schema.json",
+  "title": "ScenarioContract",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "batch",
+    "injection_point",
+    "initial_state",
+    "injected_fault",
+    "expected_terminal_state",
+    "mandatory_events",
+    "forbidden_events",
+    "retry_limit",
+    "recovery_expectation",
+    "cleanup_strategy"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^CHAOS-[0-9]{3}$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "batch": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 3
+    },
+    "injection_point": {
+      "type": "string"
+    },
+    "initial_state": {
+      "type": "string"
+    },
+    "injected_fault": {
+      "type": "string"
+    },
+    "expected_terminal_state": {
+      "type": "string",
+      "enum": ["FAILED", "COMPLETED", "RECOVERED", "TIMED_OUT"]
+    },
+    "mandatory_events": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "forbidden_events": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "retry_limit": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "recovery_expectation": {
+      "type": "object",
+      "required": ["recoverable", "same_run_id_required"],
+      "properties": {
+        "recoverable": { "type": "boolean" },
+        "same_run_id_required": { "type": "boolean" }
+      }
+    },
+    "cleanup_strategy": {
+      "type": "string",
+      "enum": ["PURGE_RUN_FOLDER", "RESET_STAGING_DB", "KILL_ORPHAN_PROCESSES", "FULL_STAGING_RESET"]
+    }
+  },
+  "additionalProperties": false
+}

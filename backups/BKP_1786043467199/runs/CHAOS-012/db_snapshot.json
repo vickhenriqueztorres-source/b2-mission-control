@@ -1,0 +1,46 @@
+{
+  "events_count": 3,
+  "events": [
+    {
+      "event_id": "EVT_CHAOS-012_START",
+      "run_id": "RUN_CHAOS-012_STAGING",
+      "production_id": "CHAOS-012",
+      "agent_id": "AntigravityBuilder",
+      "provider": "ANTIGRAVITY",
+      "task_id": "START_CHAOS_SCENARIO",
+      "timestamp": "2026-08-06T17:34:11.074Z",
+      "type": "AGENT_STARTED",
+      "status": "RUNNING",
+      "message": "Iniciando Cenário de Caos: Cotas/Créditos de Vídeo Esgotados (CHAOS-012)",
+      "attempt": 1,
+      "idempotency_key": "IDEM_CHAOS-012_START",
+      "composite_key": "CHAOS-012_SHOT_01_TAKE_01"
+    },
+    {
+      "event_id": "EVT_CHAOS-012_SUBMIT",
+      "run_id": "RUN_CHAOS-012_STAGING",
+      "production_id": "CHAOS-012",
+      "agent_id": "FireflyBotWorker",
+      "provider": "FIREFLY_BOT",
+      "task_id": "PROCESS_JOB",
+      "timestamp": "2026-08-06T17:34:11.081Z",
+      "type": "JOB_SUBMITTED",
+      "status": "PENDING",
+      "message": "Job enviado ao robô Firefly.",
+      "attempt": 1
+    },
+    {
+      "event_id": "EVT_CHAOS-012_UI_FAIL",
+      "run_id": "RUN_CHAOS-012_STAGING",
+      "production_id": "CHAOS-012",
+      "agent_id": "FireflyStateReader",
+      "provider": "FIREFLY_BOT",
+      "task_id": "READ_CANVAS",
+      "timestamp": "2026-08-06T17:34:11.087Z",
+      "type": "AGENT_FAILED",
+      "status": "FAILED",
+      "message": "Cotas/créditos de geração de vídeo esgotados na conta Adobe.",
+      "attempt": 1
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "c_drive": {
+    "disk_index": 0,
+    "partition": "Disk #0, Partition #1"
+  },
+  "d_drive": {
+    "disk_index": 1,
+    "partition": "Disk #1, Partition #1"
+  },
+  "confirmed_different_disk_index": true
+}

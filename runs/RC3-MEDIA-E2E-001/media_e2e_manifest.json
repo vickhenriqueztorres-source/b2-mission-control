@@ -1,0 +1,55 @@
+{
+  "run_id": "RC3-MEDIA-E2E-001",
+  "generated_at": "2026-08-06T22:28:12.061Z",
+  "job_id": 63,
+  "job_name": "RC3_MEDIA_E2E_001_TAKE_01",
+  "status": "done",
+  "attempts": 1,
+  "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\RC3_MEDIA_E2E_001_TAKE_01.mp4",
+  "copied_video_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-MEDIA-E2E-001\\video_result.mp4",
+  "file_size_bytes": 4349688,
+  "sha256": "05473e9cf1ba0b5447a799b55724c1eacf4bc40be93da4a5ed52547284e27a8d",
+  "ffprobe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 720,
+        "height": 1280,
+        "duration": "5.041667"
+      }
+    ],
+    "format": {
+      "duration": "5.041667",
+      "size": "4349688"
+    }
+  },
+  "media_validation_status": "PASS",
+  "first_result_ready_poll": {
+    "timestamp": "2026-08-06T22:25:29Z",
+    "job_id": 63,
+    "url": "https://firefly.adobe.com/generate/video",
+    "state": "result_ready",
+    "selectors_found": [
+      "result_ready"
+    ],
+    "selectors_absent": [
+      "content_rejected"
+    ],
+    "selector_errors": [],
+    "read_duration_ms": 3354.8689999997805,
+    "screenshot_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\screenshots\\job_63_poll_1786055129716.png"
+  },
+  "poll_count": 35,
+  "active_jobs_after_run": [],
+  "command_exit_codes": {
+    "started_at": "2026-08-06T22:22:24.3998318Z",
+    "completed_at": "2026-08-06T22:25:43.7635369Z",
+    "feed_exit_code": 0,
+    "worker_exit_code": 0
+  },
+  "pass": true,
+  "local_poll_screenshot_count": 35,
+  "screenshots_dir": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-MEDIA-E2E-001\\screenshots"
+}

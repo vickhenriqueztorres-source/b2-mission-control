@@ -1,0 +1,7 @@
+﻿{
+    "process_id":  16476,
+    "started_at":  "2026-08-06T22:59:12.0143791Z",
+    "script":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\run_rc3_pilot.ps1",
+    "stdout":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\pilot_stdout.txt",
+    "stderr":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\pilot_stderr.txt"
+}

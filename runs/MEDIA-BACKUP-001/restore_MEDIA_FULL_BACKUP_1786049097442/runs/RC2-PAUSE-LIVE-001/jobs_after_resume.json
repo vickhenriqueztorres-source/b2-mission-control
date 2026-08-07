@@ -1,0 +1,43 @@
+{
+  "generated_at": "2026-08-06T19:27:29.906Z",
+  "system_state": [
+    {
+      "singleton": 1,
+      "status": "running",
+      "reason": null,
+      "updated_at": 1786044382.863
+    }
+  ],
+  "jobs": [
+    {
+      "id": 56,
+      "name": "RC2_PAUSE_LIVE_01",
+      "status": "done",
+      "attempts": 1,
+      "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\RC2_PAUSE_LIVE_01.mp4",
+      "error": null,
+      "claimed_at": 1786043990.3716738,
+      "generation_started_at": 1786044081.3844
+    },
+    {
+      "id": 57,
+      "name": "RC2_PAUSE_LIVE_02",
+      "status": "generating",
+      "attempts": 1,
+      "output_path": null,
+      "error": null,
+      "claimed_at": 1786044386.6537535,
+      "generation_started_at": 1786044436.2680752
+    },
+    {
+      "id": 58,
+      "name": "RC2_PAUSE_LIVE_03",
+      "status": "pending",
+      "attempts": 0,
+      "output_path": null,
+      "error": null,
+      "claimed_at": null,
+      "generation_started_at": null
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "policy": "media-full-backup",
+  "source_roots": [
+    "C:\\B2-AI-STUDIO\\productions",
+    "C:\\B2-AI-STUDIO\\mission-control\\runs"
+  ],
+  "destination_root": null,
+  "verify_sha256": true
+}

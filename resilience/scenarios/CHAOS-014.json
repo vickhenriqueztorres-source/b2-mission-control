@@ -1,0 +1,17 @@
+{
+  "id": "CHAOS-014",
+  "name": "Timeout de Geração do Worker",
+  "batch": 3,
+  "injection_point": "FireflyAdapter",
+  "initial_state": "FIREFLY_WORKER_GENERATING",
+  "injected_fault": "worker_timeout",
+  "expected_terminal_state": "FAILED",
+  "mandatory_events": ["JOB_SUBMITTED", "AGENT_FAILED"],
+  "forbidden_events": ["FINAL_VIDEO_RENDERED"],
+  "retry_limit": 1,
+  "recovery_expectation": {
+    "recoverable": false,
+    "same_run_id_required": false
+  },
+  "cleanup_strategy": "KILL_ORPHAN_PROCESSES"
+}

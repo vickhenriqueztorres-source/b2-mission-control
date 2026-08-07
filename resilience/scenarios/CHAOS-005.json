@@ -1,0 +1,17 @@
+{
+  "id": "CHAOS-005",
+  "name": "MP4 Incompleto ou Corrompido",
+  "batch": 1,
+  "injection_point": "FireflyDownloader",
+  "initial_state": "FIREFLY_DOWNLOADING",
+  "injected_fault": "incomplete_mp4",
+  "expected_terminal_state": "FAILED",
+  "mandatory_events": ["JOB_SUBMITTED", "AGENT_FAILED"],
+  "forbidden_events": ["FINAL_VIDEO_RENDERED"],
+  "retry_limit": 1,
+  "recovery_expectation": {
+    "recoverable": false,
+    "same_run_id_required": false
+  },
+  "cleanup_strategy": "PURGE_RUN_FOLDER"
+}

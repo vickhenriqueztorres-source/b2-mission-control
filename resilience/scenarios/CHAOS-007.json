@@ -1,0 +1,17 @@
+{
+  "id": "CHAOS-007",
+  "name": "Desconexão do WebSocket e Replay do Histórico",
+  "batch": 2,
+  "injection_point": "WSServer",
+  "initial_state": "WEBSOCKET_CONNECTED",
+  "injected_fault": "websocket_disconnect",
+  "expected_terminal_state": "RECOVERED",
+  "mandatory_events": ["AGENT_STARTED", "AGENT_COMPLETED"],
+  "forbidden_events": ["AGENT_FAILED"],
+  "retry_limit": 1,
+  "recovery_expectation": {
+    "recoverable": true,
+    "same_run_id_required": true
+  },
+  "cleanup_strategy": "PURGE_RUN_FOLDER"
+}

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B2 Mission Control — Grafo Futurista & System Health Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #020408;
+      --bg-surface: #080d1a;
+      --bg-card: #0e1726;
+      --border-color: #1e293b;
+      --border-bright: #334155;
+      --accent-cyan: #00f2fe;
+      --accent-neon-green: #00ff66;
+      --accent-orange: #ff9900;
+      --accent-purple: #bb86fc;
+      --accent-pink: #ff007f;
+      --accent-red: #ff0055;
+      --glow-green: 0 0 25px rgba(0, 255, 102, 0.5);
+      --glow-orange: 0 0 25px rgba(255, 153, 0, 0.5);
+      --glow-cyan: 0 0 25px rgba(0, 242, 254, 0.5);
+      --glow-purple: 0 0 25px rgba(187, 134, 252, 0.5);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    header {
+      background: rgba(8, 13, 26, 0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .brand-logo {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--accent-neon-green), var(--accent-cyan));
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 255, 102, 0.5);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; color: #000; font-size: 1.3rem;
+    }
+    .brand-title {
+      font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px;
+      background: linear-gradient(90deg, #ffffff, var(--accent-neon-green), var(--accent-cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .brand-subtitle { font-size: 0.75rem; color: var(--accent-cyan); font-weight: 600; }
+
+    .controls-bar { display: flex; gap: 8px; align-items: center; }
+    
+    .zoom-controls {
+      display: flex; align-items: center; background: var(--bg-surface);
+      border: 1px solid var(--border-color); border-radius: 8px; padding: 4px 8px; gap: 6px;
+    }
+    .zoom-btn {
+      width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border-color);
+      background: var(--bg-card); color: #fff; font-weight: 800; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+    }
+    .zoom-btn:hover { border-color: var(--accent-neon-green); color: var(--accent-neon-green); }
+    .zoom-display {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 700;
+      color: var(--accent-cyan); min-width: 55px; text-align: center;
+    }
+
+    .btn {
+      padding: 7px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 700;
+      cursor: pointer; border: 1px solid var(--border-color); transition: all 0.2s;
+      background: var(--bg-card); color: var(--text-main);
+    }
+    .btn:hover { border-color: var(--accent-cyan); box-shadow: 0 0 12px rgba(0, 242, 254, 0.2); }
+
+    main {
+      flex: 1; display: grid; grid-template-columns: 1fr 380px; overflow: hidden; position: relative;
+    }
+
+    .node-graph-viewport {
+      position: relative; width: 100%; height: 100%;
+      background-color: #010307;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(0, 255, 102, 0.05) 0%, transparent 70%),
+        linear-gradient(rgba(0, 255, 102, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 102, 0.06) 1px, transparent 1px);
+      background-size: 100% 100%, 60px 60px, 60px 60px;
+      overflow: hidden; cursor: grab; user-select: none;
+    }
+    .node-graph-viewport:active { cursor: grabbing; }
+
+    .transform-container {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      transform-origin: 0 0;
+    }
+
+    .svg-connections {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 1;
+    }
+
+    .nodes-layer {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 2; min-width: 3400px; min-height: 1600px; padding: 60px;
+    }
+
+    .phase-column-title {
+      position: absolute; top: 20px; font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem; font-weight: 800; letter-spacing: 1.5px; color: var(--accent-cyan);
+      text-transform: uppercase; padding: 6px 16px; border-radius: 8px;
+      background: rgba(0, 242, 254, 0.12); border: 1px solid rgba(0, 242, 254, 0.4);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+    }
+
+    .node-card {
+      position: absolute; width: 250px;
+      background: rgba(10, 17, 28, 0.94); backdrop-filter: blur(14px);
+      border: 2px solid var(--accent-neon-green); border-radius: 14px; padding: 16px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.75), var(--glow-green);
+      transition: box-shadow 0.2s, border-color 0.2s; cursor: grab; user-select: none;
+    }
+    .node-card:active {
+      cursor: grabbing; box-shadow: 0 16px 50px rgba(0, 255, 102, 0.7), 0 0 40px rgba(0, 242, 254, 0.6);
+      border-color: #ffffff;
+    }
+    .node-card.trigger { border-color: var(--accent-orange); box-shadow: 0 10px 35px rgba(0, 0, 0, 0.75), 0 0 30px rgba(255, 153, 0, 0.6); }
+    .node-card.rafa-squad { border-color: var(--accent-purple); box-shadow: 0 10px 35px rgba(0, 0, 0, 0.75), var(--glow-purple); }
+    .node-card.firefly-bot { border-color: var(--accent-orange); box-shadow: 0 10px 35px rgba(0, 0, 0, 0.75), var(--glow-orange); }
+
+    .node-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .node-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(0, 255, 102, 0.15); border: 1px solid var(--accent-neon-green);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: var(--accent-neon-green); font-weight: 800;
+    }
+    .node-title { font-size: 0.9rem; font-weight: 800; color: #fff; line-height: 1.25; }
+    .node-badge {
+      font-size: 0.68rem; font-family: 'JetBrains Mono', monospace; font-weight: 700;
+      padding: 3px 8px; border-radius: 4px; margin-top: 4px; display: inline-block;
+      background: rgba(0, 255, 102, 0.15); color: var(--accent-neon-green);
+    }
+
+    .node-body { font-size: 0.75rem; color: var(--text-muted); line-height: 1.4; margin-top: 8px; }
+    .node-meta {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent-cyan);
+      margin-top: 10px; display: flex; justify-content: space-between; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 8px;
+    }
+
+    /* PAINEL LATERAL DE SAÚDE DO SISTEMA */
+    .sidebar {
+      background: var(--bg-surface); border-left: 1px solid var(--border-color);
+      display: flex; flex-direction: column; height: 100%;
+    }
+    .sidebar-section { padding: 14px; border-bottom: 1px solid var(--border-color); }
+    .sidebar-title {
+      font-size: 0.85rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .health-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+    }
+    .health-card {
+      background: #050811; border: 1px solid var(--border-color); border-radius: 6px; padding: 8px;
+    }
+    .health-label { color: var(--text-muted); font-size: 0.65rem; margin-bottom: 2px; }
+    .health-val { color: var(--accent-neon-green); font-weight: 700; }
+
+    .feed-container {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.74rem;
+      background: #050811; border: 1px solid var(--border-color); border-radius: 8px;
+      padding: 12px; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 6px;
+    }
+    .feed-item {
+      padding: 7px 10px; border-radius: 5px; background: rgba(255, 255, 255, 0.02);
+      border-left: 3px solid var(--border-color); word-break: break-all; line-height: 1.35;
+    }
+    .feed-item.ANTIGRAVITY { border-left-color: var(--accent-cyan); }
+    .feed-item.FIREFLY_BOT { border-left-color: var(--accent-orange); }
+    .feed-item.RAFA_LOBO { border-left-color: var(--accent-purple); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="brand-logo">B2</div>
+      <div>
+        <div class="brand-title">B2 MISSION CONTROL — SYSTEM HEALTH & CONTROLS</div>
+        <div class="brand-subtitle">🖱️ Zoom & Pan pelo Mouse | Controles de Emergência | Telemetria Ao Vivo</div>
+      </div>
+    </div>
+
+    <div class="controls-bar">
+      <div class="zoom-controls">
+        <button class="zoom-btn" onclick="adjustZoom(-0.15)">-</button>
+        <div class="zoom-display" id="zoom-display">100%</div>
+        <button class="zoom-btn" onclick="adjustZoom(0.15)">+</button>
+        <button class="zoom-btn" onclick="resetZoom()" style="width: auto; padding: 0 8px; font-size: 0.7rem;">RESET</button>
+      </div>
+
+      <!-- CONTROLES OPERACIONAIS FASE 5 -->
+      <button class="btn" style="border-color: rgba(255, 153, 0, 0.5); color: var(--accent-orange);" onclick="controlAction('pause-new-jobs')">⏸ Pausar Novos Jobs</button>
+      <button class="btn" style="border-color: rgba(0, 255, 102, 0.5); color: var(--accent-neon-green);" onclick="controlAction('resume-queue')">▶ Retomar Fila</button>
+      <button class="btn" style="border-color: rgba(255, 0, 85, 0.8); color: var(--accent-red); background: rgba(255,0,85,0.1);" onclick="controlAction('emergency-stop')">🛑 PARADA DE EMERGÊNCIA</button>
+      <button class="btn" style="border-color: rgba(0, 242, 254, 0.5); color: var(--accent-cyan);" onclick="controlAction('reconcile-state')">🔄 Reconciliar Estado</button>
+      <button class="btn" style="border-color: rgba(187, 134, 252, 0.5); color: var(--accent-purple);" onclick="controlAction('create-backup')">📦 Criar Backup</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="node-graph-viewport" id="viewport">
+      <div class="transform-container" id="transform-container">
+        <svg class="svg-connections" id="svg-layer">
+          <defs>
+            <linearGradient id="grad-green" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ff9900" />
+              <stop offset="100%" stop-color="#00ff66" />
+            </linearGradient>
+            <linearGradient id="grad-cyan" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#00ff66" />
+              <stop offset="100%" stop-color="#00f2fe" />
+            </linearGradient>
+            <linearGradient id="grad-purple" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#00f2fe" />
+              <stop offset="100%" stop-color="#bb86fc" />
+            </linearGradient>
+            <filter id="glow-filter" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="5" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+        </svg>
+
+        <div class="nodes-layer" id="nodes-layer">
+          <div class="phase-column-title" style="left: 80px;">1. INGESTÃO & BRIEFING</div>
+          <div class="phase-column-title" style="left: 530px;">2. SQUAD CRIATIVO RAFA LOBO</div>
+          <div class="phase-column-title" style="left: 1250px;">3. AUTOMAÇÃO WORKERS FIREFLY</div>
+          <div class="phase-column-title" style="left: 2150px;">4. PÓS-PRODUÇÃO AUDIOVISUAL</div>
+
+          <!-- FASE 1 -->
+          <div class="node-card trigger" id="node-briefing" style="left: 80px; top: 140px;">
+            <div class="node-header">
+              <div class="node-icon" style="background: rgba(255,153,0,0.2); color: var(--accent-orange);">👤</div>
+              <div class="node-title">UserBriefingParser</div>
+            </div>
+            <span class="node-badge trigger">BRIEFING ATIVO</span>
+            <div class="node-body">Parseia intenções e demandas do briefing de vídeo do usuário.</div>
+            <div class="node-meta"><span>Briefing #1</span> <span>100% OK</span></div>
+          </div>
+
+          <div class="node-card model-node" id="node-antigravity" style="left: 80px; top: 460px;">
+            <div class="node-header">
+              <div class="node-icon" style="background: rgba(0,242,254,0.2); color: var(--accent-cyan);">🚀</div>
+              <div class="node-title">AntigravityBuilder</div>
+            </div>
+            <span class="node-badge" style="background: rgba(0,242,254,0.2); color: var(--accent-cyan);">LÍDER DE CÓDIGO</span>
+            <div class="node-body">Orquestrador Mestre, construtor de adaptadores e integridade.</div>
+            <div class="node-meta"><span>Orquestrador</span> <span>ATIVO</span></div>
+          </div>
+
+          <!-- FASE 2 -->
+          <div class="node-card rafa-squad" id="node-prompt-arch" style="left: 530px; top: 100px;">
+            <div class="node-header">
+              <div class="node-icon" style="background: rgba(187,134,252,0.2); color: var(--accent-purple);">{ }</div>
+              <div class="node-title">RafaPromptArchitect</div>
+            </div>
+            <span class="node-badge purple">DESENHO PROMPTS</span>
+            <div class="node-body">Projeta a estética visual, enquadramentos e câmeras.</div>
+            <div class="node-meta"><span>3 Prompts</span> <span>PRONTO</span></div>
+          </div>
+
+          <div class="node-card rafa-squad" id="node-style-agent" style="left: 530px; top: 380px;">
+            <div class="node-header">
+              <div class="node-icon" style="background: rgba(187,134,252,0.2); color: var(--accent-purple);">🎨</div>
+              <div class="node-title">CinematicStyleAgent</div>
+            </div>
+            <span class="node-badge purple">ESTÉTICA VISUAL</span>
+            <div class="node-body">Aplica paletas de cores HSL, iluminação e composição.</div>
+            <div class="node-meta"><span>Estilo 4K</span> <span>OK</span></div>
+          </div>
+
+          <div class="node-card" id="node-schema-val" style="left: 870px; top: 100px;">
+            <div class="node-header">
+              <div class="node-icon">🛡️</div>
+              <div class="node-title">SchemaValidator</div>
+            </div>
+            <span class="node-badge">VALIDADOR AJV</span>
+            <div class="node-body">Valida 100% dos JSONs contra esquemas estritos.</div>
+            <div class="node-meta"><span>Esquema Estrito</span> <span>PASS</span></div>
+          </div>
+
+          <div class="node-card rafa-squad" id="node-motion-builder" style="left: 870px; top: 380px;">
+            <div class="node-header">
+              <div class="node-icon" style="background: rgba(187,134,252,0.2); color: var(--accent-purple);">🎬</div>
+              <div class="node-title">MotionPackageBuilder</div>
+            </div>
+            <span class="node-badge purple">PACOTE MOTION</span>
+            <div class="node-body">Monta a lista de movimento em formato de pacote.</div>
+            <div class="node-meta"><span>kling_motion.json</span> <span>100%</span></div>
+          </div>
+
+          <div class="node-card rafa-squad" id="node-handoff-gate" style="left: 870px; top: 660px;">
+            <div class="node-header">
+              <div class="node-icon" style="background: rgba(187,134,252,0.2); color: var(--accent-purple);">🔐</div>
+              <div class="node-title">Trava20HandoffGate</div>
+            </div>
+            <span class="node-badge purple">HANDOFF SEGURO</span>
+            <div class="node-body">Executa a trava de segurança antes do handoff.</div>
+            <div class="node-meta"><span>Trava 20</span> <span>OK</span></div>
+          </div>
+
+          <!-- FASE 3 -->
+          <div class="node-card firefly-bot" id="node-jobstore" style="left: 1250px; top: 140px;">
+            <div class="node-header">
+              <div class="node-icon" style="background: rgba(255,153,0,0.2); color: var(--accent-orange);">🗄️</div>
+              <div class="node-title">FireflyJobStore</div>
+            </div>
+            <span class="node-badge running">FILA SQLITE</span>
+            <div class="node-body">Gerencia a fila FIFO em firefly_jobs.db.</div>
+            <div class="node-meta"><span>20 Jobs</span> <span>GERENCIADO</span></div>
+          </div>
+
+          <div class="node-card firefly-bot" id="node-watchdog" style="left: 1250px; top: 460px;">
+            <div class="node-header">
+              <div class="node-icon" style="background: rgba(255,153,0,0.2); color: var(--accent-orange);">🐕</div>
+              <div class="node-title">FireflyWatchdog</div>
+            </div>
+            <span class="node-badge running">SUPERVISOR CHROME</span>
+            <div class="node-body">Verifica integridade, recria sessão e limpa locks.</div>
+            <div class="node-meta"><span>Auto-Heal</span> <span>ATIVO</span></div>
+          </div>
+
+          <div class="node-card firefly-bot" id="node-bot-worker" style="left: 1650px; top: 140px;">
+            <div class="node-header">
+              <div class="node-icon" style="background: rgba(255,153,0,0.2); color: var(--accent-orange);">🤖</div>
+              <div class="node-title">FireflyBotWorker</div>
+            </div>
+            <span class="node-badge running">AUTOMATION CHROMIUM</span>
+            <div class="node-body">Navegador Patchright que gera os vídeos na Adobe.</div>
+            <div class="node-meta"><span>Patchright</span> <span>CONCLUÍDO</span></div>
+          </div>
+
+          <div class="node-card model-node" id="node-state-reader" style="left: 1650px; top: 460px;">
+            <div class="node-header">
+              <div class="node-icon" style="background: rgba(0,242,254,0.2); color: var(--accent-cyan);">👁️</div>
+              <div class="node-title">FireflyStateReader</div>
+            </div>
+            <span class="node-badge" style="background: rgba(0,242,254,0.2); color: var(--accent-cyan);">VISÃO COMPUTACIONAL</span>
+            <div class="node-body">Lê o estado do canvas, erros de filtro e botão de download.</div>
+            <div class="node-meta"><span>Polling OCR</span> <span>Ao Vivo</span></div>
+          </div>
+
+          <div class="node-card firefly-bot" id="node-downloader" style="left: 1850px; top: 780px;">
+            <div class="node-header">
+              <div class="node-icon" style="background: rgba(255,153,0,0.2); color: var(--accent-orange);">⬇️</div>
+              <div class="node-title">FireflyDownloader</div>
+            </div>
+            <span class="node-badge running">EXPORTADOR MP4</span>
+            <div class="node-body">Garante o salvamento e validação do vídeo em disco.</div>
+            <div class="node-meta"><span>20 MP4s</span> <span>SALVO</span></div>
+          </div>
+
+          <div class="node-card" id="node-intake-bridge" style="left: 1850px; top: 1040px;">
+            <div class="node-header">
+              <div class="node-icon">🔄</div>
+              <div class="node-title">FireflyToIntakeBridge</div>
+            </div>
+            <span class="node-badge">PONTE DE INGESTÃO</span>
+            <div class="node-body">Gera o manifesto manual_kling_clip_intake.json.</div>
+            <div class="node-meta"><span>20 Clipes</span> <span>OK</span></div>
+          </div>
+
+          <!-- FASE 4 -->
+          <div class="node-card rafa-squad" id="node-qa-avatar" style="left: 2150px; top: 100px;">
+            <div class="node-header">
+              <div class="node-icon" style="background: rgba(187,134,252,0.2); color: var(--accent-purple);">🔍</div>
+              <div class="node-title">RafaAvatarVideoQaAgent</div>
+            </div>
+            <span class="node-badge purple">QA DE CLIPES</span>
+            <div class="node-body">Verifica artefatos visuais e integridade do avatar.</div>
+            <div class="node-meta"><span>QA Clipes</span> <span>PASS</span></div>
+          </div>
+
+          <div class="node-card rafa-squad" id="node-coverage-gate" style="left: 2150px; top: 380px;">
+            <div class="node-header">
+              <div class="node-icon" style="background: rgba(187,134,252,0.2); color: var(--accent-purple);">🚦</div>
+              <div class="node-title">ClipSetCoverageGate</div>
+            </div>
+            <span class="node-badge purple">GATE COBERTURA</span>
+            <div class="node-body">Verifica se 100% das tomadas necessárias estão prontas.</div>
+            <div class="node-meta"><span>Cobertura</span> <span>100%</span></div>
+          </div>
+
+          <div class="node-card rafa-squad" id="node-editor-agent" style="left: 2550px; top: 100px;">
+            <div class="node-header">
+              <div class="node-icon" style="background: rgba(187,134,252,0.2); color: var(--accent-purple);">✂️</div>
+              <div class="node-title">EditorAudiovisualAgent</div>
+            </div>
+            <span class="node-badge purple">CORTE & RITMO</span>
+            <div class="node-body">Executa a montagem, transições e cortes de edição.</div>
+            <div class="node-meta"><span>Edição</span> <span>PRONTA</span></div>
+          </div>
+
+          <div class="node-card rafa-squad" id="node-sound-color" style="left: 2550px; top: 380px;">
+            <div class="node-header">
+              <div class="node-icon" style="background: rgba(187,134,252,0.2); color: var(--accent-purple);">🎵</div>
+              <div class="node-title">SoundTextColorFinishing</div>
+            </div>
+            <span class="node-badge purple">COLOR & ÁUDIO</span>
+            <div class="node-body">Aplica foley, mixagem de som e grading de cor final.</div>
+            <div class="node-meta"><span>Finishing</span> <span>OK</span></div>
+          </div>
+
+          <div class="node-card rafa-squad" id="node-final-qa" style="left: 2550px; top: 660px;">
+            <div class="node-header">
+              <div class="node-icon" style="background: rgba(0,255,102,0.2); color: var(--accent-neon-green);">🏆</div>
+              <div class="node-title">FinalVideoQaAgent</div>
+            </div>
+            <span class="node-badge">INSPEÇÃO FINAL</span>
+            <div class="node-body">Garante a exportação do arquivo final perfeito.</div>
+            <div class="node-meta"><span>FINAL_VIDEO.mp4</span> <span>SUCESSO</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAINEL LATERAL DE FEED & SYSTEM HEALTH -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-title">
+          <span>🩺 System Health Dashboard</span>
+          <span style="font-size: 0.7rem; color: var(--accent-neon-green);" id="sys-status">HEALTHY</span>
+        </div>
+        <div class="health-grid">
+          <div class="health-card">
+            <div class="health-label">Event Hub Lag</div>
+            <div class="health-val" id="h-lag">12 ms</div>
+          </div>
+          <div class="health-card">
+            <div class="health-label">Heap Node.js</div>
+            <div class="health-val" id="h-mem">48.2 MB</div>
+          </div>
+          <div class="health-card">
+            <div class="health-label">Concorrência</div>
+            <div class="health-val" id="h-conc">1 Worker</div>
+          </div>
+          <div class="health-card">
+            <div class="health-label">Processos Órfãos</div>
+            <div class="health-val" id="h-orphan" style="color: var(--accent-neon-green);">0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section" style="flex: 1; display: flex; flex-direction: column;">
+        <div class="sidebar-title">
+          <span>📡 Eventos Ao Vivo</span>
+          <span style="font-size: 0.7rem; color: var(--accent-neon-green);">WebSocket WAL</span>
+        </div>
+        <div class="feed-container" id="feed-container">
+          <div class="feed-item ANTIGRAVITY">
+            <span style="color: var(--text-muted);">[SISTEMA]</span> Painel do Mission Control Ativo. System Health Monitoramento 100% OK.
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    const feed = document.getElementById('feed-container');
+    const viewport = document.getElementById('viewport');
+    const transformContainer = document.getElementById('transform-container');
+    const zoomDisplay = document.getElementById('zoom-display');
+
+    let zoomScale = 1.0;
+    let panX = 0;
+    let panY = 0;
+    let isPanning = false;
+    let startPanX = 0;
+    let startPanY = 0;
+
+    function applyTransform() {
+      transformContainer.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomScale})`;
+      zoomDisplay.innerText = `${Math.round(zoomScale * 100)}%`;
+      drawConnections();
+    }
+
+    function adjustZoom(delta) {
+      const newScale = Math.min(Math.max(0.35, zoomScale + delta), 2.5);
+      zoomScale = newScale;
+      applyTransform();
+    }
+
+    function resetZoom() {
+      zoomScale = 1.0;
+      panX = 0;
+      panY = 0;
+      applyTransform();
+    }
+
+    viewport.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const zoomFactor = e.deltaY < 0 ? 1.08 : 0.92;
+      const newScale = Math.min(Math.max(0.35, zoomScale * zoomFactor), 2.5);
+
+      const rect = viewport.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      panX = mouseX - (mouseX - panX) * (newScale / zoomScale);
+      panY = mouseY - (mouseY - panY) * (newScale / zoomScale);
+      zoomScale = newScale;
+
+      applyTransform();
+    }, { passive: false });
+
+    viewport.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.node-card')) return;
+      isPanning = true;
+      startPanX = e.clientX - panX;
+      startPanY = e.clientY - panY;
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (isPanning) {
+        panX = e.clientX - startPanX;
+        panY = e.clientY - startPanY;
+        applyTransform();
+        return;
+      }
+
+      if (isDraggingNode && draggedNode) {
+        const dx = (e.clientX - startMouseX) / zoomScale;
+        const dy = (e.clientY - startMouseY) / zoomScale;
+        draggedNode.style.left = `${Math.max(10, startNodeLeft + dx)}px`;
+        draggedNode.style.top = `${Math.max(10, startNodeTop + dy)}px`;
+        drawConnections();
+      }
+    });
+
+    document.addEventListener('mouseup', () => {
+      isPanning = false;
+      if (draggedNode) {
+        draggedNode.style.zIndex = 2;
+      }
+      isDraggingNode = false;
+      draggedNode = null;
+    });
+
+    let isDraggingNode = false;
+    let draggedNode = null;
+    let startMouseX = 0;
+    let startMouseY = 0;
+    let startNodeLeft = 0;
+    let startNodeTop = 0;
+
+    function initDraggableNodes() {
+      const nodes = document.querySelectorAll('.node-card');
+      nodes.forEach(node => {
+        node.addEventListener('mousedown', (e) => {
+          isDraggingNode = true;
+          draggedNode = node;
+          draggedNode.style.zIndex = 1000;
+          startMouseX = e.clientX;
+          startMouseY = e.clientY;
+          startNodeLeft = parseInt(draggedNode.style.left) || 0;
+          startNodeTop = parseInt(draggedNode.style.top) || 0;
+          e.stopPropagation();
+        });
+      });
+    }
+
+    function drawConnections() {
+      const svg = document.getElementById('svg-layer');
+      const connections = [
+        { from: 'node-briefing', to: 'node-prompt-arch', color: 'url(#grad-green)' },
+        { from: 'node-briefing', to: 'node-style-agent', color: 'url(#grad-green)' },
+        { from: 'node-prompt-arch', to: 'node-schema-val', color: 'url(#grad-green)' },
+        { from: 'node-style-agent', to: 'node-motion-builder', color: 'url(#grad-green)' },
+        { from: 'node-motion-builder', to: 'node-handoff-gate', color: 'url(#grad-green)' },
+        { from: 'node-handoff-gate', to: 'node-jobstore', color: 'url(#grad-cyan)' },
+        { from: 'node-watchdog', to: 'node-bot-worker', color: '#ff9900', dashed: true },
+        { from: 'node-jobstore', to: 'node-bot-worker', color: 'url(#grad-cyan)' },
+        { from: 'node-state-reader', to: 'node-bot-worker', color: '#00f2fe', dashed: true },
+        { from: 'node-bot-worker', to: 'node-downloader', color: 'url(#grad-cyan)' },
+        { from: 'node-downloader', to: 'node-intake-bridge', color: 'url(#grad-cyan)' },
+        { from: 'node-intake-bridge', to: 'node-qa-avatar', color: 'url(#grad-purple)' },
+        { from: 'node-qa-avatar', to: 'node-coverage-gate', color: 'url(#grad-purple)' },
+        { from: 'node-coverage-gate', to: 'node-editor-agent', color: 'url(#grad-purple)' },
+        { from: 'node-editor-agent', to: 'node-sound-color', color: 'url(#grad-purple)' },
+        { from: 'node-sound-color', to: 'node-final-qa', color: 'url(#grad-purple)' }
+      ];
+
+      let svgHtml = svg.querySelector('defs').outerHTML;
+
+      connections.forEach((conn, index) => {
+        const fromEl = document.getElementById(conn.from);
+        const toEl = document.getElementById(conn.to);
+        if (!fromEl || !toEl) return;
+
+        const x1 = fromEl.offsetLeft + fromEl.offsetWidth;
+        const y1 = fromEl.offsetTop + fromEl.offsetHeight / 2;
+        const x2 = toEl.offsetLeft;
+        const y2 = toEl.offsetTop + toEl.offsetHeight / 2;
+
+        const dx = Math.abs(x2 - x1) * 0.5;
+        const pathData = `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+        const strokeDash = conn.dashed ? 'stroke-dasharray="6,6"' : '';
+
+        svgHtml += `
+          <path d="${pathData}" stroke="${conn.color}" stroke-width="3" fill="none" filter="url(#glow-filter)" ${strokeDash} />
+          <circle cx="0" cy="0" r="4.5" fill="#ffffff" filter="url(#glow-filter)">
+            <animateMotion path="${pathData}" dur="${2.5 + (index % 4) * 0.5}s" repeatCount="indefinite" />
+          </circle>
+        `;
+      });
+
+      svg.innerHTML = svgHtml;
+    }
+
+    window.addEventListener('load', () => {
+      drawConnections();
+      initDraggableNodes();
+      applyTransform();
+      fetchHealth();
+      setInterval(fetchHealth, 5000);
+    });
+    window.addEventListener('resize', drawConnections);
+
+    async function fetchHealth() {
+      try {
+        const res = await fetch('/api/health');
+        const data = await res.json();
+        if (data.metrics) {
+          document.getElementById('h-lag').innerText = `${data.metrics.event_delivery_lag_ms} ms`;
+          document.getElementById('h-mem').innerText = `${(data.metrics.process_memory_bytes / 1024 / 1024).toFixed(1)} MB`;
+          document.getElementById('h-orphan').innerText = `${data.metrics.orphan_process_count}`;
+          document.getElementById('sys-status').innerText = data.status;
+          if (data.status === 'EMERGENCY_STOP') {
+            document.getElementById('sys-status').style.color = 'var(--accent-red)';
+          } else if (data.status === 'PAUSED') {
+            document.getElementById('sys-status').style.color = 'var(--accent-orange)';
+          } else {
+            document.getElementById('sys-status').style.color = 'var(--accent-neon-green)';
+          }
+        }
+      } catch (err) {}
+    }
+
+    const ws = new WebSocket('ws://' + window.location.host);
+    ws.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        if (data.event_type === 'TELEMETRY_REPLAY' && Array.isArray(data.events)) {
+          data.events.forEach(evt => renderEvent(evt));
+          return;
+        }
+        renderEvent(data);
+      } catch (err) { console.error(err); }
+    };
+
+    function renderEvent(data) {
+      const provider = data.provider || data.source || 'SISTEMA';
+      const eventType = data.type || data.event_type || 'EVENTO';
+      const msg = data.message || (data.payload ? JSON.stringify(data.payload) : 'Evento recebido');
+      const time = data.timestamp ? new Date(data.timestamp).toLocaleTimeString() : new Date().toLocaleTimeString();
+
+      const item = document.createElement('div');
+      item.className = `feed-item ${provider}`;
+      item.innerHTML = `<span style="color: var(--text-muted);">[${time}]</span> <strong style="color: var(--accent-neon-green);">[${provider}]</strong> <span>[${eventType}]</span> — ${msg}`;
+
+      feed.appendChild(item);
+      feed.scrollTop = feed.scrollHeight;
+    }
+
+    async function controlAction(endpoint) {
+      try {
+        const res = await fetch(`/api/control/${endpoint}`, { method: 'POST' });
+        const json = await res.json();
+        alert(json.message || (json.manifest ? 'Backup criado com ID: ' + json.manifest.backup_id : 'Ação executada com sucesso.'));
+        fetchHealth();
+      } catch (err) { alert('Erro ao executar ação: ' + err.message); }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,699 @@
+{
+  "backup_id": "BKP_1786038117839",
+  "created_at": "2026-08-06T17:41:58.285Z",
+  "files": [
+    {
+      "relative_path": "runs/CHAOS-001/assertions.json",
+      "size_bytes": 1127,
+      "sha256": "b051d291b6aa39a206db7464aa9ee99ce6ac6ca0a4d0d63a2cf7aef72b5a7c69"
+    },
+    {
+      "relative_path": "runs/CHAOS-001/chaos_events.db",
+      "size_bytes": 12288,
+      "sha256": "a37e96081cc9002aa3dd7ffa612cc0ccd00d75bb1c317263f8d9677fa4d87c0a"
+    },
+    {
+      "relative_path": "runs/CHAOS-001/cleanup.json",
+      "size_bytes": 144,
+      "sha256": "5e45e214aa5f9bcb99f84eeb455476bb36736b804da898afd392aca4e11178e3"
+    },
+    {
+      "relative_path": "runs/CHAOS-001/db_snapshot.json",
+      "size_bytes": 1159,
+      "sha256": "e9602f3e8abcf73145f91300f64e9cc123fc0cffd8d3189babc6e26a52c546dd"
+    },
+    {
+      "relative_path": "runs/CHAOS-001/events.jsonl",
+      "size_bytes": 898,
+      "sha256": "95f9f2b30ec0777cbbc781e661551c8aa8666bb8097e1daf444c0c22f615047c"
+    },
+    {
+      "relative_path": "runs/CHAOS-001/invalid_motion.json",
+      "size_bytes": 129,
+      "sha256": "fbb3aa47d7ee32d8ab108de986e9201e011b6b7e9d7dc843af70b8d95be36c5c"
+    },
+    {
+      "relative_path": "runs/CHAOS-001/REPORT.md",
+      "size_bytes": 1093,
+      "sha256": "6ca8d0d3bca7c68a31c833472513d30d796eecc820c0052e4b3f2b558584080b"
+    },
+    {
+      "relative_path": "runs/CHAOS-001/state_snapshot.json",
+      "size_bytes": 168,
+      "sha256": "da62fea116424798a5d8724a24e5bdf3965340e01c18131cdd83a7cbc089e767"
+    },
+    {
+      "relative_path": "runs/CHAOS-002/assertions.json",
+      "size_bytes": 1127,
+      "sha256": "75a865949fee1bbaaf4a4ac46c0571ffe08e5c59d3b8625e5a60f7706854c2ac"
+    },
+    {
+      "relative_path": "runs/CHAOS-002/chaos_events.db",
+      "size_bytes": 12288,
+      "sha256": "2d56c971a902ffaa2b6f94f25bb545254c350d0bc058f362724431c441fa2e1f"
+    },
+    {
+      "relative_path": "runs/CHAOS-002/cleanup.json",
+      "size_bytes": 144,
+      "sha256": "44675c50125f3188454183927a565f9e3d79f5ac22b64b589f35f8064a16fe2b"
+    },
+    {
+      "relative_path": "runs/CHAOS-002/db_snapshot.json",
+      "size_bytes": 1180,
+      "sha256": "00a265691e7770e9b0e35bc5af6b13d777177d26ca4e9564616e120b24ca7bcf"
+    },
+    {
+      "relative_path": "runs/CHAOS-002/events.jsonl",
+      "size_bytes": 919,
+      "sha256": "f8edc8c37a6a80b92bf61549a28a0f1e8e778db34c9f6fb696f3fa6e41bfb629"
+    },
+    {
+      "relative_path": "runs/CHAOS-002/firefly_guide.json",
+      "size_bytes": 197,
+      "sha256": "091e4b316fcc8439f53ffc2521c295b6e731cf63d97e614dbafa7f5a6a05a493"
+    },
+    {
+      "relative_path": "runs/CHAOS-002/REPORT.md",
+      "size_bytes": 1103,
+      "sha256": "869475824eef7a87ceab8caedafc32f299bd46cdfdac84d5dd150fdffea46934"
+    },
+    {
+      "relative_path": "runs/CHAOS-002/state_snapshot.json",
+      "size_bytes": 168,
+      "sha256": "b133ad4685caaca3f64e53cc01634746d1ad33a74ea7c7df321a78fc30f9f1e1"
+    },
+    {
+      "relative_path": "runs/CHAOS-003/assertions.json",
+      "size_bytes": 1127,
+      "sha256": "b8d75a8c7862214b10c41e88e72fc8bb335686b2b873e667f1eadbe3474e3abc"
+    },
+    {
+      "relative_path": "runs/CHAOS-003/chaos_events.db",
+      "size_bytes": 12288,
+      "sha256": "7096100828e3dbb0a42cbb61cc520564c6f3fa28aba32f1828bbabe11113d103"
+    },
+    {
+      "relative_path": "runs/CHAOS-003/cleanup.json",
+      "size_bytes": 144,
+      "sha256": "b791c0b0d1e4491e883279ad4e29c47b94ee09d1483f36ee33199ed2521bd9d2"
+    },
+    {
+      "relative_path": "runs/CHAOS-003/db_snapshot.json",
+      "size_bytes": 1563,
+      "sha256": "98776f015d8988da88cad8a8a720074fa6770f501d9daea8fa46ae4e9db1f8fb"
+    },
+    {
+      "relative_path": "runs/CHAOS-003/events.jsonl",
+      "size_bytes": 1204,
+      "sha256": "240726fafa14b58208ffdd517ce43dc9577906c00f3f9ebad72a4e8442e1705d"
+    },
+    {
+      "relative_path": "runs/CHAOS-003/firefly_guide.json",
+      "size_bytes": 203,
+      "sha256": "42bc2b7723027796b5c9dae745febcf2acac75adecc9ffcef696d1e84028d16f"
+    },
+    {
+      "relative_path": "runs/CHAOS-003/REPORT.md",
+      "size_bytes": 1089,
+      "sha256": "caf4c6c286f43e35b6294b1c965f242f9eb47c331c0c510895a0f9f7a1c76454"
+    },
+    {
+      "relative_path": "runs/CHAOS-003/state_snapshot.json",
+      "size_bytes": 168,
+      "sha256": "1b5e0c8cd8d7e67c6dc7765c2b4bd52998f19f2058d2dbc883fc3ab4e7172612"
+    },
+    {
+      "relative_path": "runs/CHAOS-004/assertions.json",
+      "size_bytes": 1128,
+      "sha256": "cf55c8f20fab12eadf01ca9983839890714c232303e063b43b86650a467fa312"
+    },
+    {
+      "relative_path": "runs/CHAOS-004/chaos_events.db",
+      "size_bytes": 12288,
+      "sha256": "0ebc0ceeeab7dbd4cc2afd8acca372edc7c4260941e3007769837cd5f676c134"
+    },
+    {
+      "relative_path": "runs/CHAOS-004/cleanup.json",
+      "size_bytes": 144,
+      "sha256": "e03e08e353eac7e0ba307398fff495d75569dcfd6927253b7be009d8ad205bc5"
+    },
+    {
+      "relative_path": "runs/CHAOS-004/db_snapshot.json",
+      "size_bytes": 1527,
+      "sha256": "09193c8cf1fb4f9375cc9b1a5c857ccaf2cb7617a67ada518fdb4d0c2d54ce2f"
+    },
+    {
+      "relative_path": "runs/CHAOS-004/events.jsonl",
+      "size_bytes": 1168,
+      "sha256": "d389dbbb15473d95e073026fa9fc24c4cb94f273ded59223cf2a72ce381d8ec0"
+    },
+    {
+      "relative_path": "runs/CHAOS-004/REPORT.md",
+      "size_bytes": 1110,
+      "sha256": "e0446ea7b09bc223adf4e9c15bbcfb8e5258fd81888d220aa1f066cd57dbc766"
+    },
+    {
+      "relative_path": "runs/CHAOS-004/state_snapshot.json",
+      "size_bytes": 171,
+      "sha256": "fdf15df113c4e830083ad1c61746edd57a93e3d33b16f2095b6d5de40dcd6320"
+    },
+    {
+      "relative_path": "runs/CHAOS-005/assertions.json",
+      "size_bytes": 1127,
+      "sha256": "1c6e50aced442b9c51c238a6b32e4c2ced2b1adf1f96d9c1e6abcdd901e2d720"
+    },
+    {
+      "relative_path": "runs/CHAOS-005/chaos_events.db",
+      "size_bytes": 12288,
+      "sha256": "9d3a60f7483b1bd4655d0bb64a5301df9d01cdc258b9f321972c5180e4e98356"
+    },
+    {
+      "relative_path": "runs/CHAOS-005/cleanup.json",
+      "size_bytes": 144,
+      "sha256": "88aaec8b4195c11642f0ef3dea05d791ae24738b489802bf90c96f3c11771c4b"
+    },
+    {
+      "relative_path": "runs/CHAOS-005/corrupted_video.mp4",
+      "size_bytes": 33,
+      "sha256": "011c3532fb379ad43cd3f3f6be5d89b6fde9f54b0c5bccc2b4f08d7f722d883a"
+    },
+    {
+      "relative_path": "runs/CHAOS-005/db_snapshot.json",
+      "size_bytes": 1536,
+      "sha256": "2c3b7923bb49dc7591550efe79114e4a5f49e8dffedcee1b4a828a90da015d3b"
+    },
+    {
+      "relative_path": "runs/CHAOS-005/events.jsonl",
+      "size_bytes": 1177,
+      "sha256": "10b849fb72a33c3d98f967aae1d1f6081e1b8acc12afe5ed6583d3873e30ccf2"
+    },
+    {
+      "relative_path": "runs/CHAOS-005/REPORT.md",
+      "size_bytes": 1097,
+      "sha256": "182c73653bdba09b12df4bd08a686b0a7680e17be0754e80dc5acba3fede225b"
+    },
+    {
+      "relative_path": "runs/CHAOS-005/state_snapshot.json",
+      "size_bytes": 168,
+      "sha256": "fdde53250adacbf385fbb0eb2f726cb7c9017c1e6ed6774003f5ea6b37ecdaa0"
+    },
+    {
+      "relative_path": "runs/CHAOS-006/assertions.json",
+      "size_bytes": 1128,
+      "sha256": "c978f365b82dd274c21aabcfd1eb3addeab1749ee15f833fcce532cb74487074"
+    },
+    {
+      "relative_path": "runs/CHAOS-006/chaos_events.db",
+      "size_bytes": 12288,
+      "sha256": "bc95841bdda9ced9cf73bb0af3506ad6edfff7ee3c78a95b8ad2056ee65e5a46"
+    },
+    {
+      "relative_path": "runs/CHAOS-006/cleanup.json",
+      "size_bytes": 146,
+      "sha256": "41a863fc0fcefbbfd779a415dfd6bbf19909865326748e3e61a28a2107760216"
+    },
+    {
+      "relative_path": "runs/CHAOS-006/db_snapshot.json",
+      "size_bytes": 1567,
+      "sha256": "c762d16406da8d39d8706ce5338486cfa116b92ff6440315c9112fd269ad1aeb"
+    },
+    {
+      "relative_path": "runs/CHAOS-006/events.jsonl",
+      "size_bytes": 1216,
+      "sha256": "fa86cd18593146a9b3951ef3ca49c40213c587ec0f9d1ec2654cd349cabfe2a3"
+    },
+    {
+      "relative_path": "runs/CHAOS-006/REPORT.md",
+      "size_bytes": 1141,
+      "sha256": "22373577db467d48922e0b7aa5329e19cbfbc7d34fc30a1cb93945c5844aba4c"
+    },
+    {
+      "relative_path": "runs/CHAOS-006/state_snapshot.json",
+      "size_bytes": 171,
+      "sha256": "79eb42d7580ce8f2e13229ca48e8e4a6e85d3bca15442d2108785326f784353b"
+    },
+    {
+      "relative_path": "runs/CHAOS-007/assertions.json",
+      "size_bytes": 1128,
+      "sha256": "b43eea8bef08bad1792510bad32838e071b2c0dff1d3b90e8e7ff9769973064b"
+    },
+    {
+      "relative_path": "runs/CHAOS-007/chaos_events.db",
+      "size_bytes": 12288,
+      "sha256": "3655005c817b9570843ef2773a4e9777d353aea3ea7f12c24e4d0f80806faf55"
+    },
+    {
+      "relative_path": "runs/CHAOS-007/cleanup.json",
+      "size_bytes": 144,
+      "sha256": "7826990e25071647bc711189e39f3fb5e1bdaa769d98970c0cdda10d7395a203"
+    },
+    {
+      "relative_path": "runs/CHAOS-007/db_snapshot.json",
+      "size_bytes": 1517,
+      "sha256": "b99fbe1c91390ca82d6f20b615b22b9caec8dd64ebbeab987ed1f448604e59ec"
+    },
+    {
+      "relative_path": "runs/CHAOS-007/events.jsonl",
+      "size_bytes": 1166,
+      "sha256": "c2077d452d40d2c1e27964960aac0a9f52cfeaccea2c66a4b2926a770ce78056"
+    },
+    {
+      "relative_path": "runs/CHAOS-007/REPORT.md",
+      "size_bytes": 1120,
+      "sha256": "5c3cc35d15a7fcadb18ab5b86f1a17fd15f4b604ff518ce1fd2add032919602d"
+    },
+    {
+      "relative_path": "runs/CHAOS-007/state_snapshot.json",
+      "size_bytes": 171,
+      "sha256": "83bce8e846eb00cac678c904a7b88d55a4d923668bf9ce8234cf5cdf0f119c1b"
+    },
+    {
+      "relative_path": "runs/CHAOS-008/assertions.json",
+      "size_bytes": 1127,
+      "sha256": "257de1d563f08fbe6355b7d22742f89ed3e863084366c9fb52c17552f2b38537"
+    },
+    {
+      "relative_path": "runs/CHAOS-008/chaos_events.db",
+      "size_bytes": 12288,
+      "sha256": "b678947edf0308d1895ca57d7f6f01562152f5d070f14971d30e35a47b2aa844"
+    },
+    {
+      "relative_path": "runs/CHAOS-008/cleanup.json",
+      "size_bytes": 144,
+      "sha256": "913276bde0001c2853d73017d5709f9802f01a8236661c940c774cbda80a9d3c"
+    },
+    {
+      "relative_path": "runs/CHAOS-008/db_snapshot.json",
+      "size_bytes": 1029,
+      "sha256": "cefcdb3a2e7214b5d95524d66166d0f734a1c201fbc430935aac43e72bd0b0e8"
+    },
+    {
+      "relative_path": "runs/CHAOS-008/events.jsonl",
+      "size_bytes": 776,
+      "sha256": "69f9a9905f0747910dcab93bc980818e023a7922cfc228f0fe350e3aeab27008"
+    },
+    {
+      "relative_path": "runs/CHAOS-008/REPORT.md",
+      "size_bytes": 1110,
+      "sha256": "c664701797f89f0bc553a20c41b0b103802e76a2502ff440dc38ad18d2504c8f"
+    },
+    {
+      "relative_path": "runs/CHAOS-008/state_snapshot.json",
+      "size_bytes": 168,
+      "sha256": "30be0f0a9a9da099583af4e15bea7aa86d1fe1bc173a74c1866b2523ad3eb54b"
+    },
+    {
+      "relative_path": "runs/CHAOS-009/assertions.json",
+      "size_bytes": 1128,
+      "sha256": "faeacff3d9ed221f99f6c87c055e906e919fcb64056ba0aef1f85495484097df"
+    },
+    {
+      "relative_path": "runs/CHAOS-009/chaos_events.db",
+      "size_bytes": 12288,
+      "sha256": "8e86bd0184e6f3730d599fe82551d379d65d2bc97219450c8cfed6d46b16c049"
+    },
+    {
+      "relative_path": "runs/CHAOS-009/cleanup.json",
+      "size_bytes": 146,
+      "sha256": "b8c830d16408b61869df6be6174a5499efa49d8b6feac84aef96f3ffc960f15a"
+    },
+    {
+      "relative_path": "runs/CHAOS-009/db_snapshot.json",
+      "size_bytes": 1535,
+      "sha256": "02a286c3b1174d661f6e0400d017de35eb46439abae74923872626d11dbee23d"
+    },
+    {
+      "relative_path": "runs/CHAOS-009/events.jsonl",
+      "size_bytes": 1184,
+      "sha256": "1d2f5daa3a64ae80690a165e3229c73b01375cc3ab69ac910209cd1657f1e6a0"
+    },
+    {
+      "relative_path": "runs/CHAOS-009/REPORT.md",
+      "size_bytes": 1121,
+      "sha256": "838009cba5fa9b1b0a76cc6d422dff32b58346648b01df7ebe9a6b15bcc33957"
+    },
+    {
+      "relative_path": "runs/CHAOS-009/state_snapshot.json",
+      "size_bytes": 171,
+      "sha256": "299cf9ea010bb0be9489c299ab316ef42a937700144af34143231f0a120fb4fb"
+    },
+    {
+      "relative_path": "runs/CHAOS-010/assertions.json",
+      "size_bytes": 1127,
+      "sha256": "253595da5eb0f8385bb8fdc27d37f00f27869eb54a4df45653b01dc53ae07e4f"
+    },
+    {
+      "relative_path": "runs/CHAOS-010/chaos_events.db",
+      "size_bytes": 12288,
+      "sha256": "1fa867350de2cb5f0f6436d9872fafa8a4db06fb3236d80a1f8f9f3ee4e129e3"
+    },
+    {
+      "relative_path": "runs/CHAOS-010/cleanup.json",
+      "size_bytes": 144,
+      "sha256": "0f1e8a7cfc4de28294ebff32b2655ecb2cdccfe9a19cc904d4bb003795595ead"
+    },
+    {
+      "relative_path": "runs/CHAOS-010/db_snapshot.json",
+      "size_bytes": 1063,
+      "sha256": "35a741ad8d80115cef5458fda1c3a4525a7762962b2d214fcacf7af0167ecd51"
+    },
+    {
+      "relative_path": "runs/CHAOS-010/events.jsonl",
+      "size_bytes": 810,
+      "sha256": "95ada214d82488a7163cba03a4dc63d0f0b96602e809643d4309609c11ccd348"
+    },
+    {
+      "relative_path": "runs/CHAOS-010/REPORT.md",
+      "size_bytes": 1117,
+      "sha256": "7f5d88f049b933a66b86071dbd1bc00558e28857a2d34d023bca3ec64627daa2"
+    },
+    {
+      "relative_path": "runs/CHAOS-010/state_snapshot.json",
+      "size_bytes": 168,
+      "sha256": "eb5723d76175d707622c541b976f86dba468ca8990db5e4439663e2fbbd8c187"
+    },
+    {
+      "relative_path": "runs/CHAOS-011/assertions.json",
+      "size_bytes": 1127,
+      "sha256": "80fabd1042b1b6797a5293fee464328a725feb56e865cc5cd9b2a4958920e600"
+    },
+    {
+      "relative_path": "runs/CHAOS-011/chaos_events.db",
+      "size_bytes": 12288,
+      "sha256": "b4c22c2e371fff1974c7f3c0762aa3dffef0068c8b57277078466cb9d3f90867"
+    },
+    {
+      "relative_path": "runs/CHAOS-011/cleanup.json",
+      "size_bytes": 149,
+      "sha256": "0a60f24d09a3c413781b22babf1302784957527ddf248833520b973c38d2df52"
+    },
+    {
+      "relative_path": "runs/CHAOS-011/db_snapshot.json",
+      "size_bytes": 1440,
+      "sha256": "dfbbc1eeeb8c205fd45c22b9d4c237dfcc5c59b79f4d09d932ae7f761deef64a"
+    },
+    {
+      "relative_path": "runs/CHAOS-011/events.jsonl",
+      "size_bytes": 1089,
+      "sha256": "e6668d0eab34b5dd2959e24404d0bad23d6abf556e8f4338374d53a33df778bf"
+    },
+    {
+      "relative_path": "runs/CHAOS-011/REPORT.md",
+      "size_bytes": 1104,
+      "sha256": "28458b80c61f826415c636b2a23849a602218f130906283d76ddbd11b70b0929"
+    },
+    {
+      "relative_path": "runs/CHAOS-011/state_snapshot.json",
+      "size_bytes": 168,
+      "sha256": "c5a95d9a49fb6f7d0f5c317c915cb053add323d894c3e6f9b1b1492f68b3ceca"
+    },
+    {
+      "relative_path": "runs/CHAOS-012/assertions.json",
+      "size_bytes": 1127,
+      "sha256": "b1b3e068ccf68f34117186e8831e9f40ec3a8b1e4302618dbad15ed7bb9ddc43"
+    },
+    {
+      "relative_path": "runs/CHAOS-012/chaos_events.db",
+      "size_bytes": 12288,
+      "sha256": "42fe396bb99dafeb5459313f058e1a6b4e145f9038c1940aa7b9a5850cd742fb"
+    },
+    {
+      "relative_path": "runs/CHAOS-012/cleanup.json",
+      "size_bytes": 144,
+      "sha256": "bccda098e0e200ee2b9c476ba8fa91176072bce2101ed80b0776ba7ac9083924"
+    },
+    {
+      "relative_path": "runs/CHAOS-012/db_snapshot.json",
+      "size_bytes": 1461,
+      "sha256": "35be2ad8fbd66a92e44abe9b314975ffdb4e58f6d79f4808406f3153ceee4cf0"
+    },
+    {
+      "relative_path": "runs/CHAOS-012/events.jsonl",
+      "size_bytes": 1110,
+      "sha256": "dc6ad07b3b76a17cfb96ec638d76d0bde8e524dff356be55e2e5b197d87caedd"
+    },
+    {
+      "relative_path": "runs/CHAOS-012/REPORT.md",
+      "size_bytes": 1106,
+      "sha256": "723bbeb9576d3c16de53d36e6fa0973438d6a1a76e20aa53a05eccbc488df5ca"
+    },
+    {
+      "relative_path": "runs/CHAOS-012/state_snapshot.json",
+      "size_bytes": 168,
+      "sha256": "359e214e4d65b8cd36b4772c37080975e61d89e175d875498e2687ecfdfa42b8"
+    },
+    {
+      "relative_path": "runs/CHAOS-013/assertions.json",
+      "size_bytes": 1127,
+      "sha256": "85c7c71bb181d174ff01e95b163f698ec83553a84e0abea8628a583d67632f5d"
+    },
+    {
+      "relative_path": "runs/CHAOS-013/chaos_events.db",
+      "size_bytes": 12288,
+      "sha256": "4b17397329690710e13655f3348dad4aa98a6bcf4d4a662f57d26caa17a6347f"
+    },
+    {
+      "relative_path": "runs/CHAOS-013/cleanup.json",
+      "size_bytes": 144,
+      "sha256": "ad93c8377533fa332b544457e78f141373309d30ea4a66e6d132762e8e91cbed"
+    },
+    {
+      "relative_path": "runs/CHAOS-013/db_snapshot.json",
+      "size_bytes": 1460,
+      "sha256": "f1f2ef6e65b0c892a91ae0dbe707573341d3efa55e8d14ed3c8655a8056ce804"
+    },
+    {
+      "relative_path": "runs/CHAOS-013/events.jsonl",
+      "size_bytes": 1109,
+      "sha256": "370745df18bac5188635cde5363a85e89dca8bee94861b226c5bcd8a0de2cfe3"
+    },
+    {
+      "relative_path": "runs/CHAOS-013/REPORT.md",
+      "size_bytes": 1111,
+      "sha256": "29d7cc7f3e48c4e9f2ec011477baebdcd608d8631b8974766ab03c025f9cf6b4"
+    },
+    {
+      "relative_path": "runs/CHAOS-013/state_snapshot.json",
+      "size_bytes": 168,
+      "sha256": "23a79c86cbf88f77c5e5264cd3c2e68c89b5dfe5175895683678ee8abe27c1c4"
+    },
+    {
+      "relative_path": "runs/CHAOS-014/assertions.json",
+      "size_bytes": 1127,
+      "sha256": "868208852275b82ad1f44ab5818d908e631519999146ed3cd5b351bd85d43dca"
+    },
+    {
+      "relative_path": "runs/CHAOS-014/chaos_events.db",
+      "size_bytes": 12288,
+      "sha256": "e171d4ee02b89a0f50579565141ccadf6502b62b19f4eb40b785c8d20bf33a59"
+    },
+    {
+      "relative_path": "runs/CHAOS-014/cleanup.json",
+      "size_bytes": 149,
+      "sha256": "01670ec1095f608cd5dc0c55066f6bceecb83b8dc828e2ff35ddce559862b3df"
+    },
+    {
+      "relative_path": "runs/CHAOS-014/db_snapshot.json",
+      "size_bytes": 1458,
+      "sha256": "db9c996965fd20455c4db0386a9298afaccaf4e37798c0ded6871f4dec25f56e"
+    },
+    {
+      "relative_path": "runs/CHAOS-014/events.jsonl",
+      "size_bytes": 1107,
+      "sha256": "48c9e383af2d89abc43f81dec7939680842fd86ef37755dfa57cbb50c626892b"
+    },
+    {
+      "relative_path": "runs/CHAOS-014/REPORT.md",
+      "size_bytes": 1096,
+      "sha256": "6dd0f1c40dd751b13265d48045e97b83f17324c9dad1f3e95071497cc573b7b5"
+    },
+    {
+      "relative_path": "runs/CHAOS-014/state_snapshot.json",
+      "size_bytes": 168,
+      "sha256": "48ae899b54b91b8551a3cd825ee01a94abc562e663bd8fc07ea43a33a811c9cf"
+    },
+    {
+      "relative_path": "runs/CHAOS-015/assertions.json",
+      "size_bytes": 1128,
+      "sha256": "adaf8ee004119a102d9627227d8f376bce12e253d1498f4f86c954257b0739a5"
+    },
+    {
+      "relative_path": "runs/CHAOS-015/chaos_events.db",
+      "size_bytes": 12288,
+      "sha256": "2f541ee9859e6272a9c54a2636109aadaf16e4c12196c42df6af889e7b146a50"
+    },
+    {
+      "relative_path": "runs/CHAOS-015/cleanup.json",
+      "size_bytes": 149,
+      "sha256": "670ec77c6ffc7c9b2eaa9f08166dea278eef2eacc508954113d0d422d8470822"
+    },
+    {
+      "relative_path": "runs/CHAOS-015/db_snapshot.json",
+      "size_bytes": 1950,
+      "sha256": "120cf049026b0df962104f8a10b09460d5773edd6ea203dc34fda6b442ee4036"
+    },
+    {
+      "relative_path": "runs/CHAOS-015/events.jsonl",
+      "size_bytes": 1501,
+      "sha256": "050da61c68a7217c761e37b079e46baaa3aa2dd20931c94d26f6e22bbec2cc24"
+    },
+    {
+      "relative_path": "runs/CHAOS-015/REPORT.md",
+      "size_bytes": 1111,
+      "sha256": "92e7cef4d988b07a87c635b17a3c6db1a5ecbdc7ff4b7607dff9c01486d4a3d3"
+    },
+    {
+      "relative_path": "runs/CHAOS-015/state_snapshot.json",
+      "size_bytes": 171,
+      "sha256": "dd4df16196cbf95b572c677d623b3e36b7d379b239550b4272d0ec67b5d2f758"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-001/events.jsonl",
+      "size_bytes": 39477,
+      "sha256": "f93c1ce4d580e758cffb0eb5fd604e4d852d3c24d6771b024c429ae656a5f6b6"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-001/firefly_guide.json",
+      "size_bytes": 393,
+      "sha256": "5a7012fd267b2e54da42c9de2da669ef8e6449c1808d35fe06739729be55a289"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-001/imagens/SHOT_REAL_E2E_001_TAKE_01_start.png",
+      "size_bytes": 2027145,
+      "sha256": "eec4cf8678854489dafc6e66e6f7f3378bb888756b100105e9b3e7cf696a98d3"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-001/kling_motion_package.json",
+      "size_bytes": 1341,
+      "sha256": "c9fb7301da3dd81f219722295a0d16b360084b8c3990420ba9588a18ccbaeae5"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-001/manual_kling_clip_intake.json",
+      "size_bytes": 609,
+      "sha256": "213d4b81ec575ff8f5beba778b4f64bf97a52432ab9670adf102604e47980931"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-001/qa_result.json",
+      "size_bytes": 398,
+      "sha256": "3c2079c6bd06e99382605b988bfefa38b0bad10cab5ea28df3e603707cb96a54"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-001/REPORT.md",
+      "size_bytes": 1824,
+      "sha256": "2f31a3a14b5643bbbee69b891a0a7f83b131368ba7d29d16c37e4dc0492740df"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-001/SHOT_REAL_E2E_001_TAKE_01_start.png",
+      "size_bytes": 2027145,
+      "sha256": "eec4cf8678854489dafc6e66e6f7f3378bb888756b100105e9b3e7cf696a98d3"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-001/state_transitions.json",
+      "size_bytes": 1505,
+      "sha256": "7aacb441f10c16431eace1d9f07459ada0263407f71189e607b87b60a3ca2cd8"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-001/video_result.mp4",
+      "size_bytes": 4033013,
+      "sha256": "94e24e7c91ea190c802e8fabfcf07048d73006ae1c51b38081edf34aac1d8d70"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-001/video_result.sha256",
+      "size_bytes": 64,
+      "sha256": "cf1754bcbd9b5763e325d526b31752772a5c1f446111696f985ac1e8f153dbd7"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-003/events.jsonl",
+      "size_bytes": 2314056,
+      "sha256": "1120432b33840a1601fdbe2d234e91b174f04e8b13f13d41cca3f9639b1ea843"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-003/firefly_guide.json",
+      "size_bytes": 829,
+      "sha256": "1c483e3c73aa2b5ae62d0d5bf9af612481451feecc57518537b50d4f6ae447d0"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-003/imagens/SHOT_01_TAKE_01_TAKE_01_start.png",
+      "size_bytes": 2027145,
+      "sha256": "eec4cf8678854489dafc6e66e6f7f3378bb888756b100105e9b3e7cf696a98d3"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-003/imagens/SHOT_01_TAKE_02_TAKE_01_start.png",
+      "size_bytes": 2027145,
+      "sha256": "eec4cf8678854489dafc6e66e6f7f3378bb888756b100105e9b3e7cf696a98d3"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-003/imagens/SHOT_01_TAKE_03_TAKE_01_start.png",
+      "size_bytes": 2027145,
+      "sha256": "eec4cf8678854489dafc6e66e6f7f3378bb888756b100105e9b3e7cf696a98d3"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-003/kling_motion_package.json",
+      "size_bytes": 4029,
+      "sha256": "b5dd87b6583da8dc8aaf738e67b27868b11d5d2077528355c6afe53d206ce125"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-003/manual_kling_clip_intake.json",
+      "size_bytes": 614,
+      "sha256": "e089d1a39bd66fb7c049ccb45d2cba352ac541fbcaf510f922ba6f6196571005"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-003/REPORT.md",
+      "size_bytes": 2245,
+      "sha256": "dcb177fe6e6686df512abcff6eee4b55c2b8b8cae0312b1bd22ee87b58f0da64"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-003/video_result_take_1.mp4",
+      "size_bytes": 3697202,
+      "sha256": "0abe85ed9889bc7d41340a3bfd08652efe3e7894db6f18662b6879d6eb9b4cab"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-003/video_result_take_1.sha256",
+      "size_bytes": 64,
+      "sha256": "869957c7389cf67d53d284467688a0e6591f2824aa2eb64bbe91c4ca72c96255"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-003/video_result_take_2.mp4",
+      "size_bytes": 3803072,
+      "sha256": "48f25e3be877597bb2cd0ae4134c2778303a5e18ef0cf7b1f84a211184aab27c"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-003/video_result_take_2.sha256",
+      "size_bytes": 64,
+      "sha256": "1908865a5916232e380cf04ea691f7a9c8d0dee999742b3a17e6a2d2b8a01c87"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-003/video_result_take_3.mp4",
+      "size_bytes": 4572153,
+      "sha256": "dddd012470290e2645ac0232d6626a3187428cc35ba103df0222a7771d446979"
+    },
+    {
+      "relative_path": "runs/REAL-E2E-003/video_result_take_3.sha256",
+      "size_bytes": 64,
+      "sha256": "64eea4433faeae6028cdc5335f3cf1e13ddf8ae0265ace38025a41e95c18e272"
+    },
+    {
+      "relative_path": "runs/RESILIENCE-TEST-001/events.jsonl",
+      "size_bytes": 1548,
+      "sha256": "2d1b250f21a3b5721f6a93764a8c08490ff56b4602fc1e8d2d7b11b7b6c93e63"
+    },
+    {
+      "relative_path": "runs/test_run/firefly_guide.json",
+      "size_bytes": 278,
+      "sha256": "580f3ea0c36a824228b3f47e9f409abeab36dec55990469bf0e8ce6998693538"
+    },
+    {
+      "relative_path": "runs/test_run/intake_manifest.json",
+      "size_bytes": 424,
+      "sha256": "67e8e92a15f9950eeb6ab769e5178dde338c3751d36fef1a4f0daab3a20b9516"
+    },
+    {
+      "relative_path": "runs/test_run/kling_package.json",
+      "size_bytes": 198,
+      "sha256": "5f4dfd53340610146ea6876d31a9f55d7a593a314442b69bc07efa3a32303c31"
+    }
+  ],
+  "sqlite_tables": {},
+  "total_files": 138,
+  "total_size_bytes": 28872203
+}

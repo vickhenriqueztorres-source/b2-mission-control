@@ -1,0 +1,17 @@
+{
+  "id": "CHAOS-002",
+  "name": "Frame Inicial Inexistente",
+  "batch": 1,
+  "injection_point": "MotionToFireflyBridge",
+  "initial_state": "MOTION_BRIDGE_RUNNING",
+  "injected_fault": "start_frame_missing",
+  "expected_terminal_state": "FAILED",
+  "mandatory_events": ["AGENT_STARTED", "AGENT_FAILED"],
+  "forbidden_events": ["AGENT_COMPLETED", "FINAL_VIDEO_RENDERED"],
+  "retry_limit": 0,
+  "recovery_expectation": {
+    "recoverable": false,
+    "same_run_id_required": false
+  },
+  "cleanup_strategy": "PURGE_RUN_FOLDER"
+}

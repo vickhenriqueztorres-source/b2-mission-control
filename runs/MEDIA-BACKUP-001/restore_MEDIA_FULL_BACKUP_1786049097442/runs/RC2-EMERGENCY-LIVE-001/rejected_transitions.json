@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-08-06T19:32:21.767Z",
+  "worker_exit_code": 20,
+  "expected_exit_code": 20,
+  "system_state": [
+    {
+      "singleton": 1,
+      "status": "emergency-stop",
+      "reason": "RC2_EMERGENCY_RESTART_PERSISTENCE",
+      "updated_at": 1786044741
+    }
+  ],
+  "pending_job": {
+    "id": 58,
+    "name": "RC2_PAUSE_LIVE_03",
+    "status": "pending",
+    "attempts": 0,
+    "claimed_at": null,
+    "generation_started_at": null
+  },
+  "pass": true
+}

@@ -1,0 +1,34 @@
+{
+  "production_id": "PILOT-004",
+  "takes_processed": 4,
+  "items": [
+    {
+      "take_name": "SHOT_01_TAKE_01",
+      "job_id": 113,
+      "status": "done",
+      "sha256": "b925c37b220baab4e42232fe3cd2fe17679843e4b96a756f1a09f461a77878d0",
+      "file_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_1.mp4"
+    },
+    {
+      "take_name": "SHOT_02_TAKE_01",
+      "job_id": 114,
+      "status": "done",
+      "sha256": "2e5ca71981d0be554fc7c8e96612f52a48ba8f4215f9a747af047155722eabfd",
+      "file_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_2.mp4"
+    },
+    {
+      "take_name": "SHOT_03_TAKE_01",
+      "job_id": 115,
+      "status": "done",
+      "sha256": "bb5050930c119393bbd801ad63f990b1fa483cdf8dbea1231e0b57ec9bd92ea5",
+      "file_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_3.mp4"
+    },
+    {
+      "take_name": "SHOT_04_TAKE_01",
+      "job_id": 116,
+      "status": "done",
+      "sha256": "8374e0a6917c31cd953e61b92cb21e6e229ac25b21c2484e357573735a364f26",
+      "file_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_4.mp4"
+    }
+  ]
+}

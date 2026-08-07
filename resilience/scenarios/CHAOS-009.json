@@ -1,0 +1,17 @@
+{
+  "id": "CHAOS-009",
+  "name": "Interrupção do Agente Antigravity",
+  "batch": 2,
+  "injection_point": "AntigravityBuilder",
+  "initial_state": "ANTIGRAVITY_EXECUTING",
+  "injected_fault": "antigravity_interrupted",
+  "expected_terminal_state": "RECOVERED",
+  "mandatory_events": ["AGENT_STARTED", "AGENT_RETRYING", "AGENT_COMPLETED"],
+  "forbidden_events": ["AGENT_FAILED"],
+  "retry_limit": 2,
+  "recovery_expectation": {
+    "recoverable": true,
+    "same_run_id_required": true
+  },
+  "cleanup_strategy": "FULL_STAGING_RESET"
+}

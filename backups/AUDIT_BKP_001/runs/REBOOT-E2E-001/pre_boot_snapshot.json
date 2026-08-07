@@ -1,0 +1,8 @@
+{
+  "run_id": "RUN_REBOOT_TEST_001",
+  "production_id": "REBOOT-E2E-001",
+  "job_id": 999,
+  "status": "generating",
+  "last_event": "JOB_SUBMITTED",
+  "timestamp": "2026-08-06T17:52:02.367Z"
+}

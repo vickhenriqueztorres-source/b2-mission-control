@@ -1,0 +1,17 @@
+{
+  "id": "CHAOS-001",
+  "name": "Esquema JSON Inválido",
+  "batch": 1,
+  "injection_point": "RafaPromptArchitect",
+  "initial_state": "PROMPT_ARCHITECT_RUNNING",
+  "injected_fault": "schema_invalid",
+  "expected_terminal_state": "FAILED",
+  "mandatory_events": ["AGENT_STARTED", "AGENT_FAILED"],
+  "forbidden_events": ["AGENT_COMPLETED", "FINAL_VIDEO_RENDERED"],
+  "retry_limit": 0,
+  "recovery_expectation": {
+    "recoverable": false,
+    "same_run_id_required": false
+  },
+  "cleanup_strategy": "PURGE_RUN_FOLDER"
+}

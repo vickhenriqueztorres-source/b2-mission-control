@@ -1,0 +1,14 @@
+TRACEBACK NOT AVAILABLE FOR RC2 JOB 59
+
+The RC2 worker did not call traceback.format_exception and did not persist a Python traceback.
+Available log evidence shows only:
+2026-08-06 18:18:10,293 | WARNING | action=screen_state_read_timeout slot_id=1 job_id=59
+2026-08-06 18:18:43,854 | ERROR | action=job_failed_infra job_id=59 error=TimeoutError:
+
+Code path reconstructed from worker.py before RC3:
+Worker._complete_generation -> Worker._poll_generation -> Worker._read_generation_state
+First asyncio.wait_for(state_reader.read_screen_state, 15s) timed out and logged screen_state_read_timeout.
+Foreground retry asyncio.wait_for(state_reader.read_screen_state, 15s) also timed out and propagated TimeoutError.
+Worker._run_claimed_page caught the exception and called _fail_infrastructure.
+
+RC3 fix now persists browser_failure_artifacts/job_<id>_traceback.txt for future failures.

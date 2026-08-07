@@ -1,0 +1,58 @@
+{
+  "generated_at": "2026-08-06T19:30:53.553Z",
+  "system_state": [
+    {
+      "singleton": 1,
+      "status": "emergency-stop",
+      "reason": "RC2_EMERGENCY_LIVE_TEST",
+      "updated_at": 1786044459
+    }
+  ],
+  "jobs": [
+    {
+      "id": 56,
+      "name": "RC2_PAUSE_LIVE_01",
+      "status": "done",
+      "attempts": 1,
+      "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\RC2_PAUSE_LIVE_01.mp4",
+      "error": null,
+      "claimed_at": 1786043990.3716738,
+      "generation_started_at": 1786044081.3844,
+      "media_validation_status": "PASS",
+      "file_size_bytes": 3971483,
+      "width": 720,
+      "height": 1280,
+      "codec": "h264"
+    },
+    {
+      "id": 57,
+      "name": "RC2_PAUSE_LIVE_02",
+      "status": "done",
+      "attempts": 1,
+      "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\RC2_PAUSE_LIVE_02.mp4",
+      "error": null,
+      "claimed_at": 1786044386.6537535,
+      "generation_started_at": 1786044436.2680752,
+      "media_validation_status": "PASS",
+      "file_size_bytes": 9275019,
+      "width": 720,
+      "height": 1280,
+      "codec": "h264"
+    },
+    {
+      "id": 58,
+      "name": "RC2_PAUSE_LIVE_03",
+      "status": "pending",
+      "attempts": 0,
+      "output_path": null,
+      "error": null,
+      "claimed_at": null,
+      "generation_started_at": null,
+      "media_validation_status": null,
+      "file_size_bytes": null,
+      "width": null,
+      "height": null,
+      "codec": null
+    }
+  ]
+}

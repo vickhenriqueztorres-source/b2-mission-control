@@ -1,0 +1,57 @@
+{
+  "generated_at": "2026-08-07T00:03:24.471Z",
+  "files_checked": 8,
+  "unchanged_count": 8,
+  "changed": [],
+  "pass": true,
+  "comparisons": [
+    {
+      "file": "C:\\B2-AI-STUDIO\\mission-control\\package.json",
+      "preflight_sha256": "a5fd7ee5569cb9d6f485e2da6a4b4f86e58a97bda819f29138ceef7f6afc4cc7",
+      "final_sha256": "a5fd7ee5569cb9d6f485e2da6a4b4f86e58a97bda819f29138ceef7f6afc4cc7",
+      "unchanged": true
+    },
+    {
+      "file": "C:\\B2-AI-STUDIO\\mission-control\\package-lock.json",
+      "preflight_sha256": "f8a9e840cb161aa93cf3fd8e1d617c798ace2153547b7905dc6a2b916e646595",
+      "final_sha256": "f8a9e840cb161aa93cf3fd8e1d617c798ace2153547b7905dc6a2b916e646595",
+      "unchanged": true
+    },
+    {
+      "file": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\firefly_bot\\config.py",
+      "preflight_sha256": "9215ac70fa856720e4d666f1e7d32760c1b29c360705593ff33b8d09676f0691",
+      "final_sha256": "9215ac70fa856720e4d666f1e7d32760c1b29c360705593ff33b8d09676f0691",
+      "unchanged": true
+    },
+    {
+      "file": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\firefly_bot\\worker.py",
+      "preflight_sha256": "ece668fd29c9650a01e33e595c7f43b04a33e4a2128b8ea40f6e7c7183c76e81",
+      "final_sha256": "ece668fd29c9650a01e33e595c7f43b04a33e4a2128b8ea40f6e7c7183c76e81",
+      "unchanged": true
+    },
+    {
+      "file": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\firefly_bot\\state_reader.py",
+      "preflight_sha256": "bbd65b82210547e9e8662f2f937d99a38e937bf5dca0229a54696e7169df29da",
+      "final_sha256": "bbd65b82210547e9e8662f2f937d99a38e937bf5dca0229a54696e7169df29da",
+      "unchanged": true
+    },
+    {
+      "file": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\firefly_bot\\job_store.py",
+      "preflight_sha256": "e71aa7109029a1c3b091598d57ef5124b57d157087a2bd2697fdf9b8ac0b251b",
+      "final_sha256": "e71aa7109029a1c3b091598d57ef5124b57d157087a2bd2697fdf9b8ac0b251b",
+      "unchanged": true
+    },
+    {
+      "file": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\firefly_bot\\export_flow.py",
+      "preflight_sha256": "c023f0c71e7bcf53e13fc7687225611d096de3690827396fceba331434bf93d0",
+      "final_sha256": "c023f0c71e7bcf53e13fc7687225611d096de3690827396fceba331434bf93d0",
+      "unchanged": true
+    },
+    {
+      "file": "C:\\B2-AI-STUDIO\\links\\firefly-automation\\.venv\\Scripts\\python.exe",
+      "preflight_sha256": "935016795f3e6908e75acbc2040a01e2e4cdb494a57c42f63a0d6eedb2372256",
+      "final_sha256": "935016795f3e6908e75acbc2040a01e2e4cdb494a57c42f63a0d6eedb2372256",
+      "unchanged": true
+    }
+  ]
+}

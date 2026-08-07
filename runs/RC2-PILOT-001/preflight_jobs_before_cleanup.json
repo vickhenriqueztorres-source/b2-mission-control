@@ -1,0 +1,49 @@
+{
+  "captured_at": "2026-08-06T21:10:18.163Z",
+  "db_path": "C:/B2-AI-STUDIO/links/firefly-automation/data/firefly_jobs.db",
+  "system_state": {
+    "singleton": 1,
+    "status": "running",
+    "reason": "HUMAN_RELEASE",
+    "updated_at": 1786044749
+  },
+  "status_counts": [
+    {
+      "status": "done",
+      "count": 22
+    },
+    {
+      "status": "pending",
+      "count": 1
+    }
+  ],
+  "active_or_pending": [
+    {
+      "id": 58,
+      "prompt": "Medium side-profile shot of a man looking calmly toward office window, soft rim lighting, 50mm lens",
+      "image_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\imagens\\RC2_PAUSE_LIVE_03.png",
+      "status": "pending",
+      "attempts": 0,
+      "output_path": null,
+      "error": null,
+      "claimed_at": null,
+      "generation_started_at": null,
+      "updated_at": 1786043967.6836214,
+      "model": "Kling 3.0",
+      "resolution": "720p",
+      "aspect_ratio": "9:16",
+      "duration_seconds": 5,
+      "name": "RC2_PAUSE_LIVE_03",
+      "download_started_at": null,
+      "download_completed_at": null,
+      "media_validated_at": null,
+      "media_validation_status": null,
+      "media_validation_error": null,
+      "file_size_bytes": null,
+      "sha256": null,
+      "width": null,
+      "height": null,
+      "codec": null
+    }
+  ]
+}

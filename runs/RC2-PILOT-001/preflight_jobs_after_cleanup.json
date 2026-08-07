@@ -1,0 +1,27 @@
+{
+  "captured_at": "2026-08-06T21:10:18.244Z",
+  "isolated_jobs": [
+    {
+      "id": 58,
+      "name": "RC2_PAUSE_LIVE_03",
+      "status_before": "pending"
+    }
+  ],
+  "system_state": {
+    "singleton": 1,
+    "status": "running",
+    "reason": null,
+    "updated_at": 1786050618.237
+  },
+  "status_counts": [
+    {
+      "status": "dead",
+      "count": 1
+    },
+    {
+      "status": "done",
+      "count": 22
+    }
+  ],
+  "active_or_pending": []
+}

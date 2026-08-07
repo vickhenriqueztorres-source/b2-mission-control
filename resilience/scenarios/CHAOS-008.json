@@ -1,0 +1,17 @@
+{
+  "id": "CHAOS-008",
+  "name": "Banco SQLite Bloqueado (Lock em Transação)",
+  "batch": 2,
+  "injection_point": "FireflyJobStore",
+  "initial_state": "SQLITE_TRANSACTION_ACTIVE",
+  "injected_fault": "sqlite_locked",
+  "expected_terminal_state": "FAILED",
+  "mandatory_events": ["AGENT_STARTED", "AGENT_FAILED"],
+  "forbidden_events": ["AGENT_COMPLETED"],
+  "retry_limit": 1,
+  "recovery_expectation": {
+    "recoverable": false,
+    "same_run_id_required": false
+  },
+  "cleanup_strategy": "RESET_STAGING_DB"
+}

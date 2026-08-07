@@ -1,0 +1,9 @@
+{
+  "version": "invalid_v999",
+  "items": [
+    {
+      "name": "SHOT_INVALID",
+      "missing_required_fields": true
+    }
+  ]
+}

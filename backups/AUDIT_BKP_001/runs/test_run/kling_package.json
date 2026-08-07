@@ -1,0 +1,8 @@
+[
+  {
+    "shot_id": "SHOT_01",
+    "take_id": "TAKE_01",
+    "prompt": "Prompt de teste de animação",
+    "start_frame_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\test_run\\frame1.png"
+  }
+]

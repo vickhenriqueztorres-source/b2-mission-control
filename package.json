@@ -1,0 +1,39 @@
+{
+  "name": "b2-mission-control",
+  "version": "1.0.0",
+  "description": "Orquestrador Central e Interface Visual para os ecossistemas Rafa Lobo e Firefly Video Automation",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node orchestrator/productionRunner.ts",
+    "test": "ts-node tests/integration.test.ts",
+    "chaos": "ts-node resilience/cli.ts",
+    "chaos:integration": "ts-node resilience/cli.ts --batch 1",
+    "chaos:staging": "ts-node resilience/cli.ts --batch 2",
+    "chaos:all": "ts-node resilience/cli.ts --all",
+    "backup:create": "ts-node backup/cli.ts create",
+    "backup:verify": "ts-node backup/cli.ts verify",
+    "backup:restore": "ts-node backup/cli.ts restore",
+    "media-backup:create": "ts-node backup/mediaBackupCli.ts create",
+    "media-backup:verify": "ts-node backup/mediaBackupCli.ts verify",
+    "media-backup:restore": "ts-node backup/mediaBackupCli.ts restore",
+    "pilot": "ts-node production/productionPilotRunner.ts",
+    "soak": "ts-node production/soakTestRunner.ts"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "better-sqlite3": "^11.8.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.1",
+    "@types/ws": "^8.5.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}

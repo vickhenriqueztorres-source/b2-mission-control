@@ -1,0 +1,18 @@
+{
+  "id": "CHAOS-004",
+  "name": "Evento Duplicado e Idempotência",
+  "batch": 1,
+  "injection_point": "ChaosEventRecorder",
+  "initial_state": "TELEMETRY_RECORDING",
+  "injected_fault": "duplicate_event",
+  "expected_terminal_state": "COMPLETED",
+  "outcome_classification": "EXPECTED_CONTINUATION",
+  "mandatory_events": ["AGENT_STARTED", "AGENT_COMPLETED"],
+  "forbidden_events": ["AGENT_FAILED"],
+  "retry_limit": 0,
+  "recovery_expectation": {
+    "recoverable": true,
+    "same_run_id_required": true
+  },
+  "cleanup_strategy": "PURGE_RUN_FOLDER"
+}

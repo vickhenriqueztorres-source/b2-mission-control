@@ -1,0 +1,2560 @@
+﻿{
+    "phase":  "PRE-REBOOT",
+    "captured_at":  "2026-08-06T20:26:37.6988376Z",
+    "run_id":  "REBOOT-E2E-002",
+    "production_id":  "REBOOT-AUDIT-CONTROLLED",
+    "job_id":  null,
+    "job_state":  null,
+    "last_event_id":  null,
+    "mission_control_pids":  [
+                                 6644,
+                                 10776
+                             ],
+    "python_worker_pids":  {
+
+                           },
+    "chrome_pids":  [
+                        1184,
+                        1912,
+                        2500,
+                        3120,
+                        4444,
+                        6008,
+                        8436,
+                        8664,
+                        8864,
+                        9236,
+                        9924,
+                        10012,
+                        12928,
+                        14684,
+                        14964,
+                        15000,
+                        15112,
+                        15460,
+                        15708,
+                        16396,
+                        16696,
+                        17028,
+                        17076,
+                        17304,
+                        17524,
+                        17888,
+                        17892
+                    ],
+    "last_boot_time":  "2026-08-06T17:02:18.5000000Z",
+    "mission_control_db":  "C:\\B2-AI-STUDIO\\mission-control\\database\\mission_control.db",
+    "firefly_jobs_db":  "C:\\B2-AI-STUDIO\\links\\firefly-automation\\data\\firefly_jobs.db",
+    "files":  [
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\media_backup_create_output.txt",
+                      "Length":  616,
+                      "LastWriteTimeUtc":  "\/Date(1786044829296)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\rc2_final_build_output.txt",
+                      "Length":  100,
+                      "LastWriteTimeUtc":  "\/Date(1786044919181)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\reboot_prepare_output.txt",
+                      "Length":  382,
+                      "LastWriteTimeUtc":  "\/Date(1786044801937)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\reboot_register_task_output.txt",
+                      "Length":  1754,
+                      "LastWriteTimeUtc":  "\/Date(1786044802605)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-001\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037650055)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-001\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650048)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-001\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037650055)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-001\\db_snapshot.json",
+                      "Length":  1159,
+                      "LastWriteTimeUtc":  "\/Date(1786037650052)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-001\\events.jsonl",
+                      "Length":  898,
+                      "LastWriteTimeUtc":  "\/Date(1786037650043)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-001\\invalid_motion.json",
+                      "Length":  129,
+                      "LastWriteTimeUtc":  "\/Date(1786037650042)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-001\\REPORT.md",
+                      "Length":  1093,
+                      "LastWriteTimeUtc":  "\/Date(1786037650083)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-001\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037650054)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-002\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037650120)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-002\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650115)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-002\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037650122)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-002\\db_snapshot.json",
+                      "Length":  1180,
+                      "LastWriteTimeUtc":  "\/Date(1786037650118)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-002\\events.jsonl",
+                      "Length":  919,
+                      "LastWriteTimeUtc":  "\/Date(1786037650109)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-002\\firefly_guide.json",
+                      "Length":  197,
+                      "LastWriteTimeUtc":  "\/Date(1786037650108)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-002\\REPORT.md",
+                      "Length":  1103,
+                      "LastWriteTimeUtc":  "\/Date(1786037650122)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-002\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037650119)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-003\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037650180)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-003\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650173)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-003\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037650182)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-003\\db_snapshot.json",
+                      "Length":  1563,
+                      "LastWriteTimeUtc":  "\/Date(1786037650178)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-003\\events.jsonl",
+                      "Length":  1204,
+                      "LastWriteTimeUtc":  "\/Date(1786037650158)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-003\\firefly_guide.json",
+                      "Length":  203,
+                      "LastWriteTimeUtc":  "\/Date(1786037650146)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-003\\REPORT.md",
+                      "Length":  1089,
+                      "LastWriteTimeUtc":  "\/Date(1786037650182)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-003\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037650180)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-004\\assertions.json",
+                      "Length":  1128,
+                      "LastWriteTimeUtc":  "\/Date(1786037650224)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-004\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650219)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-004\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037650224)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-004\\db_snapshot.json",
+                      "Length":  1527,
+                      "LastWriteTimeUtc":  "\/Date(1786037650222)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-004\\events.jsonl",
+                      "Length":  1168,
+                      "LastWriteTimeUtc":  "\/Date(1786037650213)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-004\\REPORT.md",
+                      "Length":  1110,
+                      "LastWriteTimeUtc":  "\/Date(1786037650225)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-004\\state_snapshot.json",
+                      "Length":  171,
+                      "LastWriteTimeUtc":  "\/Date(1786037650223)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-005\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037650268)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-005\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650263)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-005\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037650269)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-005\\corrupted_video.mp4",
+                      "Length":  33,
+                      "LastWriteTimeUtc":  "\/Date(1786037650248)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-005\\db_snapshot.json",
+                      "Length":  1536,
+                      "LastWriteTimeUtc":  "\/Date(1786037650266)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-005\\events.jsonl",
+                      "Length":  1177,
+                      "LastWriteTimeUtc":  "\/Date(1786037650256)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-005\\REPORT.md",
+                      "Length":  1097,
+                      "LastWriteTimeUtc":  "\/Date(1786037650270)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-005\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037650266)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-006\\assertions.json",
+                      "Length":  1128,
+                      "LastWriteTimeUtc":  "\/Date(1786037650311)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-006\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650305)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-006\\cleanup.json",
+                      "Length":  146,
+                      "LastWriteTimeUtc":  "\/Date(1786037650557)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-006\\db_snapshot.json",
+                      "Length":  1567,
+                      "LastWriteTimeUtc":  "\/Date(1786037650309)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-006\\events.jsonl",
+                      "Length":  1216,
+                      "LastWriteTimeUtc":  "\/Date(1786037650300)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-006\\REPORT.md",
+                      "Length":  1141,
+                      "LastWriteTimeUtc":  "\/Date(1786037650557)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-006\\state_snapshot.json",
+                      "Length":  171,
+                      "LastWriteTimeUtc":  "\/Date(1786037650310)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-007\\assertions.json",
+                      "Length":  1128,
+                      "LastWriteTimeUtc":  "\/Date(1786037650606)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-007\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650600)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-007\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037650606)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-007\\db_snapshot.json",
+                      "Length":  1517,
+                      "LastWriteTimeUtc":  "\/Date(1786037650603)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-007\\events.jsonl",
+                      "Length":  1166,
+                      "LastWriteTimeUtc":  "\/Date(1786037650591)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-007\\REPORT.md",
+                      "Length":  1120,
+                      "LastWriteTimeUtc":  "\/Date(1786037650606)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-007\\state_snapshot.json",
+                      "Length":  171,
+                      "LastWriteTimeUtc":  "\/Date(1786037650604)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-008\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037650642)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-008\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650637)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-008\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037650643)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-008\\db_snapshot.json",
+                      "Length":  1029,
+                      "LastWriteTimeUtc":  "\/Date(1786037650639)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-008\\events.jsonl",
+                      "Length":  776,
+                      "LastWriteTimeUtc":  "\/Date(1786037650632)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-008\\REPORT.md",
+                      "Length":  1110,
+                      "LastWriteTimeUtc":  "\/Date(1786037650644)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-008\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037650640)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-009\\assertions.json",
+                      "Length":  1128,
+                      "LastWriteTimeUtc":  "\/Date(1786037650682)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-009\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650678)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-009\\cleanup.json",
+                      "Length":  146,
+                      "LastWriteTimeUtc":  "\/Date(1786037650841)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-009\\db_snapshot.json",
+                      "Length":  1535,
+                      "LastWriteTimeUtc":  "\/Date(1786037650680)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-009\\events.jsonl",
+                      "Length":  1184,
+                      "LastWriteTimeUtc":  "\/Date(1786037650675)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-009\\REPORT.md",
+                      "Length":  1121,
+                      "LastWriteTimeUtc":  "\/Date(1786037650842)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-009\\state_snapshot.json",
+                      "Length":  171,
+                      "LastWriteTimeUtc":  "\/Date(1786037650681)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-010\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037650884)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-010\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650879)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-010\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037650885)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-010\\db_snapshot.json",
+                      "Length":  1063,
+                      "LastWriteTimeUtc":  "\/Date(1786037650882)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-010\\events.jsonl",
+                      "Length":  810,
+                      "LastWriteTimeUtc":  "\/Date(1786037650874)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-010\\REPORT.md",
+                      "Length":  1117,
+                      "LastWriteTimeUtc":  "\/Date(1786037650886)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-010\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037650884)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-011\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037650927)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-011\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650922)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-011\\cleanup.json",
+                      "Length":  149,
+                      "LastWriteTimeUtc":  "\/Date(1786037651061)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-011\\db_snapshot.json",
+                      "Length":  1440,
+                      "LastWriteTimeUtc":  "\/Date(1786037650925)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-011\\events.jsonl",
+                      "Length":  1089,
+                      "LastWriteTimeUtc":  "\/Date(1786037650916)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-011\\REPORT.md",
+                      "Length":  1104,
+                      "LastWriteTimeUtc":  "\/Date(1786037651062)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-011\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037650926)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-012\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037651095)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-012\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037651091)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-012\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037651095)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-012\\db_snapshot.json",
+                      "Length":  1461,
+                      "LastWriteTimeUtc":  "\/Date(1786037651093)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-012\\events.jsonl",
+                      "Length":  1110,
+                      "LastWriteTimeUtc":  "\/Date(1786037651088)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-012\\REPORT.md",
+                      "Length":  1106,
+                      "LastWriteTimeUtc":  "\/Date(1786037651096)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-012\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037651094)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-013\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037651127)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-013\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037651123)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-013\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037651128)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-013\\db_snapshot.json",
+                      "Length":  1460,
+                      "LastWriteTimeUtc":  "\/Date(1786037651126)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-013\\events.jsonl",
+                      "Length":  1109,
+                      "LastWriteTimeUtc":  "\/Date(1786037651119)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-013\\REPORT.md",
+                      "Length":  1111,
+                      "LastWriteTimeUtc":  "\/Date(1786037651129)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-013\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037651127)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-014\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037651164)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-014\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037651159)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-014\\cleanup.json",
+                      "Length":  149,
+                      "LastWriteTimeUtc":  "\/Date(1786037651312)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-014\\db_snapshot.json",
+                      "Length":  1458,
+                      "LastWriteTimeUtc":  "\/Date(1786037651162)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-014\\events.jsonl",
+                      "Length":  1107,
+                      "LastWriteTimeUtc":  "\/Date(1786037651153)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-014\\REPORT.md",
+                      "Length":  1096,
+                      "LastWriteTimeUtc":  "\/Date(1786037651313)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-014\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037651163)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-015\\assertions.json",
+                      "Length":  1128,
+                      "LastWriteTimeUtc":  "\/Date(1786037651364)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-015\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037651358)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-015\\cleanup.json",
+                      "Length":  149,
+                      "LastWriteTimeUtc":  "\/Date(1786037651498)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-015\\db_snapshot.json",
+                      "Length":  1950,
+                      "LastWriteTimeUtc":  "\/Date(1786037651361)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-015\\events.jsonl",
+                      "Length":  1501,
+                      "LastWriteTimeUtc":  "\/Date(1786037651354)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-015\\REPORT.md",
+                      "Length":  1111,
+                      "LastWriteTimeUtc":  "\/Date(1786037651498)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-015\\state_snapshot.json",
+                      "Length":  171,
+                      "LastWriteTimeUtc":  "\/Date(1786037651363)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\EMERGENCY-LIVE-001\\blocked_transitions.json",
+                      "Length":  200,
+                      "LastWriteTimeUtc":  "\/Date(1786039908445)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\EMERGENCY-LIVE-001\\events.jsonl",
+                      "Length":  457,
+                      "LastWriteTimeUtc":  "\/Date(1786039908447)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\EMERGENCY-LIVE-001\\release_authorization.json",
+                      "Length":  173,
+                      "LastWriteTimeUtc":  "\/Date(1786039908446)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\EMERGENCY-LIVE-001\\REPORT.md",
+                      "Length":  249,
+                      "LastWriteTimeUtc":  "\/Date(1786040021196)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\EMERGENCY-LIVE-001\\state_after_release.json",
+                      "Length":  75,
+                      "LastWriteTimeUtc":  "\/Date(1786039908447)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\EMERGENCY-LIVE-001\\state_before.json",
+                      "Length":  14482,
+                      "LastWriteTimeUtc":  "\/Date(1786039908393)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\EMERGENCY-LIVE-001\\state_locked.json",
+                      "Length":  24958,
+                      "LastWriteTimeUtc":  "\/Date(1786039908444)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\f5fca7dd-195c-44b1-ae02-23a0bd413185\\events.jsonl",
+                      "Length":  8965,
+                      "LastWriteTimeUtc":  "\/Date(1786042571509)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\MEDIA-BACKUP-001\\destination_hashes.json",
+                      "Length":  63,
+                      "LastWriteTimeUtc":  "\/Date(1786044829293)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\MEDIA-BACKUP-001\\ffprobe_restore_results.json",
+                      "Length":  63,
+                      "LastWriteTimeUtc":  "\/Date(1786044829294)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\MEDIA-BACKUP-001\\media_backup_manifest.json",
+                      "Length":  290,
+                      "LastWriteTimeUtc":  "\/Date(1786044829292)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\MEDIA-BACKUP-001\\REPORT.md",
+                      "Length":  216,
+                      "LastWriteTimeUtc":  "\/Date(1786044829294)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\MEDIA-BACKUP-001\\restore_hashes.json",
+                      "Length":  63,
+                      "LastWriteTimeUtc":  "\/Date(1786044829293)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\MEDIA-BACKUP-001\\source_hashes.json",
+                      "Length":  63,
+                      "LastWriteTimeUtc":  "\/Date(1786044829292)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\OPERATIONAL-CONTROL\\events.jsonl",
+                      "Length":  6927,
+                      "LastWriteTimeUtc":  "\/Date(1786044749271)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PAUSE-LIVE-001\\events.jsonl",
+                      "Length":  624,
+                      "LastWriteTimeUtc":  "\/Date(1786039908351)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PAUSE-LIVE-001\\jobs_after_active_completion.json",
+                      "Length":  9092,
+                      "LastWriteTimeUtc":  "\/Date(1786039908341)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PAUSE-LIVE-001\\jobs_after_resume.json",
+                      "Length":  9270,
+                      "LastWriteTimeUtc":  "\/Date(1786039908349)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PAUSE-LIVE-001\\jobs_before_pause.json",
+                      "Length":  9006,
+                      "LastWriteTimeUtc":  "\/Date(1786039907190)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PAUSE-LIVE-001\\jobs_during_pause.json",
+                      "Length":  9272,
+                      "LastWriteTimeUtc":  "\/Date(1786039907321)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PAUSE-LIVE-001\\REPORT.md",
+                      "Length":  250,
+                      "LastWriteTimeUtc":  "\/Date(1786040021195)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\manual_kling_clip_intake.json",
+                      "Length":  1183,
+                      "LastWriteTimeUtc":  "\/Date(1786038154484)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\REPORT.md",
+                      "Length":  669,
+                      "LastWriteTimeUtc":  "\/Date(1786038154485)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\video_result_take_1.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154478)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\video_result_take_2.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154480)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\video_result_take_3.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154481)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\video_result_take_4.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154483)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-002\\manual_kling_clip_intake.json",
+                      "Length":  1183,
+                      "LastWriteTimeUtc":  "\/Date(1786038154494)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-002\\REPORT.md",
+                      "Length":  669,
+                      "LastWriteTimeUtc":  "\/Date(1786038154495)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-002\\video_result_take_1.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154488)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-002\\video_result_take_2.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154489)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-002\\video_result_take_3.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154491)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-002\\video_result_take_4.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154493)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-003\\manual_kling_clip_intake.json",
+                      "Length":  1183,
+                      "LastWriteTimeUtc":  "\/Date(1786038154501)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-003\\REPORT.md",
+                      "Length":  669,
+                      "LastWriteTimeUtc":  "\/Date(1786038154502)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-003\\video_result_take_1.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154496)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-003\\video_result_take_2.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154497)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-003\\video_result_take_3.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154498)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-003\\video_result_take_4.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154499)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\manual_kling_clip_intake.json",
+                      "Length":  1183,
+                      "LastWriteTimeUtc":  "\/Date(1786038154509)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\REPORT.md",
+                      "Length":  669,
+                      "LastWriteTimeUtc":  "\/Date(1786038154509)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_1.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154504)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_2.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154505)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_3.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154507)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-004\\video_result_take_4.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154508)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-005\\manual_kling_clip_intake.json",
+                      "Length":  1183,
+                      "LastWriteTimeUtc":  "\/Date(1786038154514)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-005\\REPORT.md",
+                      "Length":  669,
+                      "LastWriteTimeUtc":  "\/Date(1786038154514)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-005\\video_result_take_1.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154510)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-005\\video_result_take_2.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154511)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-005\\video_result_take_3.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154512)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-005\\video_result_take_4.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154513)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PRODUCTION-GUARDS-001\\database_snapshots.json",
+                      "Length":  979,
+                      "LastWriteTimeUtc":  "\/Date(1786039907184)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PRODUCTION-GUARDS-001\\events.jsonl",
+                      "Length":  0,
+                      "LastWriteTimeUtc":  "\/Date(1786039907184)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PRODUCTION-GUARDS-001\\guard_matrix.json",
+                      "Length":  4928,
+                      "LastWriteTimeUtc":  "\/Date(1786039907181)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PRODUCTION-GUARDS-001\\process_snapshots.json",
+                      "Length":  8087,
+                      "LastWriteTimeUtc":  "\/Date(1786039907182)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\PRODUCTION-GUARDS-001\\REPORT.md",
+                      "Length":  216,
+                      "LastWriteTimeUtc":  "\/Date(1786039907185)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\REPORT.md",
+                      "Length":  697,
+                      "LastWriteTimeUtc":  "\/Date(1786039589992)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\resolution_comparison.json",
+                      "Length":  19874,
+                      "LastWriteTimeUtc":  "\/Date(1786039589991)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\video_hashes.json",
+                      "Length":  6346,
+                      "LastWriteTimeUtc":  "\/Date(1786039589986)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\video_probe_results.json",
+                      "Length":  26647,
+                      "LastWriteTimeUtc":  "\/Date(1786039589985)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-001_take_1.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039588249)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-001_take_2.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039588366)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-001_take_3.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039588478)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-001_take_4.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039588542)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-002_take_1.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039588608)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-002_take_2.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039588681)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-002_take_3.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039588759)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-002_take_4.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039588827)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-003_take_1.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039588907)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-003_take_2.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039588971)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-003_take_3.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039589050)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-003_take_4.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039589164)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-004_take_1.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039589293)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-004_take_2.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039589378)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-004_take_3.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039589444)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-004_take_4.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039589522)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-005_take_1.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039589597)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-005_take_2.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039589676)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-005_take_3.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039589762)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC1-VIDEO-AUDIT\\ffprobe_raw\\PILOT-005_take_4.json",
+                      "Length":  449,
+                      "LastWriteTimeUtc":  "\/Date(1786039589872)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-BUILD-FIX\\build_output.txt",
+                      "Length":  92,
+                      "LastWriteTimeUtc":  "\/Date(1786042465243)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-BUILD-FIX\\contract_comparison.json",
+                      "Length":  1331,
+                      "LastWriteTimeUtc":  "\/Date(1786042463984)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-BUILD-FIX\\REPORT.md",
+                      "Length":  307,
+                      "LastWriteTimeUtc":  "\/Date(1786042571664)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-BUILD-FIX\\test_output.txt",
+                      "Length":  33542,
+                      "LastWriteTimeUtc":  "\/Date(1786042571544)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\emergency_endpoint_response.json",
+                      "Length":  217,
+                      "LastWriteTimeUtc":  "\/Date(1786044459782)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\emergency_release_response.json",
+                      "Length":  231,
+                      "LastWriteTimeUtc":  "\/Date(1786044686458)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\endpoint_responses.json",
+                      "Length":  1601,
+                      "LastWriteTimeUtc":  "\/Date(1786044749278)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\ffprobe_emergency_active.json",
+                      "Length":  2744,
+                      "LastWriteTimeUtc":  "\/Date(1786044686337)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\firefly_guide_source.json",
+                      "Length":  736,
+                      "LastWriteTimeUtc":  "\/Date(1786043964463)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\rejected_transitions.json",
+                      "Length":  468,
+                      "LastWriteTimeUtc":  "\/Date(1786044741772)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\rejected_worker_once_stderr.txt",
+                      "Length":  275,
+                      "LastWriteTimeUtc":  "\/Date(1786044741761)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\rejected_worker_once_stdout.txt",
+                      "Length":  0,
+                      "LastWriteTimeUtc":  "\/Date(1786044741760)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\release_request.json",
+                      "Length":  63,
+                      "LastWriteTimeUtc":  "\/Date(1786044749276)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\REPORT.md",
+                      "Length":  327,
+                      "LastWriteTimeUtc":  "\/Date(1786044749279)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\restart_persistence_lock_response.json",
+                      "Length":  227,
+                      "LastWriteTimeUtc":  "\/Date(1786044741093)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\resume_response.json",
+                      "Length":  225,
+                      "LastWriteTimeUtc":  "\/Date(1786044382854)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\server_restart_stderr.txt",
+                      "Length":  0,
+                      "LastWriteTimeUtc":  "\/Date(1786044745691)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\server_restart_stdout.txt",
+                      "Length":  0,
+                      "LastWriteTimeUtc":  "\/Date(1786044745690)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\state_after_release.json",
+                      "Length":  241,
+                      "LastWriteTimeUtc":  "\/Date(1786044749277)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\state_after_restart.json",
+                      "Length":  268,
+                      "LastWriteTimeUtc":  "\/Date(1786044749232)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\state_before.json",
+                      "Length":  799,
+                      "LastWriteTimeUtc":  "\/Date(1786044382872)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\state_final_locked.json",
+                      "Length":  2053,
+                      "LastWriteTimeUtc":  "\/Date(1786044686368)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\state_locked.json",
+                      "Length":  1446,
+                      "LastWriteTimeUtc":  "\/Date(1786044459791)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\state_poll_01.json",
+                      "Length":  1044,
+                      "LastWriteTimeUtc":  "\/Date(1786044449912)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\state_poll_02.json",
+                      "Length":  1476,
+                      "LastWriteTimeUtc":  "\/Date(1786044528523)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\state_poll_03.json",
+                      "Length":  1476,
+                      "LastWriteTimeUtc":  "\/Date(1786044597680)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\state_poll_04.json",
+                      "Length":  1594,
+                      "LastWriteTimeUtc":  "\/Date(1786044653556)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\status_before_server_restart.json",
+                      "Length":  195,
+                      "LastWriteTimeUtc":  "\/Date(1786044741781)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\video_result_emergency_active.mp4",
+                      "Length":  9275019,
+                      "LastWriteTimeUtc":  "\/Date(1786044611153)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\worker_process.json",
+                      "Length":  123,
+                      "LastWriteTimeUtc":  "\/Date(1786044382886)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\worker_stderr.txt",
+                      "Length":  11952,
+                      "LastWriteTimeUtc":  "\/Date(1786044625729)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-EMERGENCY-LIVE-001\\worker_stdout.txt",
+                      "Length":  0,
+                      "LastWriteTimeUtc":  "\/Date(1786044382872)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-ENDPOINTS-001\\endpoint_responses.json",
+                      "Length":  230506,
+                      "LastWriteTimeUtc":  "\/Date(1786043469196)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-ENDPOINTS-001\\REPORT.md",
+                      "Length":  70,
+                      "LastWriteTimeUtc":  "\/Date(1786043469249)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-INVALID-MEDIA-FORENSICS\\content_classification.json",
+                      "Length":  8985,
+                      "LastWriteTimeUtc":  "\/Date(1786042669860)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-INVALID-MEDIA-FORENSICS\\download_event_comparison.json",
+                      "Length":  9095,
+                      "LastWriteTimeUtc":  "\/Date(1786042669861)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-INVALID-MEDIA-FORENSICS\\ffprobe_results.json",
+                      "Length":  12165,
+                      "LastWriteTimeUtc":  "\/Date(1786042669859)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-INVALID-MEDIA-FORENSICS\\files_inventory.json",
+                      "Length":  10045,
+                      "LastWriteTimeUtc":  "\/Date(1786042669857)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-INVALID-MEDIA-FORENSICS\\magic_bytes.json",
+                      "Length":  9985,
+                      "LastWriteTimeUtc":  "\/Date(1786042669858)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-INVALID-MEDIA-FORENSICS\\REPORT.md",
+                      "Length":  501,
+                      "LastWriteTimeUtc":  "\/Date(1786042669862)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-INVALID-MEDIA-FORENSICS\\sqlite_job_comparison.json",
+                      "Length":  13066,
+                      "LastWriteTimeUtc":  "\/Date(1786042669861)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-MEDIA-E2E-001\\browser_download_metadata.json",
+                      "Length":  8866,
+                      "LastWriteTimeUtc":  "\/Date(1786043169158)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-MEDIA-E2E-001\\events.jsonl",
+                      "Length":  7799,
+                      "LastWriteTimeUtc":  "\/Date(1786043168847)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-MEDIA-E2E-001\\ffprobe.json",
+                      "Length":  5623,
+                      "LastWriteTimeUtc":  "\/Date(1786043169135)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-MEDIA-E2E-001\\firefly_guide.json",
+                      "Length":  330,
+                      "LastWriteTimeUtc":  "\/Date(1786042907280)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-MEDIA-E2E-001\\kling_motion_package.json",
+                      "Length":  410,
+                      "LastWriteTimeUtc":  "\/Date(1786042907277)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-MEDIA-E2E-001\\manual_kling_clip_intake.json",
+                      "Length":  611,
+                      "LastWriteTimeUtc":  "\/Date(1786043221083)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-MEDIA-E2E-001\\REPORT.md",
+                      "Length":  318,
+                      "LastWriteTimeUtc":  "\/Date(1786043169158)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-MEDIA-E2E-001\\sha256.txt",
+                      "Length":  64,
+                      "LastWriteTimeUtc":  "\/Date(1786043169156)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-MEDIA-E2E-001\\sqlite_after.json",
+                      "Length":  12280,
+                      "LastWriteTimeUtc":  "\/Date(1786043168853)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-MEDIA-E2E-001\\sqlite_before.json",
+                      "Length":  12724,
+                      "LastWriteTimeUtc":  "\/Date(1786042907298)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-MEDIA-E2E-001\\video_result.mp4",
+                      "Length":  3830391,
+                      "LastWriteTimeUtc":  "\/Date(1786043088796)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-MEDIA-E2E-001\\imagens\\RC2_MEDIA_E2E_001_start.png",
+                      "Length":  2027145,
+                      "LastWriteTimeUtc":  "\/Date(1784992610000)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\endpoint_responses.json",
+                      "Length":  790,
+                      "LastWriteTimeUtc":  "\/Date(1786044784631)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\events.jsonl",
+                      "Length":  10407,
+                      "LastWriteTimeUtc":  "\/Date(1786044784633)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\feed_stderr.txt",
+                      "Length":  221,
+                      "LastWriteTimeUtc":  "\/Date(1786043967852)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\feed_stdout.txt",
+                      "Length":  0,
+                      "LastWriteTimeUtc":  "\/Date(1786043967851)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\ffprobe_active.json",
+                      "Length":  2717,
+                      "LastWriteTimeUtc":  "\/Date(1786044356956)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\firefly_guide.json",
+                      "Length":  736,
+                      "LastWriteTimeUtc":  "\/Date(1786043964463)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\jobs_after_active_completion.json",
+                      "Length":  1821,
+                      "LastWriteTimeUtc":  "\/Date(1786044356971)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\jobs_after_resume.json",
+                      "Length":  1044,
+                      "LastWriteTimeUtc":  "\/Date(1786044449912)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\jobs_before.json",
+                      "Length":  1029,
+                      "LastWriteTimeUtc":  "\/Date(1786044102935)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\jobs_paused.json",
+                      "Length":  1297,
+                      "LastWriteTimeUtc":  "\/Date(1786044116848)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\pause_endpoint_response.json",
+                      "Length":  224,
+                      "LastWriteTimeUtc":  "\/Date(1786044116833)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\REPORT.md",
+                      "Length":  296,
+                      "LastWriteTimeUtc":  "\/Date(1786044784634)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\resume_response.json",
+                      "Length":  225,
+                      "LastWriteTimeUtc":  "\/Date(1786043964823)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\state_after_pause.json",
+                      "Length":  1297,
+                      "LastWriteTimeUtc":  "\/Date(1786044116848)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\state_final.json",
+                      "Length":  1821,
+                      "LastWriteTimeUtc":  "\/Date(1786044356971)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\state_poll_01.json",
+                      "Length":  1015,
+                      "LastWriteTimeUtc":  "\/Date(1786044046493)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\state_poll_02.json",
+                      "Length":  1029,
+                      "LastWriteTimeUtc":  "\/Date(1786044102935)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\state_poll_03.json",
+                      "Length":  1320,
+                      "LastWriteTimeUtc":  "\/Date(1786044177984)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\state_poll_04.json",
+                      "Length":  1320,
+                      "LastWriteTimeUtc":  "\/Date(1786044242252)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\state_poll_05.json",
+                      "Length":  1438,
+                      "LastWriteTimeUtc":  "\/Date(1786044310852)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\video_result_active.mp4",
+                      "Length":  3971483,
+                      "LastWriteTimeUtc":  "\/Date(1786044249314)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\worker_process.json",
+                      "Length":  302,
+                      "LastWriteTimeUtc":  "\/Date(1786043967866)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\worker_stderr.txt",
+                      "Length":  10406,
+                      "LastWriteTimeUtc":  "\/Date(1786044267914)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\worker_stdout.txt",
+                      "Length":  0,
+                      "LastWriteTimeUtc":  "\/Date(1786043967852)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\imagens\\RC2_PAUSE_LIVE_01.png",
+                      "Length":  2027145,
+                      "LastWriteTimeUtc":  "\/Date(1784992610000)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\imagens\\RC2_PAUSE_LIVE_02.png",
+                      "Length":  2027145,
+                      "LastWriteTimeUtc":  "\/Date(1784992610000)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\imagens\\RC2_PAUSE_LIVE_03.png",
+                      "Length":  2027145,
+                      "LastWriteTimeUtc":  "\/Date(1784992610000)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PAUSE-LIVE-001\\videos\\RC2_PAUSE_LIVE_01.mp4",
+                      "Length":  3971483,
+                      "LastWriteTimeUtc":  "\/Date(1786044249314)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PILOT\\pilot_not_executed.json",
+                      "Length":  164,
+                      "LastWriteTimeUtc":  "\/Date(1786044970442)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PILOT\\REPORT.md",
+                      "Length":  274,
+                      "LastWriteTimeUtc":  "\/Date(1786044970442)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PRODUCTION-GUARDS-001\\database_snapshots.json",
+                      "Length":  1891,
+                      "LastWriteTimeUtc":  "\/Date(1786043870813)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PRODUCTION-GUARDS-001\\entrypoint_blocks.json",
+                      "Length":  1239,
+                      "LastWriteTimeUtc":  "\/Date(1786043870812)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PRODUCTION-GUARDS-001\\guard_matrix.json",
+                      "Length":  3292,
+                      "LastWriteTimeUtc":  "\/Date(1786043870811)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC2-PRODUCTION-GUARDS-001\\REPORT.md",
+                      "Length":  263,
+                      "LastWriteTimeUtc":  "\/Date(1786043870813)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-001\\events.jsonl",
+                      "Length":  39477,
+                      "LastWriteTimeUtc":  "\/Date(1786029373068)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-001\\firefly_guide.json",
+                      "Length":  393,
+                      "LastWriteTimeUtc":  "\/Date(1786029121389)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-001\\kling_motion_package.json",
+                      "Length":  1341,
+                      "LastWriteTimeUtc":  "\/Date(1786029120613)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-001\\manual_kling_clip_intake.json",
+                      "Length":  609,
+                      "LastWriteTimeUtc":  "\/Date(1786029373168)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-001\\qa_result.json",
+                      "Length":  398,
+                      "LastWriteTimeUtc":  "\/Date(1786029373214)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-001\\REPORT.md",
+                      "Length":  1824,
+                      "LastWriteTimeUtc":  "\/Date(1786029373265)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-001\\SHOT_REAL_E2E_001_TAKE_01_start.png",
+                      "Length":  2027145,
+                      "LastWriteTimeUtc":  "\/Date(1784992610000)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-001\\state_transitions.json",
+                      "Length":  1505,
+                      "LastWriteTimeUtc":  "\/Date(1786029373264)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-001\\video_result.mp4",
+                      "Length":  4033013,
+                      "LastWriteTimeUtc":  "\/Date(1786029371562)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-001\\video_result.sha256",
+                      "Length":  64,
+                      "LastWriteTimeUtc":  "\/Date(1786029373121)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-001\\imagens\\SHOT_REAL_E2E_001_TAKE_01_start.png",
+                      "Length":  2027145,
+                      "LastWriteTimeUtc":  "\/Date(1784992610000)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-003\\events.jsonl",
+                      "Length":  2314056,
+                      "LastWriteTimeUtc":  "\/Date(1786032270345)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-003\\firefly_guide.json",
+                      "Length":  829,
+                      "LastWriteTimeUtc":  "\/Date(1786031711823)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-003\\kling_motion_package.json",
+                      "Length":  4029,
+                      "LastWriteTimeUtc":  "\/Date(1786031711640)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-003\\manual_kling_clip_intake.json",
+                      "Length":  614,
+                      "LastWriteTimeUtc":  "\/Date(1786032270205)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-003\\REPORT.md",
+                      "Length":  2245,
+                      "LastWriteTimeUtc":  "\/Date(1786032270347)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-003\\video_result_take_1.mp4",
+                      "Length":  3697202,
+                      "LastWriteTimeUtc":  "\/Date(1786031863174)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-003\\video_result_take_1.sha256",
+                      "Length":  64,
+                      "LastWriteTimeUtc":  "\/Date(1786032270074)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-003\\video_result_take_2.mp4",
+                      "Length":  3803072,
+                      "LastWriteTimeUtc":  "\/Date(1786032020314)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-003\\video_result_take_2.sha256",
+                      "Length":  64,
+                      "LastWriteTimeUtc":  "\/Date(1786032270110)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-003\\video_result_take_3.mp4",
+                      "Length":  4572153,
+                      "LastWriteTimeUtc":  "\/Date(1786032267535)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-003\\video_result_take_3.sha256",
+                      "Length":  64,
+                      "LastWriteTimeUtc":  "\/Date(1786032270166)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-003\\imagens\\SHOT_01_TAKE_01_TAKE_01_start.png",
+                      "Length":  2027145,
+                      "LastWriteTimeUtc":  "\/Date(1784992610000)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-003\\imagens\\SHOT_01_TAKE_02_TAKE_01_start.png",
+                      "Length":  2027145,
+                      "LastWriteTimeUtc":  "\/Date(1784992610000)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-003\\imagens\\SHOT_01_TAKE_03_TAKE_01_start.png",
+                      "Length":  2027145,
+                      "LastWriteTimeUtc":  "\/Date(1784992610000)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REBOOT-E2E-001\\post_boot_snapshot.json",
+                      "Length":  396,
+                      "LastWriteTimeUtc":  "\/Date(1786038722370)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REBOOT-E2E-001\\pre_boot_snapshot.json",
+                      "Length":  193,
+                      "LastWriteTimeUtc":  "\/Date(1786038722368)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REBOOT-E2E-002\\boot_identity_comparison.json",
+                      "Length":  157,
+                      "LastWriteTimeUtc":  "\/Date(1786039889835)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REBOOT-E2E-002\\events.jsonl",
+                      "Length":  46622,
+                      "LastWriteTimeUtc":  "\/Date(1786039889870)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REBOOT-E2E-002\\post_boot_snapshot.json",
+                      "Length":  4431,
+                      "LastWriteTimeUtc":  "\/Date(1786039889829)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REBOOT-E2E-002\\pre_boot_snapshot.json",
+                      "Length":  137377,
+                      "LastWriteTimeUtc":  "\/Date(1786044801909)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REBOOT-E2E-002\\pre_reboot_restart_blocked_due_to_task.json",
+                      "Length":  9221,
+                      "LastWriteTimeUtc":  "\/Date(1786047939649)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REBOOT-E2E-002\\process_comparison.json",
+                      "Length":  8309,
+                      "LastWriteTimeUtc":  "\/Date(1786039889835)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REBOOT-E2E-002\\reboot-audit-state.json",
+                      "Length":  137377,
+                      "LastWriteTimeUtc":  "\/Date(1786044801919)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REBOOT-E2E-002\\reboot_blocker.json",
+                      "Length":  471,
+                      "LastWriteTimeUtc":  "\/Date(1786044970441)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REBOOT-E2E-002\\reconciliation_result.json",
+                      "Length":  169,
+                      "LastWriteTimeUtc":  "\/Date(1786039889870)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REBOOT-E2E-002\\REPORT.md",
+                      "Length":  342,
+                      "LastWriteTimeUtc":  "\/Date(1786047939650)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REBOOT-E2E-002\\scheduled_task_create_schtasks_output.txt",
+                      "Length":  724,
+                      "LastWriteTimeUtc":  "\/Date(1786047913818)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REBOOT-E2E-002\\scheduled_task_query_output.txt",
+                      "Length":  389,
+                      "LastWriteTimeUtc":  "\/Date(1786047913883)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REBOOT-E2E-002\\database_after\\firefly_jobs.db",
+                      "Length":  61440,
+                      "LastWriteTimeUtc":  "\/Date(1786031713245)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REBOOT-E2E-002\\database_after\\mission_control.db",
+                      "Length":  3567616,
+                      "LastWriteTimeUtc":  "\/Date(1786032671556)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REBOOT-E2E-002\\database_before\\firefly_jobs.db",
+                      "Length":  61440,
+                      "LastWriteTimeUtc":  "\/Date(1786044749265)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\REBOOT-E2E-002\\database_before\\mission_control.db",
+                      "Length":  3600384,
+                      "LastWriteTimeUtc":  "\/Date(1786044765182)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESILIENCE-TEST-001\\events.jsonl",
+                      "Length":  1548,
+                      "LastWriteTimeUtc":  "\/Date(1786029944048)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-001\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037650055)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-001\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650048)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-001\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037650055)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-001\\db_snapshot.json",
+                      "Length":  1159,
+                      "LastWriteTimeUtc":  "\/Date(1786037650052)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-001\\events.jsonl",
+                      "Length":  898,
+                      "LastWriteTimeUtc":  "\/Date(1786037650043)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-001\\invalid_motion.json",
+                      "Length":  129,
+                      "LastWriteTimeUtc":  "\/Date(1786037650042)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-001\\REPORT.md",
+                      "Length":  1093,
+                      "LastWriteTimeUtc":  "\/Date(1786037650083)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-001\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037650054)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-002\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037650120)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-002\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650115)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-002\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037650122)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-002\\db_snapshot.json",
+                      "Length":  1180,
+                      "LastWriteTimeUtc":  "\/Date(1786037650118)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-002\\events.jsonl",
+                      "Length":  919,
+                      "LastWriteTimeUtc":  "\/Date(1786037650109)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-002\\firefly_guide.json",
+                      "Length":  197,
+                      "LastWriteTimeUtc":  "\/Date(1786037650108)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-002\\REPORT.md",
+                      "Length":  1103,
+                      "LastWriteTimeUtc":  "\/Date(1786037650122)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-002\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037650119)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-003\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037650180)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-003\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650173)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-003\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037650182)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-003\\db_snapshot.json",
+                      "Length":  1563,
+                      "LastWriteTimeUtc":  "\/Date(1786037650178)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-003\\events.jsonl",
+                      "Length":  1204,
+                      "LastWriteTimeUtc":  "\/Date(1786037650158)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-003\\firefly_guide.json",
+                      "Length":  203,
+                      "LastWriteTimeUtc":  "\/Date(1786037650146)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-003\\REPORT.md",
+                      "Length":  1089,
+                      "LastWriteTimeUtc":  "\/Date(1786037650182)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-003\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037650180)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-004\\assertions.json",
+                      "Length":  1128,
+                      "LastWriteTimeUtc":  "\/Date(1786037650224)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-004\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650219)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-004\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037650224)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-004\\db_snapshot.json",
+                      "Length":  1527,
+                      "LastWriteTimeUtc":  "\/Date(1786037650222)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-004\\events.jsonl",
+                      "Length":  1168,
+                      "LastWriteTimeUtc":  "\/Date(1786037650213)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-004\\REPORT.md",
+                      "Length":  1110,
+                      "LastWriteTimeUtc":  "\/Date(1786037650225)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-004\\state_snapshot.json",
+                      "Length":  171,
+                      "LastWriteTimeUtc":  "\/Date(1786037650223)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-005\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037650268)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-005\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650263)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-005\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037650269)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-005\\corrupted_video.mp4",
+                      "Length":  33,
+                      "LastWriteTimeUtc":  "\/Date(1786037650248)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-005\\db_snapshot.json",
+                      "Length":  1536,
+                      "LastWriteTimeUtc":  "\/Date(1786037650266)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-005\\events.jsonl",
+                      "Length":  1177,
+                      "LastWriteTimeUtc":  "\/Date(1786037650256)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-005\\REPORT.md",
+                      "Length":  1097,
+                      "LastWriteTimeUtc":  "\/Date(1786037650270)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-005\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037650266)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-006\\assertions.json",
+                      "Length":  1128,
+                      "LastWriteTimeUtc":  "\/Date(1786037650311)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-006\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650305)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-006\\cleanup.json",
+                      "Length":  146,
+                      "LastWriteTimeUtc":  "\/Date(1786037650557)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-006\\db_snapshot.json",
+                      "Length":  1567,
+                      "LastWriteTimeUtc":  "\/Date(1786037650309)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-006\\events.jsonl",
+                      "Length":  1216,
+                      "LastWriteTimeUtc":  "\/Date(1786037650300)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-006\\REPORT.md",
+                      "Length":  1141,
+                      "LastWriteTimeUtc":  "\/Date(1786037650557)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-006\\state_snapshot.json",
+                      "Length":  171,
+                      "LastWriteTimeUtc":  "\/Date(1786037650310)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-007\\assertions.json",
+                      "Length":  1128,
+                      "LastWriteTimeUtc":  "\/Date(1786037650606)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-007\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650600)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-007\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037650606)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-007\\db_snapshot.json",
+                      "Length":  1517,
+                      "LastWriteTimeUtc":  "\/Date(1786037650603)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-007\\events.jsonl",
+                      "Length":  1166,
+                      "LastWriteTimeUtc":  "\/Date(1786037650591)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-007\\REPORT.md",
+                      "Length":  1120,
+                      "LastWriteTimeUtc":  "\/Date(1786037650606)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-007\\state_snapshot.json",
+                      "Length":  171,
+                      "LastWriteTimeUtc":  "\/Date(1786037650604)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-008\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037650642)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-008\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650637)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-008\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037650643)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-008\\db_snapshot.json",
+                      "Length":  1029,
+                      "LastWriteTimeUtc":  "\/Date(1786037650639)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-008\\events.jsonl",
+                      "Length":  776,
+                      "LastWriteTimeUtc":  "\/Date(1786037650632)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-008\\REPORT.md",
+                      "Length":  1110,
+                      "LastWriteTimeUtc":  "\/Date(1786037650644)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-008\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037650640)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-009\\assertions.json",
+                      "Length":  1128,
+                      "LastWriteTimeUtc":  "\/Date(1786037650682)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-009\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650678)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-009\\cleanup.json",
+                      "Length":  146,
+                      "LastWriteTimeUtc":  "\/Date(1786037650841)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-009\\db_snapshot.json",
+                      "Length":  1535,
+                      "LastWriteTimeUtc":  "\/Date(1786037650680)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-009\\events.jsonl",
+                      "Length":  1184,
+                      "LastWriteTimeUtc":  "\/Date(1786037650675)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-009\\REPORT.md",
+                      "Length":  1121,
+                      "LastWriteTimeUtc":  "\/Date(1786037650842)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-009\\state_snapshot.json",
+                      "Length":  171,
+                      "LastWriteTimeUtc":  "\/Date(1786037650681)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-010\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037650884)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-010\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650879)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-010\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037650885)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-010\\db_snapshot.json",
+                      "Length":  1063,
+                      "LastWriteTimeUtc":  "\/Date(1786037650882)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-010\\events.jsonl",
+                      "Length":  810,
+                      "LastWriteTimeUtc":  "\/Date(1786037650874)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-010\\REPORT.md",
+                      "Length":  1117,
+                      "LastWriteTimeUtc":  "\/Date(1786037650886)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-010\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037650884)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-011\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037650927)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-011\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037650922)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-011\\cleanup.json",
+                      "Length":  149,
+                      "LastWriteTimeUtc":  "\/Date(1786037651061)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-011\\db_snapshot.json",
+                      "Length":  1440,
+                      "LastWriteTimeUtc":  "\/Date(1786037650925)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-011\\events.jsonl",
+                      "Length":  1089,
+                      "LastWriteTimeUtc":  "\/Date(1786037650916)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-011\\REPORT.md",
+                      "Length":  1104,
+                      "LastWriteTimeUtc":  "\/Date(1786037651062)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-011\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037650926)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-012\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037651095)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-012\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037651091)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-012\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037651095)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-012\\db_snapshot.json",
+                      "Length":  1461,
+                      "LastWriteTimeUtc":  "\/Date(1786037651093)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-012\\events.jsonl",
+                      "Length":  1110,
+                      "LastWriteTimeUtc":  "\/Date(1786037651088)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-012\\REPORT.md",
+                      "Length":  1106,
+                      "LastWriteTimeUtc":  "\/Date(1786037651096)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-012\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037651094)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-013\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037651127)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-013\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037651123)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-013\\cleanup.json",
+                      "Length":  144,
+                      "LastWriteTimeUtc":  "\/Date(1786037651128)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-013\\db_snapshot.json",
+                      "Length":  1460,
+                      "LastWriteTimeUtc":  "\/Date(1786037651126)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-013\\events.jsonl",
+                      "Length":  1109,
+                      "LastWriteTimeUtc":  "\/Date(1786037651119)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-013\\REPORT.md",
+                      "Length":  1111,
+                      "LastWriteTimeUtc":  "\/Date(1786037651129)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-013\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037651127)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-014\\assertions.json",
+                      "Length":  1127,
+                      "LastWriteTimeUtc":  "\/Date(1786037651164)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-014\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037651159)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-014\\cleanup.json",
+                      "Length":  149,
+                      "LastWriteTimeUtc":  "\/Date(1786037651312)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-014\\db_snapshot.json",
+                      "Length":  1458,
+                      "LastWriteTimeUtc":  "\/Date(1786037651162)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-014\\events.jsonl",
+                      "Length":  1107,
+                      "LastWriteTimeUtc":  "\/Date(1786037651153)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-014\\REPORT.md",
+                      "Length":  1096,
+                      "LastWriteTimeUtc":  "\/Date(1786037651313)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-014\\state_snapshot.json",
+                      "Length":  168,
+                      "LastWriteTimeUtc":  "\/Date(1786037651163)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-015\\assertions.json",
+                      "Length":  1128,
+                      "LastWriteTimeUtc":  "\/Date(1786037651364)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-015\\chaos_events.db",
+                      "Length":  12288,
+                      "LastWriteTimeUtc":  "\/Date(1786037651358)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-015\\cleanup.json",
+                      "Length":  149,
+                      "LastWriteTimeUtc":  "\/Date(1786037651498)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-015\\db_snapshot.json",
+                      "Length":  1950,
+                      "LastWriteTimeUtc":  "\/Date(1786037651361)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-015\\events.jsonl",
+                      "Length":  1501,
+                      "LastWriteTimeUtc":  "\/Date(1786037651354)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-015\\REPORT.md",
+                      "Length":  1111,
+                      "LastWriteTimeUtc":  "\/Date(1786037651498)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\CHAOS-015\\state_snapshot.json",
+                      "Length":  171,
+                      "LastWriteTimeUtc":  "\/Date(1786037651363)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-001\\manual_kling_clip_intake.json",
+                      "Length":  1183,
+                      "LastWriteTimeUtc":  "\/Date(1786038154484)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-001\\REPORT.md",
+                      "Length":  669,
+                      "LastWriteTimeUtc":  "\/Date(1786038154485)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-001\\video_result_take_1.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154478)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-001\\video_result_take_2.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154480)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-001\\video_result_take_3.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154481)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-001\\video_result_take_4.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154483)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-002\\manual_kling_clip_intake.json",
+                      "Length":  1183,
+                      "LastWriteTimeUtc":  "\/Date(1786038154494)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-002\\REPORT.md",
+                      "Length":  669,
+                      "LastWriteTimeUtc":  "\/Date(1786038154495)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-002\\video_result_take_1.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154488)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-002\\video_result_take_2.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154489)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-002\\video_result_take_3.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154491)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-002\\video_result_take_4.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154493)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-003\\manual_kling_clip_intake.json",
+                      "Length":  1183,
+                      "LastWriteTimeUtc":  "\/Date(1786038154501)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-003\\REPORT.md",
+                      "Length":  669,
+                      "LastWriteTimeUtc":  "\/Date(1786038154502)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-003\\video_result_take_1.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154496)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-003\\video_result_take_2.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154497)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-003\\video_result_take_3.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154498)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-003\\video_result_take_4.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154499)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-004\\manual_kling_clip_intake.json",
+                      "Length":  1183,
+                      "LastWriteTimeUtc":  "\/Date(1786038154509)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-004\\REPORT.md",
+                      "Length":  669,
+                      "LastWriteTimeUtc":  "\/Date(1786038154509)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-004\\video_result_take_1.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154504)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-004\\video_result_take_2.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154505)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-004\\video_result_take_3.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154507)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-004\\video_result_take_4.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154508)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-005\\manual_kling_clip_intake.json",
+                      "Length":  1183,
+                      "LastWriteTimeUtc":  "\/Date(1786038154514)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-005\\REPORT.md",
+                      "Length":  669,
+                      "LastWriteTimeUtc":  "\/Date(1786038154514)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-005\\video_result_take_1.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154510)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-005\\video_result_take_2.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154511)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-005\\video_result_take_3.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154512)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\PILOT-005\\video_result_take_4.mp4",
+                      "Length":  73,
+                      "LastWriteTimeUtc":  "\/Date(1786038154513)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-001\\events.jsonl",
+                      "Length":  39477,
+                      "LastWriteTimeUtc":  "\/Date(1786029373068)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-001\\firefly_guide.json",
+                      "Length":  393,
+                      "LastWriteTimeUtc":  "\/Date(1786029121389)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-001\\kling_motion_package.json",
+                      "Length":  1341,
+                      "LastWriteTimeUtc":  "\/Date(1786029120613)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-001\\manual_kling_clip_intake.json",
+                      "Length":  609,
+                      "LastWriteTimeUtc":  "\/Date(1786029373168)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-001\\qa_result.json",
+                      "Length":  398,
+                      "LastWriteTimeUtc":  "\/Date(1786029373214)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-001\\REPORT.md",
+                      "Length":  1824,
+                      "LastWriteTimeUtc":  "\/Date(1786029373265)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-001\\SHOT_REAL_E2E_001_TAKE_01_start.png",
+                      "Length":  2027145,
+                      "LastWriteTimeUtc":  "\/Date(1784992610000)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-001\\state_transitions.json",
+                      "Length":  1505,
+                      "LastWriteTimeUtc":  "\/Date(1786029373264)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-001\\video_result.mp4",
+                      "Length":  4033013,
+                      "LastWriteTimeUtc":  "\/Date(1786029371562)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-001\\video_result.sha256",
+                      "Length":  64,
+                      "LastWriteTimeUtc":  "\/Date(1786029373121)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-001\\imagens\\SHOT_REAL_E2E_001_TAKE_01_start.png",
+                      "Length":  2027145,
+                      "LastWriteTimeUtc":  "\/Date(1784992610000)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-003\\events.jsonl",
+                      "Length":  2314056,
+                      "LastWriteTimeUtc":  "\/Date(1786032270345)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-003\\firefly_guide.json",
+                      "Length":  829,
+                      "LastWriteTimeUtc":  "\/Date(1786031711823)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-003\\kling_motion_package.json",
+                      "Length":  4029,
+                      "LastWriteTimeUtc":  "\/Date(1786031711640)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-003\\manual_kling_clip_intake.json",
+                      "Length":  614,
+                      "LastWriteTimeUtc":  "\/Date(1786032270205)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-003\\REPORT.md",
+                      "Length":  2245,
+                      "LastWriteTimeUtc":  "\/Date(1786032270347)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-003\\video_result_take_1.mp4",
+                      "Length":  3697202,
+                      "LastWriteTimeUtc":  "\/Date(1786031863174)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-003\\video_result_take_1.sha256",
+                      "Length":  64,
+                      "LastWriteTimeUtc":  "\/Date(1786032270074)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-003\\video_result_take_2.mp4",
+                      "Length":  3803072,
+                      "LastWriteTimeUtc":  "\/Date(1786032020314)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-003\\video_result_take_2.sha256",
+                      "Length":  64,
+                      "LastWriteTimeUtc":  "\/Date(1786032270110)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-003\\video_result_take_3.mp4",
+                      "Length":  4572153,
+                      "LastWriteTimeUtc":  "\/Date(1786032267535)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-003\\video_result_take_3.sha256",
+                      "Length":  64,
+                      "LastWriteTimeUtc":  "\/Date(1786032270166)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-003\\imagens\\SHOT_01_TAKE_01_TAKE_01_start.png",
+                      "Length":  2027145,
+                      "LastWriteTimeUtc":  "\/Date(1784992610000)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-003\\imagens\\SHOT_01_TAKE_02_TAKE_01_start.png",
+                      "Length":  2027145,
+                      "LastWriteTimeUtc":  "\/Date(1784992610000)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REAL-E2E-003\\imagens\\SHOT_01_TAKE_03_TAKE_01_start.png",
+                      "Length":  2027145,
+                      "LastWriteTimeUtc":  "\/Date(1784992610000)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REBOOT-E2E-001\\post_boot_snapshot.json",
+                      "Length":  396,
+                      "LastWriteTimeUtc":  "\/Date(1786038722370)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\REBOOT-E2E-001\\pre_boot_snapshot.json",
+                      "Length":  193,
+                      "LastWriteTimeUtc":  "\/Date(1786038722368)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\RESILIENCE-TEST-001\\events.jsonl",
+                      "Length":  1548,
+                      "LastWriteTimeUtc":  "\/Date(1786029944048)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\SOAK-001\\REPORT.md",
+                      "Length":  489,
+                      "LastWriteTimeUtc":  "\/Date(1786038160866)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\SOAK-001\\soak_metrics.json",
+                      "Length":  8673,
+                      "LastWriteTimeUtc":  "\/Date(1786038160865)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\test_run\\firefly_guide.json",
+                      "Length":  278,
+                      "LastWriteTimeUtc":  "\/Date(1786027211970)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\test_run\\intake_manifest.json",
+                      "Length":  424,
+                      "LastWriteTimeUtc":  "\/Date(1786027211971)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\RESTORE_CLEAN_TEST\\runs\\test_run\\kling_package.json",
+                      "Length":  198,
+                      "LastWriteTimeUtc":  "\/Date(1786027211968)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\SOAK-001\\REPORT.md",
+                      "Length":  489,
+                      "LastWriteTimeUtc":  "\/Date(1786038160866)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\SOAK-001\\soak_metrics.json",
+                      "Length":  8673,
+                      "LastWriteTimeUtc":  "\/Date(1786038160865)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\test_run\\firefly_guide.json",
+                      "Length":  256,
+                      "LastWriteTimeUtc":  "\/Date(1786042499108)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\test_run\\intake_manifest.json",
+                      "Length":  612,
+                      "LastWriteTimeUtc":  "\/Date(1786042499109)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\test_run\\kling_package.json",
+                      "Length":  198,
+                      "LastWriteTimeUtc":  "\/Date(1786042499085)\/"
+                  },
+                  {
+                      "FullName":  "C:\\B2-AI-STUDIO\\mission-control\\runs\\test_run\\imagens\\SHOT_01_TAKE_01_start.png",
+                      "Length":  70,
+                      "LastWriteTimeUtc":  "\/Date(1786042499107)\/"
+                  }
+              ]
+}

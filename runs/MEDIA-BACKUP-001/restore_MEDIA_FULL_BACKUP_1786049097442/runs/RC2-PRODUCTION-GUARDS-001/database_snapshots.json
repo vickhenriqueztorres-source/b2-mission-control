@@ -1,0 +1,88 @@
+{
+  "before": {
+    "label": "before",
+    "generated_at": "2026-08-06T19:17:50.762Z",
+    "mission_control": {
+      "exists": true,
+      "tables": [
+        "agent_events",
+        "artifacts",
+        "operational_control_state",
+        "productions",
+        "scenes"
+      ],
+      "rows": {
+        "agent_events": 4332,
+        "artifacts": 0,
+        "operational_control_state": 1,
+        "productions": 8,
+        "scenes": 0
+      },
+      "systemState": []
+    },
+    "firefly": {
+      "exists": true,
+      "tables": [
+        "jobs",
+        "system_state"
+      ],
+      "rows": {
+        "jobs": 21,
+        "system_state": 1
+      },
+      "systemState": [
+        {
+          "singleton": 1,
+          "status": "running",
+          "reason": "RC2_ENDPOINT_RELEASE",
+          "updated_at": 1786043467
+        }
+      ]
+    }
+  },
+  "after": {
+    "label": "after",
+    "generated_at": "2026-08-06T19:17:50.806Z",
+    "mission_control": {
+      "exists": true,
+      "tables": [
+        "agent_events",
+        "artifacts",
+        "operational_control_state",
+        "productions",
+        "scenes"
+      ],
+      "rows": {
+        "agent_events": 4332,
+        "artifacts": 0,
+        "operational_control_state": 1,
+        "productions": 8,
+        "scenes": 0
+      },
+      "systemState": []
+    },
+    "firefly": {
+      "exists": true,
+      "tables": [
+        "jobs",
+        "system_state"
+      ],
+      "rows": {
+        "jobs": 21,
+        "system_state": 1
+      },
+      "systemState": [
+        {
+          "singleton": 1,
+          "status": "running",
+          "reason": "RC2_ENDPOINT_RELEASE",
+          "updated_at": 1786043467
+        }
+      ]
+    }
+  },
+  "databaseMutationCheck": {
+    "pass": true,
+    "note": "Compares mission_control table row counts, firefly table row counts, and firefly system_state before/after guard failures."
+  }
+}

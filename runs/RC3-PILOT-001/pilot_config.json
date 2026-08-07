@@ -1,0 +1,70 @@
+{
+  "run_id": "RC3-PILOT-001",
+  "candidate": "1.0.0-rc3",
+  "created_at": "2026-08-06T22:53:02.989Z",
+  "target_productions": 5,
+  "takes_per_production": 4,
+  "expected_jobs": 20,
+  "firefly_concurrency": 1,
+  "active_productions_policy": "one_production_at_a_time",
+  "execution_policy": "feed_one_production_then_worker_once_per_take_stop_on_first_integrity_failure",
+  "timeout_policy": "unchanged_from_rc3",
+  "source_frame_sha256": "eec4cf8678854489dafc6e66e6f7f3378bb888756b100105e9b3e7cf696a98d3",
+  "productions": [
+    {
+      "production": "PROD-01",
+      "production_id": "RC3-PILOT-PROD-01",
+      "dir": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\productions\\PROD-01",
+      "items": [
+        "RC3_PILOT_001_PROD_01_TAKE_01",
+        "RC3_PILOT_001_PROD_01_TAKE_02",
+        "RC3_PILOT_001_PROD_01_TAKE_03",
+        "RC3_PILOT_001_PROD_01_TAKE_04"
+      ]
+    },
+    {
+      "production": "PROD-02",
+      "production_id": "RC3-PILOT-PROD-02",
+      "dir": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\productions\\PROD-02",
+      "items": [
+        "RC3_PILOT_001_PROD_02_TAKE_01",
+        "RC3_PILOT_001_PROD_02_TAKE_02",
+        "RC3_PILOT_001_PROD_02_TAKE_03",
+        "RC3_PILOT_001_PROD_02_TAKE_04"
+      ]
+    },
+    {
+      "production": "PROD-03",
+      "production_id": "RC3-PILOT-PROD-03",
+      "dir": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\productions\\PROD-03",
+      "items": [
+        "RC3_PILOT_001_PROD_03_TAKE_01",
+        "RC3_PILOT_001_PROD_03_TAKE_02",
+        "RC3_PILOT_001_PROD_03_TAKE_03",
+        "RC3_PILOT_001_PROD_03_TAKE_04"
+      ]
+    },
+    {
+      "production": "PROD-04",
+      "production_id": "RC3-PILOT-PROD-04",
+      "dir": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\productions\\PROD-04",
+      "items": [
+        "RC3_PILOT_001_PROD_04_TAKE_01",
+        "RC3_PILOT_001_PROD_04_TAKE_02",
+        "RC3_PILOT_001_PROD_04_TAKE_03",
+        "RC3_PILOT_001_PROD_04_TAKE_04"
+      ]
+    },
+    {
+      "production": "PROD-05",
+      "production_id": "RC3-PILOT-PROD-05",
+      "dir": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-PILOT-001\\productions\\PROD-05",
+      "items": [
+        "RC3_PILOT_001_PROD_05_TAKE_01",
+        "RC3_PILOT_001_PROD_05_TAKE_02",
+        "RC3_PILOT_001_PROD_05_TAKE_03",
+        "RC3_PILOT_001_PROD_05_TAKE_04"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "shot_id": "SHOT_01",
+    "take_id": "TAKE_01",
+    "prompt": "Rafa Lobo caminhando lentamente em um escritório moderno de luxo, iluminação cinematográfica, lente 35mm, ultra realista, 8k",
+    "start_frame_path": "C:\\B2-AI-STUDIO\\productions\\188a7a12-0533-4b55-83db-3e19e8828eb3\\start_frame_01.png",
+    "model": "Kling 3.0",
+    "resolution": "720p",
+    "aspect_ratio": "9:16",
+    "duration_seconds": 5
+  }
+]

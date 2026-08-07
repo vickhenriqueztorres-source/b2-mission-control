@@ -1,0 +1,23 @@
+{
+  "model": "Kling 3.0",
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "duration_seconds": 5,
+  "items": [
+    {
+      "image": "RC2_PAUSE_LIVE_01.png",
+      "prompt": "Medium side-profile shot of a man looking calmly toward office window, soft rim lighting, 50mm lens",
+      "name": "RC2_PAUSE_LIVE_01"
+    },
+    {
+      "image": "RC2_PAUSE_LIVE_02.png",
+      "prompt": "Medium side-profile shot of a man looking calmly toward office window, soft rim lighting, 50mm lens",
+      "name": "RC2_PAUSE_LIVE_02"
+    },
+    {
+      "image": "RC2_PAUSE_LIVE_03.png",
+      "prompt": "Medium side-profile shot of a man looking calmly toward office window, soft rim lighting, 50mm lens",
+      "name": "RC2_PAUSE_LIVE_03"
+    }
+  ]
+}

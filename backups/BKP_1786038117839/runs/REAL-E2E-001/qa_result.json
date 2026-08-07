@@ -1,0 +1,15 @@
+{
+  "test_run": "REAL-E2E-001",
+  "timestamp": "2026-08-06T15:16:13.213Z",
+  "qa_status": "APPROVED",
+  "temporal_consistency_score": 0.98,
+  "frame_rate_fps": 30,
+  "duration_seconds": 5,
+  "video_hash": "94e24e7c91ea190c802e8fabfcf07048d73006ae1c51b38081edf34aac1d8d70",
+  "checks": {
+    "file_exists": true,
+    "valid_mp4": true,
+    "has_video_track": true,
+    "no_static_frames": true
+  }
+}

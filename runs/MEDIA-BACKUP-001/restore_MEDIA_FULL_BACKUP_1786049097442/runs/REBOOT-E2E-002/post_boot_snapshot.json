@@ -1,0 +1,33 @@
+﻿{
+    "phase":  "POST-REBOOT",
+    "captured_at":  "2026-08-06T20:32:01.1828767Z",
+    "run_id":  "REBOOT-E2E-002",
+    "production_id":  "REBOOT-AUDIT-CONTROLLED",
+    "mission_control_pids":  10292,
+    "python_worker_pids":  {
+
+                           },
+    "chrome_pids":  [
+                        5276,
+                        6316,
+                        6600,
+                        9272,
+                        9388,
+                        10000,
+                        10752,
+                        10768,
+                        10832,
+                        10988,
+                        11004,
+                        11012,
+                        11020,
+                        11028,
+                        12376,
+                        12392,
+                        12444,
+                        12720,
+                        13068
+                    ],
+    "last_boot_time":  "2026-08-06T20:31:02.5000000Z",
+    "scheduled_task_resumed":  true
+}

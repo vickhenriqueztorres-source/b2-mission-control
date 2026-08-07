@@ -1,0 +1,77 @@
+{
+  "captured_at": "2026-08-06T22:28:11.917Z",
+  "db_path": "C:/B2-AI-STUDIO/links/firefly-automation/data/firefly_jobs.db",
+  "active_jobs": [],
+  "rc2_jobs": [
+    {
+      "id": 59,
+      "name": "RC2_PILOT_001_PROD_01_TAKE_01",
+      "status": "failed-infra",
+      "error": "TimeoutError: ",
+      "output_path": null
+    },
+    {
+      "id": 60,
+      "name": "RC2_PILOT_001_PROD_01_TAKE_02",
+      "status": "dead",
+      "error": "RC2-PILOT-001 stopped after first gate failure",
+      "output_path": null
+    },
+    {
+      "id": 61,
+      "name": "RC2_PILOT_001_PROD_01_TAKE_03",
+      "status": "dead",
+      "error": "RC2-PILOT-001 stopped after first gate failure",
+      "output_path": null
+    },
+    {
+      "id": 62,
+      "name": "RC2_PILOT_001_PROD_01_TAKE_04",
+      "status": "dead",
+      "error": "RC2-PILOT-001 stopped after first gate failure",
+      "output_path": null
+    }
+  ],
+  "rc3_jobs": [
+    {
+      "id": 63,
+      "name": "RC3_MEDIA_E2E_001_TAKE_01",
+      "status": "done",
+      "error": null,
+      "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\RC3_MEDIA_E2E_001_TAKE_01.mp4",
+      "file_size_bytes": 4349688,
+      "sha256": "05473e9cf1ba0b5447a799b55724c1eacf4bc40be93da4a5ed52547284e27a8d",
+      "width": 720,
+      "height": 1280,
+      "codec": "h264",
+      "media_validation_status": "PASS"
+    }
+  ],
+  "diagnostic_job": {
+    "id": 63,
+    "prompt": "A composed Brazilian business presenter turns slightly toward camera in a refined office, natural window light, cinematic realistic motion, 50mm lens, calm confident expression, RC3 diagnostic single job.",
+    "image_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\RC3-MEDIA-E2E-001\\imagens\\RC3_MEDIA_E2E_001_TAKE_01.png",
+    "status": "done",
+    "attempts": 1,
+    "output_path": "C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly\\saida\\RC3_MEDIA_E2E_001_TAKE_01.mp4",
+    "error": null,
+    "claimed_at": 1786054947.0710795,
+    "generation_started_at": 1786054997.306329,
+    "updated_at": 1786055142.5321357,
+    "model": "Kling 3.0",
+    "resolution": "720p",
+    "aspect_ratio": "9:16",
+    "duration_seconds": 5,
+    "name": "RC3_MEDIA_E2E_001_TAKE_01",
+    "download_started_at": 1786055142.532107,
+    "download_completed_at": 1786055142.532107,
+    "media_validated_at": 1786055142.532107,
+    "media_validation_status": "PASS",
+    "media_validation_error": null,
+    "file_size_bytes": 4349688,
+    "sha256": "05473e9cf1ba0b5447a799b55724c1eacf4bc40be93da4a5ed52547284e27a8d",
+    "width": 720,
+    "height": 1280,
+    "codec": "h264"
+  }
+}

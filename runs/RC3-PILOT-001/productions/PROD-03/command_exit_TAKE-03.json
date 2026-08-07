@@ -1,0 +1,10 @@
+﻿{
+    "production":  "PROD-03",
+    "take":  "TAKE-03",
+    "job_name":  "RC3_PILOT_001_PROD_03_TAKE_03",
+    "worker_exit_code":  0,
+    "completed_at":  "2026-08-06T23:31:43.5388443Z",
+    "accepted_worker_exit_codes":  [
+                                       0
+                                   ]
+}

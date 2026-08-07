@@ -1,0 +1,34 @@
+{
+  "events_count": 2,
+  "events": [
+    {
+      "event_id": "EVT_CHAOS-002_START",
+      "run_id": "RUN_CHAOS-002_STAGING",
+      "production_id": "CHAOS-002",
+      "agent_id": "AntigravityBuilder",
+      "provider": "ANTIGRAVITY",
+      "task_id": "START_CHAOS_SCENARIO",
+      "timestamp": "2026-08-06T17:34:10.097Z",
+      "type": "AGENT_STARTED",
+      "status": "RUNNING",
+      "message": "Iniciando Cenário de Caos: Frame Inicial Inexistente (CHAOS-002)",
+      "attempt": 1,
+      "idempotency_key": "IDEM_CHAOS-002_START",
+      "composite_key": "CHAOS-002_SHOT_01_TAKE_01"
+    },
+    {
+      "event_id": "EVT_CHAOS-002_FRAME_FAIL",
+      "run_id": "RUN_CHAOS-002_STAGING",
+      "production_id": "CHAOS-002",
+      "agent_id": "MotionToFireflyBridge",
+      "provider": "ANTIGRAVITY",
+      "task_id": "VERIFY_START_FRAME",
+      "timestamp": "2026-08-06T17:34:10.108Z",
+      "type": "AGENT_FAILED",
+      "status": "FAILED",
+      "message": "Frame inicial inexistente no disco: C:\\B2-AI-STUDIO\\non_existent_folder\\missing_frame.png",
+      "artifact_path": "C:\\B2-AI-STUDIO\\mission-control\\runs\\CHAOS-002\\firefly_guide.json",
+      "attempt": 1
+    }
+  ]
+}
