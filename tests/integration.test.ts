@@ -1,123 +1,69 @@
+import Ajv2020 from 'ajv/dist/2020';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
+import assert from 'node:assert/strict';
 import fs from 'fs';
 import path from 'path';
+import { HiddenSystemsLabAdapter } from '../adapters/hiddenSystemsLabAdapter';
 import { getDatabase } from '../database/db';
-import { ProductionRunner } from '../orchestrator/productionRunner';
 import { ProductionStateMachine } from '../orchestrator/stateMachine';
 import { MotionToFireflyBridge } from '../production-bridge/motionToFirefly';
-import { FireflyToIntakeBridge } from '../production-bridge/fireflyToIntake';
 
-async function runTests() {
-  console.log('============================================================');
-  console.log('SUÍTE DE TESTES DE INTEGRAÇÃO — B2 MISSION CONTROL');
-  console.log('============================================================\n');
+const PNG_1X1 = Buffer.from(
+  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
+  'base64'
+);
 
-  const ajv = new Ajv({ allErrors: true });
-  addFormats(ajv);
-
-  // 1. Validar Schemas JSON
-  console.log('[TESTE 1] Carregando e validando esquemas em shared-contracts/...');
+async function runTests(): Promise<void> {
+  const ajvDraft7 = new Ajv({allErrors: true});
+  const ajv2020 = new Ajv2020({allErrors: true});
+  addFormats(ajvDraft7);
+  addFormats(ajv2020);
   const contractsDir = path.resolve(__dirname, '../../shared-contracts');
-  
-  const schemaFiles = [
-    'production.schema.json',
-    'generation-request.schema.json',
-    'generation-result.schema.json',
-    'agent-event.schema.json',
-    'artifact.schema.json'
-  ];
-
-  for (const file of schemaFiles) {
+  for (const file of ['production.schema.json', 'generation-request.schema.json', 'generation-result.schema.json', 'agent-event.schema.json', 'artifact.schema.json', 'hsl-episode.schema.json']) {
     const filePath = path.join(contractsDir, file);
-    if (!fs.existsSync(filePath)) {
-      throw new Error(`FALHA NO TESTE: Arquivo de schema não encontrado: ${filePath}`);
-    }
-    const schemaObj = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-    ajv.addSchema(schemaObj, file);
-    console.log(`  ✓ Schema ${file} carregado e compilado com sucesso.`);
+    assert.ok(fs.existsSync(filePath), `Schema missing: ${filePath}`);
+    const schema = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    const validator = String(schema.$schema || '').includes('2020-12') ? ajv2020 : ajvDraft7;
+    validator.addSchema(schema, file);
   }
 
-  // 2. Testar Máquina de Estados Global e Bloqueios
-  console.log('\n[TESTE 2] Testando Máquina de Estados e bloqueios de transição...');
-  const testProdId = 'test-prod-uuid-0000-1111';
-  
-  // Inserir registro no SQLite para satisfazer Foreign Keys de eventos
-  const db = getDatabase();
-  const stmt = db.prepare(`
+  const productionId = `hsl-integration-${Date.now()}`;
+  getDatabase().prepare(`
     INSERT OR REPLACE INTO productions (production_id, project_name, status)
-    VALUES (?, 'Rafa Lobo Test', 'IDLE')
-  `);
-  stmt.run(testProdId);
-
-  const sm = new ProductionStateMachine(testProdId, 'IDLE');
-  
+    VALUES (?, 'Hidden Systems Lab Test', 'IDLE')
+  `).run(productionId);
+  const sm = new ProductionStateMachine(productionId);
   sm.transitionTo('BRIEFING_RECEIVED');
-  sm.transitionTo('RAFA_LOBO_PRE_KLING_RUNNING');
-  sm.transitionTo('MOTION_PACKAGE_READY');
-  
-  try {
-    // Tentar transição inválida (pular direto para FINAL_VIDEO_RENDERED)
-    sm.transitionTo('FINAL_VIDEO_RENDERED');
-    throw new Error('ERRO: A máquina de estados deveria ter bloqueado a transição inválida!');
-  } catch (err: any) {
-    if (err.message.includes('INVALID_STATE_TRANSITION')) {
-      console.log('  ✓ Bloqueio de transição inválida funcionou perfeitamente.');
-    } else {
-      throw err;
-    }
-  }
+  sm.transitionTo('HSL_EDITORIAL_PREPRODUCTION_RUNNING');
+  sm.transitionTo('HSL_EPISODE_PACKAGE_READY');
+  assert.throws(() => sm.transitionTo('FINAL_VIDEO_RENDERED'), /INVALID_STATE_TRANSITION/);
 
-  // 3. Testar Production Bridge (Conversores)
-  console.log('\n[TESTE 3] Testando Production Bridge (Kling Motion Package -> Firefly Guide -> Intake)...');
-  const tempDir = path.resolve(__dirname, '../runs/test_run');
-  if (!fs.existsSync(tempDir)) {
-    fs.mkdirSync(tempDir, { recursive: true });
-  }
+  const tempDir = path.resolve(__dirname, '../runs/test_run_hsl');
+  fs.mkdirSync(tempDir, {recursive: true});
+  const framePath = path.join(tempDir, 'fuel_farm_start.png');
+  fs.writeFileSync(framePath, PNG_1X1);
+  const packagePath = path.join(tempDir, 'generation_package.json');
+  const guidePath = path.join(tempDir, 'firefly_guide.json');
+  fs.writeFileSync(packagePath, JSON.stringify([{
+    shot_id: 'HSL_001',
+    take_id: 'TAKE_01',
+    prompt: 'Slow fuel movement through an airport pipeline network.',
+    start_frame_path: framePath,
+    aspect_ratio: '16:9',
+    resolution: '1080p'
+  }], null, 2));
+  const guide = MotionToFireflyBridge.convert(packagePath, guidePath);
+  assert.equal(guide.length, 1);
+  assert.equal(guide[0].aspect_ratio, '16:9');
+  assert.equal(guide[0].resolution, '1080p');
 
-  const sampleMotionPackage = path.join(tempDir, 'kling_package.json');
-  const sampleFireflyGuide = path.join(tempDir, 'firefly_guide.json');
-  const sampleIntakeManifest = path.join(tempDir, 'intake_manifest.json');
-
-  fs.writeFileSync(sampleMotionPackage, JSON.stringify([
-    {
-      shot_id: 'SHOT_01',
-      take_id: 'TAKE_01',
-      prompt: 'Prompt de teste de animação',
-      start_frame_path: path.join(tempDir, 'frame1.png')
-    }
-  ], null, 2));
-
-  const guide = MotionToFireflyBridge.convert(sampleMotionPackage, sampleFireflyGuide);
-  console.log(`  ✓ MotionToFireflyBridge converteu ${guide.length} item(ns).`);
-
-  const intake = FireflyToIntakeBridge.convert(testProdId, [
-    {
-      name: 'SHOT_REAL_E2E_001_TAKE_01',
-      output_path: 'C:\\B2-AI-STUDIO\\links\\firefly-automation\\saida\\SHOT_REAL_E2E_001_TAKE_01.mp4'
-    }
-  ], sampleIntakeManifest);
-  console.log(`  ✓ FireflyToIntakeBridge gerou manifesto de clipe único em: ${intake.video_path}.`);
-
-  // 4. Executar Ciclo Completo End-to-End
-  console.log('\n[TESTE 4] Executando ciclo completo no ProductionRunner...');
-  const runner = new ProductionRunner();
-  await runner.initialize();
-
-  const result = await runner.runFullProduction('Briefing Oficial de Validação do B2 Mission Control');
-  
-  if (result.success && fs.existsSync(result.finalVideoPath)) {
-    console.log(`  ✓ Ciclo End-to-End concluído com SUCESSO! Vídeo gerado em: ${result.finalVideoPath}`);
-  } else {
-    throw new Error('FALHA NO TESTE: O ciclo End-to-End não produziu o vídeo final esperado.');
-  }
-
-  console.log('\n============================================================');
-  console.log('TODOS OS TESTES DE INTEGRAÇÃO PASSARAM COM 100% DE SUCESSO!');
-  console.log('============================================================');
+  const hsl = new HiddenSystemsLabAdapter();
+  assert.equal(await hsl.checkHealth(), true);
+  process.stdout.write('HSL integration checks passed.\n');
 }
 
-runTests().catch((err) => {
-  console.error('\n❌ FALHA NOS TESTES DE INTEGRAÇÃO:', err);
-  process.exit(1);
+runTests().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
 });

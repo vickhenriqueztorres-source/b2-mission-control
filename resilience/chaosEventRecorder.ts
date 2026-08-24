@@ -7,7 +7,7 @@ export interface ChaosEventPayload {
   run_id: string;
   production_id: string;
   agent_id: string;
-  provider: 'ANTIGRAVITY' | 'FIREFLY_BOT' | 'RAFA_LOBO' | 'MISSION_CONTROL' | 'CHAOS_ENGINE';
+  provider: 'ANTIGRAVITY' | 'FIREFLY_BOT' | 'HIDDEN_SYSTEMS_LAB' | 'MISSION_CONTROL' | 'CHAOS_ENGINE';
   task_id: string;
   timestamp: string;
   type: string;

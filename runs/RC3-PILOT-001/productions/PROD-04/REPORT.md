@@ -1,3 +1,0 @@
-# RC3-PILOT-PROD-04
-
-Status: NOT_EXECUTED

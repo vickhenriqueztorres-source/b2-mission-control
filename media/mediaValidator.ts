@@ -13,6 +13,10 @@ export interface MediaValidationResult {
   fps: number;
   codec: string;
   pixel_format?: string;
+  has_audio: boolean;
+  audio_codec?: string;
+  audio_sample_rate?: number;
+  audio_channels?: number;
   ffprobe_exit_code: number | null;
   ffprobe_stdout: string;
   ffprobe_stderr: string;
@@ -50,6 +54,9 @@ export function validateVideoWithFfprobe(filePath: string): MediaValidationResul
   const duration = Number(parsed.format?.duration || videoStream?.duration || 0);
   const codec = String(videoStream?.codec_name || '');
   const fps = fpsFromRate(videoStream?.avg_frame_rate || videoStream?.r_frame_rate);
+  const audioStream = Array.isArray(parsed.streams)
+    ? parsed.streams.find((stream: any) => stream.codec_type === 'audio')
+    : null;
 
   return {
     valid: proc.status === 0 && Boolean(videoStream) && width > 0 && height > 0 && duration > 0 && Boolean(codec),
@@ -62,6 +69,10 @@ export function validateVideoWithFfprobe(filePath: string): MediaValidationResul
     fps,
     codec,
     pixel_format: videoStream?.pix_fmt,
+    has_audio: Boolean(audioStream),
+    audio_codec: audioStream?.codec_name,
+    audio_sample_rate: audioStream?.sample_rate ? Number(audioStream.sample_rate) : undefined,
+    audio_channels: audioStream?.channels ? Number(audioStream.channels) : undefined,
     ffprobe_exit_code: proc.status,
     ffprobe_stdout: proc.stdout || '',
     ffprobe_stderr: proc.stderr || ''

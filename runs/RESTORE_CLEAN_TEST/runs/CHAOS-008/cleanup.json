@@ -1,7 +1,0 @@
-{
-  "timestamp": "2026-08-06T17:34:10.642Z",
-  "strategy": "RESET_STAGING_DB",
-  "actions": [
-    "Ambiente de staging limpo com sucesso."
-  ]
-}

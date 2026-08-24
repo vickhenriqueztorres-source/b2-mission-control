@@ -1,4 +1,0 @@
-{"job_id":59,"name":"RC2_PILOT_001_PROD_01_TAKE_01","status":"failed-infra","error":"TimeoutError: ","updated_at":1786051123.8525076}
-{"job_id":60,"name":"RC2_PILOT_001_PROD_01_TAKE_02","status":"dead","error":"RC2-PILOT-001 stopped after first gate failure","updated_at":1786051217.167}
-{"job_id":61,"name":"RC2_PILOT_001_PROD_01_TAKE_03","status":"dead","error":"RC2-PILOT-001 stopped after first gate failure","updated_at":1786051217.167}
-{"job_id":62,"name":"RC2_PILOT_001_PROD_01_TAKE_04","status":"dead","error":"RC2-PILOT-001 stopped after first gate failure","updated_at":1786051217.167}

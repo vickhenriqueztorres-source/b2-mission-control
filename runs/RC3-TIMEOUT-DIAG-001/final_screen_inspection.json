@@ -1,7 +1,0 @@
-{
-  "generated_at": "2026-08-06T22:20:52.579Z",
-  "screenshot": "C:/B2-AI-STUDIO/mission-control/runs/RC2-PILOT-001/screenshots/job_59_worker_failure.png",
-  "visual_observation": "Baixar button visible/enabled; no obvious logout, quota, content rejection, or network error visible.",
-  "dom_snapshot_available": false,
-  "classification_support": "supports probable STATE_READER_FALSE_NEGATIVE but cannot prove selector attribute without DOM snapshot"
-}

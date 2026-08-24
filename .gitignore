@@ -1,3 +1,26 @@
 # Local SQLite transient files.
 *.db-shm
 *.db-wal
+*.db
+*.sqlite
+*.sqlite3
+
+# Local secrets and environment overrides.
+.env
+.env.local
+.env.*.local
+
+# Dependencies and build output.
+node_modules/
+dist/
+
+# Generated media, renders and pipeline run artifacts.
+runs/
+public/hsl-runs/
+public/hsl-publication/
+
+# Local caches and coverage.
+.cache/
+.remotion/
+coverage/
+*.log

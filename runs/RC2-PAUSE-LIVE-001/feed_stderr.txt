@@ -1,2 +1,0 @@
-2026-08-06 16:19:27,693 | INFO  | action=guide_fed count=3 status=pending
-2026-08-06 16:19:27,694 | INFO  | action=guide_enqueued count=3 guide=C:\B2-AI-STUDIO\mission-control\runs\RC2-PAUSE-LIVE-001\firefly_guide.json

@@ -60,55 +60,64 @@ export class FireflyAdapter extends BaseAdapter {
     const parsedGuide = JSON.parse(rawGuide);
     const items = parsedGuide.items || (Array.isArray(parsedGuide) ? parsedGuide : [parsedGuide]);
     const jobNames: string[] = items.map((i: any) => i.name);
+    const resumeExistingBatch = process.env.FIREFLY_RESUME_EXISTING_BATCH === 'true';
 
-    const saidaDir = path.join(this.fireflyPath, 'saida');
-    for (const jobName of jobNames) {
-      const existingMp4 = path.join(saidaDir, `${jobName}.mp4`);
-      if (fs.existsSync(existingMp4)) {
-        try {
-          fs.unlinkSync(existingMp4);
-          Logger.info(this.name, `Arquivo de saída antigo limpo: ${existingMp4}`);
-        } catch (e: any) {
-          Logger.warn(this.name, `Aviso ao remover saída antiga: ${e.message}`);
+    if (!resumeExistingBatch) {
+      const saidaDir = path.join(this.fireflyPath, 'saida');
+      for (const jobName of jobNames) {
+        const existingMp4 = path.join(saidaDir, `${jobName}.mp4`);
+        if (fs.existsSync(existingMp4)) {
+          try {
+            fs.unlinkSync(existingMp4);
+            Logger.info(this.name, `Arquivo de saída antigo limpo: ${existingMp4}`);
+          } catch (e: any) {
+            Logger.warn(this.name, `Aviso ao remover saída antiga: ${e.message}`);
+          }
         }
       }
-    }
 
-    // 2. Limpar jobs pendentes/antigos na base SQLite para garantir FIFO correto
-    try {
-      const db = new Database(this.dbPath);
-      db.prepare("DELETE FROM jobs WHERE status != 'done'").run();
-      db.prepare("UPDATE system_state SET status = 'running', reason = NULL WHERE singleton = 1").run();
+      // 2. Limpar apenas estados reclamaveis. Falhas historicas fazem parte da
+      // trilha de auditoria e nao devem ser apagadas.
+      try {
+        const db = new Database(this.dbPath);
+        db.prepare("DELETE FROM jobs WHERE status IN ('pending', 'claimed', 'generating', 'stale_generating')").run();
+        db.prepare("UPDATE system_state SET status = 'running', reason = NULL WHERE singleton = 1").run();
+        db.close();
+        Logger.info(this.name, 'Base de dados do Firefly limpa apenas de jobs reclamaveis; historico preservado e system_state resetado para RUNNING.');
+      } catch (e: any) {
+        Logger.warn(this.name, `Aviso ao preparar banco SQLite: ${e.message}`);
+      }
+
+      // 3. O Worker libera somente o perfil persistente do bot; nao encerramos Chrome global.
+
+      // 4. Executar --feed-guide no Firefly Bot
+      try {
+        const feedCmd = `"${this.pythonExec}" -m firefly_bot.main --feed-guide "${guideJsonPath}"`;
+        Logger.info(this.name, `Executando: ${feedCmd}`);
+        const feedOutput = execSync(feedCmd, { cwd: this.fireflyPath, encoding: 'utf-8' });
+        Logger.info(this.name, `Feed Output: ${feedOutput.trim()}`);
+      } catch (err: any) {
+        this.telemetry.recordEvent({
+          run_id: productionId,
+          production_id: productionId,
+          agent_id: 'FireflyJobStore',
+          provider: 'FIREFLY_BOT',
+          task_id: 'FEED_GUIDE',
+          type: 'AGENT_FAILED',
+          status: 'FAILED',
+          message: `Falha ao alimentar guia no Firefly: ${err.message}`,
+          attempt: 1
+        });
+        throw err;
+      }
+    } else {
+      const db = new Database(this.dbPath, {readonly: true});
+      const missingJobs = jobNames.filter((jobName) => !db.prepare('SELECT id FROM jobs WHERE name = ? ORDER BY id DESC LIMIT 1').get(jobName));
       db.close();
-      Logger.info(this.name, 'Base de dados do Firefly limpa de jobs pendentes antigos e system_state resetado para RUNNING.');
-    } catch (e: any) {
-      Logger.warn(this.name, `Aviso ao preparar banco SQLite: ${e.message}`);
-    }
-
-    // 3. Liberar perfil do Chrome
-    try {
-      execSync('taskkill /F /IM chrome.exe /T', { stdio: 'ignore' });
-    } catch (e) {}
-
-    // 4. Executar --feed-guide no Firefly Bot
-    try {
-      const feedCmd = `"${this.pythonExec}" -m firefly_bot.main --feed-guide "${guideJsonPath}"`;
-      Logger.info(this.name, `Executando: ${feedCmd}`);
-      const feedOutput = execSync(feedCmd, { cwd: this.fireflyPath, encoding: 'utf-8' });
-      Logger.info(this.name, `Feed Output: ${feedOutput.trim()}`);
-    } catch (err: any) {
-      this.telemetry.recordEvent({
-        run_id: productionId,
-        production_id: productionId,
-        agent_id: 'FireflyJobStore',
-        provider: 'FIREFLY_BOT',
-        task_id: 'FEED_GUIDE',
-        type: 'AGENT_FAILED',
-        status: 'FAILED',
-        message: `Falha ao alimentar guia no Firefly: ${err.message}`,
-        attempt: 1
-      });
-      throw err;
+      if (missingJobs.length > 0) {
+        throw new Error(`FIREFLY_RESUME_BATCH_MISSING_JOBS: ${missingJobs.join(', ')}`);
+      }
+      Logger.info(this.name, `Retomando ${jobNames.length} jobs existentes sem limpar saidas ou reenfileirar geracoes.`);
     }
 
     Logger.info(this.name, `Monitorando jobs na base SQLite real: ${jobNames.join(', ')}`);
@@ -116,7 +125,11 @@ export class FireflyAdapter extends BaseAdapter {
     // 5. Função para disparar worker do Firefly
     let runWorker: ChildProcess | null = null;
     const startWorkerProc = () => {
-      runWorker = spawn(this.pythonExec, ['-m', 'firefly_bot.main', '--run'], {
+      const configuredConcurrency = Number(process.env.FIREFLY_WORKER_CONCURRENCY || 1);
+      const concurrency = Number.isFinite(configuredConcurrency)
+        ? Math.max(1, Math.min(6, Math.floor(configuredConcurrency)))
+        : 1;
+      runWorker = spawn(this.pythonExec, ['-m', 'firefly_bot.main', '--concurrency', String(concurrency), '--run'], {
         cwd: this.fireflyPath,
         stdio: ['ignore', 'pipe', 'pipe']
       });
@@ -136,7 +149,11 @@ export class FireflyAdapter extends BaseAdapter {
 
     // 6. Polling na tabela `jobs` do SQLite real do Firefly
     const completedJobs: Array<{ name: string; output_path: string }> = [];
-    const maxRetries = 180; // até 15 minutos (5s * 180)
+    const configuredWaitMinutes = Number(process.env.FIREFLY_MAX_WAIT_MINUTES || 0);
+    const maxWaitMinutes = Number.isFinite(configuredWaitMinutes) && configuredWaitMinutes >= 15
+      ? configuredWaitMinutes
+      : Math.max(15, jobNames.length * 6);
+    const maxRetries = Math.ceil((maxWaitMinutes * 60) / 5);
     let retries = 0;
 
     while (retries < maxRetries) {

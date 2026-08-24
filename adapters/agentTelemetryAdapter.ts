@@ -39,7 +39,7 @@ export type TelemetryStatus =
   | 'RESULT_READY'
   | 'IDLE';
 
-export type TelemetryProvider = 'ANTIGRAVITY' | 'RAFA_LOBO' | 'FIREFLY_BOT' | 'CODEX' | 'MISSION_CONTROL';
+export type TelemetryProvider = 'ANTIGRAVITY' | 'HIDDEN_SYSTEMS_LAB' | 'FIREFLY_BOT' | 'CODEX' | 'MISSION_CONTROL';
 
 export interface TelemetryEvent {
   event_id: string;
@@ -105,7 +105,7 @@ export class AgentTelemetryAdapter {
       if (!prodCheck) {
         db.prepare(`
           INSERT INTO productions (production_id, project_name, status, current_step)
-          VALUES (?, 'Rafa Lobo Live Ops', 'RUNNING', 1)
+          VALUES (?, 'Hidden Systems Lab Live Ops', 'RUNNING', 1)
         `).run(fullEvent.production_id);
       }
 

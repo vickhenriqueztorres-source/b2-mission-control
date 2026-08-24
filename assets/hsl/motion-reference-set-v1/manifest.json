@@ -1,0 +1,56 @@
+{
+  "schema": "hsl.premium-motion.reference-set.v1",
+  "name": "HSL Premium Motion Reference Set V1",
+  "status": "APPROVED_MINIMUM_QUALITY",
+  "visual_standard": "cinematic realism + spatial infographic + narrative progression",
+  "color_grammar": {
+    "yellow": "tracked moving flow",
+    "blue": "persistent infrastructure",
+    "orange": "constraint, blockage or alert",
+    "white": "editorial titles and exact labels"
+  },
+  "items": [
+    {
+      "id": "BUFFER_AND_FLOW",
+      "file": "buffer-and-flow.png",
+      "quality": "A+",
+      "best_use": "SYSTEM_ANATOMY",
+      "sha256": "d5ca5e54ee889960cb895f01cff27a938faa65b4233b21ba0b7af4045c159be7"
+    },
+    {
+      "id": "FLOW_JOURNEY_MAP",
+      "file": "flow-journey-map.png",
+      "quality": "A+",
+      "best_use": "FLOW_JOURNEY",
+      "sha256": "029edbd22f48c19581ea7099e5ac08d7aee9ae33009ab156e5b157a547935f83"
+    },
+    {
+      "id": "LAST_METERS",
+      "file": "last-meters.png",
+      "quality": "A",
+      "best_use": "LAST_METER",
+      "sha256": "00ba19ebc373d91015ca16cfb158dd525bc10834b0273f4741d864f11a7ce810"
+    },
+    {
+      "id": "DELAY_SPREADS",
+      "file": "delay-spreads.png",
+      "quality": "A_VISUAL_B_ANIMATION",
+      "best_use": "BOTTLENECK_PROPAGATION",
+      "sha256": "606c739c1285cddba036278ae2b95b30f8a16ed19ca4899329dd315684732fd2"
+    },
+    {
+      "id": "SYSTEMS_IN_MOTION",
+      "file": "systems-in-motion.png",
+      "quality": "B+",
+      "best_use": "CINEMATIC_REVEAL",
+      "sha256": "29a5651122a7d727542d917fe8b4b206a750255a89793eac13fdc46a8f537063"
+    }
+  ],
+  "production_rules": [
+    "The start frame represents the initial state, never the fully revealed result.",
+    "Critical text and numeric values are rendered by Remotion, not Veo.",
+    "Use one primary transformation and one primary luminous focus per clip.",
+    "Preserve readable shadow detail and reserve orange for constraints.",
+    "Keep the principal action clear of title and caption safe areas."
+  ]
+}

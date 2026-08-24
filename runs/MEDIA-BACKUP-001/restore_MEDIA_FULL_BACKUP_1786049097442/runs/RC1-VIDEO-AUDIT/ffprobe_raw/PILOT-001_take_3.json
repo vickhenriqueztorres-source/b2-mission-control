@@ -1,7 +1,0 @@
-{
-  "command": "ffprobe -v error -show_format -show_streams -of json \"C:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\video_result_take_3.mp4\"",
-  "exit_code": 1,
-  "stdout": "{\r\n\r\n}\r\n",
-  "stderr": "[mov,mp4,m4a,3gp,3g2,mj2 @ 0000021cdd357800] moov atom not found\r\nC:\\B2-AI-STUDIO\\mission-control\\runs\\PILOT-001\\video_result_take_3.mp4: Invalid data found when processing input\r\n",
-  "captured_at": "2026-08-06T18:06:28.098Z"
-}

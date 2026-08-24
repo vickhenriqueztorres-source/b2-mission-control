@@ -1,0 +1,34 @@
+[0:v]drawgrid=w=80:h=80:t=1:c=white@0.045,
+drawbox=x=64:y=64:w=1792:h=952:c=white@0.13:t=2,
+drawbox=x=64:y=64:w=120:h=7:c=0xFFE500@1:t=fill,
+drawbox=x=1736:y=1009:w=120:h=7:c=0xFFE500@1:t=fill,
+drawbox=x=64:y=1009:w=7:h=7:c=0xFFE500@1:t=fill,
+format=rgba[base];
+
+color=c=0xFFE500:s=700x12:d=10:r=30[yellowbar];
+color=c=0x0038FF:s=12x360:d=10:r=30[bluebar];
+color=c=0xFF2E00:s=360x12:d=10:r=30[orangebar];
+[base][yellowbar]overlay=x='-700+300*t':y=700:enable='between(t,1.0,5.8)'[motion1];
+[motion1][bluebar]overlay=x=1440:y='-360+190*t':enable='between(t,3.0,7.0)'[motion2];
+[motion2][orangebar]overlay=x='1920-250*t':y=835:enable='between(t,6.2,9.8)'[motion3];
+
+[1:v]scale=1254:1254,zoompan=z='min(zoom+0.00045,1.08)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s=520x520:fps=30,
+format=rgba,fade=t=in:st=0:d=0.65:alpha=1,fade=t=out:st=2.55:d=0.45:alpha=1[logo];
+[motion3][logo]overlay=x='(W-w)/2':y='(H-h)/2-18':enable='between(t,0,3.0)'[withlogo];
+
+[withlogo]drawtext=fontfile='C\:/Windows/Fonts/BebasNeue-Regular.ttf':text='HSL DOCS':fontcolor=0xF4F4F0:fontsize=34:x=78:y=78,
+drawtext=fontfile='C\:/Windows/Fonts/arial.ttf':text='AI VISUALIZATION':fontcolor=0x8C90A4:fontsize=20:x=w-tw-78:y=h-th-72,
+drawtext=fontfile='C\:/Windows/Fonts/BebasNeue-Regular.ttf':text='WE REVEAL THE HIDDEN SYSTEMS':fontcolor=0xF4F4F0:fontsize=112:x=120:y=360:alpha='if(lt(t,3),0,if(lt(t,3.45),(t-3)/0.45,if(lt(t,5.7),1,if(lt(t,6.15),(6.15-t)/0.45,0))))',
+drawtext=fontfile='C\:/Windows/Fonts/BebasNeue-Regular.ttf':text='THAT KEEP MODERN LIFE MOVING.':fontcolor=0xFFE500:fontsize=96:x=120:y=490:alpha='if(lt(t,3.18),0,if(lt(t,3.68),(t-3.18)/0.5,if(lt(t,5.7),1,if(lt(t,6.15),(6.15-t)/0.45,0))))',
+drawtext=fontfile='C\:/Windows/Fonts/arial.ttf':text='BIG SYSTEMS.  SMART DESIGN.  NONSTOP CURIOSITY.':fontcolor=0x8C90A4:fontsize=28:x=124:y=628:alpha='if(lt(t,3.45),0,if(lt(t,3.95),(t-3.45)/0.5,if(lt(t,5.7),1,if(lt(t,6.15),(6.15-t)/0.45,0))))',
+drawtext=fontfile='C\:/Windows/Fonts/BebasNeue-Regular.ttf':text='THE HIDDEN SYSTEM':fontcolor=0xF4F4F0:fontsize=126:x=120:y=315:alpha='if(lt(t,6.0),0,if(lt(t,6.45),(t-6)/0.45,if(lt(t,8.85),1,if(lt(t,9.2),(9.2-t)/0.35,0))))',
+drawtext=fontfile='C\:/Windows/Fonts/BebasNeue-Regular.ttf':text='BEHIND EVERY FLIGHT':fontcolor=0xFFE500:fontsize=126:x=120:y=450:alpha='if(lt(t,6.16),0,if(lt(t,6.61),(t-6.16)/0.45,if(lt(t,8.85),1,if(lt(t,9.2),(9.2-t)/0.35,0))))',
+drawtext=fontfile='C\:/Windows/Fonts/arialbd.ttf':text='FUEL  /  TIMING  /  REDUNDANCY':fontcolor=0xF4F4F0:fontsize=32:x=124:y=618:alpha='if(lt(t,6.4),0,if(lt(t,6.9),(t-6.4)/0.5,if(lt(t,8.85),1,if(lt(t,9.2),(9.2-t)/0.35,0))))',
+drawtext=fontfile='C\:/Windows/Fonts/BebasNeue-Regular.ttf':text='HIDDEN SYSTEMS LAB':fontcolor=0xF4F4F0:fontsize=118:x=(w-tw)/2:y=420:alpha='if(lt(t,9.18),0,if(lt(t,9.5),(t-9.18)/0.32,1))',
+drawtext=fontfile='C\:/Windows/Fonts/arial.ttf':text='MOTION TEST 001':fontcolor=0xFFE500:fontsize=24:x=(w-tw)/2:y=565:alpha='if(lt(t,9.3),0,if(lt(t,9.62),(t-9.3)/0.32,1))',
+fade=t=out:st=9.72:d=0.28[vout];
+
+[2:a]volume=0.028,afade=t=in:st=0:d=0.5,afade=t=out:st=9.0:d=1.0[bed];
+[3:a]volume=0.12,adelay=3000[chime1];
+[4:a]volume=0.10,adelay=6200[chime2];
+[bed][chime1][chime2]amix=inputs=3:duration=longest:normalize=0,alimiter=limit=0.8[aout]

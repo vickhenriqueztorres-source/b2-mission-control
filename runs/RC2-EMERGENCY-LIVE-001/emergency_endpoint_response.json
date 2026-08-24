@@ -1,9 +1,0 @@
-{
-  "ok": true,
-  "humanReleaseRequired": true,
-  "queuePaused": true,
-  "emergencyStopped": true,
-  "emergencyReason": "RC2_EMERGENCY_LIVE_TEST",
-  "requestedBy": "user",
-  "activatedAt": "2026-08-06T19:27:39.763Z"
-}

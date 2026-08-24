@@ -169,7 +169,7 @@ export async function runPhase5Audit() {
 
   for (let p = 1; p <= 5; p++) {
     const prodId = `PILOT-00${p}`;
-    const manifestPath = path.resolve(process.cwd(), 'runs', prodId, 'manual_kling_clip_intake.json');
+    const manifestPath = path.resolve(process.cwd(), 'runs', prodId, 'hsl_kling_asset_intake.json');
     if (fs.existsSync(manifestPath)) {
       const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
       manifest.items.forEach((item: any) => {
@@ -200,7 +200,7 @@ export async function runPhase5Audit() {
   auditResults['REQ-7-20-VIDEOS-AUDIT'] = {
     pass: req7Pass,
     message: req7Pass ? `20 vídeos auditados individualmente com 100% de hashes SHA-256 distintos e únicos.` : `Falha: ${duplicateHashes} hashes duplicados encontrados ou total de vídeos < 20.`,
-    evidence: 'runs/PILOT-001/ a PILOT-005/manual_kling_clip_intake.json'
+    evidence: 'runs/PILOT-001/ a PILOT-005/hsl_kling_asset_intake.json'
   };
 
   // -------------------------------------------------------------------------

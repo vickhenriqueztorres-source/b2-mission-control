@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B2 Mission Control — Grafo Futurista & System Health Dashboard</title>
+  <title>Wolf AI Studio — Hidden Systems Lab Operations</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -141,7 +141,7 @@
       border-color: #ffffff;
     }
     .node-card.trigger { border-color: var(--accent-orange); box-shadow: 0 10px 35px rgba(0, 0, 0, 0.75), 0 0 30px rgba(255, 153, 0, 0.6); }
-    .node-card.rafa-squad { border-color: var(--accent-purple); box-shadow: 0 10px 35px rgba(0, 0, 0, 0.75), var(--glow-purple); }
+    .node-card.hsl-squad { border-color: var(--accent-purple); box-shadow: 0 10px 35px rgba(0, 0, 0, 0.75), var(--glow-purple); }
     .node-card.firefly-bot { border-color: var(--accent-orange); box-shadow: 0 10px 35px rgba(0, 0, 0, 0.75), var(--glow-orange); }
 
     .node-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
@@ -196,17 +196,17 @@
     }
     .feed-item.ANTIGRAVITY { border-left-color: var(--accent-cyan); }
     .feed-item.FIREFLY_BOT { border-left-color: var(--accent-orange); }
-    .feed-item.RAFA_LOBO { border-left-color: var(--accent-purple); }
+    .feed-item.HIDDEN_SYSTEMS_LAB { border-left-color: var(--accent-purple); }
   </style>
 </head>
 <body>
 
   <header>
     <div class="brand">
-      <div class="brand-logo">B2</div>
+      <div class="brand-logo">HSL</div>
       <div>
-        <div class="brand-title">B2 MISSION CONTROL — SYSTEM HEALTH & CONTROLS</div>
-        <div class="brand-subtitle">🖱️ Zoom & Pan pelo Mouse | Controles de Emergência | Telemetria Ao Vivo</div>
+        <div class="brand-title">WOLF AI STUDIO — HIDDEN SYSTEMS LAB OPERATIONS</div>
+        <div class="brand-subtitle">Pipeline editorial, procedência, Kling e Remotion</div>
       </div>
     </div>
 
@@ -253,9 +253,9 @@
 
         <div class="nodes-layer" id="nodes-layer">
           <div class="phase-column-title" style="left: 80px;">1. INGESTÃO & BRIEFING</div>
-          <div class="phase-column-title" style="left: 530px;">2. SQUAD CRIATIVO RAFA LOBO</div>
-          <div class="phase-column-title" style="left: 1250px;">3. AUTOMAÇÃO WORKERS FIREFLY</div>
-          <div class="phase-column-title" style="left: 2150px;">4. PÓS-PRODUÇÃO AUDIOVISUAL</div>
+          <div class="phase-column-title" style="left: 530px;">2. PESQUISA & MODELO CAUSAL HSL</div>
+          <div class="phase-column-title" style="left: 1250px;">3. ASSETS VISUAIS FIREFLY / KLING</div>
+          <div class="phase-column-title" style="left: 2150px;">4. REMOTION, PROCEDÊNCIA & QA</div>
 
           <!-- FASE 1 -->
           <div class="node-card trigger" id="node-briefing" style="left: 80px; top: 140px;">
@@ -279,54 +279,54 @@
           </div>
 
           <!-- FASE 2 -->
-          <div class="node-card rafa-squad" id="node-prompt-arch" style="left: 530px; top: 100px;">
+          <div class="node-card hsl-squad" id="node-prompt-arch" style="left: 530px; top: 100px;">
             <div class="node-header">
               <div class="node-icon" style="background: rgba(187,134,252,0.2); color: var(--accent-purple);">{ }</div>
-              <div class="node-title">RafaPromptArchitect</div>
+              <div class="node-title">SystemsResearchAgent</div>
             </div>
-            <span class="node-badge purple">DESENHO PROMPTS</span>
-            <div class="node-body">Projeta a estética visual, enquadramentos e câmeras.</div>
-            <div class="node-meta"><span>3 Prompts</span> <span>PRONTO</span></div>
+            <span class="node-badge purple">SOURCE PACK</span>
+            <div class="node-body">Cruza fontes primárias, técnicas e independentes por claim.</div>
+            <div class="node-meta"><span>Claims</span> <span>VERIFICADOS</span></div>
           </div>
 
-          <div class="node-card rafa-squad" id="node-style-agent" style="left: 530px; top: 380px;">
+          <div class="node-card hsl-squad" id="node-style-agent" style="left: 530px; top: 380px;">
             <div class="node-header">
               <div class="node-icon" style="background: rgba(187,134,252,0.2); color: var(--accent-purple);">🎨</div>
-              <div class="node-title">CinematicStyleAgent</div>
+              <div class="node-title">CausalModelAgent</div>
             </div>
-            <span class="node-badge purple">ESTÉTICA VISUAL</span>
-            <div class="node-body">Aplica paletas de cores HSL, iluminação e composição.</div>
-            <div class="node-meta"><span>Estilo 4K</span> <span>OK</span></div>
+            <span class="node-badge purple">TESE & MECANISMO</span>
+            <div class="node-body">Define fluxo, restrição, consequência e hero visual exclusivo.</div>
+            <div class="node-meta"><span>Modelo Causal</span> <span>OK</span></div>
           </div>
 
           <div class="node-card" id="node-schema-val" style="left: 870px; top: 100px;">
             <div class="node-header">
               <div class="node-icon">🛡️</div>
-              <div class="node-title">SchemaValidator</div>
+              <div class="node-title">EvidenceSchemaGate</div>
             </div>
             <span class="node-badge">VALIDADOR AJV</span>
-            <div class="node-body">Valida 100% dos JSONs contra esquemas estritos.</div>
+            <div class="node-body">Valida claims, fontes, licença, inferência e procedência visual.</div>
             <div class="node-meta"><span>Esquema Estrito</span> <span>PASS</span></div>
           </div>
 
-          <div class="node-card rafa-squad" id="node-motion-builder" style="left: 870px; top: 380px;">
+          <div class="node-card hsl-squad" id="node-motion-builder" style="left: 870px; top: 380px;">
             <div class="node-header">
               <div class="node-icon" style="background: rgba(187,134,252,0.2); color: var(--accent-purple);">🎬</div>
-              <div class="node-title">MotionPackageBuilder</div>
+              <div class="node-title">HslVisualPlanBuilder</div>
             </div>
-            <span class="node-badge purple">PACOTE MOTION</span>
-            <div class="node-body">Monta a lista de movimento em formato de pacote.</div>
-            <div class="node-meta"><span>kling_motion.json</span> <span>100%</span></div>
+            <span class="node-badge purple">PLANO 16:9</span>
+            <div class="node-body">Orquestra Remotion, material real e reconstruções Kling.</div>
+            <div class="node-meta"><span>episode_package.json</span> <span>100%</span></div>
           </div>
 
-          <div class="node-card rafa-squad" id="node-handoff-gate" style="left: 870px; top: 660px;">
+          <div class="node-card hsl-squad" id="node-handoff-gate" style="left: 870px; top: 660px;">
             <div class="node-header">
               <div class="node-icon" style="background: rgba(187,134,252,0.2); color: var(--accent-purple);">🔐</div>
-              <div class="node-title">Trava20HandoffGate</div>
+              <div class="node-title">OriginalitySafetyGate</div>
             </div>
             <span class="node-badge purple">HANDOFF SEGURO</span>
-            <div class="node-body">Executa a trava de segurança antes do handoff.</div>
-            <div class="node-meta"><span>Trava 20</span> <span>OK</span></div>
+            <div class="node-body">Exige score de originalidade, aprovação humana e disclosures.</div>
+            <div class="node-meta"><span>Score ≥ 16</span> <span>OK</span></div>
           </div>
 
           <!-- FASE 3 -->
@@ -386,58 +386,58 @@
               <div class="node-title">FireflyToIntakeBridge</div>
             </div>
             <span class="node-badge">PONTE DE INGESTÃO</span>
-            <div class="node-body">Gera o manifesto manual_kling_clip_intake.json.</div>
+            <div class="node-body">Gera o manifesto hsl_kling_asset_intake.json.</div>
             <div class="node-meta"><span>20 Clipes</span> <span>OK</span></div>
           </div>
 
           <!-- FASE 4 -->
-          <div class="node-card rafa-squad" id="node-qa-avatar" style="left: 2150px; top: 100px;">
+          <div class="node-card hsl-squad" id="node-qa-reconstruction" style="left: 2150px; top: 100px;">
             <div class="node-header">
               <div class="node-icon" style="background: rgba(187,134,252,0.2); color: var(--accent-purple);">🔍</div>
-              <div class="node-title">RafaAvatarVideoQaAgent</div>
+              <div class="node-title">AiReconstructionQaAgent</div>
             </div>
             <span class="node-badge purple">QA DE CLIPES</span>
-            <div class="node-body">Verifica artefatos visuais e integridade do avatar.</div>
+            <div class="node-body">Verifica física, continuidade e proibição de falsa evidência.</div>
             <div class="node-meta"><span>QA Clipes</span> <span>PASS</span></div>
           </div>
 
-          <div class="node-card rafa-squad" id="node-coverage-gate" style="left: 2150px; top: 380px;">
+          <div class="node-card hsl-squad" id="node-coverage-gate" style="left: 2150px; top: 380px;">
             <div class="node-header">
               <div class="node-icon" style="background: rgba(187,134,252,0.2); color: var(--accent-purple);">🚦</div>
-              <div class="node-title">ClipSetCoverageGate</div>
+              <div class="node-title">ProvenanceDisclosureGate</div>
             </div>
             <span class="node-badge purple">GATE COBERTURA</span>
-            <div class="node-body">Verifica se 100% das tomadas necessárias estão prontas.</div>
-            <div class="node-meta"><span>Cobertura</span> <span>100%</span></div>
+            <div class="node-body">Confere origem, licença, evidence status e rótulo de IA por cena.</div>
+            <div class="node-meta"><span>Procedência</span> <span>100%</span></div>
           </div>
 
-          <div class="node-card rafa-squad" id="node-editor-agent" style="left: 2550px; top: 100px;">
+          <div class="node-card hsl-squad" id="node-editor-agent" style="left: 2550px; top: 100px;">
             <div class="node-header">
               <div class="node-icon" style="background: rgba(187,134,252,0.2); color: var(--accent-purple);">✂️</div>
-              <div class="node-title">EditorAudiovisualAgent</div>
+              <div class="node-title">RemotionAssemblyAgent</div>
             </div>
             <span class="node-badge purple">CORTE & RITMO</span>
-            <div class="node-body">Executa a montagem, transições e cortes de edição.</div>
+            <div class="node-body">Monta mapas, fluxos, métricas, footage e capítulos em 16:9.</div>
             <div class="node-meta"><span>Edição</span> <span>PRONTA</span></div>
           </div>
 
-          <div class="node-card rafa-squad" id="node-sound-color" style="left: 2550px; top: 380px;">
+          <div class="node-card hsl-squad" id="node-sound-color" style="left: 2550px; top: 380px;">
             <div class="node-header">
               <div class="node-icon" style="background: rgba(187,134,252,0.2); color: var(--accent-purple);">🎵</div>
-              <div class="node-title">SoundTextColorFinishing</div>
+              <div class="node-title">NarrationSoundDesignAgent</div>
             </div>
             <span class="node-badge purple">COLOR & ÁUDIO</span>
             <div class="node-body">Aplica foley, mixagem de som e grading de cor final.</div>
             <div class="node-meta"><span>Finishing</span> <span>OK</span></div>
           </div>
 
-          <div class="node-card rafa-squad" id="node-final-qa" style="left: 2550px; top: 660px;">
+          <div class="node-card hsl-squad" id="node-final-qa" style="left: 2550px; top: 660px;">
             <div class="node-header">
               <div class="node-icon" style="background: rgba(0,255,102,0.2); color: var(--accent-neon-green);">🏆</div>
-              <div class="node-title">FinalVideoQaAgent</div>
+              <div class="node-title">MonetizationSafetyQaAgent</div>
             </div>
             <span class="node-badge">INSPEÇÃO FINAL</span>
-            <div class="node-body">Garante a exportação do arquivo final perfeito.</div>
+            <div class="node-body">Revisa originalidade, fontes, disclosures, legibilidade e render final.</div>
             <div class="node-meta"><span>FINAL_VIDEO.mp4</span> <span>SUCESSO</span></div>
           </div>
         </div>
@@ -603,8 +603,8 @@
         { from: 'node-state-reader', to: 'node-bot-worker', color: '#00f2fe', dashed: true },
         { from: 'node-bot-worker', to: 'node-downloader', color: 'url(#grad-cyan)' },
         { from: 'node-downloader', to: 'node-intake-bridge', color: 'url(#grad-cyan)' },
-        { from: 'node-intake-bridge', to: 'node-qa-avatar', color: 'url(#grad-purple)' },
-        { from: 'node-qa-avatar', to: 'node-coverage-gate', color: 'url(#grad-purple)' },
+        { from: 'node-intake-bridge', to: 'node-qa-reconstruction', color: 'url(#grad-purple)' },
+        { from: 'node-qa-reconstruction', to: 'node-coverage-gate', color: 'url(#grad-purple)' },
         { from: 'node-coverage-gate', to: 'node-editor-agent', color: 'url(#grad-purple)' },
         { from: 'node-editor-agent', to: 'node-sound-color', color: 'url(#grad-purple)' },
         { from: 'node-sound-color', to: 'node-final-qa', color: 'url(#grad-purple)' }

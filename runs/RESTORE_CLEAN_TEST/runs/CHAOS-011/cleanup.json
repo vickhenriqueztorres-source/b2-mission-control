@@ -1,7 +1,0 @@
-{
-  "timestamp": "2026-08-06T17:34:10.926Z",
-  "strategy": "KILL_ORPHAN_PROCESSES",
-  "actions": [
-    "Ambiente de staging limpo com sucesso."
-  ]
-}

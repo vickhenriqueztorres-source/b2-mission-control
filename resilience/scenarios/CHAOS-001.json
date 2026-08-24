@@ -2,7 +2,7 @@
   "id": "CHAOS-001",
   "name": "Esquema JSON Inválido",
   "batch": 1,
-  "injection_point": "RafaPromptArchitect",
+  "injection_point": "HslVisualPlanBuilder",
   "initial_state": "PROMPT_ARCHITECT_RUNNING",
   "injected_fault": "schema_invalid",
   "expected_terminal_state": "FAILED",

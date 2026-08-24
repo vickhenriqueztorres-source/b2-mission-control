@@ -1,0 +1,201 @@
+import {
+  NARRATIVE_BEAT_SEMANTIC_FUNCTIONS,
+  NarrativeBeatDirectorResult,
+  NarrativeBeatImportance,
+  NarrativeBeatSceneInput,
+  NarrativeBeatSemanticFunction,
+  NarrativeBeatV1
+} from '../types/cinematicPlans';
+import {CinematicTelemetryPort} from '../telemetry/cinematicTelemetry';
+import {exactScriptSpan, normalizeScriptWord, tokenizeScriptWords} from '../services/scriptWordSpans';
+import {validateNarrativeBeats} from '../validators/narrativeBeatValidator';
+import {CinematicValidationError} from '../validators/cinematicValidationError';
+
+const CLAUSE_STARTERS = new Set([
+  'and', 'but', 'because', 'first', 'however', 'instead', 'meanwhile', 'only', 'then', 'when', 'while', 'yet'
+]);
+
+const STOP_WORDS = new Set([
+  'a', 'an', 'and', 'are', 'as', 'at', 'be', 'before', 'but', 'by', 'does', 'for', 'from',
+  'has', 'in', 'into', 'is', 'it', 'of', 'on', 'only', 'or', 'that', 'the', 'then', 'this',
+  'through', 'to', 'toward', 'was', 'when', 'with'
+]);
+
+const HIGH_FUNCTIONS = new Set<NarrativeBeatSemanticFunction>([
+  'reveal_dependency', 'reveal_constraint', 'quantify', 'cause', 'consequence',
+  'failure_trigger', 'propagation', 'tradeoff', 'limitation', 'interpretation', 'conclusion'
+]);
+
+function segmentWordRanges(words: ReturnType<typeof tokenizeScriptWords>): Array<readonly [number, number]> {
+  const ranges: Array<readonly [number, number]> = [];
+  let start = 0;
+  for (let index = 0; index < words.length; index++) {
+    const currentLength = index - start + 1;
+    const terminal = /[.!?]["')\]]*$/.test(words[index].text);
+    const clauseEnd = /[,;:]["')\]]*$/.test(words[index].text) && currentLength >= 3;
+    const nextWord = words[index + 1]?.normalized;
+    const beforeClause = Boolean(nextWord && CLAUSE_STARTERS.has(nextWord) && currentLength >= 4);
+    const maximumLength = currentLength >= 14;
+    if (terminal || clauseEnd || beforeClause || maximumLength || index === words.length - 1) {
+      ranges.push([start, index + 1]);
+      start = index + 1;
+    }
+  }
+  return ranges;
+}
+
+function includesAny(text: string, terms: readonly string[]): boolean {
+  return terms.some((term) => text.includes(term));
+}
+
+function semanticFunction(text: string, narrativeFunction: string): NarrativeBeatSemanticFunction {
+  const normalized = text.toLowerCase();
+  if (includesAny(normalized, ['in conclusion', 'ultimately', 'the hidden product', 'what this reveals'])) return 'conclusion';
+  if (includesAny(normalized, ['recovers', 'recovery', 'restored', 'returns to normal'])) return 'recovery';
+  if (includesAny(normalized, ['responds', 'response', 'operators react', 'backup system'])) return 'response';
+  if (includesAny(normalized, ['spreads', 'propagates', 'cascades', 'travels through the system'])) return 'propagation';
+  if (includesAny(normalized, ['fails', 'failure begins', 'breaks down', 'trigger'])) return 'failure_trigger';
+  if (includesAny(normalized, ['as a result', 'therefore', 'consequently', 'which means'])) return 'consequence';
+  if (includesAny(normalized, ['because', 'causes', 'leads to', 'drives'])) return 'cause';
+  if (includesAny(normalized, ['trade-off', 'tradeoff', 'at the cost of', 'in exchange for'])) return 'tradeoff';
+  if (includesAny(normalized, ['however', 'although', 'limitation', 'cannot explain'])) return 'limitation';
+  if (includesAny(normalized, ['more than', 'less than', 'compared with', 'versus', 'rather than'])) return 'compare';
+  if (/\b\d+(?:[.,]\d+)?%?\b/.test(normalized)) return 'quantify';
+  if (includesAny(normalized, ['bottleneck', 'constraint', 'capacity limit', 'limited by', "isn't the real", 'cannot'])) return 'reveal_constraint';
+  if (includesAny(normalized, ['depends on', 'requires', 'only then', 'does not move directly', 'cannot operate without'])) return 'reveal_dependency';
+  if (includesAny(normalized, ['reaches', 'enters', 'passes to', 'transfers to', 'hands off'])) return 'handoff';
+  if (includesAny(normalized, ['moves', 'flows', 'travels', 'continues toward', 'moves toward'])) return 'follow_flow';
+  if (includesAny(normalized, ['works by', 'process', 'control', 'filtered', 'measured'])) return 'explain_mechanism';
+
+  if ((NARRATIVE_BEAT_SEMANTIC_FUNCTIONS as readonly string[]).includes(narrativeFunction)) {
+    return narrativeFunction as NarrativeBeatSemanticFunction;
+  }
+  return 'establish_context';
+}
+
+function conceptFor(text: string, semantic: NarrativeBeatSemanticFunction): string {
+  const contentWords = tokenizeScriptWords(text)
+    .map((word) => normalizeScriptWord(word.text))
+    .filter((word) => word && !STOP_WORDS.has(word));
+  const unique = [...new Set(contentWords)].slice(0, 4);
+  return unique.length ? unique.join('_') : semantic;
+}
+
+function emphasisFor(text: string): readonly string[] {
+  const phrases = [
+    'real bottleneck', 'only then', 'quality control', 'does not move directly',
+    'cannot', 'because', 'however', 'as a result'
+  ];
+  const lower = text.toLowerCase();
+  for (const phrase of phrases) {
+    const index = lower.indexOf(phrase);
+    if (index !== -1) return [text.slice(index, index + phrase.length)];
+  }
+  return [];
+}
+
+function importanceFor(semantic: NarrativeBeatSemanticFunction, wordCount: number): NarrativeBeatImportance {
+  if (HIGH_FUNCTIONS.has(semantic)) return 'high';
+  if (semantic === 'establish_context' && wordCount <= 4) return 'low';
+  return 'medium';
+}
+
+export class NarrativeBeatDirectorAgent {
+  constructor(private readonly telemetry: CinematicTelemetryPort) {}
+
+  public run(input: Readonly<NarrativeBeatSceneInput>): NarrativeBeatDirectorResult {
+    this.telemetry.emit('cinematic.beats.started', {
+      productionId: input.productionId,
+      episodeId: input.episodeId,
+      sceneId: input.sceneId
+    });
+
+    try {
+      const words = tokenizeScriptWords(input.approvedScriptText);
+      if (words.length === 0) {
+        throw new CinematicValidationError('CINEMATIC_APPROVED_SCRIPT_REQUIRED', input.sceneId);
+      }
+      const ranges = segmentWordRanges(words);
+      const beats: NarrativeBeatV1[] = ranges.map(([startWord, endWord], index) => {
+        const text = exactScriptSpan(input.approvedScriptText, words, startWord, endWord);
+        const semantic = semanticFunction(text, input.narrativeFunction);
+        const alignedStart = input.narrationAlignment?.[startWord];
+        const alignedEnd = input.narrationAlignment?.[endWord - 1];
+        if (input.narrationAlignment && (!alignedStart || !alignedEnd)) {
+          throw new CinematicValidationError('CINEMATIC_BEAT_TIMING_INVALID', input.sceneId);
+        }
+        const importance = importanceFor(semantic, endWord - startWord);
+        return {
+          beat_id: `${input.sceneId}_B${String(index + 1).padStart(3, '0')}`,
+          scene_id: input.sceneId,
+          claim_id: input.claimId,
+          script_span: {start_word: startWord, end_word: endWord},
+          text,
+          semantic_function: semantic,
+          concept: conceptFor(text, semantic),
+          importance,
+          emphasis: emphasisFor(text),
+          cut_candidate: /[.!?]["')\]]*$/.test(text) || index === ranges.length - 1,
+          visual_change_candidate: importance === 'high' || semantic === 'handoff',
+          timing: input.narrationAlignment
+            ? {
+                source: 'narration_alignment' as const,
+                start_ms: alignedStart!.start_ms,
+                end_ms: alignedEnd!.end_ms
+              }
+            : {source: 'not_available' as const}
+        };
+      });
+
+      const coveragePercent = validateNarrativeBeats(beats, {
+        sceneId: input.sceneId,
+        approvedScriptText: input.approvedScriptText,
+        existingClaimIds: input.existingClaimIds,
+        narrationAlignment: input.narrationAlignment
+      });
+      const metrics = {
+        beatCount: beats.length,
+        scriptWordCount: words.length,
+        coveragePercent,
+        cutCandidateCount: beats.filter((beat) => beat.cut_candidate).length,
+        visualChangeCandidateCount: beats.filter((beat) => beat.visual_change_candidate).length,
+        highImportanceCount: beats.filter((beat) => beat.importance === 'high').length,
+        timingSource: input.narrationAlignment ? 'narration_alignment' as const : 'not_available' as const
+      };
+      const primaryBeat = beats.find((beat) => beat.importance === 'high') || beats[0];
+      const narrativeIntent = `Shift viewer understanding toward ${primaryBeat.semantic_function.replace(/_/g, ' ')}: ${primaryBeat.concept.replace(/_/g, ' ')}.`;
+
+      this.telemetry.emit('cinematic.beats.generated', {
+        productionId: input.productionId,
+        episodeId: input.episodeId,
+        sceneId: input.sceneId,
+        metrics
+      });
+      this.telemetry.emit('cinematic.beats.completed', {
+        productionId: input.productionId,
+        episodeId: input.episodeId,
+        sceneId: input.sceneId,
+        metrics
+      });
+      return {beats, narrativeIntent, metrics};
+    } catch (error) {
+      if (error instanceof CinematicValidationError) {
+        this.telemetry.emit('cinematic.beats.validation_failed', {
+          productionId: input.productionId,
+          episodeId: input.episodeId,
+          sceneId: input.sceneId,
+          errorCode: error.code,
+          message: error.message
+        });
+      }
+      this.telemetry.emit('cinematic.beats.failed', {
+        productionId: input.productionId,
+        episodeId: input.episodeId,
+        sceneId: input.sceneId,
+        errorCode: error instanceof CinematicValidationError ? error.code : 'CINEMATIC_BEATS_FAILED',
+        message: error instanceof Error ? error.message : String(error)
+      });
+      throw error;
+    }
+  }
+}

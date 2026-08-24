@@ -1,25 +1,29 @@
+import 'dotenv/config';
 import crypto from 'crypto';
 import path from 'path';
 import fs from 'fs';
 import { getDatabase } from '../database/db';
 import { ProductionStateMachine } from './stateMachine';
-import { MotionToFireflyBridge } from '../production-bridge/motionToFirefly';
 import { FireflyToIntakeBridge } from '../production-bridge/fireflyToIntake';
-import { RafaLoboAdapter } from '../adapters/rafaLoboAdapter';
+import { HiddenSystemsLabAdapter } from '../adapters/hiddenSystemsLabAdapter';
 import { FireflyAdapter } from '../adapters/fireflyAdapter';
 import { AntigravityAdapter } from '../adapters/antigravityAdapter';
 import { CodexAdapter } from '../adapters/codexAdapter';
 import { Logger } from '../event-hub/logger';
 import { ProductionSafetyGuard } from '../config/productionSafetyGuard';
+import {CinematicDirectionShadowRunner} from '../hsl/cinematic/runners/cinematicDirectionShadowRunner';
+import {CinematicExecutionCompiler} from '../hsl/execution/cinematicExecutionCompiler';
+import {HslStartFrameRuntime} from '../hsl/startframe/startFrameRuntime';
+import {HslFireflyGenerationRuntime} from '../production/hslFireflyGenerationRuntime';
 
 export class ProductionRunner {
-  private rafaAdapter: RafaLoboAdapter;
+  private hslAdapter: HiddenSystemsLabAdapter;
   private fireflyAdapter: FireflyAdapter;
   private builderAdapter: AntigravityAdapter;
   private reviewerAdapter: CodexAdapter;
 
   constructor() {
-    this.rafaAdapter = new RafaLoboAdapter();
+    this.hslAdapter = new HiddenSystemsLabAdapter();
     this.fireflyAdapter = new FireflyAdapter();
     this.builderAdapter = new AntigravityAdapter();
     this.reviewerAdapter = new CodexAdapter();
@@ -27,7 +31,7 @@ export class ProductionRunner {
 
   public async initialize(): Promise<void> {
     ProductionSafetyGuard.assertSafeForProduction();
-    await this.rafaAdapter.initialize();
+    await this.hslAdapter.initialize();
     await this.fireflyAdapter.initialize();
     await this.builderAdapter.initialize();
     await this.reviewerAdapter.initialize();
@@ -44,7 +48,7 @@ export class ProductionRunner {
       INSERT INTO productions (production_id, project_name, status, current_step, created_at, updated_at)
       VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
     `);
-    stmt.run(productionId, 'Rafa Lobo', 'IDLE', 1);
+    stmt.run(productionId, 'Hidden Systems Lab', 'IDLE', 1);
 
     const sm = new ProductionStateMachine(productionId, 'IDLE');
 
@@ -52,44 +56,65 @@ export class ProductionRunner {
       // Step 1: Submeter briefing
       sm.transitionTo('BRIEFING_RECEIVED', { briefing: briefingText });
 
-      // Step 2: Executar Fase 1 do Rafa Lobo
-      sm.transitionTo('RAFA_LOBO_PRE_KLING_RUNNING');
-      const phase1Result = await this.rafaAdapter.runPhase1(productionId, briefingText);
+      // Step 2: Pesquisa, tese, roteiro, modelo causal e plano visual do HSL.
+      sm.transitionTo('HSL_EDITORIAL_PREPRODUCTION_RUNNING');
+      const preproduction = await this.hslAdapter.runPreproduction(productionId, briefingText);
+      const cinematic = await new CinematicDirectionShadowRunner().run({
+        productionId,
+        editorialPackagePath: preproduction.episodePackagePath
+      });
+      const execution = new CinematicExecutionCompiler().compile(preproduction.episodePackagePath, cinematic);
+      const sourceFramesDirectory = process.env.HSL_START_FRAME_SOURCE_DIR;
+      const approvalManifestPath = process.env.HSL_START_FRAME_APPROVAL_MANIFEST;
+      if (!sourceFramesDirectory || !approvalManifestPath) {
+        throw new Error('HSL_START_FRAME_INPUTS_REQUIRED: set HSL_START_FRAME_SOURCE_DIR and HSL_START_FRAME_APPROVAL_MANIFEST');
+      }
+      const prodDir = path.join('C:\\B2-AI-STUDIO\\productions', productionId);
+      const startFrames = new HslStartFrameRuntime().run({
+        productionId,
+        executionPlanPath: execution.executionPlanPath,
+        sourceFramesDirectory,
+        approvalManifestPath,
+        outputDirectory: path.join(prodDir, 'generation')
+      });
 
-      // Step 3: Motion Package Pronto (Trava de Handoff Manual 20 atingida)
-      sm.transitionTo('MOTION_PACKAGE_READY', { motionPackagePath: phase1Result.motionPackagePath });
+      // Step 3: Pacote do episodio aprovado para geracao dos assets ilustrativos.
+      sm.transitionTo('HSL_EPISODE_PACKAGE_READY', { episodePackagePath: preproduction.episodePackagePath });
 
       // Step 4: Converter para Guia do Firefly via Production Bridge
       sm.transitionTo('FIREFLY_INGESTION_PENDING');
-      const prodDir = path.join('C:\\B2-AI-STUDIO\\productions', productionId);
-      const fireflyGuidePath = path.join(prodDir, 'firefly_production_guide.json');
-      
-      MotionToFireflyBridge.convert(phase1Result.motionPackagePath, fireflyGuidePath);
+      const fireflyRuntime = new HslFireflyGenerationRuntime();
+      const prepared = fireflyRuntime.prepare(startFrames.handoffs, path.join(prodDir, 'firefly'));
 
       // Step 5: Executar geração de vídeos no Firefly
       sm.transitionTo('FIREFLY_GENERATION_RUNNING');
-      const fireflyResult = await this.fireflyAdapter.feedGuideAndRun(productionId, fireflyGuidePath);
+      const fireflyResult = await fireflyRuntime.dispatch(productionId, prepared, this.fireflyAdapter);
 
       // Step 6: Conclusão do Firefly
       sm.transitionTo('FIREFLY_GENERATION_COMPLETED');
 
-      // Step 7: Converter mídias para Manifesto de Ingestão da Fase 3 do Rafa Lobo
-      sm.transitionTo('RAFA_LOBO_POST_KLING_RUNNING');
-      const intakeManifestPath = path.join(prodDir, 'manual_kling_clip_intake.json');
-      FireflyToIntakeBridge.convert(productionId, fireflyResult.completedJobs, intakeManifestPath);
+      // Step 7: Validar os assets Kling antes da montagem Remotion.
+      sm.transitionTo('HSL_REMOTION_POSTPRODUCTION_RUNNING');
+      const intakeManifestPath = path.join(prodDir, 'hsl_kling_asset_intake.json');
+      FireflyToIntakeBridge.convert(
+        productionId,
+        fireflyResult.completedJobs,
+        intakeManifestPath,
+        {...prepared.lineageByJobName}
+      );
 
-      // Step 8: Executar Fase 3 do Rafa Lobo
-      const phase3Result = await this.rafaAdapter.runPhase3(productionId, intakeManifestPath);
+      // Step 8: Montagem Remotion, narracao, procedencia, disclosures e QA final.
+      const postproduction = await this.hslAdapter.runPostproduction(productionId, intakeManifestPath);
 
       // Step 9: Render Final de Vídeo concluído!
-      sm.transitionTo('FINAL_VIDEO_RENDERED', { finalVideoPath: phase3Result.finalVideoPath });
+      sm.transitionTo('FINAL_VIDEO_RENDERED', { finalVideoPath: postproduction.finalVideoPath });
 
-      Logger.info('ProductionRunner', `SUCESSO TOTAL! Vídeo renderizado e publicado em: ${phase3Result.finalVideoPath}`);
+      Logger.info('ProductionRunner', `SUCESSO TOTAL! Documentario renderizado em: ${postproduction.finalVideoPath}`);
 
       return {
         success: true,
         productionId,
-        finalVideoPath: phase3Result.finalVideoPath
+        finalVideoPath: postproduction.finalVideoPath
       };
     } catch (err: any) {
       Logger.error('ProductionRunner', `FALHA NA PRODUÇÃO ${productionId}: ${err.message}`);
@@ -107,7 +132,7 @@ export class ProductionRunner {
 if (require.main === module) {
   const runner = new ProductionRunner();
   runner.initialize().then(() => {
-    runner.runFullProduction('Briefing de Exemplo para Teste de Integração B2 Mission Control');
+    runner.runFullProduction('The Hidden System That Keeps Planes Flying');
   }).catch((err) => {
     console.error('Erro na execução:', err);
   });

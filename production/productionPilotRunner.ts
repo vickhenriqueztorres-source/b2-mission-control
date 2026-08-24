@@ -32,30 +32,29 @@ type FireflyJobRow = {
 };
 
 const FIREFLY_ROOT = 'C:\\B2-AI-STUDIO\\links\\firefly-automation';
-const DEFAULT_SOURCE_IMAGE = 'C:\\B2-AI-STUDIO\\mission-control\\runs\\REAL-E2E-003\\imagens\\SHOT_01_TAKE_02_TAKE_01_start.png';
-const DEFAULT_PROMPT = 'Medium side-profile shot of a man looking calmly toward office window, soft rim lighting, 50mm lens';
+const DEFAULT_PROMPT = 'Industrial documentary reconstruction of aviation fuel moving through refinery tanks, pipelines, airport storage and hydrant infrastructure, precise system geometry, no presenter, no readable text, no logos, no fabricated evidence';
 
 export class ProductionPilotRunner {
   public static async runProductionPilot(): Promise<{ success: boolean; productions: PilotProductionResult[] }> {
     ProductionSafetyGuard.assertSafeForProduction();
 
-    const runDir = path.resolve(process.cwd(), 'runs', 'RC2-PILOT');
+    const runDir = path.resolve(process.cwd(), 'runs', 'HSL-PILOT');
     const imagesDir = path.join(runDir, 'imagens');
     const videosDir = path.join(runDir, 'videos');
     fs.rmSync(runDir, { recursive: true, force: true });
     fs.mkdirSync(imagesDir, { recursive: true });
     fs.mkdirSync(videosDir, { recursive: true });
 
-    const sourceImage = process.env.RC2_PILOT_SOURCE_IMAGE || DEFAULT_SOURCE_IMAGE;
-    const prompt = process.env.RC2_PILOT_PROMPT || DEFAULT_PROMPT;
-    if (!fs.existsSync(sourceImage)) {
-      throw new Error(`RC2_PILOT_SOURCE_IMAGE not found: ${sourceImage}`);
+    const sourceImage = process.env.HSL_PILOT_SOURCE_IMAGE;
+    const prompt = process.env.HSL_PILOT_PROMPT || DEFAULT_PROMPT;
+    if (!sourceImage || !fs.existsSync(sourceImage)) {
+      throw new Error('HSL_PILOT_SOURCE_IMAGE_REQUIRED: provide a physical 16:9 start frame');
     }
 
     const items: Array<{ image: string; prompt: string; name: string }> = [];
     for (let production = 1; production <= 5; production++) {
       for (let take = 1; take <= 4; take++) {
-        const name = `RC2_PILOT_P${String(production).padStart(2, '0')}_TAKE_${String(take).padStart(2, '0')}`;
+        const name = `HSL_PILOT_P${String(production).padStart(2, '0')}_TAKE_${String(take).padStart(2, '0')}`;
         const image = `${name}.png`;
         fs.copyFileSync(sourceImage, path.join(imagesDir, image));
         items.push({ image, prompt, name });
@@ -68,8 +67,8 @@ export class ProductionPilotRunner {
       JSON.stringify(
         {
           model: 'Kling 3.0',
-          resolution: '720p',
-          aspect_ratio: '9:16',
+          resolution: '1080p',
+          aspect_ratio: '16:9',
           duration_seconds: 5,
           items
         },
@@ -88,13 +87,13 @@ export class ProductionPilotRunner {
     const ffprobeResults: unknown[] = [];
 
     for (let production = 1; production <= 5; production++) {
-      const productionId = `RC2-PILOT-P${String(production).padStart(2, '0')}`;
+      const productionId = `HSL-PILOT-P${String(production).padStart(2, '0')}`;
       const takes: PilotTakeResult[] = [];
       for (let take = 1; take <= 4; take++) {
-        const takeName = `RC2_PILOT_P${String(production).padStart(2, '0')}_TAKE_${String(take).padStart(2, '0')}`;
+        const takeName = `HSL_PILOT_P${String(production).padStart(2, '0')}_TAKE_${String(take).padStart(2, '0')}`;
         const row = rows.find((candidate) => candidate.name === takeName);
         if (!row || row.status !== 'done' || !row.output_path) {
-          throw new Error(`RC2 pilot job did not finish as real done media: ${takeName}`);
+          throw new Error(`HSL pilot job did not finish as real done media: ${takeName}`);
         }
 
         const validation = validateVideoWithFfprobe(row.output_path);
@@ -121,8 +120,16 @@ export class ProductionPilotRunner {
       const productionDir = path.join(runDir, productionId);
       fs.mkdirSync(productionDir, { recursive: true });
       fs.writeFileSync(
-        path.join(productionDir, 'manual_kling_clip_intake.json'),
-        JSON.stringify({ production_id: productionId, takes_processed: takes.length, items: takes }, null, 2),
+        path.join(productionDir, 'hsl_kling_asset_intake.json'),
+        JSON.stringify({
+          status: 'HSL_KLING_ASSET_INTAKE_READY',
+          production_id: productionId,
+          takes_processed: takes.length,
+          evidence_status: 'illustrative',
+          ai_disclosure_required: true,
+          on_screen_label: 'AI VISUALIZATION',
+          items: takes
+        }, null, 2),
         'utf8'
       );
       fs.writeFileSync(
@@ -137,7 +144,7 @@ export class ProductionPilotRunner {
     fs.writeFileSync(path.join(runDir, 'pilot_results.json'), JSON.stringify({ success: true, productions }, null, 2), 'utf8');
     fs.writeFileSync(
       path.join(runDir, 'REPORT.md'),
-      `# RC2-PILOT\n\nResult: PASS\n\nProductions: 5\nTakes: 20\nAll videos passed ffprobe exit code 0.\n`,
+      `# HSL-PILOT\n\nResult: PASS\n\nProductions: 5\nTakes: 20\nAll videos passed ffprobe exit code 0.\n`,
       'utf8'
     );
 

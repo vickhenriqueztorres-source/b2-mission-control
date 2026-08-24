@@ -1,0 +1,232 @@
+{
+  "$id": "hsl.cinematic.scene.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "schema_version", "ruleset", "episode_id", "scene_id", "source_revision",
+    "cinematic_plan_revision", "beats", "direction", "shot", "camera", "continuity",
+    "decision_reason", "micro_events", "transition", "remotion_choreography", "generated_at", "mode"
+  ],
+  "properties": {
+    "schema": {"const": "hsl.cinematic.scene.v1"},
+    "schema_version": {"const": "1.3.0"},
+    "ruleset": {"const": "HSL_CINEMATIC_V1"},
+    "episode_id": {"$ref": "#/$defs/id"},
+    "scene_id": {"$ref": "#/$defs/id"},
+    "source_revision": {"$ref": "#/$defs/revision"},
+    "source_scene_revision": {"type": "string", "minLength": 1},
+    "cinematic_plan_revision": {"$ref": "#/$defs/revision"},
+    "beats": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/narrativeBeat"}
+    },
+    "direction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["narrative_intent", "energy", "focus_target"],
+      "properties": {
+        "narrative_intent": {"$ref": "#/$defs/nullableText"},
+        "energy": {"$ref": "#/$defs/nullableText"},
+        "focus_target": {"type": "string", "minLength": 1, "maxLength": 120}
+      }
+    },
+    "shot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "shot_type", "shot_size", "composition", "subject_anchor", "negative_space",
+        "negative_space_motivation", "depth_design", "lens_language"
+      ],
+      "properties": {
+        "shot_type": {"enum": ["ESTABLISHING", "SYSTEM_WIDE", "OPERATION", "MECHANICAL_DETAIL", "MACRO_DETAIL", "TRACKING_FLOW", "TOPDOWN_PROCESS", "AERIAL_NETWORK", "TECHNICAL_LOCKED", "REVEAL", "SCALE_REFERENCE"]},
+        "shot_size": {"enum": ["EXTREME_WIDE", "WIDE", "MEDIUM_WIDE", "MEDIUM", "CLOSE", "EXTREME_CLOSE"]},
+        "composition": {"enum": ["CENTERED", "RULE_OF_THIRDS_LEFT", "RULE_OF_THIRDS_RIGHT", "SYMMETRIC", "ASYMMETRIC_LEFT", "ASYMMETRIC_RIGHT", "TOP_HEAVY", "BOTTOM_HEAVY", "LEADING_LINES", "LAYERED_DEPTH"]},
+        "subject_anchor": {"enum": ["CENTER", "LEFT_THIRD", "RIGHT_THIRD", "LOWER_LEFT", "LOWER_RIGHT", "UPPER_LEFT", "UPPER_RIGHT", "FULL_FRAME"]},
+        "negative_space": {"enum": ["NONE", "LEFT", "RIGHT", "TOP", "BOTTOM", "UPPER_LEFT", "UPPER_RIGHT", "LOWER_LEFT", "LOWER_RIGHT"]},
+        "negative_space_motivation": {"enum": [null, "ROOM_FOR_FUTURE_CALLOUT", "ROOM_FOR_FUTURE_METRIC", "ROOM_FOR_FLOW_OVERLAY", "ROOM_FOR_VISUAL_REVEAL", "ROOM_FOR_FUTURE_LABEL", "ROOM_FOR_EVIDENCE"]},
+        "depth_design": {"enum": ["FLAT", "TWO_LAYER", "THREE_LAYER", "DEEP"]},
+        "lens_language": {"enum": ["WIDE_24", "DOCUMENTARY_35", "NATURAL_50", "DETAIL_85", "MACRO"]}
+      }
+    },
+    "camera": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["movement", "direction", "intensity", "motivation"],
+      "properties": {
+        "movement": {"enum": ["STATIC", "SLOW_DOLLY_IN", "SLOW_DOLLY_OUT", "TRACK_LEFT", "TRACK_RIGHT", "PAN_LEFT", "PAN_RIGHT", "SUBTLE_CRANE_UP", "SUBTLE_CRANE_DOWN", "TOPDOWN_DESCEND", "PARALLAX_PUSH"]},
+        "direction": {"enum": ["LEFT_TO_RIGHT", "RIGHT_TO_LEFT", "FORWARD", "BACKWARD", "UP", "DOWN", "NONE"]},
+        "intensity": {"enum": ["NONE", "LOW", "MEDIUM"]},
+        "motivation": {"enum": [null, "FOLLOW_FLOW", "REVEAL_DETAIL", "REVEAL_SCALE", "APPROACH_MECHANISM", "LEAVE_MECHANISM", "TRANSFER_ATTENTION", "ESTABLISH_GEOGRAPHY", "SHOW_PROCESS"]}
+      }
+    },
+    "decision_reason": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["based_on", "goal"],
+      "properties": {
+        "based_on": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^(narrative_intent|[A-Za-z0-9][A-Za-z0-9._-]*_B[0-9]{3})$"}
+        },
+        "goal": {"type": "string", "minLength": 1, "maxLength": 180}
+      }
+    },
+    "continuity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "incoming", "outgoing", "sequence_memory", "warnings"],
+      "properties": {
+        "status": {"enum": ["PASS", "WARN", "REVISION_RECOMMENDED", "NOT_APPLICABLE"]},
+        "incoming": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/continuityRelation"}]},
+        "outgoing": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/continuityRelation"}]},
+        "sequence_memory": {"$ref": "#/$defs/sequenceMemory"},
+        "warnings": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/continuityWarning"}
+        }
+      }
+    },
+    "micro_events": {"$ref": "#/$defs/textList"},
+    "transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "motivation"],
+      "properties": {
+        "type": {"$ref": "#/$defs/nullableText"},
+        "motivation": {"$ref": "#/$defs/nullableText"}
+      }
+    },
+    "remotion_choreography": {"$ref": "#/$defs/textList"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "mode": {"const": "shadow"}
+  },
+  "$defs": {
+    "id": {"type": "string", "minLength": 1, "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"},
+    "revision": {"type": "string", "pattern": "^sha256_[a-f0-9]{64}$"},
+    "nullableText": {"type": ["string", "null"]},
+    "textList": {"type": "array", "items": {"type": "string"}},
+    "continuityRelation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scene_id", "screen_flow", "axis_strategy", "axis_motivation", "shot_scale_relation",
+        "focus_handoff", "bridge_candidate", "cross_media_continuity"
+      ],
+      "properties": {
+        "scene_id": {"$ref": "#/$defs/id"},
+        "screen_flow": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["direction", "source"],
+          "properties": {
+            "direction": {"enum": ["LEFT_TO_RIGHT", "RIGHT_TO_LEFT", "FORWARD", "BACKWARD", "UP", "DOWN", "STATIC", "UNKNOWN"]},
+            "source": {"enum": ["VISUAL_PLAN", "CAMERA_INTENT", "BEAT_SEMANTICS", "FOCUS_RELATION", "NOT_AVAILABLE"]}
+          }
+        },
+        "axis_strategy": {"enum": ["PRESERVE", "REVERSE_MOTIVATED", "RESET", "NOT_APPLICABLE"]},
+        "axis_motivation": {"enum": [null, "COUNTER_FLOW", "RETURN_PATH", "FAILURE_REVERSAL", "TEMPORAL_REVERSAL", "GEOGRAPHIC_REORIENTATION", "NARRATIVE_CONTRAST"]},
+        "shot_scale_relation": {"enum": ["CONTRACT", "EXPAND", "HOLD", "RESET", "NOT_APPLICABLE"]},
+        "focus_handoff": {"enum": ["DIRECT", "REVEAL", "CAUSE_TO_EFFECT", "OBJECT_TO_SYSTEM", "SYSTEM_TO_OBJECT", "RESET", "NONE"]},
+        "bridge_candidate": {"enum": ["MOTION_VECTOR", "SHAPE", "LINE", "OBJECT", "FOCUS", "SCALE", "GEOGRAPHIC", "COLOR_ROLE", "SEMANTIC", "NONE"]},
+        "cross_media_continuity": {"enum": ["PRESERVED", "RESET", "NOT_APPLICABLE", "UNKNOWN"]}
+      }
+    },
+    "sequenceMemory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "last_n_scenes", "shot_type_counts", "shot_size_sequence", "camera_sequence",
+        "composition_sequence", "same_shot_type_run", "same_shot_size_run",
+        "same_camera_movement_run", "same_composition_run"
+      ],
+      "properties": {
+        "last_n_scenes": {"type": "integer", "minimum": 1, "maximum": 6},
+        "shot_type_counts": {
+          "type": "object",
+          "propertyNames": {"enum": ["ESTABLISHING", "SYSTEM_WIDE", "OPERATION", "MECHANICAL_DETAIL", "MACRO_DETAIL", "TRACKING_FLOW", "TOPDOWN_PROCESS", "AERIAL_NETWORK", "TECHNICAL_LOCKED", "REVEAL", "SCALE_REFERENCE"]},
+          "additionalProperties": {"type": "integer", "minimum": 1}
+        },
+        "shot_size_sequence": {"type": "array", "minItems": 1, "maxItems": 6, "items": {"enum": ["EXTREME_WIDE", "WIDE", "MEDIUM_WIDE", "MEDIUM", "CLOSE", "EXTREME_CLOSE"]}},
+        "camera_sequence": {"type": "array", "minItems": 1, "maxItems": 6, "items": {"enum": ["STATIC", "SLOW_DOLLY_IN", "SLOW_DOLLY_OUT", "TRACK_LEFT", "TRACK_RIGHT", "PAN_LEFT", "PAN_RIGHT", "SUBTLE_CRANE_UP", "SUBTLE_CRANE_DOWN", "TOPDOWN_DESCEND", "PARALLAX_PUSH"]}},
+        "composition_sequence": {"type": "array", "minItems": 1, "maxItems": 6, "items": {"enum": ["CENTERED", "RULE_OF_THIRDS_LEFT", "RULE_OF_THIRDS_RIGHT", "SYMMETRIC", "ASYMMETRIC_LEFT", "ASYMMETRIC_RIGHT", "TOP_HEAVY", "BOTTOM_HEAVY", "LEADING_LINES", "LAYERED_DEPTH"]}},
+        "same_shot_type_run": {"type": "integer", "minimum": 1, "maximum": 6},
+        "same_shot_size_run": {"type": "integer", "minimum": 1, "maximum": 6},
+        "same_camera_movement_run": {"type": "integer", "minimum": 1, "maximum": 6},
+        "same_composition_run": {"type": "integer", "minimum": 1, "maximum": 6}
+      }
+    },
+    "continuityWarning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "severity", "owner", "run_length", "detail"],
+      "properties": {
+        "code": {"enum": ["REPEATED_SHOT_TYPE", "REPEATED_SHOT_SIZE", "REPEATED_COMPOSITION", "REPEATED_CAMERA_MOVEMENT", "UNMOTIVATED_DIRECTION_REVERSAL", "AXIS_DISCONTINUITY", "FOCUS_DISCONTINUITY", "SCALE_JUMP", "CROSS_MEDIA_DISCONTINUITY", "VISUAL_MONOTONY", "UNKNOWN_SCREEN_FLOW"]},
+        "severity": {"enum": ["LOW", "MEDIUM", "HIGH"]},
+        "owner": {"enum": ["CinematicShotDirectorAgent", "ContinuityDirectorAgent", "FutureTransitionDirector", "VisualPlan", "NONE"]},
+        "run_length": {"type": ["integer", "null"], "minimum": 1},
+        "detail": {"type": ["string", "null"], "maxLength": 180}
+      }
+    },
+    "narrativeBeat": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "beat_id", "scene_id", "claim_id", "script_span", "text", "semantic_function",
+        "concept", "importance", "emphasis", "cut_candidate", "visual_change_candidate", "timing"
+      ],
+      "properties": {
+        "beat_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*_B[0-9]{3}$"},
+        "scene_id": {"$ref": "#/$defs/id"},
+        "claim_id": {"type": ["string", "null"]},
+        "script_span": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["start_word", "end_word"],
+          "properties": {
+            "start_word": {"type": "integer", "minimum": 0},
+            "end_word": {"type": "integer", "minimum": 1}
+          }
+        },
+        "text": {"type": "string", "minLength": 1},
+        "semantic_function": {
+          "enum": [
+            "introduce_object", "introduce_system", "establish_context", "follow_flow",
+            "explain_mechanism", "handoff", "reveal_dependency", "reveal_constraint",
+            "compare", "quantify", "cause", "consequence", "failure_trigger",
+            "propagation", "response", "recovery", "tradeoff", "limitation",
+            "interpretation", "conclusion"
+          ]
+        },
+        "concept": {"type": "string", "minLength": 1, "pattern": "^[a-z0-9]+(?:_[a-z0-9]+)*$"},
+        "importance": {"enum": ["low", "medium", "high"]},
+        "emphasis": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "cut_candidate": {"type": "boolean"},
+        "visual_change_candidate": {"type": "boolean"},
+        "timing": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["source"],
+              "properties": {"source": {"const": "not_available"}}
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["source", "start_ms", "end_ms"],
+              "properties": {
+                "source": {"const": "narration_alignment"},
+                "start_ms": {"type": "number", "minimum": 0},
+                "end_ms": {"type": "number", "exclusiveMinimum": 0}
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

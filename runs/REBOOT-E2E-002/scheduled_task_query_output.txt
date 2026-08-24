@@ -1,8 +1,0 @@
-﻿schtasks.exe : ERRO: O sistema não pode encontrar o arquivo especificado.
-No linha:8 caractere:11
-+ $verify = schtasks.exe /Query /TN $taskName /FO LIST 2>&1
-+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : NotSpecified: (ERRO: O sistema...o especificado.:String) [], RemoteException
-    + FullyQualifiedErrorId : NativeCommandError
- 
-

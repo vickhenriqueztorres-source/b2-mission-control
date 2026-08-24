@@ -1,2 +1,0 @@
-{"timestamp":"2026-08-06T18:11:48.447Z","type":"EMERGENCY_STOP_REQUESTED","request":{"reason":"PHASE_5_RC1_REAL_TEST","requested_by":"user"}}
-{"timestamp":"2026-08-06T18:11:48.447Z","type":"EMERGENCY_STOP_ACTIVATED","endpoint_response":{"statusCode":404,"body":"<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot POST /api/control/emergency-stop</pre>\n</body>\n</html>\n","json":null}}

@@ -1,9 +1,0 @@
-{
-  "ok": true,
-  "queuePaused": false,
-  "emergencyStopped": false,
-  "emergencyReason": "RC2_EMERGENCY_RESTART_PERSISTENCE",
-  "requestedBy": "user",
-  "activatedAt": "2026-08-06T19:32:21.058Z",
-  "releasedAt": "2026-08-06T19:32:29.259Z"
-}

@@ -5,7 +5,7 @@ import { Logger } from './logger';
 export interface AgentEvent {
   event_id?: string;
   production_id: string;
-  source: 'RAFA_LOBO' | 'FIREFLY_BOT' | 'MISSION_CONTROL' | 'CODEX_REVIEWER';
+  source: 'HIDDEN_SYSTEMS_LAB' | 'FIREFLY_BOT' | 'MISSION_CONTROL' | 'CODEX_REVIEWER';
   agent_name: string;
   step_index?: number;
   event_type: 'STEP_STARTED' | 'STEP_COMPLETED' | 'QA_APPROVED' | 'QA_REJECTED' | 'HANDOFF_REACHED' | 'JOB_SUBMITTED' | 'JOB_COMPLETED' | 'ERROR';

@@ -1,0 +1,47 @@
+{
+  "schema": "hsl.soundfx.kenney-source.v1",
+  "provider": "Kenney",
+  "license": "CC0-1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "packs": [
+    {
+      "id": "interface-sounds",
+      "page_url": "https://kenney.nl/assets/interface-sounds",
+      "download_url": "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip",
+      "zip_sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "id": "impact-sounds",
+      "page_url": "https://kenney.nl/assets/impact-sounds",
+      "download_url": "https://kenney.nl/media/pages/assets/impact-sounds/87b4ddecda-1677589768/kenney_impact-sounds.zip",
+      "zip_sha256": "029d734af1582474edf3a694d1b0cebc97c1c152f2f39fa34d4c2bafc5de77f8",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    }
+  ],
+  "assets": [
+    {
+      "cue_type": "SNAP_POP",
+      "pack_id": "interface-sounds",
+      "path_in_pack": "Audio/pluck_001.ogg",
+      "local_path": "interface-sounds/Audio/pluck_001.ogg",
+      "source_sha256": "be97ec4893a02d6eccfb678daa76c83e34cb2583b834ec2593d2641def739fa4"
+    },
+    {
+      "cue_type": "SUBTLE_STRIKE",
+      "pack_id": "impact-sounds",
+      "path_in_pack": "Audio/impactMetal_light_002.ogg",
+      "local_path": "impact-sounds/Audio/impactMetal_light_002.ogg",
+      "source_sha256": "25a96f90a9a1f88a531e824e126f0519504625e5635e65a72e4f31611428db29"
+    },
+    {
+      "cue_type": "CHAPTER_DROP",
+      "pack_id": "impact-sounds",
+      "path_in_pack": "Audio/impactBell_heavy_001.ogg",
+      "local_path": "impact-sounds/Audio/impactBell_heavy_001.ogg",
+      "source_sha256": "9df61e3ae9a83dc65e5a1fd3ed19d480876f3b22b963a1b9ef6fa293592dcec4"
+    }
+  ]
+}
