@@ -13,24 +13,6 @@ function usesLocalProxy(value: unknown): boolean {
   return typeof value === 'string' && /local-proxy|LOCAL_PROXY|LOCAL_PROXY_NO_PAID_PROVIDER/i.test(value);
 }
 
-function providerRerouteByShot(runRoot: string): Map<string, {model?: string; resolution?: string}> {
-  const reroutePath = path.join(runRoot, 'firefly', 'video-3-provider-reroutes.json');
-  if (!fs.existsSync(reroutePath)) return new Map();
-  const manifest = JSON.parse(fs.readFileSync(reroutePath, 'utf8')) as {
-    status?: string;
-    items?: Array<{job_name?: string; model?: string; resolution?: string}>;
-  };
-  if (manifest.status !== 'ACTIVE') return new Map();
-  const map = new Map<string, {model?: string; resolution?: string}>();
-  for (const item of manifest.items || []) {
-    if (!item.job_name || (!item.model && !item.resolution)) continue;
-    const takeMarker = item.job_name.lastIndexOf('_TAKE_');
-    const shotId = takeMarker === -1 ? item.job_name : item.job_name.slice(0, takeMarker);
-    map.set(shotId, {model: item.model, resolution: item.resolution});
-  }
-  return map;
-}
-
 function renderContactSheets(items: HslGeneratedAssetIntakeManifest['items'], outputRoot: string): {paths: string[]; errors: string[]} {
   const tileWidth = 384;
   const tileHeight = 216;
@@ -61,9 +43,9 @@ function renderContactSheets(items: HslGeneratedAssetIntakeManifest['items'], ou
 }
 
 function main(): void {
-  const productionId = process.env.HSL_VIDEO_3_RUN_ID || 'HSL-VIDEO-003';
-  const runRoot = path.resolve(process.env.HSL_VIDEO_3_OUTPUT || path.join('runs', productionId));
-  const intakePath = path.join(runRoot, 'hsl_video_3_asset_intake.json');
+  const productionId = process.env.HSL_VIDEO_4_RUN_ID || 'HSL-VIDEO-004';
+  const runRoot = path.resolve(process.env.HSL_VIDEO_4_OUTPUT || path.join('runs', productionId));
+  const intakePath = path.join(runRoot, 'hsl_video_4_asset_intake.json');
   const intake = JSON.parse(fs.readFileSync(intakePath, 'utf8')) as HslGeneratedAssetIntakeManifest;
   const dispatchResultPath = path.join(runRoot, 'firefly', 'dispatch-result.json');
   const dispatchResult = fs.existsSync(dispatchResultPath)
@@ -73,14 +55,7 @@ function main(): void {
   const executionPlan = JSON.parse(fs.readFileSync(executionPath, 'utf8')) as HslExecutionPlan;
   const executionRoot = path.dirname(executionPath);
   const scenes = executionPlan.scenes.map((relative) => JSON.parse(fs.readFileSync(path.resolve(executionRoot, relative), 'utf8')) as HslExecutableScene);
-  const reroutes = providerRerouteByShot(runRoot);
-  const expected = new Map(scenes.flatMap((scene) => scene.visual_shots)
-    .filter((shot) => shot.visual_mode === 'generated_ai')
-    .map((shot) => [shot.shot_id, reroutes.get(shot.shot_id)?.model || (shot.generation_strategy?.startsWith('VEO') ? 'Veo 3.1' : 'Kling 3.0')] as const));
-  const veoItems = intake.items.filter((item) => item.model === 'Veo 3.1 Fast');
-  const premiumVeoItems = intake.items.filter((item) => item.model === 'Veo 3.1');
-  const fireflyVideoItems = intake.items.filter((item) => item.model === 'Firefly Video');
-  const klingItems = intake.items.filter((item) => item.model === 'Kling 3.0');
+  const expected = new Set(scenes.flatMap((scene) => scene.visual_shots).filter((shot) => shot.visual_mode === 'generated_ai').map((shot) => shot.shot_id));
   const errors: string[] = [];
   if (!dispatchResult) {
     errors.push('DISPATCH_RESULT_MISSING');
@@ -96,45 +71,49 @@ function main(): void {
   }
   const intakeIds = new Set(intake.items.map((item) => item.shot_id));
   if (intake.items.length !== expected.size) errors.push(`ITEM_COUNT:${intake.items.length}:EXPECTED:${expected.size}`);
-  for (const [shotId, model] of expected) {
-    if (!intakeIds.has(shotId)) errors.push(`EXPECTED_SHOT_MISSING:${shotId}`);
-    const item = intake.items.find((candidate) => candidate.shot_id === shotId);
-    if (item && item.model !== model) errors.push(`MODEL_MISMATCH:${shotId}:${item.model}:EXPECTED:${model}`);
-  }
-  for (const item of intake.items) if (!expected.has(item.shot_id)) errors.push(`UNPLANNED_SHOT:${item.shot_id}`);
+  for (const shotId of expected) if (!intakeIds.has(shotId)) errors.push(`EXPECTED_SHOT_MISSING:${shotId}`);
   for (const item of intake.items) {
+    if (!expected.has(item.shot_id)) errors.push(`UNPLANNED_SHOT:${item.shot_id}`);
+    if (item.model !== 'Firefly Video') errors.push(`MODEL_MISMATCH:${item.shot_id}:${item.model}:EXPECTED:Firefly Video`);
     if (usesLocalProxy(item.video_path)) errors.push(`LOCAL_PROXY_VIDEO_FORBIDDEN:${item.shot_id}`);
     if (!fs.existsSync(item.video_path)) errors.push(`VIDEO_MISSING:${item.shot_id}`);
-    if (item.width < 1280 || item.height < 720) errors.push(`RESOLUTION:${item.shot_id}:${item.width}x${item.height}`);
-    if (reroutes.get(item.shot_id)?.resolution === '1080p' && (item.width < 1920 || item.height < 1080)) {
-      errors.push(`RESOLUTION_1080P_REQUIRED:${item.shot_id}:${item.width}x${item.height}`);
-    }
+    if (item.width < 960 || item.height < 540) errors.push(`RESOLUTION_TOO_LOW:${item.shot_id}:${item.width}x${item.height}`);
     if (item.observed_duration_seconds < 3.5) errors.push(`DURATION:${item.shot_id}:${item.observed_duration_seconds}`);
-    if (item.model !== 'Kling 3.0' && item.visual_qa.first_frame_fidelity !== 'FIRST_FRAME_FIDELITY_PASS') {
+    if (item.model !== 'Firefly Video' && item.visual_qa.first_frame_fidelity !== 'FIRST_FRAME_FIDELITY_PASS') {
       errors.push(`FIRST_FRAME_FIDELITY:${item.shot_id}`);
     }
   }
-
   const contactSheets = renderContactSheets(intake.items, path.join(runRoot, 'firefly'));
   errors.push(...contactSheets.errors);
-  const contactSheetPath = contactSheets.paths[0] || null;
-
   const status = errors.length ? 'GENERATED_VIDEO_QA_FAIL' : 'GENERATED_VIDEO_QA_PASS';
   const qaPath = path.join(runRoot, 'firefly', 'generated-video-qa.json');
   writeJson(qaPath, {
-    schema: 'hsl.video-3.generated-video-qa.v1', production_id: productionId, status,
-    item_count: intake.items.length, model_counts: {'Veo 3.1 Fast': veoItems.length, 'Veo 3.1': premiumVeoItems.length, 'Firefly Video': fireflyVideoItems.length, 'Kling 3.0': klingItems.length},
+    schema: 'hsl.video-4.generated-video-qa.v1',
+    production_id: productionId,
+    status,
+    item_count: intake.items.length,
+    expected_item_count: expected.size,
+    model_counts: intake.items.reduce<Record<string, number>>((counts, item) => {
+      counts[item.model] = (counts[item.model] || 0) + 1;
+      return counts;
+    }, {}),
     native_audio_counts: intake.items.reduce<Record<string, number>>((counts, item) => {
       counts[item.native_audio_status] = (counts[item.native_audio_status] || 0) + 1;
       return counts;
     }, {}),
-    expected_item_count: expected.size, contact_sheet_path: contactSheetPath,
-    contact_sheet_paths: contactSheets.paths, contact_sheet_page_size: 25, errors,
+    contact_sheet_path: contactSheets.paths[0] || null,
+    contact_sheet_paths: contactSheets.paths,
+    contact_sheet_page_size: 25,
+    errors,
     items: intake.items.map((item) => ({
-      shot_id: item.shot_id, model: item.model, duration_seconds: item.observed_duration_seconds,
-      dimensions: `${item.width}x${item.height}`, fps: item.fps,
+      shot_id: item.shot_id,
+      model: item.model,
+      duration_seconds: item.observed_duration_seconds,
+      dimensions: `${item.width}x${item.height}`,
+      fps: item.fps,
       first_frame_ssim: item.visual_qa.first_frame_ssim,
-      native_audio_status: item.native_audio_status, sha256: item.sha256
+      native_audio_status: item.native_audio_status,
+      sha256: item.sha256
     }))
   });
   if (errors.length) throw new Error(`${status}:${errors.join(',')}`);

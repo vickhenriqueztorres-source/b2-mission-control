@@ -55,6 +55,17 @@ Nenhum episodio e publicado apenas porque parece sofisticado. Ele precisa demons
 - cenas com audio Veo validado nao recebem cues Kenney automaticos sobre o mesmo evento;
 - Kling permanece disponivel para realidade fisica, escala, atmosfera e reconstrucao;
 - toda geracao Veo conserva Start Frame, SHA-256, aprovacao humana e disclosure de IA.
+- todo shot generativo deve declarar `HSL_VISUAL_IDENTITY_V2` e `HSL Premium Motion Reference Set V1`;
+- a base do Start Frame deve ser fotografia real aprovada ou geracao condicionada por referencia aprovada;
+- desenho procedural, composicao vetorial simples, previs, placeholder e proxy nunca sao assets de producao;
+- os arquivos de referencia devem entrar como lineage verificavel, nao apenas como texto no prompt;
+- Start Frame sem `hsl.start-frame.provenance.v2` completo reprova antes do Firefly;
+- amarelo nunca e decoracao: representa somente fluxo ativo;
+- azul nunca e glow decorativo: representa somente infraestrutura persistente;
+- laranja aparece somente em bloqueio, risco ou gargalo real da narrativa;
+- cada frame possui um assunto dominante, um foco luminoso principal e profundidade fotografica;
+- o estado inicial nao pode mostrar antecipadamente toda a transformacao do motion;
+- qualquer mudanca no frame, prompt, referencia ou contact sheet invalida a aprovacao pelo hash;
 
 ## 6. Formato e marca
 
@@ -84,6 +95,10 @@ Nenhum episodio e publicado apenas porque parece sofisticado. Ele precisa demons
 - dry run nunca despacha geracao paga;
 - estado ambiguo nao autoriza reenvio automatico;
 - evidencias antigas nao sao apagadas para limpar historico.
+- nenhum script pode preencher internamente `HSL_CONFIRMED_HUMAN_APPROVAL=true`;
+- nenhum script pode preencher internamente autorizacao de dispatch pago;
+- aprovacao visual deve estar vinculada ao hash combinado das contact sheets revisadas;
+- `START_FRAME_SET_QA_PASS` exige QA tecnico, contrato visual e lineage das referencias simultaneamente.
 
 ## 9. Publicacao
 

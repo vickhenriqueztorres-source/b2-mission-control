@@ -46,6 +46,7 @@ Atualizado em: 2026-08-21
 | `RemotionChoreographyAgent` | converte intencao visual em cues graficos | cues executaveis |
 | `KlingMotionDirectorAgent` | define estado inicial, mudanca, estado final e camera | motion contract image-to-video |
 | `CinematicEditQaAgent` | valida todos os campos de execucao | scene contract aprovado |
+| `VisualIdentityContractGate` | fixa `HSL_VISUAL_IDENTITY_V2`, paleta semantica, fotografia e referencia minima | prompt e shot contract imutaveis |
 
 Os tres primeiros diretores preservam o pacote editorial em sidecars. O `CinematicExecutionCompiler` e a unica ponte autorizada desses sidecars para contratos de Start Frame, Kling e Remotion.
 
@@ -53,7 +54,8 @@ Os tres primeiros diretores preservam o pacote editorial em sidecars. O `Cinemat
 
 | Agente | Responsabilidade | Gate de saida |
 |---|---|---|
-| `StartFrameQaAgent` | valida arquivo, resolucao, aspecto e hash | Start Frame fisico valido |
+| `StartFrameQaAgent` | valida arquivo, resolucao, aspecto, textura minima e hash | Start Frame fisico valido |
+| `StartFrameIdentityGate` | rejeita previs procedural e exige lineage do Reference Set, hash do prompt e fonte fotografica | `HSL_VISUAL_IDENTITY_QA_PASS` |
 | `StartFrameContinuityAgent` | valida conjunto de frames por episodio | continuidade tecnica |
 | `MotionToFireflyBridge` | preserva start frame e lineage no guia | receipt verificavel |
 | `KlingProviderPromptAdapter` | adapta movimento para image-to-video | prompt sem drift semantico |
@@ -96,3 +98,5 @@ Os tres primeiros diretores preservam o pacote editorial em sidecars. O `Cinemat
 ## Regra de autonomia
 
 IA pode sugerir, organizar, gerar e validar. Pergunta editorial, tese final, interpretacao, licenca duvidosa e autorizacao de publicacao exigem decisao humana registrada.
+
+Start Frames e dispatch pago possuem duas decisoes humanas separadas. Nenhum agente ou script pode fabricar essas confirmacoes. A aprovacao de Start Frames deve registrar o hash das contact sheets efetivamente revisadas.

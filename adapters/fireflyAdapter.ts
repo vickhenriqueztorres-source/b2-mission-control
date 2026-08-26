@@ -9,21 +9,26 @@ import { ProductionSafetyGuard } from '../config/productionSafetyGuard';
 
 export class FireflyAdapter extends BaseAdapter {
   private fireflyPath: string;
+  private runtimeRoot: string;
   private pythonExec: string;
   private dbPath: string;
   private telemetry: AgentTelemetryAdapter;
 
-  constructor(fireflyPath: string = 'C:\\B2-AI-STUDIO\\links\\firefly-automation') {
+  constructor(
+    fireflyPath: string = process.env.FIREFLY_AUTOMATION_ROOT || 'C:\\B2-AI-STUDIO\\links\\firefly-automation',
+    runtimeRoot: string = process.env.FIREFLY_RUNTIME_ROOT || fireflyPath
+  ) {
     super('FireflyAdapter');
     this.fireflyPath = path.resolve(fireflyPath);
+    this.runtimeRoot = path.resolve(runtimeRoot);
     this.pythonExec = path.join(this.fireflyPath, '.venv', 'Scripts', 'python.exe');
-    this.dbPath = path.join(this.fireflyPath, 'data', 'firefly_jobs.db');
+    this.dbPath = path.join(this.runtimeRoot, 'data', 'firefly_jobs.db');
     this.telemetry = AgentTelemetryAdapter.getInstance();
   }
 
   public async initialize(): Promise<void> {
     ProductionSafetyGuard.assertSafeForProduction();
-    Logger.info(this.name, `Conectado ao Firefly Video Automation em: ${this.fireflyPath}`);
+    Logger.info(this.name, `Conectado ao Firefly Video Automation em: ${this.fireflyPath}; runtime isolado: ${this.runtimeRoot}`);
     if (!fs.existsSync(this.pythonExec)) {
       Logger.warn(this.name, `Python venv não encontrado em ${this.pythonExec}. Usando 'python' global.`);
       this.pythonExec = 'python';
@@ -63,7 +68,7 @@ export class FireflyAdapter extends BaseAdapter {
     const resumeExistingBatch = process.env.FIREFLY_RESUME_EXISTING_BATCH === 'true';
 
     if (!resumeExistingBatch) {
-      const saidaDir = path.join(this.fireflyPath, 'saida');
+      const saidaDir = path.join(this.runtimeRoot, 'saida');
       for (const jobName of jobNames) {
         const existingMp4 = path.join(saidaDir, `${jobName}.mp4`);
         if (fs.existsSync(existingMp4)) {
@@ -80,7 +85,11 @@ export class FireflyAdapter extends BaseAdapter {
       // trilha de auditoria e nao devem ser apagadas.
       try {
         const db = new Database(this.dbPath);
-        db.prepare("DELETE FROM jobs WHERE status IN ('pending', 'claimed', 'generating', 'stale_generating')").run();
+        const deleteReclaimable = db.prepare("DELETE FROM jobs WHERE name = ? AND status IN ('pending', 'claimed', 'generating', 'stale_generating')");
+        const deleteBatch = db.transaction((names: string[]) => {
+          for (const name of names) deleteReclaimable.run(name);
+        });
+        deleteBatch(jobNames);
         db.prepare("UPDATE system_state SET status = 'running', reason = NULL WHERE singleton = 1").run();
         db.close();
         Logger.info(this.name, 'Base de dados do Firefly limpa apenas de jobs reclamaveis; historico preservado e system_state resetado para RUNNING.');
@@ -92,7 +101,7 @@ export class FireflyAdapter extends BaseAdapter {
 
       // 4. Executar --feed-guide no Firefly Bot
       try {
-        const feedCmd = `"${this.pythonExec}" -m firefly_bot.main --feed-guide "${guideJsonPath}"`;
+        const feedCmd = `"${this.pythonExec}" -m firefly_bot.main --root "${this.runtimeRoot}" --feed-guide "${guideJsonPath}"`;
         Logger.info(this.name, `Executando: ${feedCmd}`);
         const feedOutput = execSync(feedCmd, { cwd: this.fireflyPath, encoding: 'utf-8' });
         Logger.info(this.name, `Feed Output: ${feedOutput.trim()}`);
@@ -129,7 +138,7 @@ export class FireflyAdapter extends BaseAdapter {
       const concurrency = Number.isFinite(configuredConcurrency)
         ? Math.max(1, Math.min(6, Math.floor(configuredConcurrency)))
         : 1;
-      runWorker = spawn(this.pythonExec, ['-m', 'firefly_bot.main', '--concurrency', String(concurrency), '--run'], {
+      runWorker = spawn(this.pythonExec, ['-m', 'firefly_bot.main', '--root', this.runtimeRoot, '--concurrency', String(concurrency), '--run'], {
         cwd: this.fireflyPath,
         stdio: ['ignore', 'pipe', 'pipe']
       });
@@ -149,6 +158,9 @@ export class FireflyAdapter extends BaseAdapter {
 
     // 6. Polling na tabela `jobs` do SQLite real do Firefly
     const completedJobs: Array<{ name: string; output_path: string }> = [];
+    const failedInfraJobs = new Set<string>();
+    const telemetrySnapshots = new Map<string, {status: string; emittedAt: number}>();
+    const continueOnFailedInfra = process.env.FIREFLY_CONTINUE_ON_FAILED_INFRA === 'true';
     const configuredWaitMinutes = Number(process.env.FIREFLY_MAX_WAIT_MINUTES || 0);
     const maxWaitMinutes = Number.isFinite(configuredWaitMinutes) && configuredWaitMinutes >= 15
       ? configuredWaitMinutes
@@ -163,6 +175,7 @@ export class FireflyAdapter extends BaseAdapter {
       try {
         const db = new Database(this.dbPath, { readonly: true });
         let allDone = true;
+        let skippedInfraThisPoll = false;
 
         for (const jobName of jobNames) {
           const row: any = db.prepare('SELECT * FROM jobs WHERE name = ? ORDER BY id DESC LIMIT 1').get(jobName);
@@ -179,36 +192,52 @@ export class FireflyAdapter extends BaseAdapter {
               'failed-content': 'FAILED'
             };
 
-            this.telemetry.recordEvent({
-              run_id: productionId,
-              production_id: productionId,
-              agent_id: `FireflyWorker_${row.name}`,
-              provider: 'FIREFLY_BOT',
-              task_id: `JOB_${row.id}`,
-              type: eventType,
-              status: statusMap[row.status] || 'RUNNING',
-              message: `Job #${row.id} (${row.name}) - StateReader: ${stateReaderStatus} (Elapsed: ${retries * 5}s)`,
-              artifact_path: row.output_path || undefined,
-              attempt: row.attempts || 1,
-              payload: {
-                job_id: row.id,
-                shot_id: row.name,
-                take_id: 'TAKE_01',
-                state_reader_status: stateReaderStatus,
-                elapsed_seconds: retries * 5,
-                last_observation: `Status do SQLite: ${row.status}`,
-                output_path: row.output_path
-              }
-            });
+            const now = Date.now();
+            const previousSnapshot = telemetrySnapshots.get(row.name);
+            const shouldEmitTelemetry = !previousSnapshot
+              || previousSnapshot.status !== row.status
+              || now - previousSnapshot.emittedAt >= 60_000;
+            if (shouldEmitTelemetry) {
+              this.telemetry.recordEvent({
+                run_id: productionId,
+                production_id: productionId,
+                agent_id: `FireflyWorker_${row.name}`,
+                provider: 'FIREFLY_BOT',
+                task_id: `JOB_${row.id}`,
+                type: eventType,
+                status: statusMap[row.status] || 'RUNNING',
+                message: `Job #${row.id} (${row.name}) - StateReader: ${stateReaderStatus} (Elapsed: ${retries * 5}s)`,
+                artifact_path: row.output_path || undefined,
+                attempt: row.attempts || 1,
+                payload: {
+                  job_id: row.id,
+                  shot_id: row.name,
+                  take_id: 'TAKE_01',
+                  state_reader_status: stateReaderStatus,
+                  elapsed_seconds: retries * 5,
+                  last_observation: `Status do SQLite: ${row.status}`,
+                  output_path: row.output_path
+                }
+              });
+              telemetrySnapshots.set(row.name, {status: row.status, emittedAt: now});
+            }
 
             if (row.status === 'done' && row.output_path && fs.existsSync(row.output_path)) {
               if (!completedJobs.find(j => j.name === row.name)) {
                 completedJobs.push({ name: row.name, output_path: row.output_path });
               }
             } else if (row.status === 'failed-infra') {
-              db.close();
-              if (runWorker) (runWorker as ChildProcess).kill();
-              throw new Error(`Job '${row.name}' falhou no Firefly por infraestrutura (${row.error || 'erro desconhecido'}).`);
+              if (continueOnFailedInfra) {
+                if (!failedInfraJobs.has(row.name)) {
+                  failedInfraJobs.add(row.name);
+                  Logger.warn(this.name, `Job '${row.name}' falhou por infraestrutura e sera pulado nesta rodada: ${row.error || 'erro desconhecido'}`);
+                }
+                skippedInfraThisPoll = true;
+              } else {
+                db.close();
+                if (runWorker) (runWorker as ChildProcess).kill();
+                throw new Error(`Job '${row.name}' falhou no Firefly por infraestrutura (${row.error || 'erro desconhecido'}).`);
+              }
             } else if (row.status === 'failed-content') {
               db.close();
               if (runWorker) (runWorker as ChildProcess).kill();
@@ -234,8 +263,28 @@ export class FireflyAdapter extends BaseAdapter {
 
         db.close();
 
-        if (allDone && completedJobs.length === jobNames.length) {
-          Logger.info(this.name, `Todos os ${completedJobs.length} jobs foram concluídos com SUCESSO!`);
+        if (continueOnFailedInfra && skippedInfraThisPoll) {
+          try {
+            const writableDb = new Database(this.dbPath);
+            writableDb.prepare("UPDATE system_state SET status = 'running', reason = NULL WHERE singleton = 1").run();
+            writableDb.close();
+          } catch (e: any) {
+            Logger.warn(this.name, `Aviso ao reabrir fila apos falha de infra: ${e.message}`);
+          }
+
+          const workerState = runWorker as ChildProcess | null;
+          if (!allDone && (!workerState || workerState.exitCode !== null || workerState.killed)) {
+            Logger.warn(this.name, 'Worker do Firefly saiu apos falha de infra; reiniciando para continuar jobs pendentes.');
+            startWorkerProc();
+          }
+        }
+
+        if (allDone && (completedJobs.length + failedInfraJobs.size) === jobNames.length) {
+          if (completedJobs.length === 0) {
+            if (runWorker) (runWorker as ChildProcess).kill();
+            throw new Error(`FIREFLY_ALL_JOBS_FAILED_INFRA:${[...failedInfraJobs].join(',')}`);
+          }
+          Logger.info(this.name, `Firefly concluiu ${completedJobs.length} jobs; ${failedInfraJobs.size} falharam por infraestrutura e ficaram para reroute.`);
           if (runWorker) (runWorker as ChildProcess).kill();
           return { success: true, completedJobs };
         }

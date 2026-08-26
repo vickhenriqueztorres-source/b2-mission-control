@@ -29,7 +29,7 @@ export interface HslGeneratedAssetIntakeItem {
   width: number;
   height: number;
   generation_origin: 'MISSION_CONTROL_FIREFLY_KLING' | 'MISSION_CONTROL_FIREFLY_VEO';
-  model: 'Kling 3.0' | 'Veo 3.1 Fast';
+  model: 'Kling 3.0' | 'Veo 3.1 Fast' | 'Veo 3.1' | 'Firefly Video';
   generate_audio_requested: boolean;
   native_audio_status: HslNativeAudioStatus;
   native_audio: Readonly<{
@@ -118,8 +118,11 @@ export class FireflyToIntakeBridge {
       }
 
       const { shotId, takeId } = parseShotAndTake(job.name);
-      const model = lineage.model === 'Veo 3.1 Fast' ? 'Veo 3.1 Fast' : 'Kling 3.0';
-      const requestedAudio = Boolean(lineage.generate_audio && model === 'Veo 3.1 Fast');
+      const model = lineage.model === 'Firefly Video' ? 'Firefly Video'
+        : lineage.model === 'Veo 3.1' ? 'Veo 3.1'
+          : lineage.model === 'Veo 3.1 Fast' ? 'Veo 3.1 Fast' : 'Kling 3.0';
+      const isGeneratedProvider = model !== 'Kling 3.0';
+      const requestedAudio = Boolean(lineage.generate_audio && isGeneratedProvider);
       const audioTechnicallyValid = validation.has_audio &&
         (validation.audio_sample_rate || 0) >= 44100 && (validation.audio_channels || 0) >= 1;
       const nativeAudioStatus: HslNativeAudioStatus = !requestedAudio
@@ -127,11 +130,13 @@ export class FireflyToIntakeBridge {
         : !validation.has_audio
           ? 'ABSENT_FALLBACK'
           : audioTechnicallyValid ? 'PRESENT_VALIDATED' : 'REJECTED_FALLBACK';
-      const veoVisualQa = model === 'Veo 3.1 Fast' && lineage.start_frame_path
+      const fireflyVideoReferenceMode = model === 'Firefly Video' &&
+        process.env.HSL_FIREFLY_VIDEO_REFERENCE_FRAME_MODE === 'visual-reference';
+      const generatedVisualQa = isGeneratedProvider && lineage.start_frame_path && !fireflyVideoReferenceMode
         ? firstFrameSsim(path.resolve(lineage.start_frame_path), validation.absolute_path, validation.width, validation.height)
         : undefined;
       return {
-        status: model === 'Veo 3.1 Fast' ? 'HSL_GENERATED_ASSET_IMPORTED' : 'HSL_KLING_ASSET_IMPORTED',
+        status: isGeneratedProvider ? 'HSL_GENERATED_ASSET_IMPORTED' : 'HSL_KLING_ASSET_IMPORTED',
         shot_id: shotId,
         take_id: takeId,
         video_path: validation.absolute_path,
@@ -143,7 +148,7 @@ export class FireflyToIntakeBridge {
         fps: validation.fps,
         width: validation.width,
         height: validation.height,
-        generation_origin: model === 'Veo 3.1 Fast' ? 'MISSION_CONTROL_FIREFLY_VEO' : 'MISSION_CONTROL_FIREFLY_KLING',
+        generation_origin: isGeneratedProvider ? 'MISSION_CONTROL_FIREFLY_VEO' : 'MISSION_CONTROL_FIREFLY_KLING',
         model, generate_audio_requested: requestedAudio, native_audio_status: nativeAudioStatus,
         native_audio: {
           has_audio: validation.has_audio, codec: validation.audio_codec,
@@ -151,9 +156,9 @@ export class FireflyToIntakeBridge {
         },
         source_start_frame_path: lineage.start_frame_path,
         visual_qa: {
-          first_frame_fidelity: veoVisualQa === undefined ? 'NOT_APPLICABLE' : 'FIRST_FRAME_FIDELITY_PASS',
-          first_frame_ssim: veoVisualQa,
-          geometry_drift: veoVisualQa === undefined ? 'NOT_APPLICABLE' : 'GEOMETRY_DRIFT_PASS',
+          first_frame_fidelity: generatedVisualQa === undefined ? 'NOT_APPLICABLE' : 'FIRST_FRAME_FIDELITY_PASS',
+          first_frame_ssim: generatedVisualQa,
+          geometry_drift: generatedVisualQa === undefined ? 'NOT_APPLICABLE' : 'GEOMETRY_DRIFT_PASS',
           text_ocr: 'TEXT_OCR_PASS'
         },
         evidence_status: 'illustrative',
@@ -163,7 +168,7 @@ export class FireflyToIntakeBridge {
     });
 
     const manifest: HslGeneratedAssetIntakeManifest = {
-      status: items.some((item) => item.model === 'Veo 3.1 Fast')
+      status: items.some((item) => item.model !== 'Kling 3.0')
         ? 'HSL_GENERATED_ASSET_INTAKE_READY' : 'HSL_KLING_ASSET_INTAKE_READY',
       production_id: productionId,
       generated_at: new Date().toISOString(),

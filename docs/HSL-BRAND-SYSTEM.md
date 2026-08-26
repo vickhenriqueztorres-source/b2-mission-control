@@ -2,6 +2,8 @@
 
 Atualizado em: 2026-08-19
 
+Contrato executavel atual: **`HSL_VISUAL_IDENTITY_V2`**.
+
 ## Marca
 
 Nome: **Hidden Systems Lab**
@@ -54,13 +56,12 @@ Escala 1080p:
 
 ## Layout global
 
-Toda composicao Remotion deve incluir:
+Elementos editoriais sao usados somente quando a informacao precisa permanecer exata. O master documental nao usa moldura ou telemetria persistente.
 
-- watermark `HSL DOCS` no topo esquerdo;
-- capitulo no topo direito;
-- fonte/claim no rodape esquerdo;
-- rotulo de reconstrucao no rodape direito quando aplicavel;
-- area central livre para diagrama, footage ou Kling.
+- `HSL DOCS`, `AI VISUALIZATION` e barra de carregamento ficam desligados no master;
+- textos aparecem como beats pontuais, nunca como overlay global;
+- Start Frames generativos nao possuem texto embutido;
+- area de acao principal permanece livre de safe areas editoriais.
 
 ## Movimento
 
@@ -102,6 +103,16 @@ high contrast, clean architectural framing.
 ```
 
 Texto, logo, labels e dados sao adicionados no Remotion. Nao pedir ao Kling que gere tipografia legivel.
+
+## Start Frame Identity Lock
+
+- referencia minima: `assets/hsl/motion-reference-set-v1/manifest.json`;
+- fotografia documental realista e infografico espacial devem coexistir;
+- amarelo acompanha o fluxo ativo, azul revela a infraestrutura e laranja marca somente a falha;
+- um assunto dominante, um foco luminoso e uma transformacao planejada por shot;
+- o Start Frame representa o estado inicial, nao o resultado completo;
+- procedural previs, flat vector, placeholder e proxy sao proibidos em producao;
+- todo asset aprovado registra `hsl.start-frame.provenance.v2` e hashes de frame, prompt, referencia e contact sheet.
 
 ## Thumbnail
 

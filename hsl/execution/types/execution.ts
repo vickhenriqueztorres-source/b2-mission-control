@@ -35,6 +35,8 @@ export interface HslExecutableVisualShot {
   readonly evidence_status: string;
   readonly ai_disclosure_required: boolean;
   readonly visual_function: HslVisualFunction | null;
+  readonly visual_identity_contract_version?: string;
+  readonly required_visual_reference_set?: string;
   readonly start_frame_prompt: string | null;
   readonly motion: Readonly<{
     start_state: string;
@@ -101,6 +103,8 @@ export interface HslExecutionPlan {
   readonly total_visual_shots: number;
   readonly target_visual_cadence_seconds: number;
   readonly visual_coverage_report: string;
+  readonly visual_identity_contract_version?: string;
+  readonly required_visual_reference_set?: string;
   readonly execution_revision: string;
   readonly generated_at: string;
 }

@@ -8,6 +8,11 @@ export const HSL_OFFICIAL_PRODUCTION_RULES = {
   requirePhotorealStartFrames: true,
   forbidLocalProxyAssets: true,
   forbidFlatDiagramStartFrames: true,
+  visualIdentityContractVersion: 'HSL_VISUAL_IDENTITY_V2',
+  requireApprovedVisualReferenceLineage: true,
+  forbidProceduralPrevisAsProductionFrame: true,
+  requireApprovalBoundToContactSheetHash: true,
+  forbidAutomaticHumanApproval: true,
   defaultKlingModel: 'Kling 3.0',
   defaultVeoModel: 'Veo 3.1 Fast'
 } as const;

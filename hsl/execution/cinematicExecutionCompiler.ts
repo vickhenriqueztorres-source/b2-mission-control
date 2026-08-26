@@ -13,6 +13,11 @@ import {
   VisualShotDirectorAgent
 } from './agents/executionAgents';
 import {HslExecutableScene, HslExecutionPlan} from './types/execution';
+import {
+  buildHslStartFramePrompt,
+  HSL_PREMIUM_MOTION_REFERENCE_SET,
+  HSL_VISUAL_IDENTITY_CONTRACT_VERSION
+} from '../../config/hslVisualIdentity';
 
 function canonical(value: unknown): string {
   if (Array.isArray(value)) return `[${value.map(canonical).join(',')}]`;
@@ -66,7 +71,13 @@ export class CinematicExecutionCompiler {
       const timing = rhythm.run(scene);
       const motion = kling.run(scene, source);
       const startFramePrompt = scene.visual_mode === 'generated_ai'
-        ? `Original HSL documentary start frame. ${scene.visual_subject}. Photoreal cinematic image from real-world infrastructure, not a flat diagram. ${source.shot.shot_type.toLowerCase().replace(/_/g, ' ')} composition, ${source.shot.lens_language.toLowerCase().replace(/_/g, ' ')}, subject at ${source.shot.subject_anchor.toLowerCase().replace(/_/g, ' ')}, negative space ${source.shot.negative_space.toLowerCase().replace(/_/g, ' ')}. Natural industrial materials, real texture, depth, practical lighting, no large embedded text, no title card, no dark grid template, no logo, no presenter, no identifiable company.`
+        ? buildHslStartFramePrompt({
+          subject: scene.visual_subject,
+          composition: `${source.shot.shot_type.toLowerCase().replace(/_/g, ' ')} composition`,
+          lens: source.shot.lens_language.toLowerCase().replace(/_/g, ' '),
+          subjectAnchor: source.shot.subject_anchor.toLowerCase().replace(/_/g, ' '),
+          negativeSpace: source.shot.negative_space.toLowerCase().replace(/_/g, ' ')
+        })
         : null;
       const seed: Omit<HslExecutableScene, 'execution_revision'> = {
         schema: 'hsl.execution.scene.v1', schema_version: '1.0.0', episode_id: episode.episode_id,
@@ -159,7 +170,9 @@ export class CinematicExecutionCompiler {
       generated_shot_ids: generatedShotIds,
       total_visual_shots: executableScenes.reduce((sum, scene) => sum + scene.visual_shots.length, 0),
       target_visual_cadence_seconds: visualShotDirector.targetCadenceSeconds,
-      visual_coverage_report: path.relative(outputDirectory, visualCoverageReportPath).replace(/\\/g, '/')
+      visual_coverage_report: path.relative(outputDirectory, visualCoverageReportPath).replace(/\\/g, '/'),
+      visual_identity_contract_version: HSL_VISUAL_IDENTITY_CONTRACT_VERSION,
+      required_visual_reference_set: HSL_PREMIUM_MOTION_REFERENCE_SET.name
     };
     const executionRevision = sha(planSeed);
     const planPath = path.join(outputDirectory, 'episode.execution.json');

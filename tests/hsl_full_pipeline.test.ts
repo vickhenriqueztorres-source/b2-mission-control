@@ -13,6 +13,8 @@ import {HslFireflyGenerationRuntime} from '../production/hslFireflyGenerationRun
 import {HslPostproductionRuntime} from '../hsl/postproduction/postproductionRuntime';
 import {HslSoundFxRuntime} from '../hsl/postproduction/soundFxRuntime';
 import {HslExecutableScene} from '../hsl/execution/types/execution';
+import {HSL_PREMIUM_MOTION_REFERENCE_SET, HSL_VISUAL_IDENTITY_CONTRACT_VERSION} from '../config/hslVisualIdentity';
+import {sha256File, sha256Text} from '../hsl/startframe/startFrameIdentityGate';
 
 const roots: string[] = [];
 after(() => roots.forEach((root) => fs.rmSync(root, {recursive: true, force: true})));
@@ -71,6 +73,11 @@ test('complete editorial and cinematic chain produces approved execution contrac
     assert.ok(scene.visual_shots.length >= 2);
     assert.equal(scene.visual_shots.reduce((sum: number, shot: {planned_duration_seconds: number}) => sum + shot.planned_duration_seconds, 0), scene.planned_duration_seconds);
     for (const shot of scene.visual_shots) {
+      if (shot.visual_mode === 'generated_ai') {
+        assert.equal(shot.visual_identity_contract_version, HSL_VISUAL_IDENTITY_CONTRACT_VERSION);
+        assert.equal(shot.required_visual_reference_set, HSL_PREMIUM_MOTION_REFERENCE_SET.name);
+        assert.match(shot.start_frame_prompt, /HSL_VISUAL_IDENTITY_V2/);
+      }
       if (shot.visual_mode === 'remotion') {
         assert.equal(shot.motion_design.schema, 'hsl.motion-design.v2');
         assert.ok(shot.motion_design.stages.length >= 3);
@@ -98,9 +105,36 @@ test('start-frame runtime requires physical 16:9 files, approval hashes and crea
   const execution = JSON.parse(fs.readFileSync(result.execution.executionPlanPath, 'utf8'));
   const generatedShotIds = execution.generated_shot_ids as string[];
   generatedShotIds.forEach((shotId) => image(path.join(frames, `${shotId}.png`)));
+  const prompts = new Map<string, string>();
+  for (const scenePath of result.execution.scenePaths) {
+    const scene = JSON.parse(fs.readFileSync(scenePath, 'utf8')) as HslExecutableScene;
+    scene.visual_shots.filter((shot) => shot.visual_mode === 'generated_ai').forEach((shot) => {
+      prompts.set(shot.shot_id, shot.start_frame_prompt || '');
+    });
+  }
+  const provenancePath = path.join(frames, 'start-frame-provenance.json');
+  json(provenancePath, {
+    schema: 'hsl.start-frame.provenance.v2',
+    status: 'IDENTITY_LOCKED_START_FRAMES_READY',
+    identity_contract_version: HSL_VISUAL_IDENTITY_CONTRACT_VERSION,
+    reference_set_manifest_path: HSL_PREMIUM_MOTION_REFERENCE_SET.manifestPath,
+    reference_set_manifest_sha256: sha256File(path.resolve(HSL_PREMIUM_MOTION_REFERENCE_SET.manifestPath)),
+    items: generatedShotIds.map((shotId) => ({
+      shot_id: shotId,
+      frame_sha256: hash(path.join(frames, `${shotId}.png`)),
+      prompt_sha256: sha256Text(prompts.get(shotId) || ''),
+      source_mode: 'REFERENCE_CONDITIONED_GENERATION',
+      generator: 'TEST_REFERENCE_CONDITIONED_GENERATOR',
+      identity_contract_version: HSL_VISUAL_IDENTITY_CONTRACT_VERSION,
+      reference_asset_ids: ['LAST_METERS']
+    }))
+  });
   const approvalPath = path.join(base, 'approval.json');
   json(approvalPath, {
     episode_id: 'HSL-PILOT-001', status: 'APPROVED',
+    visual_identity_contract_version: HSL_VISUAL_IDENTITY_CONTRACT_VERSION,
+    start_frame_provenance_sha256: sha256File(provenancePath),
+    review_artifact_sha256: 'sha256_test_review_artifact',
     items: generatedShotIds.map((shotId) => ({
       shot_id: shotId, status: 'APPROVED', approved_start_frame_sha256: hash(path.join(frames, `${shotId}.png`)), reviewer: 'TEST_REVIEWER', reviewed_at: '2026-08-19T00:00:00.000Z'
     }))

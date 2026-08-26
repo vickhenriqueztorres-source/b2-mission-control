@@ -4,6 +4,12 @@ import {HslEnergy, HslExecutableScene, HslExecutableVisualShot, HslMicroEvent, H
 import {buildMotionDesign} from '../../motion/motionDesign';
 import {MotionRouteDirectorAgent, VeoMotionDirectorAgent} from '../../motion/generatedMotion';
 import {CinematicCoverageDirectorAgent} from '../cinematicCoveragePolicy';
+import {
+  assertHslStartFramePromptIdentity,
+  buildHslStartFramePrompt,
+  HSL_PREMIUM_MOTION_REFERENCE_SET,
+  HSL_VISUAL_IDENTITY_CONTRACT_VERSION
+} from '../../../config/hslVisualIdentity';
 
 function words(text: string): number {
   return text.trim().split(/\s+/).filter(Boolean).length;
@@ -147,9 +153,14 @@ export class VisualShotDirectorAgent {
         variant, visual_mode: visualMode, visual_subject: visualSubject,
         planned_duration_seconds: plannedDuration, evidence_status: scene.evidence_status,
         ai_disclosure_required: generated, visual_function: generated ? scene.visual_function || 'reconstruction' : null,
-        start_frame_prompt: generated
-          ? `Original HSL documentary start frame. ${visualSubject}. Build a photoreal cinematic image from real-world water infrastructure, not a flat diagram. ${this.composition(variant)}, ${source.shot.lens_language.toLowerCase().replace(/_/g, ' ')}, subject at ${source.shot.subject_anchor.toLowerCase().replace(/_/g, ' ')}. Natural industrial materials, coherent practical lighting, real texture, depth, atmospheric scale and documentary camera language. HSL yellow or blue may appear only as subtle spatial flow accents over a real scene. No large embedded text, no title card, no dark grid template, no logo, no presenter, no identifiable company.`
-          : null,
+        visual_identity_contract_version: generated ? HSL_VISUAL_IDENTITY_CONTRACT_VERSION : undefined,
+        required_visual_reference_set: generated ? HSL_PREMIUM_MOTION_REFERENCE_SET.name : undefined,
+        start_frame_prompt: generated ? buildHslStartFramePrompt({
+          subject: visualSubject,
+          composition: this.composition(variant),
+          lens: source.shot.lens_language.toLowerCase().replace(/_/g, ' '),
+          subjectAnchor: source.shot.subject_anchor.toLowerCase().replace(/_/g, ' ')
+        }) : null,
         motion: generated ? this.motion(scene, source, variant) : null,
         generation_strategy: route.generation_strategy, audio_strategy: route.audio_strategy,
         motion_family: route.motion_family, motion_route: route,
@@ -221,6 +232,11 @@ export class VisualCoverageQaAgent {
     for (const shot of scene.visual_shots) {
       if (shot.planned_duration_seconds > 8 || shot.planned_duration_seconds < 2) throw new Error(`HSL_VISUAL_SHOT_DURATION_INVALID:${shot.shot_id}`);
       if (shot.visual_mode === 'generated_ai' && (!shot.start_frame_prompt || !shot.motion || !shot.ai_disclosure_required)) throw new Error(`HSL_GENERATED_SHOT_CONTRACT_INVALID:${shot.shot_id}`);
+      if (shot.visual_mode === 'generated_ai') {
+        if (shot.visual_identity_contract_version !== HSL_VISUAL_IDENTITY_CONTRACT_VERSION) throw new Error(`HSL_VISUAL_IDENTITY_CONTRACT_REQUIRED:${shot.shot_id}`);
+        if (shot.required_visual_reference_set !== HSL_PREMIUM_MOTION_REFERENCE_SET.name) throw new Error(`HSL_VISUAL_REFERENCE_SET_REQUIRED:${shot.shot_id}`);
+        assertHslStartFramePromptIdentity(shot.start_frame_prompt!, shot.shot_id);
+      }
       if (shot.visual_mode !== 'generated_ai' && (shot.start_frame_prompt || shot.motion)) throw new Error(`HSL_NON_GENERATED_SHOT_HAS_MOTION:${shot.shot_id}`);
     }
   }

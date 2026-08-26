@@ -3,8 +3,13 @@ import path from 'path';
 import fs from 'fs';
 import { ProductionSafetyGuard } from '../config/productionSafetyGuard';
 
-const DB_PATH = path.join(__dirname, 'mission_control.db');
-const SCHEMA_PATH = path.join(__dirname, 'schema.sql');
+const projectRoot = path.basename(path.dirname(__dirname)) === 'dist'
+  ? path.resolve(__dirname, '..', '..')
+  : path.resolve(__dirname, '..');
+const DB_PATH = process.env.MISSION_CONTROL_DB_PATH
+  ? path.resolve(process.env.MISSION_CONTROL_DB_PATH)
+  : path.join(projectRoot, 'database', 'mission_control.db');
+const SCHEMA_PATH = path.join(projectRoot, 'database', 'schema.sql');
 
 export function getDatabase(): Database.Database {
   ProductionSafetyGuard.assertSafeForProduction();

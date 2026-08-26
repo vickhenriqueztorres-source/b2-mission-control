@@ -5,6 +5,12 @@ import path from 'path';
 import {HslGenerationHandoff} from '../../production-bridge/motionToFirefly';
 import {HslExecutableScene, HslExecutableVisualShot, HslExecutionPlan} from '../execution/types/execution';
 import {PremiumMotionStartFrameAgent} from './premiumMotionStartFrame';
+import {
+  HSL_PREMIUM_MOTION_REFERENCE_SET,
+  HSL_VISUAL_IDENTITY_CONTRACT_VERSION,
+  HSL_VISUAL_IDENTITY_RULES
+} from '../../config/hslVisualIdentity';
+import {StartFrameIdentityGate} from './startFrameIdentityGate';
 
 export interface HslStartFrameApprovalItem {
   readonly shot_id?: string;
@@ -18,6 +24,9 @@ export interface HslStartFrameApprovalItem {
 export interface HslStartFrameApprovalManifest {
   readonly episode_id: string;
   readonly status: 'APPROVED';
+  readonly visual_identity_contract_version?: string;
+  readonly start_frame_provenance_sha256?: string;
+  readonly review_artifact_sha256?: string;
   readonly items: readonly HslStartFrameApprovalItem[];
 }
 
@@ -125,11 +134,11 @@ function visualAnalysis(filePath: string): HslStartFrameVisualAnalysis {
     average_edge_delta: Math.round(averageEdgeDelta * 1000) / 1000,
     luminance_stddev: Math.round(Math.sqrt(variance) * 1000) / 1000
   };
-  const flatGraphic = analysis.texture_bucket_ratio < .022
+  const flatGraphic = analysis.texture_bucket_ratio < HSL_VISUAL_IDENTITY_RULES.minimumTextureBucketRatio
     && analysis.brand_palette_ratio > .88
     && analysis.luminance_stddev < 36
     && analysis.average_edge_delta < 9;
-  if (flatGraphic) throw new Error(`START_FRAME_VISUAL_STYLE_TOO_FLAT:${filePath}`);
+  if (flatGraphic) throw new Error(`START_FRAME_VISUAL_STYLE_TOO_FLAT:${filePath}:${JSON.stringify(analysis)}`);
   return analysis;
 }
 
@@ -173,6 +182,10 @@ export class HslStartFrameRuntime {
       return shots.filter((shot) => shot.visual_mode === 'generated_ai').map((shot) => ({shot, executionRevision: scene.execution_revision}));
     });
     if (!generatedShots.length) throw new Error('HSL_GENERATED_SHOTS_REQUIRED');
+    const identityLocked = executionPlan.visual_identity_contract_version === HSL_VISUAL_IDENTITY_CONTRACT_VERSION;
+    if (identityLocked && executionPlan.required_visual_reference_set !== HSL_PREMIUM_MOTION_REFERENCE_SET.name) {
+      throw new Error('HSL_EXECUTION_VISUAL_REFERENCE_SET_MISMATCH');
+    }
     const approvalPath = path.resolve(input.approvalManifestPath);
     if (!fs.existsSync(approvalPath)) throw new Error('HSL_START_FRAME_HUMAN_APPROVAL_REQUIRED');
     const approval = JSON.parse(fs.readFileSync(approvalPath, 'utf8')) as HslStartFrameApprovalManifest;
@@ -195,11 +208,35 @@ export class HslStartFrameRuntime {
       fs.copyFileSync(source, destination);
       frameRecords.push({shot_id: shot.shot_id, parent_scene_id: shot.parent_scene_id, path: destination, sha256: validation.sha256, width: validation.width, height: validation.height, prompt: shot.start_frame_prompt || ''});
     }
+    let provenanceHash: string | null = null;
+    if (identityLocked) {
+      const provenancePath = path.join(path.resolve(input.sourceFramesDirectory), 'start-frame-provenance.json');
+      new StartFrameIdentityGate().validate({
+        provenanceManifestPath: provenancePath,
+        expectedShots: frameRecords.map((frame) => ({
+          shot_id: frame.shot_id,
+          frame_path: frame.path,
+          start_frame_prompt: frame.prompt
+        }))
+      });
+      provenanceHash = shaFile(provenancePath);
+      if (approval.visual_identity_contract_version !== HSL_VISUAL_IDENTITY_CONTRACT_VERSION) {
+        throw new Error('HSL_START_FRAME_APPROVAL_IDENTITY_VERSION_REQUIRED');
+      }
+      if (approval.start_frame_provenance_sha256 !== provenanceHash) {
+        throw new Error('HSL_START_FRAME_APPROVAL_PROVENANCE_HASH_MISMATCH');
+      }
+      if (!approval.review_artifact_sha256) throw new Error('HSL_START_FRAME_APPROVAL_REVIEW_ARTIFACT_REQUIRED');
+    }
     new StartFrameContinuityAgent().validate(frameRecords);
     const startFrameManifestPath = path.join(outputRoot, 'start-frame-manifest.json');
     writeJson(startFrameManifestPath, {
       schema: 'hsl.start-frame.manifest.v1', episode_id: executionPlan.episode_id,
-      status: 'HUMAN_APPROVED', human_approval_hash: approvalHash, items: frameRecords
+      status: 'HUMAN_APPROVED', human_approval_hash: approvalHash,
+      visual_identity_contract_version: identityLocked ? HSL_VISUAL_IDENTITY_CONTRACT_VERSION : null,
+      start_frame_provenance_sha256: provenanceHash,
+      review_artifact_sha256: approval.review_artifact_sha256 || null,
+      items: frameRecords
     });
     const motionPackagePaths: string[] = [];
     const premiumPackagePaths: string[] = [];

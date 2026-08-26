@@ -9,7 +9,16 @@ export const HSL_CINEMATIC_BRAND_RULES: HslCinematicBrandRules = Object.freeze({
     'controlled depth',
     'readable geometry',
     'room for information',
-    'mechanical specificity'
+    'mechanical specificity',
+    'photoreal documentary base',
+    'kinetic pop documentary identity',
+    'acid yellow active flow only',
+    'electric blue infrastructure only',
+    'hyper orange constraint only',
+    'one dominant luminous focus',
+    'approved premium motion reference lineage',
+    'no embedded text in generated start frames',
+    'no procedural previs in production'
   ]),
   maximumCameraIntensity: 'MEDIUM',
   defaultDocumentaryLens: 'DOCUMENTARY_35'
