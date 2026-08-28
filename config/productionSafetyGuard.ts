@@ -5,7 +5,9 @@ export type ProductionSafetyViolationCode =
   | 'SIMULATED_EVENT_FORBIDDEN_IN_PRODUCTION'
   | 'STAGING_DATABASE_FORBIDDEN_IN_PRODUCTION'
   | 'STAGING_CHROME_PROFILE_FORBIDDEN_IN_PRODUCTION'
-  | 'STAGING_OUTPUT_FORBIDDEN_IN_PRODUCTION';
+  | 'STAGING_OUTPUT_FORBIDDEN_IN_PRODUCTION'
+  | 'REUSED_FRAMES_FORBIDDEN_IN_PRODUCTION'
+  | 'FIREFLY_EXECUTION_MANDATORY_IN_PRODUCTION';
 
 export type ProductionSafetyViolation = {
   code: ProductionSafetyViolationCode;
@@ -32,6 +34,29 @@ export class ProductionSafetyGuard {
     const violation = this.firstViolation(env);
     if (violation) {
       throw new ProductionSafetyError(violation);
+    }
+  }
+
+  public static assertFireflyMandatory(hasExecutedFirefly: boolean, productionId: string): void {
+    if (!hasExecutedFirefly) {
+      throw new ProductionSafetyError({
+        code: 'FIREFLY_EXECUTION_MANDATORY_IN_PRODUCTION',
+        variable: 'FIREFLY_GENERATED_TAKES',
+        value: `Production ${productionId} must execute real Firefly video generation.`
+      });
+    }
+  }
+
+  public static assertNoReusedStartFrames(startFramePaths: readonly string[], currentEpisodeId: string): void {
+    for (const framePath of startFramePaths) {
+      const normalized = framePath.replace(/\\/g, '/');
+      if (normalized.includes('OOL_001') && currentEpisodeId !== 'OOL_001') {
+        throw new ProductionSafetyError({
+          code: 'REUSED_FRAMES_FORBIDDEN_IN_PRODUCTION',
+          variable: 'START_FRAME_PATH',
+          value: `Frame ${framePath} belongs to OOL_001. All scenes must have fresh generated frames for ${currentEpisodeId}.`
+        });
+      }
     }
   }
 

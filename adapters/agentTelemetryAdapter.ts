@@ -105,7 +105,7 @@ export class AgentTelemetryAdapter {
       if (!prodCheck) {
         db.prepare(`
           INSERT INTO productions (production_id, project_name, status, current_step)
-          VALUES (?, 'Hidden Systems Lab Live Ops', 'RUNNING', 1)
+          VALUES (?, 'O Outro Lado Live Ops', 'RUNNING', 1)
         `).run(fullEvent.production_id);
       }
 

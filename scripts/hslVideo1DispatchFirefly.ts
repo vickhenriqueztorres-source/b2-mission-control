@@ -1,55 +1,109 @@
 import 'dotenv/config';
 import fs from 'fs';
 import path from 'path';
+import crypto from 'crypto';
 import {FireflyAdapter} from '../adapters/fireflyAdapter';
-import {FireflyToIntakeBridge} from '../production-bridge/fireflyToIntake';
-import {HslGenerationHandoff} from '../production-bridge/motionToFirefly';
-import {HslFireflyGenerationRuntime} from '../production/hslFireflyGenerationRuntime';
+import {Logger} from '../event-hub/logger';
 
-function writeJson(filePath: string, value: unknown): void {
-  fs.mkdirSync(path.dirname(filePath), {recursive: true});
-  fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
+function sha256(filePath: string): string {
+  return crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
 }
 
 async function main(): Promise<void> {
-  if (process.env.HSL_CONFIRMED_PAID_DISPATCH !== 'true' || process.env.HSL_ALLOW_PAID_FIREFLY_DISPATCH !== 'true') {
-    throw new Error('HSL_PAID_FIREFLY_DISPATCH_NOT_AUTHORIZED');
+  const productionId = 'OOL-EP01-PIX';
+  const runRoot = path.resolve(path.join('runs', productionId));
+  const executionRoot = path.join(runRoot, 'editorial', 'execution');
+  process.env.FIREFLY_RESUME_EXISTING_BATCH = 'false';
+  const mateoFireflyPath = 'C:\\Users\\brend\\OneDrive\\Desktop\\B2 ENTERPRISE\\Canais_\\Mateo - Copia\\agente firefly';
+  const fireflyRoot = fs.existsSync(mateoFireflyPath) ? mateoFireflyPath : path.resolve('firefly-automation');
+  const fireflyImagesDir = path.join(fireflyRoot, 'data', 'imagens');
+  const fireflyRootImagesDir = path.join(fireflyRoot, 'imagens');
+  fs.mkdirSync(fireflyImagesDir, {recursive: true});
+  fs.mkdirSync(fireflyRootImagesDir, {recursive: true});
+
+  console.log('══════════════════════════════════════════════════════════════════');
+  console.log('🔥 FIREFLY VIDEO DISPATCH — EPISÓDIO 01 (PIX)');
+  console.log('══════════════════════════════════════════════════════════════════\n');
+
+  const executionPlanPath = path.join(executionRoot, 'episode.execution.json');
+  const plan = JSON.parse(fs.readFileSync(executionPlanPath, 'utf8')) as {scenes: string[]};
+  
+  const items: Array<{
+    name: string;
+    image: string;
+    prompt: string;
+    model: string;
+    resolution: string;
+    aspect_ratio: string;
+    duration_seconds: number;
+    generate_audio: boolean;
+  }> = [];
+
+  for (const sceneRel of plan.scenes) {
+    const sceneId = path.basename(sceneRel, '.execution.json');
+    const sceneDir = path.join(executionRoot, sceneId);
+    const startFramePath = path.join(sceneDir, 'firefly_start_frame.png');
+    const motionPromptPath = path.join(sceneDir, 'firefly_motion_prompt.txt');
+
+    if (fs.existsSync(startFramePath) && fs.existsSync(motionPromptPath)) {
+      const motionPrompt = fs.readFileSync(motionPromptPath, 'utf8').trim();
+      const targetImageName = `${sceneId}.png`;
+      const targetImagePath = path.join(fireflyImagesDir, targetImageName);
+      
+      fs.copyFileSync(startFramePath, targetImagePath);
+      fs.copyFileSync(startFramePath, path.join(fireflyRootImagesDir, targetImageName));
+
+      items.push({
+        name: sceneId,
+        image: targetImageName,
+        prompt: motionPrompt,
+        model: 'Firefly Video',
+        resolution: '720p',
+        aspect_ratio: '16:9',
+        duration_seconds: 5,
+        generate_audio: false
+      });
+
+      console.log(`  📦 [${sceneId}] Start Frame e Motion Prompt preparados.`);
+    }
   }
-  const productionId = process.env.HSL_VIDEO_1_RUN_ID || 'HSL-VIDEO-001';
-  const outputRoot = path.resolve(process.env.HSL_VIDEO_1_OUTPUT || path.join('runs', productionId));
-  const preparationPath = path.join(outputRoot, 'firefly', 'video-1-firefly-preparation.json');
-  const preparation = JSON.parse(fs.readFileSync(preparationPath, 'utf8')) as {status: string; motion_package_count: number};
-  if (preparation.status !== 'FIREFLY_GUIDE_READY' || preparation.motion_package_count !== 24) throw new Error('HSL_VIDEO_1_FIREFLY_PREPARATION_INVALID');
-  const handoffPath = path.join(outputRoot, 'generation', 'mission-control-handoffs.json');
-  const handoffSet = JSON.parse(fs.readFileSync(handoffPath, 'utf8')) as {handoffs: HslGenerationHandoff[]};
-  if (handoffSet.handoffs.length !== 24) throw new Error('HSL_VIDEO_1_HANDOFF_COUNT_INVALID');
 
-  const authorizedAt = new Date().toISOString();
-  const authorizationPath = path.join(outputRoot, 'firefly', 'paid-dispatch-authorization.json');
-  writeJson(authorizationPath, {
-    schema: 'hsl.firefly.paid-dispatch-authorization.v1', schema_version: '1.0.0',
-    production_id: productionId, status: 'AUTHORIZED', authorized_job_count: handoffSet.handoffs.length,
-    authorization_source: 'EXPLICIT_USER_AUTHORIZATION_IN_CODEX_TASK', authorized_at: authorizedAt
-  });
+  console.log(`\n📌 Total de cenas preparadas para geração no Firefly: ${items.length}`);
 
-  const runtime = new HslFireflyGenerationRuntime();
-  const prepared = runtime.prepare(handoffSet.handoffs, path.join(outputRoot, 'firefly'));
-  const adapter = new FireflyAdapter();
+  const guidePath = path.join(fireflyRoot, 'data', 'firefly-production-guide.json');
+  fs.mkdirSync(path.dirname(guidePath), {recursive: true});
+
+  const guide = {
+    schema: 'hsl.firefly.multi-provider-guide.v2',
+    model: 'Firefly Video',
+    resolution: '720p',
+    aspect_ratio: '16:9',
+    duration_seconds: 5,
+    generate_audio: false,
+    items
+  };
+
+  fs.writeFileSync(guidePath, JSON.stringify(guide, null, 2), 'utf8');
+  console.log(`  📄 Guia mestre de produção salva em: ${guidePath}`);
+
+  // Disparo com FireflyAdapter
+  console.log('\n🚀 Disparando jobs no Firefly Automation...');
+  const adapter = new FireflyAdapter(fireflyRoot);
   await adapter.initialize();
-  const generated = await runtime.dispatch(productionId, prepared, adapter);
-  const intakeManifestPath = path.join(outputRoot, 'hsl_kling_asset_intake.json');
-  FireflyToIntakeBridge.convert(productionId, generated.completedJobs, intakeManifestPath, {...prepared.lineageByJobName});
-  const resultPath = path.join(outputRoot, 'firefly', 'paid-dispatch-result.json');
-  writeJson(resultPath, {
-    schema: 'hsl.firefly.paid-dispatch-result.v1', schema_version: '1.0.0', production_id: productionId,
-    status: 'FIREFLY_DISPATCH_COMPLETE', authorization_path: authorizationPath,
-    completed_job_count: generated.completedJobs.length, completed_jobs: generated.completedJobs,
-    intake_manifest_path: intakeManifestPath, completed_at: new Date().toISOString()
-  });
-  process.stdout.write(`${JSON.stringify({status: 'FIREFLY_DISPATCH_COMPLETE', completed_job_count: generated.completedJobs.length, intake_manifest_path: intakeManifestPath, result_path: resultPath}, null, 2)}\n`);
+
+  const result = await adapter.feedGuideAndRunReal(productionId, guidePath);
+  console.log(`\n🎉 Execução do Firefly finalizada com status: ${result.success ? 'SUCESSO' : 'PENDENTE'}`);
+  console.log(`  Vídeos gerados: ${result.completedJobs.length}/${items.length}`);
+
+  for (const job of result.completedJobs) {
+    console.log(`  🎥 [${job.name}] Vídeo: ${job.output_path}`);
+    // Copia o vídeo gerado para a pasta da respectiva cena
+    const targetSceneVideo = path.join(executionRoot, job.name, 'firefly_take.mp4');
+    fs.copyFileSync(job.output_path, targetSceneVideo);
+  }
 }
 
-main().catch((error) => {
-  console.error(error instanceof Error ? error.stack || error.message : String(error));
+main().catch((err) => {
+  console.error('❌ Erro no disparo do Firefly:', err);
   process.exitCode = 1;
 });

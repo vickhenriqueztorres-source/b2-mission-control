@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://b2.ai/schemas/artifact.schema.json",
+  "title": "ArtifactRegistry",
+  "description": "Registro central de artefatos produzidos",
+  "type": "object",
+  "required": [
+    "artifact_id",
+    "production_id",
+    "artifact_type",
+    "file_path",
+    "sha256",
+    "created_at"
+  ],
+  "properties": {
+    "artifact_id": { "type": "string" },
+    "production_id": { "type": "string" },
+    "artifact_type": {
+      "type": "string",
+      "enum": [
+        "BRIEFING_DOC",
+        "SCRIPT_JSON",
+        "SHOT_MAP",
+        "START_FRAME_PNG",
+        "MOTION_PACKAGE_JSON",
+        "FIREFLY_GUIDE_JSON",
+        "RAW_CLIP_MP4",
+        "INTAKE_MANIFEST_JSON",
+        "FINAL_VIDEO_MP4"
+      ]
+    },
+    "file_path": { "type": "string" },
+    "sha256": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" }
+  }
+}

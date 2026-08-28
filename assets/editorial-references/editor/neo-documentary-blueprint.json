@@ -1,0 +1,95 @@
+{
+  "schema": "hsl.editorial.neo-documentary-blueprint.v1",
+  "schema_version": "1.0.0",
+  "source": {
+    "url": "https://www.youtube.com/watch?v=krSePO1QsDI",
+    "video_id": "krSePO1QsDI",
+    "title": "How the U.S. Doomsday Plane Works",
+    "channel": "neo",
+    "channel_url": "https://www.youtube.com/@neoexplains",
+    "total_duration_seconds": 918.09,
+    "total_words": 2236,
+    "words_per_minute": 146.1,
+    "total_cues": 319
+  },
+  "narrative_architecture": {
+    "chapters": [
+      {
+        "chapter_id": "CH_01_HOOK",
+        "title": "The Polarization Hook & Secret Counterpart",
+        "timestamp_start": 0.0,
+        "timestamp_end": 52.0,
+        "duration_seconds": 52.0,
+        "pacing_cadence_seconds": 3.4,
+        "editing_formula": "Show iconic known subject (Air Force One VC-25) -> contrast with secret apocalyptic machine (E-4B Doomsday Plane) -> whoosh into 3D digital interior reconstruction."
+      },
+      {
+        "chapter_id": "CH_02_SYSTEM_LOGIC",
+        "title": "The System Problem & Nuclear Triad Chain of Command",
+        "timestamp_start": 52.0,
+        "timestamp_end": 188.0,
+        "duration_seconds": 136.0,
+        "pacing_cadence_seconds": 3.8,
+        "editing_formula": "Protocol breakdown at Offutt AFB -> 3-way branch (Land, Sea, Air Triad) -> System vulnerability question (EMP blast & communication blackout)."
+      },
+      {
+        "chapter_id": "CH_03_HISTORICAL_CONTINGENCY",
+        "title": "Operation Looking Glass (24/7 29-Year Airborne Alert)",
+        "timestamp_start": 188.0,
+        "timestamp_end": 300.0,
+        "duration_seconds": 112.0,
+        "pacing_cadence_seconds": 4.1,
+        "editing_formula": "Historical timeline -> 24/7 continuous flight radar loop -> Transition from EC-135 to Boeing 747-200 (E-4B)."
+      },
+      {
+        "chapter_id": "CH_04_3D_CROSS_SECTION",
+        "title": "3D Digital Interior Cross-Section (Room-by-Room Walkthrough)",
+        "timestamp_start": 300.0,
+        "timestamp_end": 680.0,
+        "duration_seconds": 380.0,
+        "pacing_cadence_seconds": 3.2,
+        "editing_formula": "Compartment zoom-in -> highlight active room in Neon Amber (#FF5500) -> HUD callout line + specs -> slow camera tracking through 3D wireframe."
+      },
+      {
+        "chapter_id": "CH_05_PHYSICS_AND_HARDENING",
+        "title": "5-Mile VLF Trailing Wire, Submarine Links & EMP Hardening",
+        "timestamp_start": 680.0,
+        "timestamp_end": 780.0,
+        "duration_seconds": 100.0,
+        "pacing_cadence_seconds": 3.6,
+        "editing_formula": "Aircraft gentle banking turn diagram -> 5-mile trailing wire deployment -> VLF radio wave penetration into ocean seawater to reach nuclear ballistic subs -> analog wire-mesh windows."
+      },
+      {
+        "chapter_id": "CH_06_FLEET_REDUNDANCY",
+        "title": "Command Network Redundancy & Closing Verdict",
+        "timestamp_start": 780.0,
+        "timestamp_end": 918.0,
+        "duration_seconds": 138.0,
+        "pacing_cadence_seconds": 4.0,
+        "editing_formula": "Air Force E-4B (4 units) + Navy E-6 Mercury (16 units) distributed grid -> B-2 Spirit link -> sponsor transition."
+      }
+    ]
+  },
+  "editing_heuristics": {
+    "visual_shot_cadence": {
+      "target_seconds": 3.6,
+      "min_seconds": 2.2,
+      "max_seconds": 5.5
+    },
+    "color_and_lighting": {
+      "background": "#0A0B10",
+      "chassis_wireframe": "rgba(244, 244, 240, 0.25)",
+      "active_compartment_glow": "#FF5500",
+      "telemetry_data_accent": "#00F0FF",
+      "text_primary": "#F4F4F0",
+      "text_muted": "#8A8D9F"
+    },
+    "cinematography_rules": [
+      "Continuous subtle camera push-in or gentle orbital rotation (no static camera for > 2 seconds)",
+      "X-Ray / Cutaway schematic view when explaining internal mechanics or components",
+      "Callout cards tethered to specific coordinates with glowing anchor dots",
+      "Laser beam connection lines for signal paths (satellite uplink / undersea submarine links)",
+      "Audio-visual sync: Sound whoosh and sub-bass drop on compartment transitions"
+    ]
+  }
+}

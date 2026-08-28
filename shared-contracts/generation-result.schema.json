@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://b2.ai/schemas/generation-result.schema.json",
+  "title": "ManualKlingClipIntake",
+  "description": "Manifesto de Ingestão gerado pelo Mission Control a partir dos MP4s exportados pelo Firefly para entrega ao Rafa Lobo Fase 3",
+  "type": "object",
+  "required": [
+    "production_id",
+    "imported_at",
+    "clips"
+  ],
+  "properties": {
+    "production_id": {
+      "type": "string"
+    },
+    "imported_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "clips": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "shot_id",
+          "take_id",
+          "file_path",
+          "file_hash_sha256",
+          "resolution",
+          "fps",
+          "duration_seconds",
+          "is_real_video"
+        ],
+        "properties": {
+          "shot_id": { "type": "string" },
+          "take_id": { "type": "string" },
+          "file_path": { "type": "string" },
+          "file_hash_sha256": { "type": "string" },
+          "resolution": { "type": "string" },
+          "fps": { "type": "integer" },
+          "duration_seconds": { "type": "number" },
+          "is_real_video": { "type": "boolean", "const": true }
+        }
+      }
+    }
+  }
+}

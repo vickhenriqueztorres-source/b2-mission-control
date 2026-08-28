@@ -1,0 +1,141 @@
+{
+  "schema": "hsl.editorial.editor-rag-index.v1",
+  "schema_version": "1.0.0",
+  "reference_only": true,
+  "generated_at": "2026-08-25T02:25:00.000Z",
+  "source_directory_label": "RAG EDITOR",
+  "source_files": [
+    "Cont1.md",
+    "Intro.md"
+  ],
+  "aesthetic_definition": {
+    "name": "Villeneuve Cyber-Industrial Documentary",
+    "color_palette": {
+      "deep_carbon_black": "#060709",
+      "sodium_vapor_amber": "#FF5500",
+      "cyan_telemetry": "#00F0FF",
+      "surface_dark": "#161824",
+      "border_dark": "#34384F",
+      "text_primary": "#F4F4F0",
+      "text_muted": "#9A9EB2"
+    },
+    "cinematography": {
+      "aspect_ratio": "2.39:1",
+      "lens_simulation": "35mm Anamorphic",
+      "framing": "Monolithic / Symmetrical with Corner Framing Brackets [ ]",
+      "lighting": "Chiaroscuro with dense volumetric fog, steam, and wet reflective ground",
+      "film_grain": "35mm Film Dust at 0.06 screen blend"
+    }
+  },
+  "modules": [
+    {
+      "module_id": 1,
+      "technique_name": "PARALLAX_RACK_FOCUS_2_5D",
+      "title": "Técnica 1: O Efeito Switch Focus (Rack Focus 2.5D Automatizado)",
+      "origin": "Johnny Harris & Vox Documentary Editing Breakdown",
+      "principles": [
+        "SEPARATE_FOREGROUND_FROM_BACKGROUND",
+        "INVERSE_BLUR_TRANSITION_0_TO_12_AND_8_TO_0",
+        "SPRING_PHYSICS_CURVE_DAMPING_18_STIFFNESS_60",
+        "BACKGROUND_SUBTLE_PUSH_IN_SCALE_1_0_TO_1_08",
+        "TRANSLUCENT_XRAY_OR_TELEMETRY_FOREGROUND_FOCUS"
+      ],
+      "mathematical_formula": {
+        "spring_config": "{ damping: 18, stiffness: 60 }",
+        "bg_blur": "interpolate(progress, [0, 1], [0, 12])",
+        "bg_scale": "interpolate(progress, [0, 1], [1.0, 1.08])",
+        "fg_blur": "interpolate(progress, [0, 1], [8, 0])",
+        "fg_opacity": "interpolate(progress, [0, 1], [0.3, 1.0])"
+      },
+      "core_summary": "Separação de planos ópticos em 2.5D com transição simultânea de desfoque inverso (fundo desfoca enquanto elemento frontal ganha nitidez máxima) e push-in milimétrico."
+    },
+    {
+      "module_id": 2,
+      "technique_name": "CYBER_MAP_TRACE_3D",
+      "title": "Técnica 2: O Mapa Cyber-Industrial 3D (Estilo Johnny Harris Vetorial)",
+      "origin": "Johnny Harris 3D Map & Motion Graphics Breakdown",
+      "principles": [
+        "PERSPECTIVE_3D_CAMERA_TILT_25_TO_35_DEG",
+        "CONTINUOUS_VECTOR_ROUTE_STROKE_PROGRESS",
+        "SODIUM_VAPOR_AMBER_LASER_GLOW_FF5500",
+        "CYAN_TELEMETRY_COORDINATES_PULSE_00F0FF",
+        "Z_AXIS_ROTATION_MINUS_12_DEG"
+      ],
+      "mathematical_formula": {
+        "stroke_progress": "interpolate(frame, [0, 90], [1000, 0], { extrapolateRight: 'clamp' })",
+        "camera_tilt": "interpolate(frame, [0, 150], [25, 35])",
+        "transform": "rotateX(cameraTilt deg) rotateZ(-12deg) scale(1.15)"
+      },
+      "core_summary": "Renderização vetorial 3D de mapas e rotas de infraestrutura com duto/traçado acendendo em Laranja Neon (#FF5500), drop-shadow laser e pontos focais com coordenadas ciano."
+    },
+    {
+      "module_id": 3,
+      "technique_name": "LASER_SCAN_DOSSIER",
+      "title": "Técnica 3: O Dossiê com Corte Laser (Documentos Investigativos Sob Vidro)",
+      "origin": "Vox & Investigative Journalism Document Analysis",
+      "principles": [
+        "AUTHENTIC_TECHNICAL_DOCUMENT_UNDER_DARK_GLASS",
+        "LASER_SWEEP_BLADE_0_TO_100_PERCENT_HEIGHT",
+        "CRITICAL_TEXT_HIGHLIGHT_INSTANT_FF5500_BACKDROP",
+        "DARK_VIGNETTE_HIGH_CONTRAST_MONOCHROME"
+      ],
+      "mathematical_formula": {
+        "laser_y": "interpolate(frame, [0, 60], [0, 100])",
+        "text_highlight_opacity": "interpolate(frame, [20, 35], [0, 1], { extrapolateRight: 'clamp' })"
+      },
+      "core_summary": "Exibição de documentos técnicos e regulatórios reais sob vidro escuro com lâmina laser de varredura vertical (#FF5500) revelando e destacando números e cláusulas decisivas."
+    },
+    {
+      "module_id": 4,
+      "technique_name": "ANAMORPHIC_CINEMATIC_OVERLAY",
+      "title": "Técnica 4: Camada de Textura Anamórfica Global (Acabamento Villeneuve)",
+      "origin": "Denis Villeneuve (Blade Runner 2049) 35mm Master Finishing",
+      "principles": [
+        "FILM_DUST_35MM_GRAIN_SCREEN_BLEND_0_06_OPACITY",
+        "LETTERBOX_CROP_2_39_1_WITH_CORNER_BRACKETS",
+        "HORIZONTAL_SODIUM_AMBER_LENS_FLARES_ON_TRANSITIONS",
+        "ATMOSPHERIC_VOLUMETRIC_FOG_INTEGRATION"
+      ],
+      "mathematical_formula": {
+        "letterbox_height_percent": "12.5%",
+        "grain_opacity": "0.06",
+        "flare_opacity": "interpolate(frame, [0, 10, 25], [0, 0.8, 0], { extrapolateRight: 'clamp' })"
+      },
+      "core_summary": "Camada de finalização global composta por grão 35mm sutil, crop letterbox 2.39:1 com cantoneiras de enquadramento [ ] e reflexos horizontais anamórficos nas quebras de capítulo."
+    },
+    {
+      "module_id": 5,
+      "technique_name": "DOCUMENTARY_TEXT_TYPOGRAPHY",
+      "title": "Técnica 5: Tipografia Investigativa & Text Animations",
+      "origin": "Johnny Harris & Magnates Media Typography Guide",
+      "principles": [
+        "RETRO_TYPEWRITER_OR_SMOOTH_WORD_BY_WORD_REVEAL",
+        "PRO_FONTS_SPECIAL_ELITE_TIMES_NEW_ROMAN_HELVETICA_BLACK_CONDENSED_JETBRAINS_MONO",
+        "ANIMATION_DURATION_1_5_TO_2_0_SECONDS",
+        "EMPHASIS_COLOR_ORANGE_FF5500_OR_CYAN_00F0FF"
+      ],
+      "mathematical_formula": {
+        "word_reveal_delay": "8 + index * Math.max(2, Math.floor(28 / words.length))",
+        "word_opacity": "interpolate(frame, [start, start + 10], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })"
+      },
+      "core_summary": "Tipografia sóbria e impositiva com revelação cadenciada em fontes industriais/editoriais, destacando palavras-chave em Laranja Vapor de Sódio (#FF5500)."
+    },
+    {
+      "module_id": 6,
+      "technique_name": "ON_SCREEN_RESEARCH_LAPSE",
+      "title": "Técnica 6: On-Screen Research Time-Lapse (Dossiê de Tela Estilizado)",
+      "origin": "Johnny Harris Archival Research Technique",
+      "principles": [
+        "TEXTURE_LABS_GLASS127_SCREEN_TEXTURE",
+        "COLOR_BURN_OR_SCREEN_BLEND_MODE_OPACITY_39_PERCENT",
+        "TIME_LAPSE_ACCELERATION_AND_SMOOTH_RISER_SFX",
+        "CAMERA_LOOK_PERSPECTIVE_DISTORTION"
+      ],
+      "mathematical_formula": {
+        "texture_opacity": "0.39",
+        "zoom_speed": "interpolate(frame, [0, 120], [1.0, 1.12])"
+      },
+      "core_summary": "Gravação de pesquisas em tela estilizada com textura de lente/vidro (glass127) a 39% de opacidade e aceleração temporal com risers de tensão sonora."
+    }
+  ]
+}

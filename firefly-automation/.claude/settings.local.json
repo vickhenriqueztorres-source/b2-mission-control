@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(cmd /c 'rmdir \"C:\\\\Users\\\\brend\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-brend\\\\pytest-current\"')",
+      "PowerShell(icacls \"C:\\\\Users\\\\brend\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-brend\\\\pytest-17\")",
+      "Bash(powershell.exe -NoProfile -Command ' *)"
+    ]
+  }
+}

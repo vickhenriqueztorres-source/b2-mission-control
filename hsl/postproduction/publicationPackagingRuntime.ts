@@ -215,7 +215,7 @@ export class ThumbnailArtDirectorAgent {
           'Cinematic investigative documentary thumbnail base, 16:9, photorealistic, one dominant focal subject.',
           `Subject: ${definition.focal}.`,
           `Visual tension: ${definition.conflict}.`,
-          'Hidden Systems Lab palette: matte charcoal, controlled electric yellow for active flow, structural Klein blue, orange only for risk.',
+          'O Outro Lado Industrial X-Ray palette: deep carbon black (#060709), sodium-vapor orange (#FF5500) for revealed interiors/bottlenecks, laser cyan (#00F0FF) for data telemetry.',
           `Composition: ${definition.composition}. Preserve clean negative space on the ${definition.textSide.toLowerCase()} for exact typography added later.`,
           'High contrast at mobile size, credible industrial detail, one readable visual idea, no embedded words.'
         ].join(' '),

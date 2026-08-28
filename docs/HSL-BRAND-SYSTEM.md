@@ -1,106 +1,134 @@
-# Hidden Systems Lab - Brand System
+# MANUAL DE IDENTIDADE VISUAL: O OUTRO LADO
 
-Atualizado em: 2026-08-19
+Este documento é a **especificação técnica definitiva** da identidade visual **Industrial X-Ray** para o canal **O Outro Lado**, pronta para alimentar o pipeline automatizado no Remotion, Kling e geradores de imagem.
 
-Contrato executavel atual: **`HSL_VISUAL_IDENTITY_V2`**.
+Contrato executavel atual: **`HSL_VISUAL_IDENTITY_V2`** (Dossiê do Sistema v3.0).
 
-## Marca
+---
 
-Nome: **Hidden Systems Lab**
-Assinatura curta: **HSL Docs**
-Estetica: **Kinetic Pop-Documentary**
+## 1. Conceito Central & Universo Visual
 
-O logo oficial recebido usa `HSL DOCS` em branco, ponto amarelo e cantoneiras de enquadramento sobre fundo Obsidian Matte. A arte conceitual tambem apresenta o Infinite Arrow / Flow Glyph amarelo como simbolo de fluxo continuo.
+* **Arquétipo Estético:** *Industrial X-Ray / Cinematic Thriller*.
+* **Sensação:** Revelação de segredos de engenharia, mistério técnico, acesso a áreas restritas e iluminação cinematográfica de alta tensão.
+* **Pilares Visuais:**
+  1. **A Linha Laser de Corte:** Uma lâmina de luz laranja (`#FF5500`) que divide a realidade opaca da máquina e revela suas entranhas luminosas.
+  2. **Vidro Fosco (Glassmorphism):** Painéis e cards translúcidos flutuando sobre as cenas reais com telemetria técnica.
+  3. **Atmosfera Volumétrica:** Névoa, partículas em suspensão e reflexos metálicos nos vídeos gerados por I.A.
 
-![HSL identity board](./assets/hsl/identity-board.png)
+---
 
-![HSL Docs logo](./assets/hsl/logo.png)
+## 2. Paleta de Cores Oficial (Design Tokens)
 
-## Formato
+Uso estrito e semântico de cores:
 
-- 16:9;
-- master 3840x2160;
-- render 1920x1080;
-- 30 fps;
-- safe margin de 64 px em 1080p;
-- nenhuma pessoa olhando para a camera.
+```text
+┌────────────────────────────────────────────────────────────────────────┐
+│ PALETA SEMÂNTICA: INDUSTRIAL X-RAY                                    │
+├────────────────────────────────────────────────────────────────────────┤
+│ [ #060709 ] CARBON BLACK        Base void / Fundo cinematográfico      │
+│ [ #FF5500 ] SODIUM-VAPOR ORANGE Interior revelado / Gargalo / Laser Cut│
+│ [ #00F0FF ] LASER CYAN          Fluxo de dados / Análise e telemetria  │
+│ [ rgba(255,255,255,0.08) ]      FROSTED GLASS (Cards e painéis)        │
+│ [ #F4F4F5 ] TITANIUM WHITE      Títulos e dados primários de alto peso │
+│ [ #71717A ] MUTED SLATE         Textos secundários e coordenadas HUD   │
+└────────────────────────────────────────────────────────────────────────┘
+```
 
-## Cores
+---
 
-| Token | Cor | Funcao |
-|---|---|---|
-| `COLOR_BG_DARK` | `#0D0E15` | fundo principal |
-| `COLOR_SURFACE` | `#161824` | cards e paineis |
-| `COLOR_SURFACE_BORDER` | `#26293D` | bordas e grid |
-| `COLOR_ACCENT_YELLOW` | `#FFE500` | foco, seta e hero metric |
-| `COLOR_ACCENT_BLUE` | `#0038FF` | infraestrutura e fluxo secundario |
-| `COLOR_STATE_BOTTLENECK` | `#FF2E00` | gargalo, calor e bloqueio |
-| `COLOR_STATE_RECOVERY` | `#00FF85` | redundancia e recuperacao |
-| `COLOR_TEXT_PRIMARY` | `#F4F4F0` | texto principal |
-| `COLOR_TEXT_MUTED` | `#8C90A4` | fontes e telemetria |
+## 3. Tipografia Oficial
 
-Nao usar cores fora da tabela sem nova decisao de marca.
+Fontes abertas para carregamento nativo no Remotion via `@remotion/google-fonts`:
 
-## Tipografia
+| Função | Família Tipográfica | Peso / Tracking | Aplicação |
+| :--- | :--- | :--- | :--- |
+| **Hero / Títulos** | `Bebas Neue` ou `Anton` | Bold / Tracking `2px` | "O OUTRO LADO", nomes de capítulos, números massivos |
+| **Texto de Apoio** | `Inter` | Regular (400) / Semi-Bold (600) | Explicações técnicas, descrição de documentos |
+| **Telemetria / HUD** | `JetBrains Mono` | Medium (500) / Uppercase | Coordenadas, percentual de revelação, fontes, labels |
 
-- headings: Bebas Neue;
-- body: Inter;
-- telemetria: JetBrains Mono.
+---
 
-Escala 1080p:
+## 4. Logo, Avatar & Ícone Oficial
 
-- hero: 96-120 px;
-- card header: 44-56 px;
-- apoio: 22-26 px;
-- labels e fontes: 14-16 px.
+### O Símbolo: "The Split Core" (O Núcleo Dividido)
+Uma escotilha mecânica escura cortada verticalmente ao meio por um feixe de luz laser:
+* **Lado Esquerdo:** Metal escuro fosco e blindagem mecânica fria (`#060709`).
+* **Lado Direito:** Mecanismo interno em corte transversal brilhando em laranja incandescente (`#FF5500`).
 
-## Layout global
+### Prompt para Gerar o Avatar Master (Midjourney v6.1 / Flux 1.1 Pro):
+> `Cinematic documentary studio icon logo, circular industrial mechanical reactor core split vertically in half by a blazing laser light beam, left half is dark matte carbon steel, right half is an illuminated glowing orange internal mechanical cross-section with high-tech gears and conduits (#FF5500), dark carbon background (#060709), technical precision, ultra-clean vector textures, 8k, centered icon, isolated --v 6.1 --style raw`
 
+<<<<<<< HEAD
 Elementos editoriais sao usados somente quando a informacao precisa permanecer exata. O master documental nao usa moldura ou telemetria persistente.
 
 - `HSL DOCS`, `AI VISUALIZATION` e barra de carregamento ficam desligados no master;
 - textos aparecem como beats pontuais, nunca como overlay global;
 - Start Frames generativos nao possuem texto embutido;
 - area de acao principal permanece livre de safe areas editoriais.
+=======
+---
 
-## Movimento
+## 5. Banner do YouTube (2560 x 1440 px)
+>>>>>>> 83e11b5 (feat: complete end-to-end documentary production engine and EP06 Gasolina)
+
+* **Composição da Safe Area Central (1546 x 423 px):**
+  * **Lado Esquerdo:** Símbolo *Split Core* + Assinatura tipográfica: **O OUTRO LADO** (com o "O" em Laranja `#FF5500` e o restante em Titânio `#F4F4F5`) + Subtítulo em `JetBrains Mono`: `INVESTIGAR • REVELAR • COMPREENDER`.
+  * **Lado Direito:** Corte esquemático X-Ray de um duto/sistema industrial com feixes de laser laranja e ciano.
+
+### Prompt para Gerar o Fundo do Banner:
+> `Cinematic YouTube documentary banner backdrop, ultra-wide 16:9 framing, dark atmospheric industrial infrastructure interior, heavy dark machinery and pipes cut open by an intense vertical orange laser line (#FF5500) revealing glowing mechanical interiors, cyan telemetry laser grids (#00F0FF), volumetric smoke, anamorphic lens flare, dark carbon black background (#060709), empty center area for text, hyper-detailed 8k --ar 16:9 --v 6.1 --style raw`
+
+---
+
+## 6. Sistema de Thumbnails de Alto CTR (A Fórmula X-Ray)
+
+```text
+┌─────────────────────────────────────────────────────────────┐
+│  [ HERO SHOT ]                                              │
+│  Uma máquina, estrutura ou duto gigante à noite em 4K.      │
+│                                                             │
+│  [ CORTE X-RAY INDUSTRIAL ]                                 │
+│  Metade do objeto cortado revelando o interior incandescente│
+│  em Laranja Vapor de Sódio (#FF5500) com vapor/luz.         │
+│                                                             │
+│  [ SELO TÉCNICO DE VERIFICAÇÃO ]                            │
+│  Badge holográfico em ciano: "[ ANÁLISE TÉCNICA VERIFICADA ]"│
+│                                                             │
+│  [ TEXTO MASSIVO EM 2 LINHAS ]                              │
+│  "O QUE ESTÁ" (Branco) / "POR DENTRO?" (Laranja #FF5500)    │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 7. Linguagem de Movimento no Remotion (Motion Specs)
 
 ```ts
-export const MOTION_CONFIGS = {
-  elasticPop: { damping: 12, mass: 0.6, stiffness: 180 },
-  smoothPan: { damping: 20, mass: 1.0, stiffness: 80 },
-  heavyDrop: { damping: 14, mass: 1.2, stiffness: 140 }
+export const XRAY_MOTION = {
+  laserWipe: { damping: 20, mass: 0.8, stiffness: 90 },     // Transição de revelação X-Ray
+  glassFloat: { damping: 15, mass: 1.0, stiffness: 120 },   // Cards de vidro entrando
+  telemetryScan: { damping: 30, mass: 0.5, stiffness: 200 } // Rotação do gauge de revelação
 };
 ```
 
-- entrada: escala 0.8 para 1 e fade em 8 frames;
-- saida: fade de 4 frames sem overshoot;
-- transicao: hard cut ou whip-pan de 6 frames com rastro amarelo;
-- mudanca visual ou movimento a cada 4-7 segundos.
+### Regras dos Componentes:
+1. **`<LaserRevealWipe />`:** Uma barra de luz laranja com glow passa da esquerda para a direita, revelando o gráfico Remotion por baixo do vídeo do Kling.
+2. **`<GlassCard />`:** Caixa com `background: rgba(255,255,255,0.06)`, `backdrop-filter: blur(12px)` e borda fina de `1px solid rgba(255,85,0,0.3)`.
+3. **`<RevelationGauge />`:** Mostrador radial com contagem de `0%` a `100%` (`"NÍVEL DE REVELAÇÃO"`).
 
-## Modulos essenciais
+---
 
-- `HeroMetricCard`;
-- `KineticFlowTrace`;
-- `ViewfinderCallout`;
-- `SystemSplitFlap`;
-- `EvidenceSourceBadge`;
-- `SystemMap`;
-- `LayerStack`;
-- `CutawayDiagram`;
-- `FaultTree`;
-- `DependencyGraph`;
-- `AIReconstructionLabel`.
+## 8. Diretrizes de Prompts do Kling (Atmosfera & Luz)
 
-## Kling modifier
+Todo prompt para a API do Kling deve incluir o bloco de modificadores de iluminação industrial:
 
 ```text
-[SPECIFIC ACTION OR STRUCTURE], documentary cinematography, 35mm lens,
-shot on Arri Alexa, industrial palette with matte charcoal and controlled
-vibrant yellow highlights, volumetric haze, slow continuous mechanical
-movement, hyper-realistic textures, no human faces looking at camera,
-high contrast, clean architectural framing.
+[AÇÃO INDUSTRIAL OU SISTEMA ESPECÍFICO], documentary cinematography, 35mm anamorphic lens, 
+dramatic moody lighting dominated by deep carbon black (#060709) and fiery sodium-vapor orange (#FF5500) glowing accents, 
+subtle cyan highlights (#00F0FF), volumetric steam and haze, slow controlled tracking shot, 
+photorealistic metal textures, high dynamic range, no human faces visible, pristine cinematic framing --motion 3
 ```
+<<<<<<< HEAD
 
 Texto, logo, labels e dados sao adicionados no Remotion. Nao pedir ao Kling que gere tipografia legivel.
 
@@ -125,3 +153,5 @@ Formula: objeto central isolado, detalhe mecanico forte, seta amarela grande e n
 - bumper sem voz: ate -6 dB;
 - SFX de pop, gargalo e chapter drop sincronizados com a acao;
 - atmosfera continua sob o episodio.
+=======
+>>>>>>> 83e11b5 (feat: complete end-to-end documentary production engine and EP06 Gasolina)

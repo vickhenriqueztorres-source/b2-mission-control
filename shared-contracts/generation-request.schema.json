@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://b2.ai/schemas/generation-request.schema.json",
+  "title": "FireflyGenerationGuide",
+  "description": "Formato de Guia de Produção gerado pelo Mission Control para ingestão no Firefly Bot",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "name",
+      "prompt",
+      "image_path",
+      "model",
+      "resolution",
+      "aspect_ratio",
+      "duration_seconds"
+    ],
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "Identificador do plano (ex: SHOT_01_TAKE_01)"
+      },
+      "prompt": {
+        "type": "string",
+        "description": "Prompt de movimento detalhado"
+      },
+      "image_path": {
+        "type": "string",
+        "description": "Caminho absoluto para a imagem PNG/JPG do Start Frame"
+      },
+      "model": {
+        "type": "string",
+        "default": "Kling 3.0"
+      },
+      "resolution": {
+        "type": "string",
+        "default": "720p"
+      },
+      "aspect_ratio": {
+        "type": "string",
+        "default": "9:16"
+      },
+      "duration_seconds": {
+        "type": "integer",
+        "default": 5
+      }
+    }
+  }
+}

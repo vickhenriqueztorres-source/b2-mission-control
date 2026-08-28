@@ -75,7 +75,13 @@ function semanticFunction(text: string, narrativeFunction: string): NarrativeBea
 
 function conceptFor(text: string, semantic: NarrativeBeatSemanticFunction): string {
   const contentWords = tokenizeScriptWords(text)
-    .map((word) => normalizeScriptWord(word.text))
+    .map((word) =>
+      word.text
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]/g, '')
+    )
     .filter((word) => word && !STOP_WORDS.has(word));
   const unique = [...new Set(contentWords)].slice(0, 4);
   return unique.length ? unique.join('_') : semantic;

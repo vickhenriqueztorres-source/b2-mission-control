@@ -1,0 +1,23 @@
+# Configurações do ChatGPT Image Bot (Prompt 2)
+output_dir: "output"
+profile_dir: "C:/Users/brend/chatgpt_bot_session"
+prompts_file: "prompts/queue.txt"
+manifest_file: "output/manifest.jsonl"
+url: "https://chatgpt.com/"
+cdp_url: "http://127.0.0.1:9222"
+
+# Delays de digitação humana (char a char)
+typing_delay_min_ms: 30
+typing_delay_max_ms: 90
+
+# Delays entre prompts e geração
+delay_min_ms: 1000
+delay_max_ms: 3000
+timeout_geracao_s: 180
+auth_timeout_s: 300
+
+# Parâmetros de resiliência e estabilização da resposta
+max_retries: 3
+rate_limit_margin_s: 30
+stabilize_polls: 3
+stabilize_interval_s: 2

@@ -18,8 +18,8 @@ async function runTests(): Promise<void> {
   const ajvDraft7 = new Ajv({allErrors: true});
   const ajv2020 = new Ajv2020({allErrors: true});
   addFormats(ajvDraft7);
-  addFormats(ajv2020);
-  const contractsDir = path.resolve(__dirname, '../../shared-contracts');
+  const localContractsDir = path.resolve(__dirname, '../shared-contracts');
+  const contractsDir = fs.existsSync(localContractsDir) ? localContractsDir : path.resolve('C:\\B2-AI-STUDIO\\shared-contracts');
   for (const file of ['production.schema.json', 'generation-request.schema.json', 'generation-result.schema.json', 'agent-event.schema.json', 'artifact.schema.json', 'hsl-episode.schema.json']) {
     const filePath = path.join(contractsDir, file);
     assert.ok(fs.existsSync(filePath), `Schema missing: ${filePath}`);

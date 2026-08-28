@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://b2.ai/schemas/production.schema.json",
+  "title": "ProductionState",
+  "description": "Schema de estado global da produção no B2 Mission Control",
+  "type": "object",
+  "required": [
+    "production_id",
+    "project_name",
+    "status",
+    "created_at",
+    "updated_at",
+    "scenes"
+  ],
+  "properties": {
+    "production_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "project_name": {
+      "type": "string",
+      "default": "Rafa Lobo"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "IDLE",
+        "BRIEFING_RECEIVED",
+        "RAFA_LOBO_PRE_KLING_RUNNING",
+        "MOTION_PACKAGE_READY",
+        "FIREFLY_INGESTION_PENDING",
+        "FIREFLY_GENERATION_RUNNING",
+        "FIREFLY_GENERATION_COMPLETED",
+        "RAFA_LOBO_POST_KLING_RUNNING",
+        "FINAL_VIDEO_RENDERED",
+        "PRODUCTION_FAILED"
+      ]
+    },
+    "current_step": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 27
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "error_log": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "scenes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["scene_id", "shot_id", "status"],
+        "properties": {
+          "scene_id": { "type": "string" },
+          "shot_id": { "type": "string" },
+          "status": { "type": "string" },
+          "motion_prompt": { "type": "string" },
+          "start_frame_path": { "type": "string" },
+          "output_video_path": { "type": "string" }
+        }
+      }
+    }
+  }
+}

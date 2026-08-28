@@ -57,8 +57,8 @@ export function adaptKlingProviderPrompt(
     `Motion change: ${String(motionPackage.motion_change || '').trim()}.`,
     `End state: ${intent.endState}.`,
     'Preserve the industrial structure, machine geometry, material scale, lighting direction and spatial relationships visible in the first frame.',
-    `Camera: ${intent.cameraIntent}. Documentary cinematography, 35mm lens, Arri Alexa character, clean architectural framing.`,
-    'Matte charcoal industrial palette with controlled vibrant yellow highlights, volumetric haze, slow continuous mechanical movement and hyper-realistic textures.',
+    `Camera: ${intent.cameraIntent}. Denis Villeneuve 35mm anamorphic documentary cinematography, shallow depth of field, creamy bokeh, clean architectural framing.`,
+    'Carbon black (#060709) and deep steel (#0D0E15) chiaroscuro industrial palette with glowing sodium-vapor amber reflections (#FF5500) and sharp laser cyan telemetry lights (#00F0FF), dense volumetric fog and steam, slow continuous mechanical movement and hyper-realistic industrial textures.',
     'No human faces looking at camera. No presenter. No dialogue. No readable text, logos, brand marks, news graphics or fabricated documentary evidence.',
     'Do not add machinery, workers, locations or operations that are not required by the declared action or supported by the first frame.'
   ].join('\n\n');

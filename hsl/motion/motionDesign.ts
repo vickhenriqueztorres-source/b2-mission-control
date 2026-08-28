@@ -67,6 +67,7 @@ function storyFor(input: HslMotionDesignInput): MotionStory {
   const subject = stripShotIntent(input.visualSubject);
   const value = `${input.narrativeFunction} ${subject} ${input.voiceover || ''}`.toLowerCase();
 
+  // 0. ENGENHARIA DE PROCESSOS, FLUIDOS & CONTAMINAÇÃO
   if (/specification|performance envelope|temperature, density|fuel droplet/.test(value)) return {
     eyebrow: 'QUALITY ENVELOPE', headline: 'THE FUEL MUST STAY INSIDE THE LIMITS',
     stages: ['TEMPERATURE', 'DENSITY', 'COMPATIBILITY'], takeaway: 'QUALITY TRAVELS WITH THE BATCH', accent: 'blue', preferred: 'PROCESS_CUTAWAY'
@@ -83,6 +84,58 @@ function storyFor(input: HslMotionDesignInput): MotionStory {
     eyebrow: 'SAFE SEQUENCE', headline: 'CONNECT BEFORE FLOW BEGINS',
     stages: ['BOND', 'VERIFY', 'OPEN FLOW'], takeaway: 'THE ORDER OF ACTIONS MANAGES THE HAZARD', accent: 'blue', preferred: 'STATE_TRANSITION'
   };
+
+  // 1. TEMPO ATÔMICO, GPS, FÍSICA QUÂNTICA & RELATIVIDADE
+  if (/césio|cesio|rubídio|rubidio|relógio atômico|relogio atomico|atomic clock|9\.192|nanossegundo|nanosecond/.test(value)) return {
+    eyebrow: 'PADRÃO DE FREQUÊNCIA ATÔMICA', headline: '9.192.631.770 OSCILAÇÕES DEFINEM 1 SEGUNDO',
+    stages: ['ÁTOMO CÉSIO-133', 'MICRO-ONDAS', 'TRANSIÇÃO QUÂNTICA', 'SINAL UTC'], takeaway: 'A PRECISÃO DA CIVILIZAÇÃO NASCE NO ÁTOMO', accent: 'blue', preferred: 'PROCESS_CUTAWAY', metric: {value: '9.192 GHz', label: 'RESSONÂNCIA'}
+  };
+  if (/relatividade|einstein|dilatação|dilatacao|gravitacional|cinemática|cinematica|\+38|38\.7|microssegundos/.test(value)) return {
+    eyebrow: 'CORREÇÃO RELATIVÍSTICA', headline: 'A GRAVIDADE E A VELOCIDADE ALTERAM O TEMPO',
+    stages: ['-7.2µs VELOCIDADE', '+45.9µs GRAVIDADE', '+38.7µs SALDO LÍQUIDO'], takeaway: 'SEM A CORREÇÃO DE EINSTEIN, O ERRO SERIA DE 11.6 KM/DIA', accent: 'orange', preferred: 'BEFORE_AFTER', metric: {value: '+38.7 µs/dia', label: 'DERIVA LÍQUIDA'}
+  };
+  if (/trilateração|trilateracao|satélites|satelites|constelação|constelacao|órbita|orbita|20\.200|distância|distancia/.test(value)) return {
+    eyebrow: 'GEOMETRIA TEMPORAL', headline: 'D = VELOCIDADE DA LUZ × INTERVALO DE TEMPO',
+    stages: ['SINAL EMITIDO', 'TEMPO DE VOO (ΔT)', 'ESFERAS DE DISTÂNCIA', 'PONTO EXATO'], takeaway: 'POSIÇÃO É APENAS O TEMPO DA LUZ NO ESPAÇO', accent: 'blue', preferred: 'FLOW_MAP'
+  };
+  if (/spoofing|jamming|guerra eletrônica|guerra eletronica|interferência|interferencia|sinal falso/.test(value)) return {
+    eyebrow: 'AMEAÇA ELETRÔNICA', headline: 'O SINAL CIVIL DO GPS É FRÁGIL E DESPROTEGIDO',
+    stages: ['POTÊNCIA 50 WATTS', '20.000 KM DE DISTÂNCIA', 'SINAL FRACO NO SOLO', 'INTERFERÊNCIA'], takeaway: 'UM TRANSMISSOR CLANDESTINO CEGA UMA REGIÃO', accent: 'orange', preferred: 'BOTTLENECK'
+  };
+
+  // 2. FINANÇAS DE ALTA FREQUÊNCIA, PIX & BANCOS
+  if (/pix|transação|transacao|banco central|bacen|spb|iso 20022|pagamento|ted|doc/.test(value)) return {
+    eyebrow: 'INFRAESTRUTURA DE PAGAMENTOS', headline: 'LIQUIDAÇÃO FINANCEIRA EM TEMPO REAL',
+    stages: ['AUTENTICAÇÃO', 'MENSAGERIA ISO 20022', 'SPI / BACEN', 'CRÉDITO NA CONTA'], takeaway: 'A DECISÃO FINANCEIRA OCORRE EM FRAÇÕES DE SEGUNDO', accent: 'blue', preferred: 'FLOW_MAP'
+  };
+  if (/hft|alta frequência|alta frequencia|wall street|faria lima|ordens|nanosegundos|ordem duplicada/.test(value)) return {
+    eyebrow: 'SINCRONISMO HFT', headline: 'QUANDO UM MICROSEGUNDO VALE BILHÕES',
+    stages: ['ORDEM ENVIADA', 'CARIMBO TEMPORAL (PTP)', 'MATCHING ENGINE', 'EXECUÇÃO'], takeaway: 'ORDENS SEM CARIMBO SINCRONIZADO CAUSAM CAOS', accent: 'orange', preferred: 'BOTTLENECK'
+  };
+
+  // 3. CABOS SUBMARINOS, FIBRA ÓPTICA & TELECOMUNICAÇÕES
+  if (/cabo submarino|fibra óptica|fibra optica|erbium|edfa|amplificador|laser|silica/.test(value)) return {
+    eyebrow: 'ESTRUTURA FÍSICA DA INTERNET', headline: '99% DO TRÁFEGO MUNDIAL PASSA PELO FUNDO DO OCEANO',
+    stages: ['LASER DE SÍLICA', 'AMPLIFICAÇÃO ERBIUM', 'CABO BLINDADO', 'LANDING STATION'], takeaway: 'A NUVEM É FEITA DE CABOS NO ABISSO OCEÂNICO', accent: 'blue', preferred: 'PROCESS_CUTAWAY'
+  };
+  if (/5g|beamforming|antena|fase|mhz|ghz|largura de banda/.test(value)) return {
+    eyebrow: 'SINCRONIZAÇÃO 5G', headline: 'TRANSMISSÃO MILIMÉTRICA EXIGE PRECISÃO TEMPORAL',
+    stages: ['ANTENA MIMO', 'SINCRONIA DE FASE', 'BEAM DIRECIONADO', 'DISPOSITIVO'], takeaway: 'DESALINHAMENTO TEMPORAL DERRUBA A REDE MÓVEL', accent: 'blue', preferred: 'STATE_TRANSITION'
+  };
+
+  // 4. ENERGIA, REDE ELÉTRICA & SMART GRID
+  if (/rede elétrica|rede eletrica|subestação|subestacao|60 hz|transformador|apagão|apagao|grid/.test(value)) return {
+    eyebrow: 'SINCRONISMO DE FASE DO GRID', headline: 'TODA A ENERGIA PRECISA OSCILAR NA MESMA FASE',
+    stages: ['GERAÇÃO', 'SINAIS PMU (FASORES)', 'COMPARAÇÃO TEMPORAL', 'DISTRIBUIÇÃO'], takeaway: 'DESVIO DE FASE DESCONECTA SUBESTAÇÕES EM CASCATA', accent: 'orange', preferred: 'DELAY_PROPAGATION'
+  };
+
+  // 5. GARGALOS, VULNERABILIDADES & COLAPSO SISTÊMICO
+  if (/gargalo|colapso|falha|vulnerabilidade|apagão|estrangulamento|crise|ponto único/.test(value)) return {
+    eyebrow: 'PONTO CRÍTICO DE FALHA', headline: 'A REDE É TÃO FORTE QUANTO SEU ELO MAIS ESTREITO',
+    stages: ['FLUXO NORMAL', 'PONTO DE TENSÃO', 'ESTRANGULAMENTO', 'COLAPSO'], takeaway: 'UM ÚNICO NÓ PODE PARAR TODO O SISTEMA', accent: 'orange', preferred: 'BOTTLENECK'
+  };
+
+  // 6. ENGENHARIA DE COMBUSTÍVEL E FLUXOS INDUSTRIAIS (LEGACY PRESERVED)
   if (/receipt|entering airport storage|airport boundary/.test(value) && !/custody|record remain attached/.test(value)) return {
     eyebrow: 'CONTROLLED RECEIPT', headline: 'ARRIVAL IS NOT AVAILABILITY',
     stages: ['ARRIVES', 'IDENTIFIED', 'ACCEPTED'], takeaway: 'THE GATE DECIDES WHAT ENTERS STORAGE', preferred: 'STATE_TRANSITION'

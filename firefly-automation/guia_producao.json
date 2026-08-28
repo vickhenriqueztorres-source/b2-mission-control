@@ -1,0 +1,8 @@
+{
+  "batch_name": "producao_kling3",
+  "model": "Kling 3.0",
+  "resolution": "720p",
+  "aspect_ratio": "9:16",
+  "duration_seconds": 5,
+  "auto_discover": true
+}

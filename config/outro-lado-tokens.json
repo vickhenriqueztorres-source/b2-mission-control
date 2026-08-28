@@ -1,0 +1,34 @@
+{
+  "brand": {
+    "name": "O Outro Lado",
+    "tagline": "Investigar. Revelar. Compreender.",
+    "slogan": "O que acontece depois que você clica, compra, liga ou aperta.",
+    "theme": "Industrial X-Ray"
+  },
+  "colors": {
+    "background": "#060709",
+    "surface": "rgba(255, 255, 255, 0.05)",
+    "surfaceBorder": "rgba(255, 85, 0, 0.3)",
+    "orange": "#FF5500",
+    "cyan": "#00F0FF",
+    "textPrimary": "#F4F4F5",
+    "textMuted": "#71717A"
+  },
+  "glass": {
+    "backdropBlur": "12px",
+    "border": "1px solid rgba(255, 85, 0, 0.3)"
+  },
+  "fonts": {
+    "heading": "Bebas Neue, sans-serif",
+    "body": "Inter, sans-serif",
+    "mono": "JetBrains Mono, monospace"
+  },
+  "motion": {
+    "laserCutDurationFrames": 24,
+    "spring": {
+      "damping": 18,
+      "mass": 0.8,
+      "stiffness": 100
+    }
+  }
+}

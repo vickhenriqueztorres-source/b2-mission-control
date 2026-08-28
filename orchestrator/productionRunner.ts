@@ -48,7 +48,7 @@ export class ProductionRunner {
       INSERT INTO productions (production_id, project_name, status, current_step, created_at, updated_at)
       VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
     `);
-    stmt.run(productionId, 'Hidden Systems Lab', 'IDLE', 1);
+    stmt.run(productionId, 'O Outro Lado', 'IDLE', 1);
 
     const sm = new ProductionStateMachine(productionId, 'IDLE');
 

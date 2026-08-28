@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "hsl-episode.schema.json",
+  "title": "Hidden Systems Lab Episode Brief",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "episode_id",
+    "title",
+    "language",
+    "format",
+    "target_duration_minutes",
+    "central_question",
+    "original_thesis",
+    "object_or_flow",
+    "system_being_analyzed",
+    "main_constraint",
+    "primary_consequence",
+    "hero_visual",
+    "original_interpretation",
+    "counterargument_or_limitation",
+    "sources",
+    "scenes",
+    "human_approval_status"
+  ],
+  "properties": {
+    "episode_id": {"type": "string", "pattern": "^HSL-[A-Z0-9-]+$"},
+    "title": {"type": "string", "minLength": 8},
+    "language": {"const": "en"},
+    "format": {"enum": ["THE_JOURNEY", "SYSTEM_ANATOMY", "BOTTLENECK", "FAILURE"]},
+    "target_duration_minutes": {"type": "number", "minimum": 12, "maximum": 22},
+    "central_question": {"type": "string", "minLength": 20},
+    "original_thesis": {"type": "string", "minLength": 30},
+    "object_or_flow": {"type": "string", "minLength": 5},
+    "system_being_analyzed": {"type": "string", "minLength": 8},
+    "main_constraint": {"type": "string", "minLength": 8},
+    "primary_consequence": {"type": "string", "minLength": 8},
+    "hero_visual": {"type": "string", "minLength": 20},
+    "original_interpretation": {"type": "string", "minLength": 20},
+    "counterargument_or_limitation": {"type": "string", "minLength": 20},
+    "sources": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["source_id", "category", "url", "accessed_at", "claims", "limitations"],
+        "properties": {
+          "source_id": {"type": "string"},
+          "category": {"enum": ["primary", "technical", "independent"]},
+          "url": {"type": "string", "format": "uri"},
+          "accessed_at": {"type": "string"},
+          "claims": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "limitations": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "scenes": {"type": "array", "minItems": 1},
+    "human_approval_status": {"enum": ["APPROVED", "PENDING", "REJECTED"]}
+  }
+}

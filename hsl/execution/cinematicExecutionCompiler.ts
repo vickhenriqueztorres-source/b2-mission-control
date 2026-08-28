@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import {CinematicScenePlanV1, CinematicShadowRunResult} from '../cinematic/types/cinematicPlans';
 import {HslEditorialPackage} from '../editorial/types/editorial';
+import {DocumentaryEditorAgent} from '../editorial/documentaryEditorAgent';
 import {
   CinematicEditQaAgent,
   EditRhythmDirectorAgent,
@@ -71,13 +72,7 @@ export class CinematicExecutionCompiler {
       const timing = rhythm.run(scene);
       const motion = kling.run(scene, source);
       const startFramePrompt = scene.visual_mode === 'generated_ai'
-        ? buildHslStartFramePrompt({
-          subject: scene.visual_subject,
-          composition: `${source.shot.shot_type.toLowerCase().replace(/_/g, ' ')} composition`,
-          lens: source.shot.lens_language.toLowerCase().replace(/_/g, ' '),
-          subjectAnchor: source.shot.subject_anchor.toLowerCase().replace(/_/g, ' '),
-          negativeSpace: source.shot.negative_space.toLowerCase().replace(/_/g, ' ')
-        })
+        ? `Extreme cinematic 35mm anamorphic still from a Denis Villeneuve film, ${scene.visual_subject}, monumental scale, atmospheric chiaroscuro lighting, deep carbon blacks (#060709), illuminated by glowing sodium-vapor amber reflections (#FF5500) and sharp cyan laser telemetry lights (#00F0FF), dense volumetric fog and steam, wet reflective ground, shallow depth of field, creamy anamorphic bokeh, filmic texture, raw realistic industrial photography, 8k, no text, no human faces --ar 16:9`
         : null;
       const seed: Omit<HslExecutableScene, 'execution_revision'> = {
         schema: 'hsl.execution.scene.v1', schema_version: '1.0.0', episode_id: episode.episode_id,
@@ -161,6 +156,18 @@ export class CinematicExecutionCompiler {
       generated_source_seconds: generatedSourceSeconds,
       firefly_source_seconds: generatedSourceSeconds, firefly_loop_required: false
     });
+    const docEditor = new DocumentaryEditorAgent();
+    docEditor.compileDocumentaryPackage(
+      episode.episode_id,
+      executableScenes.map((s) => ({
+        sceneId: s.scene_id,
+        shotId: s.visual_shots[0]?.shot_id || s.scene_id,
+        narrativeFunction: s.narrative_function,
+        visualSubject: s.visual_subject
+      })),
+      outputDirectory
+    );
+
     const planSeed = {
       schema: 'hsl.execution.episode.v1' as const, schema_version: '1.0.0' as const,
       episode_id: episode.episode_id, source_episode_package: packagePath,

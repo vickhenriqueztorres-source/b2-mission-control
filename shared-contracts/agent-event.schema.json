@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://b2.ai/schemas/agent-event.schema.json",
+  "title": "AgentEvent",
+  "description": "Evento emitido em tempo real por qualquer agente ou componente do sistema",
+  "type": "object",
+  "required": [
+    "event_id",
+    "run_id",
+    "production_id",
+    "agent_id",
+    "provider",
+    "task_id",
+    "timestamp",
+    "type",
+    "status",
+    "message",
+    "attempt"
+  ],
+  "properties": {
+    "event_id": { "type": "string" },
+    "run_id": { "type": "string" },
+    "production_id": { "type": "string" },
+    "agent_id": { "type": "string" },
+    "provider": { 
+      "type": "string", 
+      "enum": ["ANTIGRAVITY", "RAFA_LOBO", "FIREFLY_BOT", "CODEX"]
+    },
+    "task_id": { "type": "string" },
+    "timestamp": { "type": "string" },
+    "type": { 
+      "type": "string",
+      "enum": [
+        "AGENT_REGISTERED",
+        "AGENT_STARTED",
+        "AGENT_ACTIVITY",
+        "TOOL_STARTED",
+        "TOOL_COMPLETED",
+        "ARTIFACT_READ",
+        "ARTIFACT_CREATED",
+        "ARTIFACT_VALIDATED",
+        "AGENT_WAITING",
+        "AGENT_COMPLETED",
+        "AGENT_FAILED",
+        "AGENT_RETRYING",
+        "AGENT_CANCELLED",
+        "STEP_STARTED",
+        "STEP_COMPLETED",
+        "QA_APPROVED",
+        "QA_REJECTED",
+        "HANDOFF_REACHED",
+        "JOB_SUBMITTED",
+        "JOB_COMPLETED",
+        "ERROR"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["PENDING", "RUNNING", "SUCCESS", "WAITING", "FAILED", "CANCELLED", "STILL_GENERATING", "RESULT_READY", "IDLE"]
+    },
+    "message": { "type": "string" },
+    "artifact_path": { "type": "string" },
+    "tool_name": { "type": "string" },
+    "attempt": { "type": "integer" },
+    "step_index": { "type": "integer" },
+    "payload": { "type": "object" }
+  }
+}

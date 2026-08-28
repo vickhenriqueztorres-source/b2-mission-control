@@ -1,7 +1,7 @@
 import path from 'path';
 import {syncReferenceInsightSnapshot} from '../hsl/editorial/reference/referenceInsightIngestAgent';
 
-const defaultSourceRoot = 'C:\\Users\\brend\\OneDrive\\Desktop\\PROJETO 30K ATE 27\\DOCS ABRAHAM\\transcriptions';
+const defaultSourceRoot = 'C:\\Users\\brend\\OneDrive\\Desktop\\PROJETO 30K ATE 27\\02 - O OUTRO LADO\\DOCS ABRAHAM\\transcriptions';
 const sourceRoot = path.resolve(process.argv[2] || process.env.HSL_ABRAHAM_TRANSCRIPT_ROOT || defaultSourceRoot);
 const outputPath = path.resolve(process.argv[3] || 'assets/editorial-references/abraham/reference-insights.json');
 const snapshot = syncReferenceInsightSnapshot(sourceRoot, outputPath);

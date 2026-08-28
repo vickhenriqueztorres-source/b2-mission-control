@@ -6,6 +6,7 @@ import Database from 'better-sqlite3';
 import { Logger } from '../event-hub/logger';
 import { AgentTelemetryAdapter } from './agentTelemetryAdapter';
 import { ProductionSafetyGuard } from '../config/productionSafetyGuard';
+import { PipelineContractGate } from '../pipeline/pipelineContractGate';
 
 export class FireflyAdapter extends BaseAdapter {
   private fireflyPath: string;
@@ -15,12 +16,18 @@ export class FireflyAdapter extends BaseAdapter {
   private telemetry: AgentTelemetryAdapter;
 
   constructor(
-    fireflyPath: string = process.env.FIREFLY_AUTOMATION_ROOT || 'C:\\B2-AI-STUDIO\\links\\firefly-automation',
-    runtimeRoot: string = process.env.FIREFLY_RUNTIME_ROOT || fireflyPath
+    fireflyPath?: string,
+    runtimeRoot?: string
   ) {
     super('FireflyAdapter');
-    this.fireflyPath = path.resolve(fireflyPath);
-    this.runtimeRoot = path.resolve(runtimeRoot);
+    const localPath = path.join(process.cwd(), 'firefly-automation');
+    const envPath = process.env.FIREFLY_AUTOMATION_ROOT || process.env.FIREFLY_ROOT_PATH;
+    const defaultPath = (envPath && fs.existsSync(envPath)) 
+      ? envPath 
+      : (fs.existsSync(localPath) ? localPath : path.resolve(process.cwd(), 'firefly-automation'));
+    
+    this.fireflyPath = path.resolve(fireflyPath || defaultPath);
+    this.runtimeRoot = path.resolve(runtimeRoot || process.env.FIREFLY_RUNTIME_ROOT || this.fireflyPath);
     this.pythonExec = path.join(this.fireflyPath, '.venv', 'Scripts', 'python.exe');
     this.dbPath = path.join(this.runtimeRoot, 'data', 'firefly_jobs.db');
     this.telemetry = AgentTelemetryAdapter.getInstance();
@@ -60,12 +67,29 @@ export class FireflyAdapter extends BaseAdapter {
       attempt: 1
     });
 
-    // 1. Ler itens na guia para identificar nomes de saída e limpar arquivos MP4 antigos na pasta `saida/` (evita FileExistsError)
+    // 1. Ler itens na guia para identificar nomes de saída e filtrar itens KEYFRAME_DOSSIER
     const rawGuide = fs.readFileSync(guideJsonPath, 'utf-8');
     const parsedGuide = JSON.parse(rawGuide);
-    const items = parsedGuide.items || (Array.isArray(parsedGuide) ? parsedGuide : [parsedGuide]);
-    const jobNames: string[] = items.map((i: any) => i.name);
+    const allItems = parsedGuide.items || (Array.isArray(parsedGuide) ? parsedGuide : [parsedGuide]);
+    
+    // Filtra apenas itens que necessitam de renderização de vídeo pelo Firefly
+    const videoItems = allItems.filter((i: any) => i.takeType !== 'KEYFRAME_DOSSIER' && !i.isDossier);
+    const jobNames: string[] = videoItems.map((i: any) => i.name);
     const resumeExistingBatch = process.env.FIREFLY_RESUME_EXISTING_BATCH === 'true';
+
+    Logger.info(this.name, `Total de cenas na guia: ${allItems.length} (${videoItems.length} vídeos no Firefly, ${allItems.length - videoItems.length} Keyframe Dossiers 2.5D)`);
+
+    if (videoItems.length === 0) {
+      Logger.info(this.name, 'Todos os itens são KEYFRAME_DOSSIER. Nenhuma geração de vídeo no Firefly necessária.');
+      return { success: true, completedJobs: [] };
+    }
+
+    // Cria guia temporária contendo apenas os takes de vídeo para o Firefly
+    let effectiveGuidePath = guideJsonPath;
+    if (videoItems.length < allItems.length) {
+      effectiveGuidePath = path.join(path.dirname(guideJsonPath), `firefly_filtered_guide_${Date.now()}.json`);
+      fs.writeFileSync(effectiveGuidePath, JSON.stringify({ items: videoItems }, null, 2), 'utf-8');
+    }
 
     if (!resumeExistingBatch) {
       const saidaDir = path.join(this.runtimeRoot, 'saida');
@@ -97,11 +121,13 @@ export class FireflyAdapter extends BaseAdapter {
         Logger.warn(this.name, `Aviso ao preparar banco SQLite: ${e.message}`);
       }
 
-      // 3. O Worker libera somente o perfil persistente do bot; nao encerramos Chrome global.
-
-      // 4. Executar --feed-guide no Firefly Bot
+      // 3. Executar --feed-guide no Firefly Bot com a guia filtrada
       try {
+<<<<<<< HEAD
         const feedCmd = `"${this.pythonExec}" -m firefly_bot.main --root "${this.runtimeRoot}" --feed-guide "${guideJsonPath}"`;
+=======
+        const feedCmd = `"${this.pythonExec}" -m firefly_bot.main --feed-guide "${effectiveGuidePath}"`;
+>>>>>>> 83e11b5 (feat: complete end-to-end documentary production engine and EP06 Gasolina)
         Logger.info(this.name, `Executando: ${feedCmd}`);
         const feedOutput = execSync(feedCmd, { cwd: this.fireflyPath, encoding: 'utf-8' });
         Logger.info(this.name, `Feed Output: ${feedOutput.trim()}`);
@@ -164,7 +190,7 @@ export class FireflyAdapter extends BaseAdapter {
     const configuredWaitMinutes = Number(process.env.FIREFLY_MAX_WAIT_MINUTES || 0);
     const maxWaitMinutes = Number.isFinite(configuredWaitMinutes) && configuredWaitMinutes >= 15
       ? configuredWaitMinutes
-      : Math.max(15, jobNames.length * 6);
+      : Math.max(60, jobNames.length * 15);
     const maxRetries = Math.ceil((maxWaitMinutes * 60) / 5);
     let retries = 0;
 
@@ -223,8 +249,15 @@ export class FireflyAdapter extends BaseAdapter {
             }
 
             if (row.status === 'done' && row.output_path && fs.existsSync(row.output_path)) {
-              if (!completedJobs.find(j => j.name === row.name)) {
-                completedJobs.push({ name: row.name, output_path: row.output_path });
+              const stat = fs.statSync(row.output_path);
+              const probe = PipelineContractGate.probeMedia(row.output_path);
+              if (stat.size >= 50 * 1024 && probe.valid && probe.duration > 0) {
+                if (!completedJobs.find(j => j.name === row.name)) {
+                  completedJobs.push({ name: row.name, output_path: row.output_path });
+                }
+              } else {
+                Logger.warn(this.name, `Job '${row.name}' marcado como done mas arquivo inválido (${stat.size} bytes, duração: ${probe.duration}s).`);
+                allDone = false;
               }
             } else if (row.status === 'failed-infra') {
               if (continueOnFailedInfra) {

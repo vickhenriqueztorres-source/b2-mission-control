@@ -308,7 +308,7 @@ export class HslPostproductionRuntime {
     const soundFxPublic = path.join(publicRoot, 'soundfx-bed.wav');
     fs.copyFileSync(combinedSoundFxPath, soundFxPublic);
     const props = {
-      title: 'Hidden Systems Lab', fps: 30, width: 1920, height: 1080,
+      title: 'O Outro Lado', fps: 30, width: 1920, height: 1080,
       totalDurationInFrames: renderScenes.reduce((sum, scene) => sum + scene.durationInFrames, 0),
       scenes: renderScenes, narrationSrc: `hsl-runs/${input.productionId}/narration-leveled.wav`,
       soundFxSrc: `hsl-runs/${input.productionId}/soundfx-bed.wav`, soundFxVolume: 1,

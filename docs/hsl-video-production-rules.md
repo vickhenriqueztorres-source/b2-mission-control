@@ -1,45 +1,60 @@
-# HSL Video Production Rules
+# 🎬 REGRAS DE PRODUÇÃO AUDIOVISUAL — O OUTRO LADO
 
-Estas regras sao obrigatorias para qualquer novo video do Hidden Systems Lab.
+> **Identidade Oficial:** **INDUSTRIAL X-RAY (Opção 2)**  
+> **Estética Cinematográfica:** **Denis Villeneuve (35mm Anamorphic / Blade Runner 2049)**  
+> **Slogan:** **"O que acontece depois que você clica, compra, liga ou aperta."**
 
-## Voz oficial
+---
 
-- A voz oficial do projeto e `Echo`.
-- O provedor oficial e `Voicebox`.
-- O preset oficial e `am_echo`.
-- Nao usar Microsoft TTS, ElevenLabs, fallback local ou outra voz para master final.
-- Se `HSL_NARRATION_PROVIDER` nao for `voicebox`, o pipeline deve falhar.
+## 1. Princípios Invioláveis de Direção de Arte
 
-## Configuracao visual original
+1. **O Princípio das Duas Camadas:**
+   - **Camada 1 (Superfície):** Matéria bruta escura (`#060709` / `#0D0E15`), escala monumental, fotografia 35mm *low-key* chiaroscuro.
+   - **Camada 2 (Mecanismo):** Linha de corte a laser, raio-x interior em Laranja Vapor de Sódio (`#FF5500`), telemetria e coordenadas em Ciano Laser (`#00F0FF`).
 
-- Manter o plano cinematografico do canal: maioria Kling/Veo, pouca Remotion.
-- Remotion fica apenas para dados, labels e informacao que precisa ser exata.
-- Start frames para Kling/Veo precisam ter base foto-real/cinematografica.
-- Nao aprovar start frame que seja apenas diagrama escuro, texto grande, grid abstrato ou title card.
-- O video final nao deve exibir overlays globais como `HSL DOCS`, `AI VISUALIZATION`, barra de loading ou texto hibrido persistente.
+2. **Voz & Narração Oficial:**
+   - **Provedor:** `ElevenLabs`
+   - **Voz:** `Chris` (`iP95p4xoKVk53GoZ742B`)
+   - **Modelo:** `eleven_multilingual_v2`
+   - **Tom:** Moderno e íntimo, cadência cirúrgica (~146 WPM).
+   - Zero apresentador físico na tela (canal 100% faceless).
 
-## Contrato visual imutavel
+3. **Paleta de Cores do Sistema:**
+   - `#060709` (Carbon Black) — 70%+ da área
+   - `#0D0E15` (Deep Steel)
+   - `#FF5500` (Sodium-Vapor Orange)
+   - `#00F0FF` (Laser Cyan)
+   - `rgba(255,255,255,0.08)` (Frosted Glass)
+   - `#F4F4F0` (Titanium White)
 
-- Versao obrigatoria: `HSL_VISUAL_IDENTITY_V2`.
-- Referencia minima obrigatoria: `HSL Premium Motion Reference Set V1`.
-- Estetica: fotografia documental cinematografica integrada a infografico espacial Kinetic Pop.
-- Amarelo `#FFE500`: somente fluxo ativo.
-- Azul `#0038FF`: somente infraestrutura persistente.
-- Laranja `#FF2E00`: somente bloqueio, gargalo ou risco.
-- Branco `#F4F4F0`: informacao editorial exata adicionada depois da geracao.
-- Um assunto dominante e um foco luminoso principal por Start Frame.
-- Texto, numero, label, logo e painel legivel nao podem ser gravados no Start Frame.
-- Procedural previs, flat vector, placeholder e proxy sao proibidos como fonte de producao.
-- Todo frame precisa de `hsl.start-frame.provenance.v2`, hash do prompt e IDs das referencias aprovadas.
-- Aprovacao humana fica presa ao hash das contact sheets; qualquer alteracao exige nova revisao.
+---
 
-## Gates obrigatorios
+## 2. Geração de Imagem & Start Frames
 
-- Cobertura gerada minima: 70%.
-- Cobertura Remotion maxima: 22%.
-- No maximo um shot Remotion consecutivo.
-- Assets locais/proxy sao proibidos no master final.
-- Start frame flat deve reprovar no QA antes de ir para Kling/Veo.
-- QA de paleta isolado nao prova identidade visual.
-- QA somente passa com proveniencia aprovada, contrato de prompt e analise visual.
-- O orquestrador deve parar antes da geracao quando a aprovacao humana ou a autorizacao paga estiver ausente.
+Todo prompt enviado para IA (DALL-E 3 / Firefly) segue a matriz mestra:
+
+```text
+Extreme cinematic 35mm anamorphic still from a Denis Villeneuve film, {SUBJECT}, monumental scale, atmospheric chiaroscuro lighting, deep carbon blacks (#060709), illuminated by glowing sodium-vapor amber reflections (#FF5500) and sharp cyan laser telemetry lights (#00F0FF), dense volumetric fog and steam, wet reflective ground, shallow depth of field, creamy anamorphic bokeh, filmic texture, raw realistic industrial photography, 8k, no text, no human faces --ar 16:9
+```
+
+---
+
+## 3. Composição Remotion & Motion Design
+
+1. **Biblioteca Modular Pré-Construída:** Usar exclusivamente os componentes de `remotion/documentary/` (`<TechnicalCutawaySchematic />`, `<CyberMapTrace />`, `<LaserScanDossier />`, `<ParallaxRackFocus />`, `<KineticEditorialCallout />`, `<KineticNumberCounter />`, `<AtomicStopwatch />`, `<AnamorphicCinematicOverlay />`).
+2. **Acabamento Global:** Todo vídeo possui Letterbox anamórfico 2.39:1, cantoneiras `[ ]` e ruído analógico 35mm.
+3. **Micro-Movimento:** Nenhum plano fica estático por mais de 2.0s (push-in óptico contínuo).
+4. **Cadência:** Duração média de corte de 2.5s a 4.5s; narração sóbria a ~146 WPM.
+
+---
+
+## 4. Thumbnails 4K (3840x2160)
+
+1. Objeto cotidiano único reconhecível em corte X-Ray.
+2. Linha de corte a laser com feixe laranja `#FF5500`.
+3. Headline curta (1 a 4 palavras) com palavra de tensão em `#FF5500`.
+4. Subheadline em Ciano `#00F0FF` com barra vertical.
+5. Selo circular de auditoria técnica no canto inferior direito.
+6. Acentos de interface: Coordenadas geográficas, Dial `% REVELADO`, Indicador de Investigação com listras.
+7. Zero clickbait barato, zero setas vermelhas, zero emojis.
+>>>>>>> 83e11b5 (feat: complete end-to-end documentary production engine and EP06 Gasolina)

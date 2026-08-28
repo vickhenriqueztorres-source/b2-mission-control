@@ -1,0 +1,7 @@
+profile/
+output/
+__pycache__/
+*.pyc
+*.pyo
+*.tmp
+*.log
