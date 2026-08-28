@@ -2,7 +2,7 @@
 
 CREATE TABLE IF NOT EXISTS productions (
     production_id TEXT PRIMARY KEY,
-    project_name TEXT NOT NULL DEFAULT 'Hidden Systems Lab',
+    project_name TEXT NOT NULL DEFAULT 'O Outro Lado',
     status TEXT NOT NULL,
     current_step INTEGER DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

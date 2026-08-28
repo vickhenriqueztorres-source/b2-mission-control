@@ -1,5 +1,9 @@
 import fs from 'fs';
 import path from 'path';
+import {
+  HSL_MIN_EPISODE_DURATION_SECONDS,
+  HSL_MAX_EPISODE_DURATION_SECONDS
+} from '../spec/hsl-spec';
 
 export type EvidenceStatus = 'fact' | 'estimate' | 'inference' | 'illustrative' | 'not_evidence';
 export type AssetProvenance = 'original_remotion' | 'licensed_stock' | 'public_domain' | 'generated_ai';
@@ -30,7 +34,7 @@ export interface HslScene {
 export interface HslEpisodeBrief {
   episode_id: string;
   title: string;
-  language: 'en';
+  language: 'en' | 'pt' | 'pt-BR';
   format: 'THE_JOURNEY' | 'SYSTEM_ANATOMY' | 'BOTTLENECK' | 'FAILURE';
   target_duration_minutes: number;
   central_question: string;
@@ -72,9 +76,11 @@ export function validateHslEpisode(episode: HslEpisodeBrief): HslEpisodeGateResu
   for (const [field, code] of requiredText) {
     if (!String(episode[field] || '').trim()) errors.push(code);
   }
-  if (episode.language !== 'en') errors.push('AUDIENCE_LANGUAGE_MUST_BE_ENGLISH');
-  if (episode.target_duration_minutes < 12 || episode.target_duration_minutes > 22) {
-    errors.push('DURATION_OUTSIDE_12_TO_22_MINUTES');
+  if (!['en', 'pt', 'pt-BR'].includes(episode.language)) {
+    errors.push('AUDIENCE_LANGUAGE_INVALID');
+  }
+  if (episode.target_duration_minutes < 5 || episode.target_duration_minutes > 22) {
+    errors.push('DURATION_OUTSIDE_5_TO_22_MINUTES');
   }
 
   const sourceCategories = new Set((episode.sources || []).map((source) => source.category));
