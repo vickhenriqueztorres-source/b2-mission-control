@@ -1,0 +1,302 @@
+[
+  {
+    "sceneId": "GPS_001",
+    "voiceover": "Você abre o aplicativo no meio do trânsito pesado, e uma pequena esfera azul marca exatamente a faixa da avenida onde seu carro está parado.",
+    "visualSubject": "Smartphone fixado no suporte do painel de um carro escuro à noite sob chuva torrencial e reflexos âmbar",
+    "visual_must_include": ["smartphone", "painel", "chuva"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "vehicle_dashboard",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 8
+  },
+  {
+    "sceneId": "GPS_002",
+    "voiceover": "Do lado de fora, a lataria do teto recebe um fluxo contínuo e invisível de ondas eletromagnéticas que acabaram de cruzar a atmosfera da Terra.",
+    "visualSubject": "Teto de metal escuro do veículo molhado pela chuva com ondulações de luz ciano no vidro",
+    "visual_must_include": ["teto", "lataria", "chuva"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "vehicle_dashboard",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 9
+  },
+  {
+    "sceneId": "GPS_003",
+    "voiceover": "Em frações de segundo, o algoritmo calcula o tempo estimado de chegada e recalcula a rota com precisão menor que três metros.",
+    "visualSubject": "Tela do smartphone exibindo rota vectorial iluminada em ciano cortando o mapa escuro da cidade",
+    "visual_must_include": ["mapa", "rota", "tela"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "vehicle_dashboard",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 15
+  },
+  {
+    "sceneId": "GPS_004",
+    "voiceover": "O que parece uma simples conexão de internet é, na verdade, uma das maiores máquinas físicas já construídas pela humanidade.",
+    "visualSubject": "Dossiê digital com coordenadas de telemetria latitude longitude e altitude em tempo real",
+    "visual_must_include": ["coordenadas", "telemetria", "dossie"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "metrology_forensics",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 16
+  },
+  {
+    "sceneId": "GPS_005",
+    "voiceover": "O seu celular não envia sinal algum para o espaço; ele é apenas uma antena passiva escutando o tempo passar.",
+    "visualSubject": "Corte em raio-x do chip receptor GNSS L1 L5 soldado na placa-mãe do smartphone",
+    "visual_must_include": ["chip", "antena", "circuito"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "metrology_forensics",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 12
+  },
+  {
+    "sceneId": "GPS_006",
+    "voiceover": "A vinte mil e duzentos quilômetros de altitude, no vácuo silencioso da órbita média da Terra, opera uma constelação militar de satélites.",
+    "visualSubject": "Satélite GPS Block III em titânio orbitando na escuridão do espaço com o horizonte curvo da Terra ao fundo",
+    "visual_must_include": ["satelite", "orbita", "espaco"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "space_infrastructure",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 9
+  },
+  {
+    "sceneId": "GPS_007",
+    "voiceover": "Cada satélite pesa mais de duas toneladas, desloca-se a quatorze mil quilômetros por hora e completa duas voltas no planeta a cada dia.",
+    "visualSubject": "Painéis solares gigantescos dourados do satélite captando a luz com reflexos âmbar em chiaroscuro",
+    "visual_must_include": ["paineis_solares", "satelite", "estrutura"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "space_infrastructure",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 15
+  },
+  {
+    "sceneId": "GPS_008",
+    "voiceover": "Trinta e um nós ativos estão distribuídos em seis planos orbitais inclinados a cinquenta e cinco graus em relação ao equador.",
+    "visualSubject": "Mapa holográfico 3D da Terra envolvida pelos seis anéis orbitais com os nós de satélites piscando em ciano",
+    "visual_must_include": ["globo", "orbitas", "satelites"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "metrology_forensics",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 8
+  },
+  {
+    "sceneId": "GPS_009",
+    "voiceover": "No solo, estações de rastreamento com antenas parabólicas monumentais de vinte metros monitoram cada milímetro da trajetória orbital.",
+    "visualSubject": "Antena parabólica colossal de telecomunicação militar cercada por neve sob céu noturno escuro",
+    "visual_must_include": ["antena", "parabolica", "estacao"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "space_infrastructure",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 16
+  },
+  {
+    "sceneId": "GPS_010",
+    "voiceover": "Supercomputadores em bases subterrâneas calculam as efemérides e transmitem correções de rota para manter a malha alinhada.",
+    "visualSubject": "Racks de servidores em data center subterrâneo blindado com cabos de fibra ótica iluminados em ciano",
+    "visual_must_include": ["servidores", "data_center", "cabos"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "space_infrastructure",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 12
+  },
+  {
+    "sceneId": "GPS_011",
+    "voiceover": "Mas o verdadeiro segredo de cada satélite não é a câmera ou o motor; é o que está selado no centro de sua blindagem de chumbo.",
+    "visualSubject": "Carcaça cilíndrica de aço inoxidável selada com parafusos de precisão e etiquetas de auditoria militar",
+    "visual_must_include": ["cilindro", "blindagem", "chassi"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "atomic_clock_hardware",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 9
+  },
+  {
+    "sceneId": "GPS_012",
+    "voiceover": "Dentro de cada cápsula operam quatro relógios atômicos baseados nas transições hiperfinas de átomos de césio e rubídio.",
+    "visualSubject": "Câmara de vácuo interna de quartzo onde feixes de laser cruzam uma nuvem atômica de vapor de césio",
+    "visual_must_include": ["camara_vacuo", "laser", "cesio"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "atomic_clock_hardware",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 15
+  },
+  {
+    "sceneId": "GPS_013",
+    "voiceover": "O átomo de Césio-133 oscila exatamente nove bilhões, cento e noventa e dois milhões, seiscentos e trinta e um mil, setecentas e setenta vezes por segundo.",
+    "visualSubject": "Dossiê com osciloscópio atômico exibindo a frequência exata de 9.192.631.770 Hertz com estabilidade extrema",
+    "visual_must_include": ["frequencia", "hertz", "osciloscopio"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "metrology_forensics",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 8
+  },
+  {
+    "sceneId": "GPS_014",
+    "voiceover": "Essa cadência é tão precisa que o relógio levaria trinta milhões de anos para adiantar ou atrasar um único segundo.",
+    "visualSubject": "Close macro em circuito de micro-ondas sintonizado na cavidade ressonante de titânio do relógio atômico",
+    "visual_must_include": ["ressonador", "microondas", "circuito"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "atomic_clock_hardware",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 16
+  },
+  {
+    "sceneId": "GPS_015",
+    "voiceover": "A cada instante, o satélite não transmite mapas ou rotas; ele transmite apenas duas coisas: quem ele é e que horas são.",
+    "visualSubject": "Diagrama de pacote binário de telemetria decompondo o cabeçalho de tempo e efeméride em blocos de bits",
+    "visual_must_include": ["dados", "binario", "pacote"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "metrology_forensics",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 12
+  },
+  {
+    "sceneId": "GPS_016",
+    "voiceover": "O sinal de rádio deixa o satélite e desce pelo espaço à velocidade da luz, cruzando trezentos mil quilômetros por segundo.",
+    "visualSubject": "Dossiê óptico mostrando a linha de propagação do sinal de rádio percorrendo 20.200 km em 67 milissegundos",
+    "visual_must_include": ["propagacao", "velocidade_luz", "distancia"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "metrology_forensics",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 9
+  },
+  {
+    "sceneId": "GPS_017",
+    "voiceover": "Ele leva cerca de sessenta e sete milissegundos para viajar do espaço até a antena microscópica do seu smartphone.",
+    "visualSubject": "Ondas de rádio concêntricas em ciano atingindo a antena de cerâmica embutida no chassi do celular",
+    "visual_must_include": ["ondas", "antena", "smartphone"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "space_infrastructure",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 15
+  },
+  {
+    "sceneId": "GPS_018",
+    "voiceover": "O chip do celular compara o horário gravado na mensagem com o horário em que o sinal foi recebido.",
+    "visualSubject": "Dois cronômetros digitais em alta velocidade calculando o delta de tempo de chegada em nanossegundos",
+    "visual_must_include": ["cronometro", "delta", "tempo"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "atomic_clock_hardware",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 8
+  },
+  {
+    "sceneId": "GPS_019",
+    "voiceover": "Multiplicando esse intervalo de tempo pela velocidade da luz, o processador calcula uma esfera de raio exato ao redor do satélite.",
+    "visualSubject": "Esfera translúcida 3D de distância se expandindo a partir do satélite até tocar a superfície da Terra",
+    "visual_must_include": ["esfera", "satelite", "intersecao"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "space_infrastructure",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 16
+  },
+  {
+    "sceneId": "GPS_020",
+    "voiceover": "Com três satélites, três esferas se cruzam em apenas dois pontos no universo; o quarto satélite descarta o ponto no espaço e crava a sua rua.",
+    "visualSubject": "Quatro feixes de laser ciano convergindo em um único ponto geométrico pulsando em laranja na avenida",
+    "visual_must_include": ["triangulacao", "feixes", "ponto_intersecao"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "space_infrastructure",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 12
+  },
+  {
+    "sceneId": "GPS_021",
+    "voiceover": "Mas essa matemática perfeita esconde uma armadilha imposta pelas próprias leis do universo: o tempo não corre igual para todos.",
+    "visualSubject": "Dossiê com a equação de dilatação temporal de Lorentz e a curvatura do tensor de Einstein",
+    "visual_must_include": ["equacao", "einstein", "dossie"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "metrology_forensics",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 9
+  },
+  {
+    "sceneId": "GPS_022",
+    "voiceover": "Pela Relatividade Especial de Einstein, objetos que se movem a grande velocidade experimentam o tempo passar mais devagar.",
+    "visualSubject": "Satélite cruzando a órbita em velocidade extrema com rastro de luz distorcido pelo efeito de velocidade relativística",
+    "visual_must_include": ["satelite", "velocidade", "distorcao"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "space_infrastructure",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 15
+  },
+  {
+    "sceneId": "GPS_023",
+    "voiceover": "A quatorze mil quilômetros por hora, o relógio atômico a bordo do satélite perde cerca de sete microssegundos a cada vinte e quatro horas.",
+    "visualSubject": "Display digital do relógio do satélite marcando menos sete microssegundos em relação à base terrestre",
+    "visual_must_include": ["display", "microssegundos", "atraso"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "atomic_clock_hardware",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 8
+  },
+  {
+    "sceneId": "GPS_024",
+    "voiceover": "No entanto, a Relatividade Geral diz o contrário: a gravidade da Terra curva o espaço-tempo e desacelera os relógios no solo.",
+    "visualSubject": "Malha do espaço-tempo deformada como um funil gravitacional sob o peso monumental da Terra",
+    "visual_must_include": ["gravidade", "curvatura", "espaco_tempo"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "space_infrastructure",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 16
+  },
+  {
+    "sceneId": "GPS_025",
+    "voiceover": "Na órbita, onde a gravidade é quatro vezes mais fraca, o relógio do satélite acelera quarenta e cinco microssegundos por dia.",
+    "visualSubject": "Comparação gráfica dos dois efeitos físicos: menos sete microssegundos de velocidade contra mais quarenta e cinco de gravidade",
+    "visual_must_include": ["grafico", "relatividade_especial", "relatividade_geral"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "space_infrastructure",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 12
+  },
+  {
+    "sceneId": "GPS_026",
+    "voiceover": "O saldo líquido é brutal: os relógios dos satélites no espaço adiantam exatamente trinta e oito microssegundos todos os dias.",
+    "visualSubject": "Dossiê com o cálculo do desvio: 38 microssegundos multiplicados por 300.000 km/s resultando em 11.400 metros de erro diário",
+    "visual_must_include": ["calculo", "desvio", "metros"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "metrology_forensics",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 9
+  },
+  {
+    "sceneId": "GPS_027",
+    "voiceover": "Se esse desvio não fosse corrigido na física, o GPS do seu celular erraria a sua posição em mais de onze quilômetros a cada vinte e quatro horas.",
+    "visualSubject": "Dossiê com mapa de satélite mostrando a bolinha azul se deslocando 11 km para fora da cidade no oceano",
+    "visual_must_include": ["mapa", "erro_posicao", "dossie"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "metrology_forensics",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 15
+  },
+  {
+    "sceneId": "GPS_028",
+    "voiceover": "Para neutralizar Einstein, os engenheiros sintonizam os relógios dos satélites antes do lançamento em uma frequência ligeiramente mais lenta.",
+    "visualSubject": "Engenheiro aeroespacial calibrando oscilador atômico em laboratório de vácuo limpo sob luz âmbar",
+    "visual_must_include": ["engenheiro", "calibracao", "laboratorio"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "atomic_clock_hardware",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 8
+  },
+  {
+    "sceneId": "GPS_029",
+    "voiceover": "Sem uma equação escrita no papel em 1915, nenhum avião pousaria às cegas na neblina e nenhum aplicativo encontraria a sua porta.",
+    "visualSubject": "Visão noturna panorâmica da metrópole iluminada com milhares de rotas de carros fluindo em perfeita sincronia",
+    "visual_must_include": ["cidade", "rotas", "noite"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "space_infrastructure",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 16
+  },
+  {
+    "sceneId": "GPS_030",
+    "voiceover": "A verdade de um sistema aparece quando seus rastros são colocados lado a lado: investigar, revelar, compreender.",
+    "visualSubject": "Câmera recuando do painel do carro em direção ao céu noturno até revelar a constelação de satélites brilhando na órbita",
+    "visual_must_include": ["camera_recuo", "painel", "ceu_estrelado"],
+    "visual_must_not": ["cargo ship", "warehouse conveyor", "airplane cockpit"],
+    "required_category": "space_infrastructure",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 12
+  }
+]
