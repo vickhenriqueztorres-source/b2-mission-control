@@ -53,6 +53,10 @@ async function runTests() {
   // TESTE 3: 0 takes + audio skip NÃO gera PARTIAL_NO_AUDIO (gera E2E_BLOCKED ou FAILED)
   // ─────────────────────────────────────────────────────────────────────────────
   console.log('\n[TEST 3/4] Validando que 0 takes + audio skip nunca gera PARTIAL_NO_AUDIO...');
+  const prevDispatch = process.env.FIREFLY_DISPATCH;
+  const prevAudioDispatch = process.env.ELEVENLABS_DISPATCH;
+  process.env.FIREFLY_DISPATCH = '0';
+  process.env.ELEVENLABS_DISPATCH = '0';
   try {
     const e2eResult = await runGasolinaE2E();
 
@@ -65,6 +69,11 @@ async function runTests() {
   } catch (err: any) {
     console.error('❌ ERRO NO TESTE 3:', err.message);
     allPassed = false;
+  } finally {
+    if (prevDispatch !== undefined) process.env.FIREFLY_DISPATCH = prevDispatch;
+    else delete process.env.FIREFLY_DISPATCH;
+    if (prevAudioDispatch !== undefined) process.env.ELEVENLABS_DISPATCH = prevAudioDispatch;
+    else delete process.env.ELEVENLABS_DISPATCH;
   }
 
   // ─────────────────────────────────────────────────────────────────────────────

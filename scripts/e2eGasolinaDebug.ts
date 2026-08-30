@@ -138,8 +138,9 @@ export async function runGasolinaE2E(): Promise<E2EResult> {
 
   if (fireflySessionLive.live) {
     console.log(`\n[STEP 1/6] Disparando Firefly Lote 1 (10 Cenas)...`);
+    const allowLiveDispatch = process.env.FIREFLY_DISPATCH === '1';
     try {
-      await runFireflyBatchDispatch({ lote: 1, runId, forceDispatch: true });
+      await runFireflyBatchDispatch({ lote: 1, runId, forceDispatch: allowLiveDispatch });
     } catch (err: any) {
       console.warn(`⚠️ Aviso Lote 1: ${err.message}`);
       failures.push(`LOTE1_DISPATCH_NOTICE: ${err.message}`);
@@ -153,7 +154,7 @@ export async function runGasolinaE2E(): Promise<E2EResult> {
     if (lote1Val.passed) {
       console.log(`\n[STEP 2/6] Disparando Firefly Lote 2 (11 Cenas)...`);
       try {
-        await runFireflyBatchDispatch({ lote: 2, runId, forceDispatch: true });
+        await runFireflyBatchDispatch({ lote: 2, runId, forceDispatch: allowLiveDispatch });
       } catch (err: any) {
         console.warn(`⚠️ Aviso Lote 2: ${err.message}`);
         failures.push(`LOTE2_DISPATCH_NOTICE: ${err.message}`);
@@ -184,8 +185,9 @@ export async function runGasolinaE2E(): Promise<E2EResult> {
     allowPartialAudio = true;
   } else {
     console.log(`✅ ElevenLabs Online. Disparando síntese das 30 locuções...`);
+    const allowVoDispatch = process.env.ELEVENLABS_DISPATCH === '1';
     try {
-      await runNarrationDispatch({ runId, forceDispatch: true });
+      await runNarrationDispatch({ runId, forceDispatch: allowVoDispatch });
       const voVal = validateNarrationBatch(runId);
       narrationCount = `${voVal.existingCount}/30`;
     } catch (err: any) {
@@ -196,7 +198,7 @@ export async function runGasolinaE2E(): Promise<E2EResult> {
 
     // Tenta SFX
     try {
-      await runAudioBedDispatch({ runId, forceDispatch: true });
+      await runAudioBedDispatch({ runId, forceDispatch: process.env.AUDIO_DISPATCH === '1' });
       const audioVal = validateAudioBed(runId);
       sfxCount = `${audioVal.sfxStemsPresent}/30`;
     } catch (err: any) {
