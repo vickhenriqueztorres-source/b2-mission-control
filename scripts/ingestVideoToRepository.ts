@@ -124,6 +124,9 @@ async function main(): Promise<void> {
     recommendedMotion: motion,
     sha256,
     provenance: 'curated_broll',
+    qaStatus: 'approved',
+    approvedBy: 'manual_ingest',
+    approvedAt: new Date().toISOString(),
     createdAt: new Date().toISOString()
   };
 

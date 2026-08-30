@@ -1,0 +1,79 @@
+{
+  "episodeId": "test-cinema-pilot",
+  "fps": 30,
+  "actBreaks": [2],
+  "audio": {
+    "musicBed": "episodes/test-cinema-pilot/audio/music/bed.mp3",
+    "musicVolume": 0.22,
+    "voiceoverVolume": 1.0,
+    "sfxVolume": 0.45,
+    "ducking": true,
+    "duckedVolume": 0.12
+  },
+  "hudWindows": [
+    {
+      "id": "HUD_WIN_01",
+      "component": "TelemetryWindow",
+      "props": {
+        "title": "MONITORAMENTO DE FLUXO ATIVO",
+        "status": "OPERACIONAL"
+      },
+      "startSeconds": 5,
+      "durationSeconds": 15
+    }
+  ],
+  "scenes": [
+    {
+      "id": "SC_TEST_01",
+      "name": "Superfície Visível",
+      "component": "DynamicDocumentaryMedia",
+      "take_type": "CINEMATIC_TAKE",
+      "durationSeconds": 8,
+      "mediaFile": "episodes/test-cinema-pilot/takes/SC_TEST_01.mp4",
+      "voiceoverFile": "episodes/test-cinema-pilot/audio/narration/SC_TEST_01.mp3",
+      "callout": {
+        "categoryText": "EVIDÊNCIA",
+        "mainText": "SUPERFÍCIE",
+        "subText": "REGISTRO INICIAL",
+        "position": "bottom_left"
+      }
+    },
+    {
+      "id": "SC_TEST_02",
+      "name": "Dossiê Raio-X",
+      "component": "IndustrialXRayHUD",
+      "take_type": "KEYFRAME_DOSSIER",
+      "durationSeconds": 16,
+      "voiceoverFile": "episodes/test-cinema-pilot/audio/narration/SC_TEST_02.mp3",
+      "props": {
+        "sceneNumber": "SC_TEST_02",
+        "title": "SCANNER DE FLUXO",
+        "latencyMs": 42
+      }
+    },
+    {
+      "id": "SC_TEST_03",
+      "name": "Mecanismo Oculto",
+      "component": "TechnicalCutawaySchematic",
+      "take_type": "KEYFRAME_DOSSIER",
+      "durationSeconds": 9,
+      "voiceoverFile": "episodes/test-cinema-pilot/audio/narration/SC_TEST_03.mp3"
+    },
+    {
+      "id": "SC_TEST_04",
+      "name": "Corte Transversal",
+      "component": "DynamicDocumentaryMedia",
+      "take_type": "CINEMATIC_TAKE",
+      "durationSeconds": 15,
+      "mediaFile": "episodes/test-cinema-pilot/takes/SC_TEST_04.mp4"
+    },
+    {
+      "id": "SC_TEST_05",
+      "name": "Veredito Causal",
+      "component": "DynamicDocumentaryMedia",
+      "take_type": "CINEMATIC_TAKE",
+      "durationSeconds": 12,
+      "mediaFile": "episodes/test-cinema-pilot/takes/SC_TEST_05.mp4"
+    }
+  ]
+}

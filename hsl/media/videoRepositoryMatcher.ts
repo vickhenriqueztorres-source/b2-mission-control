@@ -63,23 +63,100 @@ export class VideoRepositoryMatcher {
   }
 
   /**
-   * Registra um novo vídeo no catálogo central
+   * PORTA ÚNICA PÚBLICA DE ESCRITA NO CATÁLOGO DE VÍDEOS
+   * Governa inserções, atualizações e retagging com controle estrito de procedência e QA.
+   */
+  public static upsertEntries(
+    entries: VideoCatalogEntry[],
+    origin: 'sync_broll' | 'manual_ingest' | 'on_demand_dispatch',
+    opts?: { retagOnly?: boolean }
+  ): { inserted: number; updated: number; rejected: Array<{ id: string; reason: string }> } {
+    const catalog = this.loadCatalog(true);
+    let inserted = 0;
+    let updated = 0;
+    const rejected: Array<{ id: string; reason: string }> = [];
+
+    const ORIGIN_MAP: Record<
+      'sync_broll' | 'manual_ingest' | 'on_demand_dispatch',
+      { provenance: 'curated_broll' | 'manual_import' | 'firefly_ai'; qaStatus: 'quarantined' }
+    > = {
+      sync_broll: { provenance: 'curated_broll', qaStatus: 'quarantined' },
+      manual_ingest: { provenance: 'manual_import', qaStatus: 'quarantined' },
+      on_demand_dispatch: { provenance: 'firefly_ai', qaStatus: 'quarantined' }
+    };
+
+    const derivedDefaults = ORIGIN_MAP[origin];
+
+    for (const entry of entries) {
+      if (!entry.id || !entry.id.trim() || !entry.filename || !entry.filename.trim()) {
+        const idStr = entry.id || 'UNKNOWN';
+        const reason = `MISSING_REQUIRED_FIELDS: Entry '${idStr}' deve conter id e filename preenchidos.`;
+        rejected.push({ id: idStr, reason });
+        console.warn(`[CATALOG_AUDIT] REJECTED | id='${idStr}' | origin='${origin}' | motivo='${reason}'`);
+        continue;
+      }
+
+      const existingIndex = catalog.videos.findIndex(
+        v => v.id === entry.id || v.filename === entry.filename
+      );
+
+      if (opts?.retagOnly) {
+        if (existingIndex < 0) {
+          const reason = `RETAG_ONLY_NOT_FOUND: Entry '${entry.id}' não existe no catálogo para retag.`;
+          rejected.push({ id: entry.id, reason });
+          console.warn(`[CATALOG_AUDIT] REJECTED | id='${entry.id}' | origin='${origin}' | motivo='${reason}'`);
+          continue;
+        }
+
+        const existing = catalog.videos[existingIndex];
+        if (entry.tags) existing.tags = entry.tags;
+        if (entry.description) existing.description = entry.description;
+        if (entry.category) existing.category = entry.category;
+        updated++;
+        console.log(`[CATALOG_AUDIT] RETAGGED | id='${existing.id}' | origin='${origin}' | tags=[${(existing.tags || []).join(', ')}]`);
+        continue;
+      }
+
+      if (existingIndex >= 0) {
+        const existing = catalog.videos[existingIndex];
+        // Preserva o qaStatus atual e campos de auditoria
+        catalog.videos[existingIndex] = {
+          ...entry,
+          qaStatus: existing.qaStatus,
+          provenance: existing.provenance ?? derivedDefaults.provenance,
+          approvedBy: existing.approvedBy,
+          approvedAt: existing.approvedAt,
+          sourceRunId: existing.sourceRunId ?? entry.sourceRunId
+        };
+        updated++;
+        console.log(`[CATALOG_AUDIT] UPDATED | id='${entry.id}' | origin='${origin}' | qaStatus='${existing.qaStatus}' (preservado)`);
+      } else {
+        const newEntry: VideoCatalogEntry = {
+          ...entry,
+          provenance: derivedDefaults.provenance,
+          qaStatus: derivedDefaults.qaStatus
+        };
+        catalog.videos.push(newEntry);
+        if (newEntry.category && !catalog.categories.includes(newEntry.category)) {
+          catalog.categories.push(newEntry.category);
+        }
+        inserted++;
+        console.log(`[CATALOG_AUDIT] INSERTED | id='${newEntry.id}' | origin='${origin}' | provenance='${newEntry.provenance}' | qaStatus='${newEntry.qaStatus}'`);
+      }
+    }
+
+    if (inserted > 0 || updated > 0) {
+      this.saveCatalog(catalog);
+    }
+
+    return { inserted, updated, rejected };
+  }
+
+  /**
+   * @deprecated Utilize VideoRepositoryMatcher.upsertEntries(entries, origin) para controle estrito de escrita.
    */
   public static registerVideo(entry: VideoCatalogEntry): void {
-    const catalog = this.loadCatalog(true);
-    const existingIndex = catalog.videos.findIndex(v => v.id === entry.id || v.filename === entry.filename);
-
-    if (existingIndex >= 0) {
-      catalog.videos[existingIndex] = { ...catalog.videos[existingIndex], ...entry };
-    } else {
-      catalog.videos.push(entry);
-    }
-
-    if (entry.category && !catalog.categories.includes(entry.category)) {
-      catalog.categories.push(entry.category);
-    }
-
-    this.saveCatalog(catalog);
+    this.upsertEntries([entry], 'manual_ingest');
   }
 
   /**
@@ -156,6 +233,16 @@ export class VideoRepositoryMatcher {
       const resolvedPath = candidatePaths.find(p => fs.existsSync(p));
       if (!resolvedPath) {
         lastRejectionReason = `BANK_CLIP_UNINDEXED: Arquivo '${video.filename}' não encontrado no disco.`;
+        continue;
+      }
+
+      // Portão de Confiança & Procedência (Fail-Closed)
+      if (video.qaStatus !== 'approved') {
+        lastRejectionReason = `BANK_CLIP_NOT_APPROVED: Clip '${video.id}' tem qaStatus '${video.qaStatus ?? 'ausente'}' (exigido: approved).`;
+        continue;
+      }
+      if (!video.provenance) {
+        lastRejectionReason = `BANK_CLIP_NO_PROVENANCE: Clip '${video.id}' sem procedência declarada.`;
         continue;
       }
 
@@ -280,8 +367,14 @@ export class VideoRepositoryMatcher {
       tags?: string[];
       colorTone?: string;
       recommendedMotion?: string;
-    }
+      sourceRunId?: string;
+    },
+    origin: 'firefly_real'
   ): VideoCatalogEntry {
+    if (origin !== 'firefly_real') {
+      throw new Error(`INGEST_REJECTED_NON_APPROVED_ORIGIN: Origem '${origin}' não autorizada para ingestão no repositório.`);
+    }
+
     if (!fs.existsSync(sourceVideoPath)) {
       throw new Error(`SOURCE_VIDEO_NOT_FOUND: ${sourceVideoPath}`);
     }
@@ -289,15 +382,9 @@ export class VideoRepositoryMatcher {
     const autoIngestEnabled = process.env.HSL_AUTO_INGEST === 'true';
     const filename = path.basename(sourceVideoPath);
     const category = metadata.category || 'industrial';
-    const categoryDir = path.join(this.REPO_PATH, category);
-    fs.mkdirSync(categoryDir, { recursive: true });
 
-    const targetPath = path.join(categoryDir, filename);
-    if (!fs.existsSync(targetPath) || fs.statSync(targetPath).size !== fs.statSync(sourceVideoPath).size) {
-      fs.copyFileSync(sourceVideoPath, targetPath);
-    }
-
-    const buf = fs.readFileSync(targetPath);
+    // Mede metadados e hash diretamente do arquivo fonte antes de qualquer cópia
+    const buf = fs.readFileSync(sourceVideoPath);
     const sha = crypto.createHash('sha256').update(buf).digest('hex');
 
     let durationSeconds = 5.0;
@@ -311,7 +398,7 @@ export class VideoRepositoryMatcher {
         '-select_streams', 'v:0',
         '-show_entries', 'stream=width,height,r_frame_rate:format=duration',
         '-of', 'json',
-        targetPath
+        sourceVideoPath
       ], { encoding: 'utf8' });
       const parsed = JSON.parse(probe.stdout);
       if (parsed.format?.duration) durationSeconds = parseFloat(parsed.format.duration);
@@ -325,10 +412,12 @@ export class VideoRepositoryMatcher {
       }
     } catch {}
 
+    const quarantineRelativePath = `_quarantine/${category}/${filename}`.replace(/\\/g, '/');
+
     const entry: VideoCatalogEntry = {
       id: metadata.id || `GEN_${path.basename(filename, path.extname(filename)).toUpperCase()}`,
       category,
-      filename: `${category}/${filename}`.replace(/\\/g, '/'),
+      filename: quarantineRelativePath,
       tags: metadata.tags || ['firefly', 'gerado', category],
       description: metadata.description || `Take cinematográfico gerado via Firefly (${category}).`,
       durationSeconds: Math.round(durationSeconds * 1000) / 1000,
@@ -338,12 +427,26 @@ export class VideoRepositoryMatcher {
       recommendedMotion: (metadata.recommendedMotion as any) || 'slow_push_in',
       sha256: sha,
       provenance: 'firefly_ai',
+      qaStatus: 'quarantined',
+      sourceRunId: metadata.sourceRunId,
       createdAt: new Date().toISOString()
     };
 
-    if (autoIngestEnabled) {
-      this.registerVideo(entry);
+    // PROIBIDO copiar se autoIngestEnabled estiver desligado
+    if (!autoIngestEnabled) {
+      return entry;
     }
+
+    // Se autoIngestEnabled estiver ativo, copia exclusivamente para a QUARENTENA
+    const quarantineCategoryDir = path.join(this.REPO_PATH, '_quarantine', category);
+    fs.mkdirSync(quarantineCategoryDir, { recursive: true });
+
+    const targetPath = path.join(quarantineCategoryDir, filename);
+    if (!fs.existsSync(targetPath) || fs.statSync(targetPath).size !== fs.statSync(sourceVideoPath).size) {
+      fs.copyFileSync(sourceVideoPath, targetPath);
+    }
+
+    this.registerVideo(entry);
     return entry;
   }
 

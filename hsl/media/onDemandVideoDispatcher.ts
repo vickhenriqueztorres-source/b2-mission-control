@@ -122,6 +122,7 @@ export class OnDemandVideoDispatcher {
       recommendedMotion: options.recommendedMotion || 'slow_push_in',
       sha256,
       provenance: 'firefly_ai',
+      qaStatus: 'quarantined',
       createdAt: new Date().toISOString()
     };
 

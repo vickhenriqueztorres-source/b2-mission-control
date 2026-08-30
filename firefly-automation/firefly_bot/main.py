@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import json
 import logging
 from pathlib import Path
 
@@ -13,6 +14,7 @@ from .job_store import JobStore
 from .logging_utils import configure_logging, event
 from .mateo_execution_contract import enqueue_execution_package
 from .duration_control_gate import run_gate as run_duration_control_gate
+from .session import probe_session
 from .watchdog import WatchdogSupervisor
 from .worker import Worker
 
@@ -34,6 +36,7 @@ def build_parser() -> argparse.ArgumentParser:
     actions.add_argument("--duration-control-gate", type=int, metavar="SECONDS")
     actions.add_argument("--duration-slider-gate", type=int, metavar="SECONDS")
     actions.add_argument("--recover-result-ready-job", type=int, metavar="JOB_ID")
+    actions.add_argument("--probe-session", action="store_true", help="Verifica se a sessão do Firefly está autenticada")
     actions.add_argument("--run", action="store_true")
     actions.add_argument("--status", action="store_true")
 
@@ -84,6 +87,7 @@ def main() -> int:
             args.duration_control_gate is not None,
             args.duration_slider_gate is not None,
             args.recover_result_ready_job is not None,
+            args.probe_session,
             args.run,
             args.status,
             args.command,
@@ -144,6 +148,10 @@ def main() -> int:
         return 0 if result["status"] == "PASS" else 1
     if args.recover_result_ready_job is not None:
         return asyncio.run(Worker(config, store, logger).recover_result_ready_job(args.recover_result_ready_job))
+    if args.probe_session:
+        res = asyncio.run(probe_session(config))
+        print(json.dumps(res, indent=2))
+        return 0 if res.get("authenticated") else 1
     if args.command == "enqueue":
         count = store.add_prompts(args.file.read_text(encoding="utf-8").splitlines())
         event(logger, logging.INFO, "prompts_enqueued", count=count)

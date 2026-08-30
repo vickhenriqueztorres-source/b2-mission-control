@@ -1,3 +1,10 @@
+/**
+ * @legacy-composition
+ * AVISO PARA AGENTES: Esta composição utiliza o formato artesanal legado.
+ * NÃO USE ESTE ARQUIVO COMO TEMPLATE PARA NOVOS EPISÓDIOS.
+ * O padrão canônico e obrigatório para todos os novos episódios é:
+ * `contracts/episodes/<id>.episode.json` + `TimelineContract` + `<CinematicEpisode />` em `remotion/cinema/CinematicEpisode.tsx`.
+ */
 import React from 'react';
 import { AbsoluteFill, Audio, Sequence, staticFile } from 'remotion';
 import {

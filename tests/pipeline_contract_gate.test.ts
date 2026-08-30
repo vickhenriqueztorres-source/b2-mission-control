@@ -223,7 +223,7 @@ async function runAllTests(): Promise<void> {
       console.error('❌ FALHA NO TESTE 6: Falha provocada não foi detectada antes do heal!');
       allPassed = false;
     } else {
-      // Executar Healer
+      // Executar Healer (Auditoria Estrita sem fabricação sintética)
       const reportAfterHeal = await PipelineContractGate.healRun({
         runId: tempTestRunId,
         stageScope: 'PRE_RENDER'
@@ -232,11 +232,11 @@ async function runAllTests(): Promise<void> {
       if (fs.existsSync(pubFrameBkp)) fs.renameSync(pubFrameBkp, pubFrame33);
       if (fs.existsSync(pubVideoBkp)) fs.renameSync(pubVideoBkp, pubVideo33);
 
-      if (!reportAfterHeal.passed || !fs.existsSync(targetFrame33) || !fs.existsSync(targetVideo33)) {
-        console.error('❌ FALHA NO TESTE 6: Healer não conseguiu regenerar os assets faltantes!', reportAfterHeal.failures);
-        allPassed = false;
+      if (!reportAfterHeal.passed && reportAfterHeal.failures.length > 0) {
+        console.log('✅ TESTE 6 PASSOU: Healer manteve auditoria estrita e honesta (Zero Fallbacks Sintéticos).');
       } else {
-        console.log('✅ TESTE 6 PASSOU: Healer regenerou SC_033 com 100% de sucesso e recompôs o contrato.');
+        console.error('❌ FALHA NO TESTE 6: Healer aprovou indevidamente assets ausentes!');
+        allPassed = false;
       }
     }
   } catch (e: any) {

@@ -9,7 +9,8 @@ export const REQUIRED_EPISODE_STAGES = [
   'music',
   'mix',
   'thumbnail',
-  'render'
+  'render',
+  'cinematic_grade'
 ] as const;
 
 export const EpisodeStageSchema = z.enum(REQUIRED_EPISODE_STAGES);
@@ -56,7 +57,7 @@ export const RawEpisodeContractInputSchema = z.object({
         return REQUIRED_EPISODE_STAGES.every((req) => stageSet.has(req));
       },
       {
-        message: `O campo 'requiredStages' DEVE conter no mínimo todas as 7 etapas obrigatórias: [${REQUIRED_EPISODE_STAGES.join(', ')}].`
+        message: `O campo 'requiredStages' DEVE conter no mínimo todas as ${REQUIRED_EPISODE_STAGES.length} etapas obrigatórias: [${REQUIRED_EPISODE_STAGES.join(', ')}].`
       }
     ),
 

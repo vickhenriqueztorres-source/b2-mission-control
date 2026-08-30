@@ -1,0 +1,27 @@
+{
+  "episodeId": "test-cinema-pilot",
+  "title": "PILOTO CINEMATOGRÁFICO // CAMADA CINEMA PADRÃO",
+  "theme": "Validação da esteira cinematográfica automática orientada a dados",
+  "domainTags": [
+    "cinematics",
+    "automation",
+    "xray_telemetry",
+    "forensics"
+  ],
+  "targetDurationSeconds": 60,
+  "minDurationRatio": 0.9,
+  "minScenes": 5,
+  "requiredStages": [
+    "narration",
+    "visuals",
+    "sfx",
+    "music",
+    "mix",
+    "thumbnail",
+    "render",
+    "cinematic_grade"
+  ],
+  "voiceProfile": "Chris (ElevenLabs)",
+  "musicMood": "dark_industrial_investigative",
+  "sfxDensity": "medium"
+}

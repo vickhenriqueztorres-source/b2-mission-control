@@ -81,128 +81,78 @@ export class RemotionCompiler {
     const timelineDataFilename = `${input.compositionId.charAt(0).toLowerCase() + input.compositionId.slice(1)}TimelineData.ts`;
     const timelineDataPath = path.join(remotionDir, timelineDataFilename);
 
-    const timelineDataCode = `// Arquivo gerado automaticamente pelo RemotionCompiler
-export interface CompiledSceneItem {
-  sceneId: string;
-  name: string;
-  startFrame: number;
-  durationFrames: number;
-  durationSeconds: number;
-  takeType: 'CINEMATIC_TAKE' | 'KEYFRAME_DOSSIER';
-  integratedText?: string;
-  motionMode: 'crash_push_in' | 'slow_push_in' | 'dramatic_pull_out' | 'pan_right' | 'pan_left' | 'cinematic_drift';
-  callout?: {
-    categoryText: string;
-    mainText: string;
-    subText: string;
-    position?: 'center' | 'bottom_left' | 'bottom_right' | 'top_left';
-  };
-}
+    const timelineDataCode = `// Arquivo gerado automaticamente pelo RemotionCompiler via CinematicEpisode
+import { TimelineContract, CalculatedTimeline, parseAndCalculateTimeline } from '../contracts/timelineContract';
 
 export const ${totalFramesVarName} = ${totalDurationFrames};
 
-export const ${timelineVarName}: CompiledSceneItem[] = ${JSON.stringify(compiledScenes, null, 2)};
+export const ${timelineVarName}_CONTRACT: TimelineContract = {
+  episodeId: '${input.episodeId}',
+  fps: ${fps},
+  audio: {
+    musicBed: 'episodes/${input.episodeId}/audio/music/bed.mp3',
+    musicVolume: 0.22,
+    voiceoverVolume: 1.0,
+    sfxVolume: 0.45,
+    ducking: true,
+    duckedVolume: 0.12
+  },
+  scenes: ${JSON.stringify(compiledScenes.map(sc => ({
+    id: sc.sceneId,
+    name: sc.name,
+    component: sc.takeType === 'KEYFRAME_DOSSIER' ? 'CinematicKeyframeDossier' : 'DynamicDocumentaryMedia',
+    durationSeconds: sc.durationSeconds,
+    transition: 'crossfade',
+    camera: sc.takeType === 'KEYFRAME_DOSSIER' ? 'drift' : 'pushIn',
+    callout: sc.callout,
+    take_type: sc.takeType,
+    mediaFile: `episodes/${input.episodeId}/takes/\${sc.sceneId}.mp4`,
+    voiceoverFile: `episodes/${input.episodeId}/audio/narration/\${sc.sceneId}.mp3`,
+    sfxFile: `episodes/${input.episodeId}/audio/sfx/\${sc.sceneId}.mp3`,
+    props: {
+      sceneId: sc.sceneId,
+      name: sc.name,
+      integratedText: sc.integratedText,
+      motionMode: sc.motionMode,
+      zoomIntensity: 1.15
+    }
+  })), null, 2)}
+};
+
+export const ${timelineVarName}_CALCULATED: CalculatedTimeline = parseAndCalculateTimeline(${timelineVarName}_CONTRACT);
 `;
 
     fs.writeFileSync(timelineDataPath, timelineDataCode, 'utf8');
     Logger.info(this.loggerName, `Timeline data gerada em: ${timelineDataPath}`);
 
-    // 3. Gerar arquivo do Componente Remotion: EpisodeXX<Name>.tsx
+    // 3. Gerar arquivo do Componente Remotion usando CinematicEpisode
     const componentPath = path.join(remotionDir, `${input.compositionId}.tsx`);
-    const audioFolder = input.audioSubfolder || `postproduction_${input.episodeId.toLowerCase().replace(/[^a-z0-9_]/g, '_')}`;
 
     const componentCode = `import React from 'react';
-import { AbsoluteFill, Audio, Sequence, staticFile } from 'remotion';
-import {
-  AnamorphicCinematicOverlay,
-  AtomicStopwatch,
-  CinematicKeyframeDossier,
-  DynamicDocumentaryMedia,
-  DynamicSpotlightFocus,
-  Episode02SoundTrack,
-  IndustrialXRayHUD,
-  KineticEditorialCallout,
-  KineticNumberCounter
-} from './documentary';
-import { ${timelineVarName}, ${totalFramesVarName} } from './${timelineDataFilename.replace('.ts', '')}';
+import { CinematicEpisode } from './cinema/CinematicEpisode';
+import { ${timelineVarName}_CALCULATED, ${totalFramesVarName} } from './${timelineDataFilename.replace('.ts', '')}';
 
 export interface ${input.compositionId}Props {
   accentColor?: string;
   telemetryColor?: string;
+  runId?: string;
 }
 
 export const ${input.compositionId}: React.FC<${input.compositionId}Props> = ({
   accentColor = '#FF5500',
-  telemetryColor = '#00F0FF'
+  telemetryColor = '#00F0FF',
+  runId = 'latest'
 }) => {
   return (
-    <AbsoluteFill style={{ backgroundColor: '#060709', color: '#FFFFFF' }}>
-      {/* 1. Trilha Sonora Master & Sound Design */}
-      <Episode02SoundTrack />
-
-      {/* 2. Áudio da Narração Master Sincronizado */}
-      <Audio src={staticFile('postproduction/narration.mp3')} volume={1.0} />
-
-      {/* 3. Cronômetro Atômico de Telemetria no Topo */}
-      <AtomicStopwatch totalFrames={${totalFramesVarName}} />
-
-      {/* 4. Sequência das ${compiledScenes.length} Cenas com Motion Graphics */}
-      {${timelineVarName}.map((scene) => {
-        return (
-          <Sequence
-            key={scene.sceneId}
-            from={scene.startFrame}
-            durationInFrames={scene.durationFrames}
-            name={\`\${scene.sceneId}_\${scene.name}\`}
-          >
-            <AbsoluteFill style={{ backgroundColor: '#060709' }}>
-              {/* CENA CINEMATOGRÁFICA 35MM (Firefly Take ou Keyframe Dossier 2.5D) */}
-              <DynamicDocumentaryMedia
-                sceneId={scene.sceneId}
-                kenBurns={scene.motionMode}
-                zoomIntensity={1.22}
-                durationInFrames={scene.durationFrames}
-                isDossierTake={scene.takeType === 'KEYFRAME_DOSSIER'}
-                dossierTag={\`TELEMETRIA // \${scene.sceneId}\`}
-              />
-
-              {/* Spotlight Chiaroscuro */}
-              <DynamicSpotlightFocus
-                durationInFrames={scene.durationFrames}
-                intensity={0.38}
-              />
-
-              {/* HUD Industrial de Telemetria X-Ray */}
-              <IndustrialXRayHUD
-                sceneId={scene.sceneId}
-                title={scene.name}
-                category="${category}"
-                accentColor={accentColor}
-                telemetryColor={telemetryColor}
-              />
-
-              {/* Tipografia Editorial Dinâmica / Callout */}
-              {scene.callout && (
-                <KineticEditorialCallout
-                  mainText={scene.callout.mainText}
-                  subText={scene.callout.subText}
-                  categoryText={scene.callout.categoryText}
-                  startFrame={12}
-                  durationFrames={Math.max(60, scene.durationFrames - 20)}
-                  position={scene.callout.position || 'bottom_left'}
-                  accentColor={accentColor}
-                />
-              )}
-            </AbsoluteFill>
-          </Sequence>
-        );
-      })}
-
-      {/* 5. Overlay Cinematográfico 35mm Master (Letterbox 2.39:1 + Grão + Retículas) */}
-      <AnamorphicCinematicOverlay />
-    </AbsoluteFill>
+    <CinematicEpisode
+      timeline={${timelineVarName}_CALCULATED}
+      accentColor={accentColor}
+      telemetryColor={telemetryColor}
+      runId={runId}
+    />
   );
 };
+`;
 `;
 
     fs.writeFileSync(componentPath, componentCode, 'utf8');

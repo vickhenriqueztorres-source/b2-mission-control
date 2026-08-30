@@ -33,7 +33,7 @@ export class ImageRepositoryManager {
         totalImages: 0,
         images: []
       };
-      this.saveCatalog(defaultCatalog);
+      this.saveImageCatalog(defaultCatalog);
       this.catalogCache = defaultCatalog;
       return defaultCatalog;
     }
@@ -58,7 +58,7 @@ export class ImageRepositoryManager {
   /**
    * Salva o catálogo de imagens no disco
    */
-  public static saveCatalog(catalog: ImageCatalog): void {
+  private static saveImageCatalog(catalog: ImageCatalog): void {
     if (!fs.existsSync(this.REPO_PATH)) {
       fs.mkdirSync(this.REPO_PATH, { recursive: true });
     }
@@ -134,7 +134,7 @@ export class ImageRepositoryManager {
       catalog.topics.push(topic);
     }
 
-    this.saveCatalog(catalog);
+    this.saveImageCatalog(catalog);
     return entry;
   }
 

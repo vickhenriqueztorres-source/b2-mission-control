@@ -7,7 +7,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "fuel_dispenser_nozzle",
     "take_type": "CINEMATIC_TAKE",
-    "targetSeconds": 12
+    "targetSeconds": 9
   },
   {
     "sceneId": "GAS_002",
@@ -17,7 +17,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "vehicle_dashboard",
     "take_type": "CINEMATIC_TAKE",
-    "targetSeconds": 12
+    "targetSeconds": 15
   },
   {
     "sceneId": "GAS_003",
@@ -27,7 +27,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "fuel_station_infrastructure",
     "take_type": "CINEMATIC_TAKE",
-    "targetSeconds": 12
+    "targetSeconds": 8
   },
   {
     "sceneId": "GAS_004",
@@ -37,7 +37,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "flow_meter_mechanism",
     "take_type": "KEYFRAME_DOSSIER",
-    "targetSeconds": 12
+    "targetSeconds": 16
   },
   {
     "sceneId": "GAS_005",
@@ -57,7 +57,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "pulse_sensor_assembly",
     "take_type": "CINEMATIC_TAKE",
-    "targetSeconds": 12
+    "targetSeconds": 9
   },
   {
     "sceneId": "GAS_007",
@@ -67,7 +67,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "pulse_sensor_assembly",
     "take_type": "CINEMATIC_TAKE",
-    "targetSeconds": 12
+    "targetSeconds": 15
   },
   {
     "sceneId": "GAS_008",
@@ -77,7 +77,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "metrology_forensics",
     "take_type": "KEYFRAME_DOSSIER",
-    "targetSeconds": 12
+    "targetSeconds": 8
   },
   {
     "sceneId": "GAS_009",
@@ -87,7 +87,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "fuel_station_infrastructure",
     "take_type": "CINEMATIC_TAKE",
-    "targetSeconds": 12
+    "targetSeconds": 16
   },
   {
     "sceneId": "GAS_010",
@@ -107,7 +107,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "rogue_microchip_pcb",
     "take_type": "CINEMATIC_TAKE",
-    "targetSeconds": 12
+    "targetSeconds": 9
   },
   {
     "sceneId": "GAS_012",
@@ -117,7 +117,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "rogue_microchip_pcb",
     "take_type": "CINEMATIC_TAKE",
-    "targetSeconds": 12
+    "targetSeconds": 15
   },
   {
     "sceneId": "GAS_013",
@@ -127,7 +127,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "metrology_forensics",
     "take_type": "KEYFRAME_DOSSIER",
-    "targetSeconds": 12
+    "targetSeconds": 8
   },
   {
     "sceneId": "GAS_014",
@@ -137,7 +137,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "fuel_dispenser_nozzle",
     "take_type": "CINEMATIC_TAKE",
-    "targetSeconds": 12
+    "targetSeconds": 16
   },
   {
     "sceneId": "GAS_015",
@@ -157,7 +157,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "metrology_forensics",
     "take_type": "KEYFRAME_DOSSIER",
-    "targetSeconds": 12
+    "targetSeconds": 9
   },
   {
     "sceneId": "GAS_017",
@@ -167,7 +167,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "rogue_microchip_pcb",
     "take_type": "CINEMATIC_TAKE",
-    "targetSeconds": 12
+    "targetSeconds": 15
   },
   {
     "sceneId": "GAS_018",
@@ -177,7 +177,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "rogue_microchip_pcb",
     "take_type": "CINEMATIC_TAKE",
-    "targetSeconds": 12
+    "targetSeconds": 8
   },
   {
     "sceneId": "GAS_019",
@@ -187,7 +187,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "metrology_forensics",
     "take_type": "CINEMATIC_TAKE",
-    "targetSeconds": 12
+    "targetSeconds": 16
   },
   {
     "sceneId": "GAS_020",
@@ -207,7 +207,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "pulse_sensor_assembly",
     "take_type": "KEYFRAME_DOSSIER",
-    "targetSeconds": 12
+    "targetSeconds": 9
   },
   {
     "sceneId": "GAS_022",
@@ -217,7 +217,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "metrology_forensics",
     "take_type": "CINEMATIC_TAKE",
-    "targetSeconds": 12
+    "targetSeconds": 15
   },
   {
     "sceneId": "GAS_023",
@@ -227,7 +227,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "metrology_forensics",
     "take_type": "CINEMATIC_TAKE",
-    "targetSeconds": 12
+    "targetSeconds": 8
   },
   {
     "sceneId": "GAS_024",
@@ -237,7 +237,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "metrology_forensics",
     "take_type": "CINEMATIC_TAKE",
-    "targetSeconds": 12
+    "targetSeconds": 16
   },
   {
     "sceneId": "GAS_025",
@@ -257,7 +257,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "metrology_forensics",
     "take_type": "KEYFRAME_DOSSIER",
-    "targetSeconds": 12
+    "targetSeconds": 9
   },
   {
     "sceneId": "GAS_027",
@@ -267,7 +267,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "metrology_forensics",
     "take_type": "KEYFRAME_DOSSIER",
-    "targetSeconds": 12
+    "targetSeconds": 15
   },
   {
     "sceneId": "GAS_028",
@@ -277,7 +277,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "rogue_microchip_pcb",
     "take_type": "CINEMATIC_TAKE",
-    "targetSeconds": 12
+    "targetSeconds": 8
   },
   {
     "sceneId": "GAS_029",
@@ -287,7 +287,7 @@
     "visual_must_not": ["cargo ship", "warehouse conveyor", "water tank rooftop"],
     "required_category": "fuel_station_infrastructure",
     "take_type": "CINEMATIC_TAKE",
-    "targetSeconds": 12
+    "targetSeconds": 16
   },
   {
     "sceneId": "GAS_030",

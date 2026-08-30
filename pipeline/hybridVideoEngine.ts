@@ -6,6 +6,7 @@ import { FireflyAdapter } from '../adapters/fireflyAdapter';
 import { VideoRepositoryMatcher } from '../hsl/media/videoRepositoryMatcher';
 import { VideoExecutionMode, VideoMatchResult } from '../hsl/media/types';
 import { PipelineContractGate } from './pipelineContractGate';
+import { RunManifest } from './runManifest';
 import { Logger } from '../event-hub/logger';
 import { AgentTelemetryAdapter } from '../adapters/agentTelemetryAdapter';
 import { ProductionSafetyGuard } from '../config/productionSafetyGuard';
@@ -50,6 +51,7 @@ export interface HybridVideoEngineResult {
     videoPath?: string;
     startFramePath: string;
     matchScore?: number;
+    takeOrigin?: 'firefly_real' | 'fallback_kenburns' | 'bank_matched' | 'dossier_25d';
     reason: string;
   }>;
 }
@@ -159,6 +161,7 @@ export class HybridVideoEngine {
         sceneOutcomes[sc.scene_id] = {
           action: 'KEYFRAME_DOSSIER_2.5D',
           startFramePath,
+          takeOrigin: 'dossier_25d',
           reason: 'KEYFRAME_DOSSIER: Render procedural 2.5D com motion graphics e HUD de raio-x no Remotion.'
         };
 
@@ -203,6 +206,7 @@ export class HybridVideoEngine {
           videoPath: targetVideo,
           startFramePath,
           matchScore: matchResult.matchScore,
+          takeOrigin: 'bank_matched',
           reason: matchResult.reason
         };
 
@@ -239,6 +243,7 @@ export class HybridVideoEngine {
           action: 'DISPATCH_FIREFLY_ON_DEMAND',
           startFramePath,
           matchScore: matchResult.matchScore,
+          takeOrigin: 'firefly_real',
           reason: `PENDING_FIREFLY: ${matchResult.reason}`
         };
 
@@ -282,11 +287,15 @@ export class HybridVideoEngine {
       const firefly = new FireflyAdapter();
       await firefly.initialize();
 
-      let completedJobs: Array<{ name: string; output_path: string }> = [];
+      let completedJobs: Array<{ name: string; output_path: string; origin: 'firefly_real' | 'fallback_kenburns' }> = [];
 
       try {
         const fireflyResult = await firefly.feedGuideAndRun(runId, guideJsonPath);
-        completedJobs = fireflyResult.completedJobs;
+        completedJobs = fireflyResult.completedJobs.map(job => ({
+          name: job.name,
+          output_path: job.output_path,
+          origin: 'firefly_real' as const
+        }));
       } catch (err: any) {
         Logger.warn('HybridVideoEngine', `⚠️ Firefly Bot encontrou exceção: ${err.message}. Aplicando fallback com interpolação de movimento de alta fidelidade.`);
         
@@ -294,8 +303,8 @@ export class HybridVideoEngine {
         for (const pending of fireflyPendingScenes) {
           const targetVideo = path.join(pending.sceneDir, 'firefly_take.mp4');
           const vf = "scale=1920:1080,zoompan=z='min(zoom+0.0015,1.25)':d=180:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1920x1080";
-          execSync(`ffmpeg -y -loop 1 -i "${pending.startFramePath}" -vf "${vf}" -c:v libx264 -t 6 -pix_fmt yuv420p "${targetVideo}"`);
-          completedJobs.push({ name: pending.scene.scene_id, output_path: targetVideo });
+          execSync(`ffmpeg -y -loop 1 -i "${pending.startFramePath}" -vf "${vf}" -c:v libx264 -t 6 -pix_fmt yuv420p "${targetVideo}"`, { stdio: 'ignore' });
+          completedJobs.push({ name: pending.scene.scene_id, output_path: targetVideo, origin: 'fallback_kenburns' });
         }
       }
 
@@ -311,24 +320,57 @@ export class HybridVideoEngine {
           }
           fs.copyFileSync(targetVideo, pubVideo);
 
-          sceneOutcomes[job.name].videoPath = targetVideo;
+          sceneOutcomes[job.name] = {
+            action: 'DISPATCH_FIREFLY_ON_DEMAND',
+            videoPath: targetVideo,
+            startFramePath: pending.startFramePath,
+            takeOrigin: job.origin,
+            reason: job.origin === 'firefly_real' ? 'FIREFLY_GENERATED_SUCCESS' : 'FALLBACK_KENBURNS_CONTINGENCY'
+          };
           fireflyCount++;
 
-          // Auto-ingere no repositório central para enriquecer o acervo
-          try {
-            VideoRepositoryMatcher.ingestGeneratedVideo(targetVideo, {
-              id: `GEN_${pending.scene.scene_id}`,
-              category: pending.scene.required_category || 'industrial',
-              description: pending.scene.visual_subject,
-              tags: pending.scene.tags || ['firefly', 'gerado', '35mm'],
-              recommendedMotion: pending.scene.motion_mode || 'slow_push_in'
-            });
-            Logger.info('HybridVideoEngine', `  📦 [AUTO-INGESTÃO] Take '${pending.scene.scene_id}' catalogado com sucesso no acervo central.`);
-          } catch (e: any) {
-            Logger.warn('HybridVideoEngine', `Aviso na auto-ingestão de '${pending.scene.scene_id}': ${e.message}`);
+          // Auto-ingere no repositório central para enriquecer o acervo APENAS quando origin === 'firefly_real'
+          if (job.origin === 'firefly_real') {
+            try {
+              VideoRepositoryMatcher.ingestGeneratedVideo(
+                targetVideo,
+                {
+                  id: `GEN_${pending.scene.scene_id}`,
+                  category: pending.scene.required_category || 'industrial',
+                  description: pending.scene.visual_subject,
+                  tags: pending.scene.tags || ['firefly', 'gerado', '35mm'],
+                  recommendedMotion: pending.scene.motion_mode || 'slow_push_in',
+                  sourceRunId: runId
+                },
+                'firefly_real'
+              );
+              Logger.info('HybridVideoEngine', `  📦 [AUTO-INGESTÃO] Take '${pending.scene.scene_id}' catalogado na quarentena com sucesso.`);
+            } catch (e: any) {
+              Logger.warn('HybridVideoEngine', `Aviso na auto-ingestão de '${pending.scene.scene_id}': ${e.message}`);
+            }
+          } else {
+            Logger.info('HybridVideoEngine', `  🛡️ [PROTEÇÃO CONTRA CONTAMINAÇÃO] Take '${pending.scene.scene_id}' com fallback Ken Burns NÃO é oferecido para ingestão no repositório.`);
           }
         }
       }
+    }
+
+    // Registrar manifesto de run com takeOrigin por cena para auditoria
+    try {
+      const manifest = new RunManifest(runDirectory, runId);
+      for (const [scId, outcome] of Object.entries(sceneOutcomes)) {
+        manifest.recordSceneTakeOrigin(
+          scId,
+          outcome.takeOrigin || (outcome.action === 'USE_MATCHED_VIDEO' ? 'bank_matched' : outcome.action === 'KEYFRAME_DOSSIER_2.5D' ? 'dossier_25d' : 'fallback_kenburns'),
+          {
+            action: outcome.action,
+            videoPath: outcome.videoPath,
+            startFramePath: outcome.startFramePath
+          }
+        );
+      }
+    } catch (e: any) {
+      Logger.warn('HybridVideoEngine', `Aviso ao registrar takeOrigin no manifesto: ${e.message}`);
     }
 
     fs.writeFileSync('remotion/availableMedia.json', JSON.stringify(availableMedia, null, 2), 'utf8');

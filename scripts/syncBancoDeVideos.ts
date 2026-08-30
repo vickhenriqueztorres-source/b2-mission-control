@@ -222,10 +222,8 @@ export function syncBancoDeVideos(): { syncedCount: number; totalCatalog: number
   const files = fs.readdirSync(bancoDir).filter(f => f.endsWith('.mp4'));
   console.log(`[SYNC_BANCO] Encontrados ${files.length} vídeos em 'banco de videos'. Sincronizando com repositório central...`);
 
-  // Inicializa catálogo limpo
+  // Carrega catálogo existente preservando histórico
   const catalog = VideoRepositoryMatcher.loadCatalog(true);
-  catalog.videos = [];
-  VideoRepositoryMatcher.saveCatalog(catalog);
 
   let syncedCount = 0;
 
@@ -233,6 +231,7 @@ export function syncBancoDeVideos(): { syncedCount: number; totalCatalog: number
     const srcPath = path.join(bancoDir, file);
     const matchingMeta = VIDEO_METADATA_MAP.find(m => file.includes(m.pattern));
 
+    const isKnown = !!matchingMeta;
     const category = matchingMeta?.category || 'industrial';
     const id = matchingMeta?.id || `VIDEO_${file.replace(/[^a-zA-Z0-9]/g, '_').toUpperCase()}`;
     const description = matchingMeta?.description || `Take de vídeo em 35mm chiaroscuro para o tema ${file}`;
@@ -240,17 +239,26 @@ export function syncBancoDeVideos(): { syncedCount: number; totalCatalog: number
     const recommendedMotion = matchingMeta?.recommendedMotion || 'slow_push_in';
     const colorTone = matchingMeta?.colorTone || 'Chiaroscuro / Industrial';
 
-    const targetCategoryDir = path.join(repoDir, category);
-    if (!fs.existsSync(targetCategoryDir)) {
-      fs.mkdirSync(targetCategoryDir, { recursive: true });
+    // Verifica se já existe no catálogo
+    const existingEntry = catalog.videos.find(v => v.id === id || v.filename.endsWith(file));
+
+    // Determina qaStatus e destino do arquivo
+    const qaStatus = existingEntry?.qaStatus || (isKnown ? 'approved' : 'quarantined');
+    const isQuarantined = qaStatus === 'quarantined';
+
+    const targetSubDir = isQuarantined ? path.join('_quarantine', category) : category;
+    const targetDir = path.join(repoDir, targetSubDir);
+    if (!fs.existsSync(targetDir)) {
+      fs.mkdirSync(targetDir, { recursive: true });
     }
 
-    // Nome canônico padronizado para o repositório
-    const canonicalFilename = `${category}/${file}`;
+    const canonicalFilename = `${targetSubDir}/${file}`.replace(/\\/g, '/');
     const destPath = path.join(repoDir, canonicalFilename);
 
-    // Copia o arquivo físico para a pasta categorizada do repositório
-    fs.copyFileSync(srcPath, destPath);
+    // Copia o arquivo físico
+    if (!fs.existsSync(destPath) || fs.statSync(destPath).size !== fs.statSync(srcPath).size) {
+      fs.copyFileSync(srcPath, destPath);
+    }
 
     // Extrai metadados via ffprobe
     const probe = probeVideo(srcPath);
@@ -268,12 +276,16 @@ export function syncBancoDeVideos(): { syncedCount: number; totalCatalog: number
       colorTone,
       recommendedMotion: recommendedMotion as any,
       sha256,
-      createdAt: new Date().toISOString()
+      provenance: 'stock_curated',
+      qaStatus,
+      approvedBy: existingEntry?.approvedBy || (qaStatus === 'approved' ? 'curator_banco_sync' : undefined),
+      approvedAt: existingEntry?.approvedAt || (qaStatus === 'approved' ? new Date().toISOString() : undefined),
+      createdAt: existingEntry?.createdAt || new Date().toISOString()
     };
 
     VideoRepositoryMatcher.registerVideo(entry);
     syncedCount++;
-    console.log(`  ✅ [${category.toUpperCase()}] Sincronizado: ${file} ➔ ${id} (${probe.duration.toFixed(1)}s, ${probe.resolution})`);
+    console.log(`  ✅ [${category.toUpperCase()}] Sincronizado: ${file} ➔ ${id} (${qaStatus.toUpperCase()}, ${probe.duration.toFixed(1)}s, ${probe.resolution})`);
   }
 
   const finalCatalog = VideoRepositoryMatcher.loadCatalog(true);

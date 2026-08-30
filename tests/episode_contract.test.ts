@@ -131,7 +131,7 @@ try {
     targetDurationSeconds: 360,
     minDurationRatio: 0.9,
     minScenes: 30,
-    requiredStages: ['narration', 'visuals', 'sfx', 'music', 'mix', 'thumbnail', 'render'],
+    requiredStages: ['narration', 'visuals', 'sfx', 'music', 'mix', 'thumbnail', 'render', 'cinematic_grade'],
     voiceProfile: 'Chris',
     musicMood: 'dark',
     sfxDensity: 'high',

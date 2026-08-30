@@ -1,6 +1,12 @@
 import scenesData from '../contracts/episodes/gasolina-adulterada.scenes.json';
 import { SceneVisualContract } from '../contracts/sceneVisualContract';
 import { RawSceneInput } from '../contracts/buildSceneContracts';
+import {
+  CalculatedTimeline,
+  TimelineContract,
+  TimelineContractInput,
+  parseAndCalculateTimeline
+} from '../contracts/timelineContract';
 
 export interface SceneTimelineItem {
   sceneId: string;
@@ -41,6 +47,18 @@ export const DOSSIER_SCENE_IDS = [
   'GAS_026',
   'GAS_027'
 ] as const;
+
+export const SCENE_COMPONENT_MAP: Record<string, string> = {
+  GAS_004: 'FlowMeterPulserSchematicHUD',
+  GAS_005: 'TechnicalCutawaySchematic',
+  GAS_008: 'FlowMeterPulserSchematicHUD',
+  GAS_013: 'Iso20022PacketInspector',
+  GAS_015: 'FlowDiscrepancyHUD',
+  GAS_016: 'OnScreenResearchLapse',
+  GAS_021: 'LaserRevealWipe',
+  GAS_026: 'InfraredPlateScanner3D',
+  GAS_027: 'LaserScanDossier'
+};
 
 /**
  * Constrói a lista determinística de 30 cenas para a timeline do Remotion.
@@ -122,3 +140,61 @@ export function buildGasolinaTimeline(
 }
 
 export const EPISODE_GASOLINA_TIMELINE: SceneTimelineItem[] = buildGasolinaTimeline();
+
+/**
+ * Constrói o contrato de timeline canônico para o compositor CinematicEpisode
+ */
+export function buildGasolinaTimelineContract(): TimelineContractInput {
+  const scenes = buildGasolinaTimeline();
+
+  return {
+    episodeId: 'gasolina-adulterada',
+    fps: EPISODE_GASOLINA_FPS,
+    actBreaks: [5, 10, 15, 20, 25], // Índices de mudança de capítulo (1 a 6)
+    hudWindows: [],
+    audio: {
+      musicBed: 'episodes/gasolina-adulterada/audio/music/bed.mp3',
+      musicVolume: 0.22,
+      voiceoverVolume: 1.0,
+      sfxVolume: 0.45,
+      ducking: true,
+      duckedVolume: 0.12
+    },
+    scenes: scenes.map((s) => ({
+      id: s.sceneId,
+      name: s.name,
+      chapterTitle: s.chapterTitle,
+      component: SCENE_COMPONENT_MAP[s.sceneId] || 'DynamicDocumentaryMedia',
+      take_type: s.take_type,
+      durationSeconds: s.durationSeconds,
+      transition: s.order % 5 === 1 && s.order > 1 ? 'dipToBlack' : 'crossfade',
+      camera: s.take_type === 'KEYFRAME_DOSSIER' ? 'drift' : 'pushIn',
+      voiceoverFile: s.audioFile,
+      sfxFile: s.sfxFile,
+      mediaFile: s.videoFile,
+      callout: s.calloutMain ? {
+        categoryText: s.calloutCategory || 'INVESTIGAÇÃO',
+        mainText: s.calloutMain,
+        subText: s.calloutSub || '',
+        position: s.sceneId === 'GAS_030' ? 'center' : 'bottom_left'
+      } : undefined,
+      props: {
+        sceneNumber: s.sceneId,
+        title: s.name.toUpperCase(),
+        subtitle: s.chapterTitle,
+        latencyMs: s.sceneId === 'GAS_008' ? 40 : 120,
+        transactionsPerSec: s.sceneId === 'GAS_004' ? '200 p/L' : '1.000 L/s',
+        systemStressPercent: s.sceneId === 'GAS_015' ? 98 : 42,
+        sourceText: 'FONTE: INMETRO // PORTARIA 559 METROLOGIA LEGAL',
+        dateText: 'TELEMETRIA: BOMBA DE COMBUSTÍVEL DIGITAL',
+        kenBurns: s.motionMode || 'slow_push_in',
+        zoomIntensity: 1.15,
+        isDossierTake: s.take_type === 'KEYFRAME_DOSSIER',
+        dossierTag: `EVIDÊNCIA FORENSE // ${s.sceneId}`
+      }
+    }))
+  };
+}
+
+export const GASOLINA_TIMELINE_CONTRACT: TimelineContractInput = buildGasolinaTimelineContract();
+export const EPISODE_GASOLINA_CALCULATED_TIMELINE: CalculatedTimeline = parseAndCalculateTimeline(GASOLINA_TIMELINE_CONTRACT);

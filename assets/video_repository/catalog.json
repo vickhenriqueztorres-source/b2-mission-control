@@ -33,7 +33,11 @@
       "colorTone": "Chiaroscuro / Deep Steel",
       "recommendedMotion": "slow_push_in",
       "sha256": "f8ce973aeae93ec099efa4ce74d5ff55e73a681b9d0d516423de02a3e6689eaf",
-      "createdAt": "2026-08-28T15:46:13.074Z"
+      "createdAt": "2026-08-28T15:46:13.074Z",
+      "qaStatus": "approved",
+      "provenance": "curated_broll",
+      "approvedBy": "backfill_script",
+      "approvedAt": "2026-08-30T02:56:20.743Z"
     },
     {
       "id": "INFRA_CAR_CROSSING_STREET_01",
@@ -56,7 +60,11 @@
       "colorTone": "Low-Key / Sodium Amber",
       "recommendedMotion": "slow_push_in",
       "sha256": "69940253b195398a2e4360fd3fd6a4fd9a958b6bd3c320512e6777e8dd973246",
-      "createdAt": "2026-08-28T15:46:13.159Z"
+      "createdAt": "2026-08-28T15:46:13.159Z",
+      "qaStatus": "approved",
+      "provenance": "curated_broll",
+      "approvedBy": "backfill_script",
+      "approvedAt": "2026-08-30T02:56:20.743Z"
     },
     {
       "id": "ATMOS_CITY_SKYLINE_DAWN_01",
@@ -80,7 +88,11 @@
       "colorTone": "Chiaroscuro / Muted Slate",
       "recommendedMotion": "cinematic_drift",
       "sha256": "ab80ff866ca4be08a518a3d099f7e693821ce4b28ab15982d3fe172a89ed89d5",
-      "createdAt": "2026-08-28T15:46:13.240Z"
+      "createdAt": "2026-08-28T15:46:13.240Z",
+      "qaStatus": "approved",
+      "provenance": "curated_broll",
+      "approvedBy": "backfill_script",
+      "approvedAt": "2026-08-30T02:56:20.743Z"
     },
     {
       "id": "ATMOS_CLOUDS_OVER_NEIGHBORHOOD_01",
@@ -103,7 +115,11 @@
       "colorTone": "Atmospheric Fog",
       "recommendedMotion": "cinematic_drift",
       "sha256": "0563d3759a27f3f578a3baf13fdb8fc32a5b10f1dffbf94992898b7f652c4acc",
-      "createdAt": "2026-08-28T15:46:13.321Z"
+      "createdAt": "2026-08-28T15:46:13.321Z",
+      "qaStatus": "approved",
+      "provenance": "curated_broll",
+      "approvedBy": "backfill_script",
+      "approvedAt": "2026-08-30T02:56:20.743Z"
     },
     {
       "id": "IND_FORKLIFT_WAREHOUSE_01",
@@ -126,7 +142,11 @@
       "colorTone": "Sodium Amber / Industrial",
       "recommendedMotion": "cinematic_drift",
       "sha256": "6f0591b5a823c3028dc126c76f6037aa0878822dadff0ab66764c0b9b23149a3",
-      "createdAt": "2026-08-28T15:46:13.517Z"
+      "createdAt": "2026-08-28T15:46:13.517Z",
+      "qaStatus": "approved",
+      "provenance": "curated_broll",
+      "approvedBy": "backfill_script",
+      "approvedAt": "2026-08-30T02:56:20.743Z"
     },
     {
       "id": "INFRA_FREIGHT_TRAIN_TRACKS_01",
@@ -149,7 +169,11 @@
       "colorTone": "Deep Steel / Chiaroscuro",
       "recommendedMotion": "cinematic_drift",
       "sha256": "9095535088644c22f831e31afadfcce86437a13b34eb46aafd692111bd5f8efd",
-      "createdAt": "2026-08-28T15:46:13.614Z"
+      "createdAt": "2026-08-28T15:46:13.614Z",
+      "qaStatus": "approved",
+      "provenance": "curated_broll",
+      "approvedBy": "backfill_script",
+      "approvedAt": "2026-08-30T02:56:20.743Z"
     },
     {
       "id": "IND_GLOVED_HAND_VALVE_01",
@@ -174,7 +198,11 @@
       "colorTone": "Industrial Chiaroscuro",
       "recommendedMotion": "slow_push_in",
       "sha256": "6664cbc38ecb4ebd3d136ab534df9d67db590aa3048de32231d2fa62e1dcf732",
-      "createdAt": "2026-08-28T15:46:13.710Z"
+      "createdAt": "2026-08-28T15:46:13.710Z",
+      "qaStatus": "approved",
+      "provenance": "curated_broll",
+      "approvedBy": "backfill_script",
+      "approvedAt": "2026-08-30T02:56:20.743Z"
     },
     {
       "id": "CYBER_HANDS_COMPARING_DOCUMENTS_01",
@@ -198,7 +226,11 @@
       "colorTone": "Documentary Desk / Frosted",
       "recommendedMotion": "slow_push_in",
       "sha256": "7ecf9f44a0ad0c39dcadef5a3d0ca1a0c73047473cab509d82d3d93df56545ee",
-      "createdAt": "2026-08-28T15:46:13.799Z"
+      "createdAt": "2026-08-28T15:46:13.799Z",
+      "qaStatus": "approved",
+      "provenance": "curated_broll",
+      "approvedBy": "backfill_script",
+      "approvedAt": "2026-08-30T02:56:20.743Z"
     },
     {
       "id": "CYBER_PHONE_ROOFTOP_ANTENNA_01",
@@ -223,7 +255,11 @@
       "colorTone": "Laser Cyan / Amber",
       "recommendedMotion": "slow_push_in",
       "sha256": "f13ca1c0ead14bd612c3ebb9d60f848ea76ebac2d9fe3ef63ea41cac305d7148",
-      "createdAt": "2026-08-28T15:46:13.885Z"
+      "createdAt": "2026-08-28T15:46:13.885Z",
+      "qaStatus": "approved",
+      "provenance": "curated_broll",
+      "approvedBy": "backfill_script",
+      "approvedAt": "2026-08-30T02:56:20.743Z"
     },
     {
       "id": "INFRA_MAINTENANCE_VEHICLE_SECURITY_01",
@@ -247,7 +283,11 @@
       "colorTone": "Low-Key Surveillance",
       "recommendedMotion": "cinematic_drift",
       "sha256": "6b5636e2b77ac348642568cdf4c7aadc7a0dac0de558f2d735d2b088bd73b1a7",
-      "createdAt": "2026-08-28T15:46:13.979Z"
+      "createdAt": "2026-08-28T15:46:13.979Z",
+      "qaStatus": "approved",
+      "provenance": "curated_broll",
+      "approvedBy": "backfill_script",
+      "approvedAt": "2026-08-30T02:56:20.743Z"
     },
     {
       "id": "IND_PARCEL_CONVEYOR_BELT_01",
@@ -271,7 +311,11 @@
       "colorTone": "Sodium Amber / Industrial",
       "recommendedMotion": "cinematic_drift",
       "sha256": "29fe47be84f4a29c3298d5f8a02f1ccb32c82e71afdeda61362d2d3d6d652730",
-      "createdAt": "2026-08-28T15:46:14.059Z"
+      "createdAt": "2026-08-28T15:46:14.059Z",
+      "qaStatus": "approved",
+      "provenance": "curated_broll",
+      "approvedBy": "backfill_script",
+      "approvedAt": "2026-08-30T02:56:20.743Z"
     },
     {
       "id": "IND_PARCEL_SCANNER_LASER_01",
@@ -295,7 +339,11 @@
       "colorTone": "Laser Cyan / Sodium Orange",
       "recommendedMotion": "slow_push_in",
       "sha256": "cbd5fc22f55c4fd61b55e37b041d535985d1b0f933dc06c3ddeb4640e13d4b84",
-      "createdAt": "2026-08-28T15:46:14.139Z"
+      "createdAt": "2026-08-28T15:46:14.139Z",
+      "qaStatus": "approved",
+      "provenance": "curated_broll",
+      "approvedBy": "backfill_script",
+      "approvedAt": "2026-08-30T02:56:20.743Z"
     },
     {
       "id": "CYBER_PHONE_TO_FIBER_CONNECTOR_01",
@@ -320,7 +368,11 @@
       "colorTone": "Laser Cyan / Laser Orange",
       "recommendedMotion": "slow_push_in",
       "sha256": "bb3d271ac7369adb4a43311ddf5927fcc0fd57bd79d85f6835e43578f9fb5b47",
-      "createdAt": "2026-08-28T15:46:14.218Z"
+      "createdAt": "2026-08-28T15:46:14.218Z",
+      "qaStatus": "approved",
+      "provenance": "curated_broll",
+      "approvedBy": "backfill_script",
+      "approvedAt": "2026-08-30T02:56:20.743Z"
     },
     {
       "id": "CYBER_PRINTER_EJECTS_PAPER_01",
@@ -344,7 +396,11 @@
       "colorTone": "Muted Slate / Office",
       "recommendedMotion": "slow_push_in",
       "sha256": "b8d626652ce50986acc72fd5d46b9b44b82f687ed14d6604d8d870ad1db5d1d8",
-      "createdAt": "2026-08-28T15:46:14.300Z"
+      "createdAt": "2026-08-28T15:46:14.300Z",
+      "qaStatus": "approved",
+      "provenance": "curated_broll",
+      "approvedBy": "backfill_script",
+      "approvedAt": "2026-08-30T02:56:20.743Z"
     },
     {
       "id": "PHYS_WATER_GLASS_FAUCET_01",
@@ -368,7 +424,11 @@
       "colorTone": "High Contrast / Clean Water",
       "recommendedMotion": "slow_push_in",
       "sha256": "873faae91c5963b534c768b2a092a941835baf0b72a1369522c600f21870c785",
-      "createdAt": "2026-08-28T15:46:14.390Z"
+      "createdAt": "2026-08-28T15:46:14.390Z",
+      "qaStatus": "approved",
+      "provenance": "curated_broll",
+      "approvedBy": "backfill_script",
+      "approvedAt": "2026-08-30T02:56:20.743Z"
     },
     {
       "id": "IND_WORKER_REDIRECTS_PARCEL_01",
@@ -392,7 +452,11 @@
       "colorTone": "Industrial Chiaroscuro",
       "recommendedMotion": "cinematic_drift",
       "sha256": "16089397a9c80897b075507f3fc31395c52c4f86ed7758a82d5d9efaef45457f",
-      "createdAt": "2026-08-28T15:46:14.485Z"
+      "createdAt": "2026-08-28T15:46:14.485Z",
+      "qaStatus": "approved",
+      "provenance": "curated_broll",
+      "approvedBy": "backfill_script",
+      "approvedAt": "2026-08-30T02:56:20.743Z"
     }
   ]
 }

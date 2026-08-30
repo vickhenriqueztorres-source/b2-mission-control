@@ -32,6 +32,7 @@ export interface RunContractValidationOptions {
   contract?: EpisodeContract;
   contractPath?: string;
   sceneContracts?: SceneVisualContract[];
+  allowDegraded?: boolean;
 }
 
 export interface RunValidationReport {
@@ -197,9 +198,16 @@ export class PipelineContractGate {
 
     let scenes: SceneItem[] = [];
 
-    if (fs.existsSync(editPackagePath)) {
+    const candidatePackagePaths = [
+      editPackagePath,
+      path.join(runDir, 'edit_package.json'),
+      path.join(runDir, 'editorial', 'execution', 'edit_package.json')
+    ];
+    const foundPkgPath = candidatePackagePaths.find(p => fs.existsSync(p));
+
+    if (foundPkgPath) {
       try {
-        const pkg = JSON.parse(fs.readFileSync(editPackagePath, 'utf8'));
+        const pkg = JSON.parse(fs.readFileSync(foundPkgPath, 'utf8'));
         scenes = pkg.scenes || [];
       } catch (err: any) {
         failures.push({
@@ -207,7 +215,7 @@ export class PipelineContractGate {
           shotId: 'EDIT_PACKAGE',
           index: 0,
           assetType: 'TIMING',
-          expectedPath: editPackagePath,
+          expectedPath: foundPkgPath,
           reason: `EDIT_PACKAGE_CORRUPTED: ${err.message}`
         });
       }
@@ -549,7 +557,7 @@ export class PipelineContractGate {
       }
     }
 
-    // Detecção e Listagem de Cenas Degradadas / Fallback (Report Only)
+    // Detecção e Listagem de Cenas Degradadas / Fallback
     const degradedScenes: Array<{ sceneId: string; reason?: string }> = [];
     for (const sc of scenes) {
       const scAny = sc as any;
@@ -565,6 +573,18 @@ export class PipelineContractGate {
           reason: scAny.fallbackReason || scAny.degradedReason || 'Cena marcada como fallback/degradada'
         });
       }
+    }
+
+    const allowDegraded = options.allowDegraded || process.env.ALLOW_DEGRADED === 'true' || process.argv.includes('--allow-degraded');
+    if (degradedScenes.length > 0 && !allowDegraded) {
+      failures.push({
+        sceneId: 'GLOBAL',
+        shotId: 'DEGRADED_SCENES',
+        index: 0,
+        assetType: 'VIDEO_TAKE',
+        expectedPath: path.join(runDir, 'editorial', 'execution', 'scenes'),
+        reason: `RUN_HAS_DEGRADED_SCENES: ${degradedScenes.length} cenas degradadas encontradas (${degradedScenes.map(d => d.sceneId).join(', ')}). Exige a flag explícita --allow-degraded para aprovação.`
+      });
     }
 
     let packagingValid = true;
@@ -814,6 +834,35 @@ export class PipelineContractGate {
             }
             break;
           }
+          case 'cinematic_grade': {
+            const renderManifestPath = path.join(runDir, 'render_manifest.json');
+            let hasCinematicGrade = false;
+
+            if (fs.existsSync(renderManifestPath)) {
+              try {
+                const renderManifest = JSON.parse(fs.readFileSync(renderManifestPath, 'utf8'));
+                if (renderManifest.compositor === 'CinematicEpisode') {
+                  hasCinematicGrade = true;
+                }
+              } catch {}
+            }
+
+            if (manifestData?.compositor === 'CinematicEpisode' || manifestData?.cinematicGradeApplied === true) {
+              hasCinematicGrade = true;
+            }
+
+            if (!hasCinematicGrade && scope === 'FULL_PACKAGE') {
+              failures.push({
+                sceneId: 'STAGE',
+                shotId: 'CINEMATIC_GRADE',
+                index: 0,
+                assetType: 'VIDEO_TAKE',
+                expectedPath: renderManifestPath,
+                reason: 'MISSING_STAGE: cinematic_grade - Composição raiz deve ser CinematicEpisode com render_manifest.json válido.'
+              });
+            }
+            break;
+          }
         }
       }
     }
@@ -838,107 +887,14 @@ export class PipelineContractGate {
   }
 
   /**
-   * Auto-recuperação (Healer): Regenera determinística e exclusivamente os assets faltantes de uma run
+   * Auditoria de recuperação: O PipelineContractGate é estritamente um auditor.
+   * Regra inviolável: Não fabrica evidências, imagens sintéticas ou takes Ken Burns.
    */
   public static async healRun(options: RunContractValidationOptions): Promise<RunValidationReport> {
-    const reportBefore = this.auditRun(options);
-    if (reportBefore.passed) {
-      console.log(`[HEALER] A run '${options.runId}' já está 100% íntegra. Nenhuma correção necessária.`);
-      return reportBefore;
-    }
-
-    console.log(`[HEALER] Iniciando auto-regeneração cirúrgica para ${reportBefore.failures.length} falhas na run '${options.runId}'...`);
-    const runsDir = options.runsDir || path.join(process.cwd(), 'runs');
-    const publicDir = options.publicDir || path.join(process.cwd(), 'public');
-    const runDir = path.join(runsDir, options.runId);
-
-    const curatedDirs = [
-      path.join(process.cwd(), 'assets', 'submarine_curated'),
-      path.join(process.cwd(), 'public', 'assets', 'submarine_curated'),
-      path.join(process.cwd(), 'assets', 'submarine_references')
-    ];
-    const existingCuratedDir = curatedDirs.find((d) => fs.existsSync(d));
-    const curatedPhotos = existingCuratedDir
-      ? fs.readdirSync(existingCuratedDir).filter((f) => f.endsWith('.jpg') || f.endsWith('.png')).map((f) => path.join(existingCuratedDir, f))
-      : [];
-
-    for (const failure of reportBefore.failures) {
-      if (failure.assetType === 'START_FRAME') {
-        const scId = failure.sceneId;
-        const targetFrame = path.join(runDir, 'editorial', 'execution', 'scenes', scId, 'firefly_start_frame.png');
-        const pubFrame = path.join(publicDir, 'editorial', 'execution', scId, 'firefly_start_frame.png');
-
-        fs.mkdirSync(path.dirname(targetFrame), { recursive: true });
-        fs.mkdirSync(path.dirname(pubFrame), { recursive: true });
-
-        if (curatedPhotos.length > 0) {
-          const photoIdx = parseInt(scId.replace('SC_', ''), 10) % curatedPhotos.length;
-          const srcPhoto = curatedPhotos[photoIdx];
-          spawnSync('ffmpeg', [
-            '-y',
-            '-i', srcPhoto,
-            '-vf', 'scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720,eq=contrast=1.10:brightness=-0.02:saturation=0.92',
-            '-frames:v', '1',
-            targetFrame
-          ]);
-          if (fs.existsSync(targetFrame)) {
-            fs.copyFileSync(targetFrame, pubFrame);
-            const receiptPath = path.join(path.dirname(targetFrame), 'start_frame_receipt.json');
-            const fileBuf = fs.readFileSync(targetFrame);
-            const sha = crypto.createHash('sha256').update(fileBuf).digest('hex');
-            fs.writeFileSync(
-              receiptPath,
-              JSON.stringify(
-                {
-                  sceneId: scId,
-                  sha256: sha,
-                  generatedAt: new Date().toISOString(),
-                  model: 'curated_healer'
-                },
-                null,
-                2
-              ),
-              'utf8'
-            );
-            console.log(`[HEALER] ✅ Start Frame regenerado para ${scId}: ${targetFrame}`);
-          }
-        }
-      }
-
-      if (failure.assetType === 'VIDEO_TAKE') {
-        const scId = failure.sceneId;
-        const targetVideo = path.join(runDir, 'editorial', 'execution', 'scenes', scId, 'firefly_take.mp4');
-        const pubVideo = path.join(publicDir, 'editorial', 'execution', scId, 'firefly_take.mp4');
-        const runFrame = path.join(runDir, 'editorial', 'execution', 'scenes', scId, 'firefly_start_frame.png');
-        const pubFrame = path.join(publicDir, 'editorial', 'execution', scId, 'firefly_start_frame.png');
-
-        const resolvedFrame = [runFrame, pubFrame].find(p => fs.existsSync(p));
-        if (resolvedFrame) {
-          fs.mkdirSync(path.dirname(targetVideo), { recursive: true });
-          fs.mkdirSync(path.dirname(pubVideo), { recursive: true });
-
-          const vf = "scale=1280:720,zoompan=z='min(zoom+0.0015,1.25)':d=150:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1280x720";
-          spawnSync('ffmpeg', [
-            '-y',
-            '-loop', '1',
-            '-i', resolvedFrame,
-            '-vf', vf,
-            '-c:v', 'libx264',
-            '-t', '5',
-            '-pix_fmt', 'yuv420p',
-            targetVideo
-          ]);
-          if (fs.existsSync(targetVideo)) {
-            fs.copyFileSync(targetVideo, pubVideo);
-            console.log(`[HEALER] ✅ Video Take regenerado com Ken Burns para ${scId}: ${targetVideo}`);
-          }
-        }
-      }
-    }
-
-    const reportAfter = this.auditRun(options);
-    this.printReport(reportAfter);
-    return reportAfter;
+    console.log(`[AUDITOR_STRICT] PipelineContractGate é estritamente um auditor de integridade e não fabrica evidências ou takes sintéticos.`);
+    const report = this.auditRun(options);
+    this.printReport(report);
+    return report;
   }
 
   public static assertPreRenderIntegrity(runId: string, runsDir?: string, publicDir?: string): void {

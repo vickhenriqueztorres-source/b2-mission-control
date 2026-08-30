@@ -45,3 +45,9 @@ Extreme cinematic 35mm anamorphic still from a Denis Villeneuve film, {SUBJECT},
 - ❌ NUNCA começar roteiros ou vídeos pelo nome técnico de protocolos.
 - ❌ NUNCA aplicar efeitos gráficos ou Laranja/Ciano sem função direta de prova ou descoberta.
 - ❓ **Pergunta Definitiva:** *"Se eu remover o efeito, ainda resta uma evidência, uma pergunta ou uma descoberta?"* Se não, remova o efeito.
+
+## 7. Composição Orientada a Dados & Motor Cinematográfico
+- **Caminho Único**: Novos episódios = `contracts/episodes/<id>.episode.json` + `TimelineContract` (`contracts/timelineContract.ts`).
+- ❌ **Proibição Total**: PROIBIDO criar componente `EpisodeXXX.tsx` artesanal ou `<Sequence>` com corte seco fora do `CinematicEpisode`.
+- **Motor Canônico**: `<CinematicEpisode timeline={timeline} audio={audioManifest} />` em `remotion/cinema/CinematicEpisode.tsx` é a autoridade única de renderização.
+

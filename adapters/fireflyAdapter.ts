@@ -7,7 +7,7 @@ import { Logger } from '../event-hub/logger';
 import { AgentTelemetryAdapter } from './agentTelemetryAdapter';
 import { ProductionSafetyGuard } from '../config/productionSafetyGuard';
 import { PipelineContractGate } from '../pipeline/pipelineContractGate';
-import { isFireflySessionLive, FireflySessionLiveResult } from '../config/fireflySessionLive';
+import { isFireflySessionLive, FireflySessionLiveResult, getFireflyPythonExec, resolveFireflyRoot } from '../config/fireflySessionLive';
 
 export class FireflyAdapter extends BaseAdapter {
   private fireflyPath: string;
@@ -21,44 +21,57 @@ export class FireflyAdapter extends BaseAdapter {
     runtimeRoot?: string
   ) {
     super('FireflyAdapter');
-    const localPath = path.join(process.cwd(), 'firefly-automation');
-    const envPath = process.env.FIREFLY_AUTOMATION_ROOT || process.env.FIREFLY_ROOT_PATH;
-    const defaultPath = (envPath && fs.existsSync(envPath)) 
-      ? envPath 
-      : (fs.existsSync(localPath) ? localPath : path.resolve(process.cwd(), 'firefly-automation'));
-    
-    this.fireflyPath = path.resolve(fireflyPath || defaultPath);
+    this.fireflyPath = path.resolve(fireflyPath || resolveFireflyRoot());
     this.runtimeRoot = path.resolve(runtimeRoot || process.env.FIREFLY_RUNTIME_ROOT || this.fireflyPath);
-    this.pythonExec = path.join(this.fireflyPath, '.venv', 'Scripts', 'python.exe');
+    const pyExec = getFireflyPythonExec(this.fireflyPath);
+    this.pythonExec = pyExec || path.join(this.fireflyPath, '.venv', process.platform === 'win32' ? 'Scripts/python.exe' : 'bin/python');
     this.dbPath = path.join(this.runtimeRoot, 'data', 'firefly_jobs.db');
     this.telemetry = AgentTelemetryAdapter.getInstance();
   }
 
   public async initialize(): Promise<void> {
     ProductionSafetyGuard.assertSafeForProduction();
-    Logger.info(this.name, `Conectado ao Firefly Video Automation em: ${this.fireflyPath}; runtime isolado: ${this.runtimeRoot}`);
-    if (!fs.existsSync(this.pythonExec)) {
-      Logger.warn(this.name, `Python venv não encontrado em ${this.pythonExec}. Usando 'python' global.`);
-      this.pythonExec = 'python';
+    Logger.info(this.name, `Conectado ao Firefly Video Automation em: ${this.fireflyPath}; runtime: ${this.runtimeRoot}`);
+    const pyExec = getFireflyPythonExec(this.fireflyPath);
+    if (!pyExec) {
+      throw new Error(`FIREFLY_VENV_NOT_FOUND: rode setup em ${path.basename(this.fireflyPath)}/ (.venv não encontrado)`);
     }
+    this.pythonExec = pyExec;
   }
 
   public async checkHealth(): Promise<boolean> {
-    const liveResult = await isFireflySessionLive();
+    const liveResult = await isFireflySessionLive(this.fireflyPath);
     return fs.existsSync(this.dbPath) && liveResult.live;
   }
 
   public async isSessionLive(): Promise<FireflySessionLiveResult> {
-    return isFireflySessionLive();
+    return isFireflySessionLive(this.fireflyPath);
   }
 
   public async feedGuideAndRunReal(
     productionId: string,
     guideJsonPath: string
   ): Promise<{ success: boolean; completedJobs: Array<{ name: string; output_path: string }> }> {
-    Logger.info(this.name, `[EXECUÇÃO REAL] Alimentando fila do Firefly com: ${guideJsonPath}`);
+    Logger.info(this.name, `[EXECUÇÃO REAL] Validando sessão e alimentando fila do Firefly com: ${guideJsonPath}`);
 
     ProductionSafetyGuard.assertSafeForProduction();
+
+    // 0. Probe de Sessão Obrigatório ANTES de gastar qualquer estado
+    const sessionCheck = await isFireflySessionLive(this.fireflyPath);
+    if (!sessionCheck.live) {
+      this.telemetry.recordEvent({
+        run_id: productionId,
+        production_id: productionId,
+        agent_id: 'FireflyJobStore',
+        provider: 'FIREFLY_BOT',
+        task_id: 'SESSION_CHECK',
+        type: 'AGENT_FAILED',
+        status: 'FAILED',
+        message: `FIREFLY_SESSION_DEAD: ${sessionCheck.reason}`,
+        attempt: 1
+      });
+      throw new Error(`FIREFLY_SESSION_DEAD: ${sessionCheck.reason}. Rode o login interativo antes de disparar a produção.`);
+    }
 
     this.telemetry.recordEvent({
       run_id: productionId,

@@ -35,7 +35,14 @@ export interface RunManifestData {
     sizeBytes: number;
     sha256?: string;
     durationSeconds?: number;
+    takeOrigin?: 'firefly_real' | 'fallback_kenburns' | 'bank_matched' | 'dossier_25d';
     verifiedAt: string;
+  }>;
+  scenes?: Record<string, {
+    takeOrigin?: 'firefly_real' | 'fallback_kenburns' | 'bank_matched' | 'dossier_25d';
+    action?: string;
+    videoPath?: string;
+    startFramePath?: string;
   }>;
 }
 
@@ -139,6 +146,23 @@ export class RunManifest {
       };
       this.save();
     }
+  }
+
+  public recordSceneTakeOrigin(
+    sceneId: string,
+    origin: 'firefly_real' | 'fallback_kenburns' | 'bank_matched' | 'dossier_25d',
+    details?: { action?: string; videoPath?: string; startFramePath?: string }
+  ): void {
+    if (!this.data.scenes) {
+      this.data.scenes = {};
+    }
+    this.data.scenes[sceneId] = {
+      ...(this.data.scenes[sceneId] || {}),
+      takeOrigin: origin,
+      ...(details || {})
+    };
+    this.data.updatedAt = new Date().toISOString();
+    this.save();
   }
 
   public setOverallStatus(status: 'RUNNING' | 'COMPLETED' | 'FAILED'): void {

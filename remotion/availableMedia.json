@@ -1,50 +1,5 @@
 {
-  "GAS_001": {
-    "hasVideo": true,
-    "hasImage": true,
-    "isDossier": false
-  },
-  "GAS_002": {
-    "hasVideo": true,
-    "hasImage": true,
-    "isDossier": false
-  },
-  "GAS_003": {
-    "hasVideo": true,
-    "hasImage": true,
-    "isDossier": false
-  },
-  "GAS_004": {
-    "hasVideo": false,
-    "hasImage": true,
-    "isDossier": true
-  },
-  "GAS_005": {
-    "hasVideo": true,
-    "hasImage": true,
-    "isDossier": false
-  },
-  "GAS_006": {
-    "hasVideo": true,
-    "hasImage": true,
-    "isDossier": false
-  },
-  "GAS_007": {
-    "hasVideo": false,
-    "hasImage": true,
-    "isDossier": true
-  },
-  "GAS_008": {
-    "hasVideo": true,
-    "hasImage": true,
-    "isDossier": false
-  },
-  "GAS_009": {
-    "hasVideo": false,
-    "hasImage": true,
-    "isDossier": true
-  },
-  "GAS_010": {
+  "SC_TEST_01": {
     "hasVideo": true,
     "hasImage": true,
     "isDossier": false

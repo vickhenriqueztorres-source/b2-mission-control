@@ -21,7 +21,8 @@
     "music",
     "mix",
     "thumbnail",
-    "render"
+    "render",
+    "cinematic_grade"
   ],
   "voiceProfile": "Chris - Sóbrio, íntimo, autoritário (ElevenLabs)",
   "musicMood": "dark_industrial_investigative",

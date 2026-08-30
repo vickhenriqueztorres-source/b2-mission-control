@@ -77,6 +77,10 @@ async function runTests() {
       fps: 24,
       resolution: '1280x720',
       colorTone: 'Chiaroscuro / Sodium Amber',
+      provenance: 'curated_broll',
+      qaStatus: 'approved',
+      approvedBy: 'test_suite',
+      approvedAt: new Date().toISOString(),
       createdAt: new Date().toISOString()
     });
 

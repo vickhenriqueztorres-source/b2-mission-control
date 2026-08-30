@@ -18,6 +18,17 @@ export type VideoCategory =
   | 'transport_logistics'
   | 'energy_grid';
 
+export type VideoProvenance =
+  | 'firefly_ai'
+  | 'stock_curated'
+  | 'manual_import'
+  | 'curated_broll'
+  | 'kling_ai'
+  | 'veo_ai'
+  | 'remotion_procedural';
+
+export type VideoQaStatus = 'approved' | 'quarantined' | 'rejected';
+
 export interface VideoCatalogEntry {
   id: string;
   category: VideoCategory | string;
@@ -30,7 +41,11 @@ export interface VideoCatalogEntry {
   colorTone: string; // Ex: 'Chiaroscuro / Sodium Amber'
   recommendedMotion?: 'slow_push_in' | 'crash_push_in' | 'dramatic_pull_out' | 'pan_right' | 'pan_left' | 'cinematic_drift';
   sha256?: string;
-  provenance?: 'firefly_ai' | 'kling_ai' | 'veo_ai' | 'curated_broll' | 'remotion_procedural';
+  provenance: VideoProvenance;
+  qaStatus: VideoQaStatus;
+  approvedBy?: string;
+  approvedAt?: string;
+  sourceRunId?: string;
   createdAt?: string;
 }
 
