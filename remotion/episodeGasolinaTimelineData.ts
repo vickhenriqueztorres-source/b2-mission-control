@@ -3,7 +3,6 @@ import { SceneVisualContract } from '../contracts/sceneVisualContract';
 import { RawSceneInput } from '../contracts/buildSceneContracts';
 import {
   CalculatedTimeline,
-  TimelineContract,
   TimelineContractInput,
   parseAndCalculateTimeline
 } from '../contracts/timelineContract';
@@ -86,7 +85,7 @@ export function buildGasolinaTimeline(
       visualSubject: r.visualSubject,
       take_type: (r.take_type === 'KEYFRAME_DOSSIER' ? 'KEYFRAME_DOSSIER' : 'CINEMATIC_TAKE') as 'KEYFRAME_DOSSIER' | 'CINEMATIC_TAKE',
       allowed_sources: r.take_type === 'KEYFRAME_DOSSIER' ? ['dossier'] : ['firefly', 'bank'],
-      targetSeconds: r.targetSeconds || 12.0
+      targetSeconds: r.sceneId === 'GAS_001' ? 8.0 : (r.sceneId === 'GAS_002' ? 9.0 : (r.targetSeconds || 12.0))
     }));
   }
 
@@ -95,7 +94,7 @@ export function buildGasolinaTimeline(
 
   for (let i = 0; i < scenesToUse.length; i++) {
     const sc = scenesToUse[i];
-    const durationSeconds = sc.targetSeconds || 12.0;
+    const durationSeconds = sc.sceneId === 'GAS_001' ? 8.0 : (sc.sceneId === 'GAS_002' ? 9.0 : (sc.targetSeconds || 12.0));
     const durationFrames = Math.round(durationSeconds * EPISODE_GASOLINA_FPS);
     const startFrame = accumulatedFrames;
     const endFrame = startFrame + durationFrames;
@@ -150,11 +149,23 @@ export function buildGasolinaTimelineContract(): TimelineContractInput {
   return {
     episodeId: 'gasolina-adulterada',
     fps: EPISODE_GASOLINA_FPS,
-    actBreaks: [5, 10, 15, 20, 25], // Índices de mudança de capítulo (1 a 6)
-    hudWindows: [],
+    coldOpen: {
+      sceneIds: ['GAS_001', 'GAS_002']
+    },
+    actBreaks: [5, 15, 25], // 3 viradas de ato estruturais
+    hudWindows: [
+      {
+        componentName: 'AtomicStopwatch',
+        appearances: [
+          { startScene: 3, seconds: 8 },
+          { startScene: 12, seconds: 8 },
+          { startScene: 22, seconds: 8 }
+        ]
+      }
+    ],
     audio: {
       musicBed: 'episodes/gasolina-adulterada/audio/music/bed.mp3',
-      musicVolume: 0.22,
+      musicVolume: 0.30,
       voiceoverVolume: 1.0,
       sfxVolume: 0.45,
       ducking: true,
@@ -167,7 +178,7 @@ export function buildGasolinaTimelineContract(): TimelineContractInput {
       component: SCENE_COMPONENT_MAP[s.sceneId] || 'DynamicDocumentaryMedia',
       take_type: s.take_type,
       durationSeconds: s.durationSeconds,
-      transition: s.order % 5 === 1 && s.order > 1 ? 'dipToBlack' : 'crossfade',
+      transition: s.order === 6 || s.order === 16 || s.order === 26 ? 'dipToBlack' : 'crossfade',
       camera: s.take_type === 'KEYFRAME_DOSSIER' ? 'drift' : 'pushIn',
       voiceoverFile: s.audioFile,
       sfxFile: s.sfxFile,

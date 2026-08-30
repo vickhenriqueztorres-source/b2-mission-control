@@ -2,18 +2,19 @@ import fs from 'fs';
 import path from 'path';
 import { z } from 'zod';
 import { HSL_FPS } from '../spec/hsl-spec';
+import { isRegisteredComponent } from '../remotion/cinema/componentRegistry';
 
-export type SceneTransitionType = 'crossfade' | 'dipToBlack' | 'laserWipe' | 'wipe' | 'cut';
-export type CameraMotionType = 'pushIn' | 'drift' | 'pullOut' | 'panRight' | 'panLeft';
+export type SceneTransitionType = 'crossfade' | 'dipToBlack' | 'whipPan' | 'hardCut' | 'laserWipe' | 'wipe' | 'cut';
+export type CameraMotionType = 'pushIn' | 'drift' | 'tension' | 'static' | 'pullOut' | 'panRight' | 'panLeft';
 
-export const SceneTransitionEnum = z.enum(['crossfade', 'dipToBlack', 'laserWipe', 'wipe', 'cut']);
-export const CameraMotionEnum = z.enum(['pushIn', 'drift', 'pullOut', 'panRight', 'panLeft']);
+export const SceneTransitionEnum = z.enum(['crossfade', 'dipToBlack', 'whipPan', 'hardCut', 'laserWipe', 'wipe', 'cut']);
+export const CameraMotionEnum = z.enum(['pushIn', 'drift', 'tension', 'static', 'pullOut', 'panRight', 'panLeft']);
 
 export const TimelineCalloutSchema = z.object({
   categoryText: z.string().min(1),
   mainText: z.string().min(1),
   subText: z.string().min(1),
-  position: z.enum(['center', 'bottom_left', 'bottom_right', 'top_left', 'top_right']).optional().default('bottom_left')
+  position: z.enum(['center', 'bottom_left', 'bottom_right', 'top_left', 'top_right', 'center_left']).optional().default('bottom_left')
 });
 
 export const TimelineSceneItemSchema = z.object({
@@ -34,7 +35,16 @@ export const TimelineSceneItemSchema = z.object({
   visualSubject: z.string().optional(),
   callout: TimelineCalloutSchema.optional(),
   integratedText: z.string().optional()
-}).transform((scene) => {
+}).transform((scene, ctx) => {
+  // Valida existência do componente no registro oficial
+  if (!isRegisteredComponent(scene.component)) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: `TIMELINE_UNKNOWN_COMPONENT: O componente '${scene.component}' na cena '${scene.id}' não foi encontrado no registro oficial.`,
+      path: ['component']
+    });
+  }
+
   // Atribui câmera padrão inteligente de acordo com o tipo de cena se não foi especificada
   const camera = scene.camera || (scene.take_type === 'KEYFRAME_DOSSIER' ? 'drift' : 'pushIn');
   // Garante que a transição padrão seja sempre crossfade
@@ -48,15 +58,38 @@ export const TimelineSceneItemSchema = z.object({
 
 export type TimelineSceneItem = z.infer<typeof TimelineSceneItemSchema>;
 
+export const HudAppearanceSchema = z.object({
+  startScene: z.number().int().nonnegative().optional(),
+  startSeconds: z.number().nonnegative().optional(),
+  seconds: z.number().min(6).max(10, "Cada aparição de HUD deve ter entre 6s e 10s.")
+});
+
 export const HudWindowSchema = z.object({
-  id: z.string().min(1),
-  component: z.string().min(1),
+  id: z.string().optional(),
+  componentName: z.string().optional(),
+  component: z.string().optional(),
   props: z.record(z.string(), z.any()).optional().default({}),
-  startSeconds: z.number().nonnegative(),
-  durationSeconds: z.number().positive()
+  appearances: z.array(HudAppearanceSchema).max(3, "Máximo de 3 aparições por HUD.").optional(),
+  startSeconds: z.number().nonnegative().optional(),
+  durationSeconds: z.number().min(6).max(10).optional()
+}).transform((hud) => {
+  const comp = hud.componentName || hud.component || 'HudWindow';
+  const id = hud.id || comp;
+  return {
+    ...hud,
+    id,
+    component: comp,
+    componentName: comp
+  };
 });
 
 export type HudWindow = z.infer<typeof HudWindowSchema>;
+
+export const ColdOpenSchema = z.object({
+  sceneIds: z.array(z.string().min(1)).min(1, "O cold open deve conter pelo menos uma cena.")
+});
+
+export type ColdOpen = z.infer<typeof ColdOpenSchema>;
 
 export const AudioManifestSchema = z.object({
   musicBed: z.string().min(1, "O caminho da trilha musical (musicBed) é obrigatório."),
@@ -65,7 +98,8 @@ export const AudioManifestSchema = z.object({
   sfxVolume: z.number().min(0).max(1).optional().default(0.45),
   ducking: z.boolean().optional().default(true),
   duckedVolume: z.number().min(0).max(1).optional().default(0.12),
-  voiceoverTrack: z.string().optional()
+  voiceoverTrack: z.string().optional(),
+  roomTone: z.string().optional()
 });
 
 export type AudioManifest = z.infer<typeof AudioManifestSchema>;
@@ -74,15 +108,45 @@ export const TimelineContractSchema = z.object({
   episodeId: z.string().min(1, "O campo 'episodeId' é obrigatório."),
   fps: z.number().int().positive().optional().default(HSL_FPS),
   scenes: z.array(TimelineSceneItemSchema).min(1, "O timeline deve conter pelo menos uma cena."),
+  actBreaks: z.array(z.number().int().nonnegative()).optional(),
+  coldOpen: ColdOpenSchema.optional(),
   hudWindows: z.array(HudWindowSchema).optional().default([]),
-  actBreaks: z.array(z.number().int().nonnegative()).optional().default([]),
   audio: AudioManifestSchema.optional()
 }).superRefine((data, ctx) => {
-  // ─────────────────────────────────────────────────────────────────────────
-  // REGRA DE RITMO MANDATÓRIA (RECURSO EDITORIAL DOUTORAL)
-  // Reprova timelines onde mais de 5 cenas consecutivas tenham a mesma duração (+-10%)
-  // ─────────────────────────────────────────────────────────────────────────
   const scenes = data.scenes;
+
+  // 1. TIMELINE_NO_ACT_STRUCTURE (mín 2, máx 4 viradas de ato)
+  if (!data.actBreaks || data.actBreaks.length < 2 || data.actBreaks.length > 4) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: `TIMELINE_NO_ACT_STRUCTURE: O timeline deve declarar entre 2 e 4 actBreaks (viradas estruturais de ato). Encontrado: ${data.actBreaks?.length || 0}.`,
+      path: ['actBreaks']
+    });
+  }
+
+  // 2. TIMELINE_NO_COLD_OPEN (Cold open obrigatório de 15s a 20s)
+  if (!data.coldOpen || !data.coldOpen.sceneIds || data.coldOpen.sceneIds.length === 0) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: `TIMELINE_NO_COLD_OPEN: O episódio deve conter uma declaração de coldOpen com sceneIds antes de qualquer título.`,
+      path: ['coldOpen']
+    });
+  } else {
+    const coldOpenSceneSet = new Set(data.coldOpen.sceneIds);
+    const coldOpenDuration = scenes
+      .filter((s) => coldOpenSceneSet.has(s.id))
+      .reduce((acc, s) => acc + s.durationSeconds, 0);
+
+    if (coldOpenDuration < 14.5 || coldOpenDuration > 20.5) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `TIMELINE_NO_COLD_OPEN: A duração somada do coldOpen deve estar entre 15s e 20s. Atual: ${coldOpenDuration.toFixed(1)}s.`,
+        path: ['coldOpen']
+      });
+    }
+  }
+
+  // 3. TIMELINE_FLAT_PACING (>5 cenas consecutivas com duração ±10% igual)
   if (scenes.length >= 6) {
     let streakCount = 1;
     let streakStartIdx = 0;
@@ -97,7 +161,7 @@ export const TimelineContractSchema = z.object({
         if (streakCount > 5) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
-            message: `RHYTHM_VIOLATION_MONOTONOUS_CADENCE: Mais de 5 cenas consecutivas (índices ${streakStartIdx} a ${i}, cenas '${scenes[streakStartIdx].id}' a '${scenes[i].id}') possuem a mesma duração de ~${currDur.toFixed(1)}s (+-10%). Varie o ritmo do roteiro alternando respiração (cenas mais longas) e aceleração/revelação (cenas mais curtas).`,
+            message: `TIMELINE_FLAT_PACING: Mais de 5 cenas consecutivas (índices ${streakStartIdx} a ${i}, cenas '${scenes[streakStartIdx].id}' a '${scenes[i].id}') possuem a mesma duração de ~${currDur.toFixed(1)}s (variação <= 10%). Varie o ritmo do roteiro alternando respiração e revelação.`,
             path: ['scenes', i]
           });
           break;
@@ -106,6 +170,31 @@ export const TimelineContractSchema = z.object({
         streakCount = 1;
         streakStartIdx = i;
       }
+    }
+  }
+
+  // 4. TIMELINE_NO_CLIMAX_BREATH (rajada de cenas < 3s deve ser seguida de cena com respiração >= 6s)
+  for (let i = 0; i < scenes.length - 1; i++) {
+    if (scenes[i].durationSeconds < 3 && scenes[i + 1].durationSeconds < 3) {
+      // Encontrou início de rajada (<3s)
+      let burstEndIdx = i + 1;
+      while (burstEndIdx < scenes.length && scenes[burstEndIdx].durationSeconds < 3) {
+        burstEndIdx++;
+      }
+
+      // Se a rajada terminou e a cena seguinte não tem respiro (duração < 6s)
+      if (burstEndIdx < scenes.length) {
+        const breathScene = scenes[burstEndIdx];
+        if (breathScene.durationSeconds < 6.0) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: `TIMELINE_NO_CLIMAX_BREATH: Uma sequência de clímax acelerado (cenas <3s nos índices ${i} a ${burstEndIdx - 1}) deve ser obrigatoriamente seguida por uma cena de respiro com duração >= 6s. A cena seguinte '${breathScene.id}' tem apenas ${breathScene.durationSeconds.toFixed(1)}s.`,
+            path: ['scenes', burstEndIdx]
+          });
+          break;
+        }
+      }
+      i = burstEndIdx;
     }
   }
 });
@@ -127,8 +216,16 @@ export interface CalculatedTimeline {
   totalDurationSeconds: number;
   totalDurationFrames: number;
   scenes: CalculatedTimelineScene[];
-  hudWindows: Array<HudWindow & { startFrame: number; durationFrames: number; endFrame: number }>;
+  hudWindows: Array<{
+    id: string;
+    component: string;
+    props: Record<string, any>;
+    startFrame: number;
+    durationFrames: number;
+    endFrame: number;
+  }>;
   actBreaks: number[];
+  coldOpen?: ColdOpen;
   audio: AudioManifest;
 }
 
@@ -168,15 +265,46 @@ export function parseAndCalculateTimeline(rawInput: unknown): CalculatedTimeline
     });
   });
 
-  const calculatedHudWindows = (parsed.hudWindows || []).map((hud) => {
-    const startFrame = Math.round(hud.startSeconds * fps);
-    const durationFrames = Math.round(hud.durationSeconds * fps);
-    return {
-      ...hud,
-      startFrame,
-      durationFrames,
-      endFrame: startFrame + durationFrames
-    };
+  // Expande janelas de HUD (tanto por aparições em cenas quanto por startSeconds)
+  const calculatedHudWindows: Array<{
+    id: string;
+    component: string;
+    props: Record<string, any>;
+    startFrame: number;
+    durationFrames: number;
+    endFrame: number;
+  }> = [];
+
+  (parsed.hudWindows || []).forEach((hud, hudIdx) => {
+    if (hud.appearances && hud.appearances.length > 0) {
+      hud.appearances.forEach((app, appIdx) => {
+        let startSec = app.startSeconds || 0;
+        if (app.startScene !== undefined && app.startScene < calculatedScenes.length) {
+          startSec = calculatedScenes[app.startScene].startFrame / fps;
+        }
+        const startFrame = Math.round(startSec * fps);
+        const durationFrames = Math.round(app.seconds * fps);
+        calculatedHudWindows.push({
+          id: `${hud.id}_app_${appIdx + 1}`,
+          component: hud.component,
+          props: hud.props || {},
+          startFrame,
+          durationFrames,
+          endFrame: startFrame + durationFrames
+        });
+      });
+    } else if (hud.startSeconds !== undefined && hud.durationSeconds !== undefined) {
+      const startFrame = Math.round(hud.startSeconds * fps);
+      const durationFrames = Math.round(hud.durationSeconds * fps);
+      calculatedHudWindows.push({
+        id: hud.id || `hud_${hudIdx + 1}`,
+        component: hud.component,
+        props: hud.props || {},
+        startFrame,
+        durationFrames,
+        endFrame: startFrame + durationFrames
+      });
+    }
   });
 
   const totalDurationFrames = accumulatedFrames;
@@ -199,6 +327,7 @@ export function parseAndCalculateTimeline(rawInput: unknown): CalculatedTimeline
     scenes: calculatedScenes,
     hudWindows: calculatedHudWindows,
     actBreaks: parsed.actBreaks || [],
+    coldOpen: parsed.coldOpen,
     audio: defaultAudio
   };
 }

@@ -12,9 +12,9 @@ export interface SceneTransitionProps {
 }
 
 /**
- * ⚡ SceneTransition: Transição Cinematográfica Integrada
- * Garante que cortes secos nunca ocorram por omissão, aplicando crossfade
- * por padrão ou dipToBlack em viradas de ato.
+ * ⚡ SceneTransition: Transições Cinematográficas Denis Villeneuve
+ * Aplica crossfade orgânico com overlap, dipToBlack em viradas de ato,
+ * whipPan direcional ou corte seco apenas quando estritamente declarado.
  */
 export const SceneTransition: React.FC<SceneTransitionProps> = ({
   children,
@@ -27,37 +27,32 @@ export const SceneTransition: React.FC<SceneTransitionProps> = ({
   const frame = useCurrentFrame();
   const transitionLen = Math.min(transitionDurationFrames, Math.floor(durationInFrames / 3));
 
-  // Opacidade de Entrada (Fade In / Crossfade)
-  let entryOpacity = 1;
-  if (!isFirstScene) {
-    entryOpacity = interpolate(frame, [0, transitionLen], [0, 1], {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp'
-    });
-  }
-
-  // Opacidade de Saída (Fade Out / Crossfade)
-  let exitOpacity = 1;
-  if (!isLastScene) {
-    exitOpacity = interpolate(
-      frame,
-      [durationInFrames - transitionLen, durationInFrames],
-      [1, 0],
-      {
-        extrapolateLeft: 'clamp',
-        extrapolateRight: 'clamp'
-      }
-    );
-  }
-
-  // Comportamento específico por tipo de transição
-  if (transitionType === 'cut') {
+  // 1. Corte Seco (Apenas quando explicitamente declarado no timeline)
+  if (transitionType === 'hardCut' || transitionType === 'cut') {
     return <AbsoluteFill>{children}</AbsoluteFill>;
   }
 
+  // 2. Dip to Black (20-30 frames nos Act Breaks)
   if (transitionType === 'dipToBlack') {
-    // Dip to black escurece mais profundamente na transição
-    const dipOpacity = Math.min(entryOpacity, exitOpacity);
+    const dipLen = Math.min(24, Math.floor(durationInFrames / 3));
+    let dipOpacity = 1.0;
+
+    if (!isFirstScene && frame < dipLen) {
+      // Fade in a partir do preto absoluto (#060709)
+      dipOpacity = interpolate(frame, [0, dipLen], [0, 1], {
+        extrapolateLeft: 'clamp',
+        extrapolateRight: 'clamp'
+      });
+    } else if (!isLastScene && frame > durationInFrames - dipLen) {
+      // Fade out para o preto absoluto (#060709)
+      dipOpacity = interpolate(
+        frame,
+        [durationInFrames - dipLen, durationInFrames],
+        [1, 0],
+        { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
+      );
+    }
+
     return (
       <AbsoluteFill style={{ backgroundColor: '#060709' }}>
         <AbsoluteFill style={{ opacity: dipOpacity }}>{children}</AbsoluteFill>
@@ -65,6 +60,63 @@ export const SceneTransition: React.FC<SceneTransitionProps> = ({
     );
   }
 
+  // 3. Whip Pan (6-8 frames de blur direcional e translação rápida)
+  if (transitionType === 'whipPan') {
+    const whipLen = 7;
+    let blurPx = 0;
+    let translateX = 0;
+    let opacity = 1.0;
+
+    if (!isFirstScene && frame < whipLen) {
+      blurPx = interpolate(frame, [0, whipLen], [18, 0], {
+        extrapolateLeft: 'clamp',
+        extrapolateRight: 'clamp'
+      });
+      translateX = interpolate(frame, [0, whipLen], [-120, 0], {
+        extrapolateLeft: 'clamp',
+        extrapolateRight: 'clamp'
+      });
+      opacity = interpolate(frame, [0, whipLen], [0.4, 1], {
+        extrapolateLeft: 'clamp',
+        extrapolateRight: 'clamp'
+      });
+    } else if (!isLastScene && frame > durationInFrames - whipLen) {
+      blurPx = interpolate(
+        frame,
+        [durationInFrames - whipLen, durationInFrames],
+        [0, 18],
+        { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
+      );
+      translateX = interpolate(
+        frame,
+        [durationInFrames - whipLen, durationInFrames],
+        [0, 120],
+        { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
+      );
+      opacity = interpolate(
+        frame,
+        [durationInFrames - whipLen, durationInFrames],
+        [1, 0.4],
+        { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
+      );
+    }
+
+    return (
+      <AbsoluteFill style={{ backgroundColor: '#060709', overflow: 'hidden' }}>
+        <AbsoluteFill
+          style={{
+            opacity,
+            filter: blurPx > 0 ? `blur(${blurPx.toFixed(1)}px)` : undefined,
+            transform: translateX !== 0 ? `translate3d(${translateX.toFixed(1)}px, 0, 0)` : undefined
+          }}
+        >
+          {children}
+        </AbsoluteFill>
+      </AbsoluteFill>
+    );
+  }
+
+  // 4. Laser Wipe (Corte tecnológico industrial ciano)
   if (transitionType === 'laserWipe' || transitionType === 'wipe') {
     const wipeProgress = interpolate(frame, [0, transitionLen], [0, 100], {
       extrapolateLeft: 'clamp',
@@ -75,7 +127,7 @@ export const SceneTransition: React.FC<SceneTransitionProps> = ({
     return (
       <AbsoluteFill style={{ backgroundColor: '#060709' }}>
         <AbsoluteFill style={{ clipPath }}>{children}</AbsoluteFill>
-        {wipeProgress < 100 && (
+        {wipeProgress < 100 && wipeProgress > 0 && (
           <div
             style={{
               position: 'absolute',
@@ -92,7 +144,28 @@ export const SceneTransition: React.FC<SceneTransitionProps> = ({
     );
   }
 
-  // Padrão Absoluto: Crossfade
+  // 5. Crossfade Canônico (12-18 frames com overlap orgânico)
+  let entryOpacity = 1;
+  if (!isFirstScene) {
+    entryOpacity = interpolate(frame, [0, transitionLen], [0, 1], {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp'
+    });
+  }
+
+  let exitOpacity = 1;
+  if (!isLastScene) {
+    exitOpacity = interpolate(
+      frame,
+      [durationInFrames - transitionLen, durationInFrames],
+      [1, 0],
+      {
+        extrapolateLeft: 'clamp',
+        extrapolateRight: 'clamp'
+      }
+    );
+  }
+
   const combinedOpacity = Math.min(entryOpacity, exitOpacity);
 
   return (

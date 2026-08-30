@@ -83,9 +83,11 @@ export async function runEpisodeProduction(options: EpisodeProductionOptions): P
 
   // 4. Execução dos Diretores Cinematográficos Bloqueantes (Beat -> Shot -> Continuity)
   try {
-    const beatDirector = new NarrativeBeatDirectorAgent();
-    const shotDirector = new CinematicShotDirectorAgent();
-    const continuityDirector = new ContinuityDirectorAgent();
+    const { AgentTelemetryCinematicSink } = require('../hsl/cinematic/telemetry/cinematicTelemetry');
+    const telemetry = new AgentTelemetryCinematicSink();
+    const beatDirector = new NarrativeBeatDirectorAgent(telemetry);
+    const shotDirector = new CinematicShotDirectorAgent(telemetry);
+    const continuityDirector = new ContinuityDirectorAgent(telemetry);
 
     const editorialScenes = sceneContracts.map((sc, idx) => ({
       scene_id: sc.sceneId,

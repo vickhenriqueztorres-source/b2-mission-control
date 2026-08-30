@@ -153,7 +153,6 @@ export const ${input.compositionId}: React.FC<${input.compositionId}Props> = ({
   );
 };
 `;
-`;
 
     fs.writeFileSync(componentPath, componentCode, 'utf8');
     Logger.info(this.loggerName, `Componente do episódio gerado em: ${componentPath}`);

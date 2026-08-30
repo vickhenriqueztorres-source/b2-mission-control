@@ -1,11 +1,21 @@
 import React from 'react';
-import { AbsoluteFill, useCurrentFrame } from 'remotion';
-import { HudWindow } from '../../contracts/timelineContract';
+import { AbsoluteFill, useCurrentFrame, interpolate } from 'remotion';
 import { AtomicStopwatch } from '../documentary/AtomicStopwatch';
+import { CINEMATIC_TYPOGRAPHY } from './typography';
+
+export interface CalculatedHudWindow {
+  id: string;
+  component: string;
+  componentName?: string;
+  props?: Record<string, any>;
+  startFrame: number;
+  durationFrames: number;
+  endFrame: number;
+}
 
 export interface HudDirectorProps {
   totalFrames: number;
-  hudWindows?: Array<HudWindow & { startFrame: number; durationFrames: number; endFrame: number }>;
+  hudWindows?: CalculatedHudWindow[];
   showMasterStopwatch?: boolean;
   accentColor?: string;
   telemetryColor?: string;
@@ -15,7 +25,8 @@ export interface HudDirectorProps {
 /**
  * 🛰️ HudDirector: Diretor de HUDs Persistentes e Telemetria
  * Gerencia a renderização segura de elementos técnicos na tela,
- * respeitando áreas nobres e zonas seguras (safe zones).
+ * respeitando janelas de timeline, slide-in/out de 10 frames e limite
+ * de 1 elemento gráfico simultâneo.
  */
 export const HudDirector: React.FC<HudDirectorProps> = ({
   totalFrames,
@@ -32,6 +43,9 @@ export const HudDirector: React.FC<HudDirectorProps> = ({
     (w) => frame >= w.startFrame && frame < w.endFrame
   );
 
+  // Limite Disciplinar de HUD: Máximo 1 elemento gráfico simultâneo
+  const visibleWindows = activeWindows.slice(0, 1);
+
   return (
     <AbsoluteFill style={{ pointerEvents: 'none' }}>
       {/* 1. Camada Base dos Filhos */}
@@ -39,13 +53,55 @@ export const HudDirector: React.FC<HudDirectorProps> = ({
 
       {/* 2. Cronômetro Atômico de Telemetria no Topo Central (Safe Zone) */}
       {showMasterStopwatch && (
-        <div style={{ position: 'absolute', top: '16px', left: 0, right: 0, display: 'flex', justifyContent: 'center', zIndex: 950 }}>
+        <div
+          style={{
+            position: 'absolute',
+            top: '16px',
+            left: 0,
+            right: 0,
+            display: 'flex',
+            justifyContent: 'center',
+            zIndex: 950
+          }}
+        >
           <AtomicStopwatch totalFrames={totalFrames} />
         </div>
       )}
 
-      {/* 3. Renderização de Janelas de HUD Específicas ativas */}
-      {activeWindows.map((win) => {
+      {/* 3. Renderização de Janelas de HUD Específicas com Slide-In/Out 10 frames */}
+      {visibleWindows.map((win) => {
+        const localFrame = frame - win.startFrame;
+        const animDuration = 10;
+
+        // Slide-in nos primeiros 10 frames
+        let translateX = 0;
+        let opacity = 1;
+
+        if (localFrame < animDuration) {
+          translateX = interpolate(localFrame, [0, animDuration], [40, 0], {
+            extrapolateLeft: 'clamp',
+            extrapolateRight: 'clamp'
+          });
+          opacity = interpolate(localFrame, [0, animDuration], [0, 1], {
+            extrapolateLeft: 'clamp',
+            extrapolateRight: 'clamp'
+          });
+        } else if (localFrame > win.durationFrames - animDuration) {
+          // Slide-out nos últimos 10 frames
+          translateX = interpolate(
+            localFrame,
+            [win.durationFrames - animDuration, win.durationFrames],
+            [0, 40],
+            { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
+          );
+          opacity = interpolate(
+            localFrame,
+            [win.durationFrames - animDuration, win.durationFrames],
+            [1, 0],
+            { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
+          );
+        }
+
         return (
           <div
             key={win.id}
@@ -53,34 +109,68 @@ export const HudDirector: React.FC<HudDirectorProps> = ({
               position: 'absolute',
               top: '110px',
               right: '48px',
-              padding: '12px 18px',
-              backgroundColor: 'rgba(6, 7, 9, 0.85)',
-              backdropFilter: 'blur(10px)',
+              padding: '14px 20px',
+              backgroundColor: 'rgba(6, 7, 9, 0.88)',
+              backdropFilter: 'blur(12px)',
               border: `1px solid rgba(0, 240, 255, 0.25)`,
               borderLeft: `3px solid ${accentColor}`,
               borderRadius: '4px',
-              color: '#F4F4F0',
-              fontFamily: 'monospace',
+              color: CINEMATIC_TYPOGRAPHY.COLORS.TEXT_PRIMARY,
+              fontFamily: CINEMATIC_TYPOGRAPHY.FONTS.TELEMETRY,
               fontSize: '12px',
               letterSpacing: '1px',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.6)',
               zIndex: 920,
-              maxWidth: '380px'
+              maxWidth: '400px',
+              transform: `translate3d(${translateX}px, 0, 0)`,
+              opacity
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-              <span style={{ color: telemetryColor, fontWeight: 'bold', fontSize: '11px' }}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: '6px'
+              }}
+            >
+              <span
+                style={{
+                  color: telemetryColor,
+                  fontWeight: 'bold',
+                  fontSize: CINEMATIC_TYPOGRAPHY.SIZES.TELEMETRY_DATA,
+                  letterSpacing: '1.5px'
+                }}
+              >
                 // TELEMETRIA SISTÊMICA
               </span>
-              <span style={{ color: '#8A8D9F', fontSize: '10px' }}>
+              <span
+                style={{
+                  color: CINEMATIC_TYPOGRAPHY.COLORS.TEXT_MUTED,
+                  fontSize: CINEMATIC_TYPOGRAPHY.SIZES.FOOTNOTE
+                }}
+              >
                 {win.id}
               </span>
             </div>
-            <div style={{ color: '#F4F4F0', fontSize: '13px', lineHeight: 1.4 }}>
+            <div
+              style={{
+                color: CINEMATIC_TYPOGRAPHY.COLORS.TEXT_PRIMARY,
+                fontSize: '13px',
+                lineHeight: 1.4
+              }}
+            >
               {win.props?.title || win.component}
             </div>
             {win.props?.status && (
-              <div style={{ marginTop: '6px', fontSize: '11px', color: accentColor }}>
+              <div
+                style={{
+                  marginTop: '6px',
+                  fontSize: CINEMATIC_TYPOGRAPHY.SIZES.TELEMETRY_DATA,
+                  color: accentColor,
+                  fontWeight: 'bold'
+                }}
+              >
                 STATUS: {win.props.status}
               </div>
             )}

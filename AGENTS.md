@@ -102,13 +102,14 @@ pnpm firefly:doctor
 ## 7. REGRA INVIOLÁVEL: COMPOSIÇÃO ORIENTADA A DADOS (CINEMATIC EPISODE)
 
 1. **Caminho Único de Produção:**
-   - Episódio novo = criar **APENAS** `contracts/episodes/<id>.episode.json` + timeline data validado pelo `timelineContract` (`contracts/timelineContract.ts`).
+   - Episódio novo = **APENAS** `contracts/episodes/<id>.episode.json` + timeline data validado pelo `timelineContract` (`contracts/timelineContract.ts`).
 2. **Proibição Total de Composição Artesanal:**
-   - **PROIBIDO** criar componente `EpisodeXXX.tsx` artesanal ou `<Sequence>` com corte seco fora do `CinematicEpisode`.
+   - **PROIBIDO** criar componente `EpisodeXXX.tsx` artesanal, `<Sequence>` com corte seco fora do `CinematicEpisode`, ou `<Audio>` com volume constante. Antes de concluir: `pnpm check`.
 3. **Camada Cinematográfica Obrigatória por Construção:**
    - Todo episódio renderiza compulsoriamente via `<CinematicEpisode timeline={timeline} audio={audioManifest} />` em `remotion/cinema/CinematicEpisode.tsx`.
    - Aplica SEMPRE e sem flags para desligar:
      $$\text{FilmGrade (35mm)} \longrightarrow \text{HudDirector} \longrightarrow [\text{SceneTransition} + \text{CameraLanguage}] + \text{CinematicAudioMix}$$
    - Transição sem especificação recebe `crossfade` por default (nunca corte seco). Mudanças de ato (`actBreaks`) recebem `dipToBlack` automaticamente.
+
 
 

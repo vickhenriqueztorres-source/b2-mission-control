@@ -5,6 +5,7 @@ import { spawnSync } from 'child_process';
 import { RunManifest } from './runManifest';
 import { EpisodeContract, parseEpisodeContract } from '../contracts/episodeContract';
 import { SceneVisualContract } from '../contracts/sceneVisualContract';
+import { TimelineContractSchema } from '../contracts/timelineContract';
 import {
   HSL_BYTE_CONSTRAINTS,
   HSL_MAX_AUDIO_VIDEO_DESYNC_SECONDS,
@@ -851,18 +852,54 @@ export class PipelineContractGate {
               hasCinematicGrade = true;
             }
 
-            if (!hasCinematicGrade && scope === 'FULL_PACKAGE') {
+            if (!hasCinematicGrade && (scope === 'FULL_PACKAGE' || scope === 'PRE_RENDER')) {
               failures.push({
                 sceneId: 'STAGE',
                 shotId: 'CINEMATIC_GRADE',
                 index: 0,
                 assetType: 'VIDEO_TAKE',
                 expectedPath: renderManifestPath,
-                reason: 'MISSING_STAGE: cinematic_grade - Composição raiz deve ser CinematicEpisode com render_manifest.json válido.'
+                reason: 'GATE_NOT_CINEMATIC: render_manifest.json ausente ou compositor !== CinematicEpisode'
               });
             }
             break;
           }
+        }
+      }
+    }
+
+    // Auditoria de Conformidade de Timeline Cinematográfico
+    const possibleTimelinePaths = [
+      path.join(runDir, 'timeline.json'),
+      path.join(runDir, 'timeline_contract.json'),
+      path.join(runDir, 'dispatch', 'timeline.json')
+    ];
+
+    for (const tPath of possibleTimelinePaths) {
+      if (fs.existsSync(tPath)) {
+        try {
+          const raw = JSON.parse(fs.readFileSync(tPath, 'utf8'));
+          const result = TimelineContractSchema.safeParse(raw);
+          if (!result.success) {
+            const firstError = result.error.issues[0]?.message || 'Contrato de timeline inválido';
+            failures.push({
+              sceneId: 'TIMELINE',
+              shotId: 'TIMELINE_CONTRACT',
+              index: 0,
+              assetType: 'TIMING',
+              expectedPath: tPath,
+              reason: `GATE_TIMELINE_INVALID: ${firstError}`
+            });
+          }
+        } catch (err: any) {
+          failures.push({
+            sceneId: 'TIMELINE',
+            shotId: 'TIMELINE_PARSE',
+            index: 0,
+            assetType: 'TIMING',
+            expectedPath: tPath,
+            reason: `GATE_TIMELINE_INVALID: Falha ao ler timeline JSON (${err.message})`
+          });
         }
       }
     }

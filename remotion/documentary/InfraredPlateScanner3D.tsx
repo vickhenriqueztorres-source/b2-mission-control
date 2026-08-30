@@ -11,6 +11,7 @@ export interface InfraredPlateScanner3DProps {
   accentColor?: string;
   telemetryColor?: string;
   sealNumber?: string;
+  detectedPlate?: string;
   confidenceScore?: number;
   durationInFrames?: number;
 }

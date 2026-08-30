@@ -1,57 +1,97 @@
 import React from 'react';
-import { AbsoluteFill } from 'remotion';
+import { AbsoluteFill, useCurrentFrame, interpolate } from 'remotion';
 
 export interface FilmGradeProps {
   children: React.ReactNode;
-  aspectRatio?: string; // default '2.39:1' anamorphic
-  enableGrain?: boolean;
+  contrast?: number;
+  saturate?: number;
+  grainOpacity?: number;
   enableVignette?: boolean;
+  enableGrain?: boolean;
   enableLetterbox?: boolean;
+  enableTealShadows?: boolean;
+  isColdOpenOrClimax?: boolean;
 }
 
 /**
  * 🎬 Master Film Grade: Denis Villeneuve 35mm Cyber-Industrial Look
- * Aplica color grade chiaroscuro, pretos profundos (#060709),
- * vinheta atmosférica, grão de película e letterbox anamórfico 2.39:1.
+ * Aplica color grade chiaroscuro, sombras teal, highlights quentes,
+ * vinheta atmosférica 15-18%, grão de película determinístico e letterbox 2.39:1.
  */
 export const FilmGrade: React.FC<FilmGradeProps> = ({
   children,
-  enableGrain = true,
+  contrast = 1.06,
+  saturate = 1.08,
+  grainOpacity = 0.035,
   enableVignette = true,
-  enableLetterbox = true
+  enableGrain = true,
+  enableLetterbox = true,
+  enableTealShadows = true,
+  isColdOpenOrClimax = true
 }) => {
+  const frame = useCurrentFrame();
+
+  // Grão SVG determinístico: seed varia por frame sem Math.random
+  const deterministicSeed = (frame % 250) + 1;
+  const grainFrequency = (0.75 + (frame % 10) * 0.01).toFixed(3);
+
+  // Letterbox animado em coldOpen e clímax
+  const letterboxHeight = isColdOpenOrClimax
+    ? interpolate(frame, [0, 20], [0, 84], {
+        extrapolateLeft: 'clamp',
+        extrapolateRight: 'clamp'
+      })
+    : 84;
+
   return (
     <AbsoluteFill style={{ backgroundColor: '#060709', overflow: 'hidden' }}>
-      {/* 1. Camada de Conteúdo Visual */}
-      <AbsoluteFill style={{ filter: 'contrast(1.08) brightness(0.98) saturate(1.05)' }}>
+      {/* 1. Camada de Conteúdo Visual com Grade 35mm */}
+      <AbsoluteFill
+        style={{
+          filter: `contrast(${contrast}) saturate(${saturate}) brightness(0.98)`
+        }}
+      >
         {children}
       </AbsoluteFill>
 
-      {/* 2. Vinheta Atmosférica Chiaroscuro */}
+      {/* 2. Sombras Teal & Highlights Quentes (Cyber-Industrial Split Tone) */}
+      {enableTealShadows && (
+        <AbsoluteFill
+          style={{
+            pointerEvents: 'none',
+            background:
+              'linear-gradient(135deg, rgba(0, 32, 40, 0.12) 0%, rgba(6, 7, 9, 0) 50%, rgba(255, 170, 102, 0.04) 100%)',
+            mixBlendMode: 'color-dodge'
+          }}
+        />
+      )}
+
+      {/* 3. Vinheta Atmosférica Chiaroscuro 15-18% */}
       {enableVignette && (
         <AbsoluteFill
           style={{
             pointerEvents: 'none',
-            background: 'radial-gradient(ellipse at center, rgba(6,7,9,0) 45%, rgba(6,7,9,0.78) 95%, rgba(6,7,9,0.95) 100%)',
+            background:
+              'radial-gradient(ellipse at center, rgba(6,7,9,0) 50%, rgba(6,7,9,0.72) 90%, rgba(6,7,9,0.92) 100%)',
             mixBlendMode: 'multiply'
           }}
         />
       )}
 
-      {/* 3. Textura de Grão de Película 35mm (Noise SVG Procedural) */}
+      {/* 4. Textura de Grão de Película 35mm SVG Determinístico (Opacity 0.035) */}
       {enableGrain && (
         <AbsoluteFill
           style={{
             pointerEvents: 'none',
-            opacity: 0.055,
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            opacity: grainOpacity,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='${grainFrequency}' seed='${deterministicSeed}' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
             mixBlendMode: 'overlay'
           }}
         />
       )}
 
-      {/* 4. Letterbox Anamórfico 2.39:1 Cinematográfico Master */}
-      {enableLetterbox && (
+      {/* 5. Letterbox Anamórfico 2.39:1 Cinematográfico Master */}
+      {enableLetterbox && letterboxHeight > 0 && (
         <AbsoluteFill style={{ pointerEvents: 'none', zIndex: 900 }}>
           {/* Barra Superior */}
           <div
@@ -60,9 +100,9 @@ export const FilmGrade: React.FC<FilmGradeProps> = ({
               top: 0,
               left: 0,
               right: 0,
-              height: '84px', // Letterbox padrão 1920x1080 -> 1920x803 (2.39:1)
+              height: `${letterboxHeight}px`,
               backgroundColor: '#060709',
-              borderBottom: '1px solid rgba(255, 255, 255, 0.06)'
+              borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
             }}
           />
 
@@ -73,17 +113,17 @@ export const FilmGrade: React.FC<FilmGradeProps> = ({
               bottom: 0,
               left: 0,
               right: 0,
-              height: '84px',
+              height: `${letterboxHeight}px`,
               backgroundColor: '#060709',
-              borderTop: '1px solid rgba(255, 255, 255, 0.06)'
+              borderTop: '1px solid rgba(255, 255, 255, 0.05)'
             }}
           />
 
-          {/* Retículas e Mira de Telemetria de Canto */}
+          {/* Retículas e Mira de Telemetria */}
           <div
             style={{
               position: 'absolute',
-              top: '92px',
+              top: `${Math.max(10, letterboxHeight + 8)}px`,
               left: '32px',
               fontSize: '9px',
               fontFamily: 'monospace',
@@ -94,25 +134,6 @@ export const FilmGrade: React.FC<FilmGradeProps> = ({
             }}
           >
             OOL // 35MM ANAMORPHIC RAW // 2.39:1
-          </div>
-
-          <div
-            style={{
-              position: 'absolute',
-              top: '92px',
-              right: '32px',
-              fontSize: '9px',
-              fontFamily: 'monospace',
-              letterSpacing: '1.5px',
-              color: '#00F0FF',
-              opacity: 0.85,
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px'
-            }}
-          >
-            <span style={{ display: 'inline-block', width: '6px', height: '6px', backgroundColor: '#FF5500', borderRadius: '50%' }} />
-            OPTICAL FEED ACTIVE
           </div>
         </AbsoluteFill>
       )}

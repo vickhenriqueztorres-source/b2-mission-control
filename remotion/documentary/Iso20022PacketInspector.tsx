@@ -10,6 +10,8 @@ export interface Iso20022PacketInspectorProps {
   sealStatus?: string;
   accentColor?: string;
   telemetryColor?: string;
+  amount?: string;
+  latencyMs?: number;
 }
 
 export const Iso20022PacketInspector: React.FC<Iso20022PacketInspectorProps> = ({
