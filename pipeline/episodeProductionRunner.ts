@@ -209,12 +209,30 @@ export async function runEpisodeProduction(options: EpisodeProductionOptions): P
 
       case 'render': {
         const masterVideoPath = path.join(runDir, 'final_master.mp4');
+        const compositionId = episodeContract.episodeId === 'gps-tempo'
+          ? 'EpisodeGps'
+          : episodeContract.episodeId === 'gasolina-adulterada'
+          ? 'EpisodeGasolina'
+          : 'EpisodeGasolina';
+
         if (!options.dryRun) {
-          const remotionCmd = `npx remotion render remotion/index.ts EpisodeGasolina "${masterVideoPath}" --concurrency=2 --gl=angle`;
+          const remotionCmd = `npx remotion render remotion/index.ts ${compositionId} "${masterVideoPath}" --concurrency=2 --gl=angle`;
           execSync(remotionCmd, { stdio: 'inherit' });
         }
-        saveCheckpoint('render', { masterVideoPath });
+        saveCheckpoint('render', { masterVideoPath, compositionId });
         stagesCompleted.push('render');
+        break;
+      }
+
+      case 'cinematic_grade': {
+        const timelineData = (episodeContract.episodeId === 'gps-tempo')
+          ? require('../remotion/episodeGpsTimelineData').EPISODE_GPS_CALCULATED_TIMELINE
+          : require('../remotion/episodeGasolinaTimelineData').EPISODE_GASOLINA_CALCULATED_TIMELINE;
+
+        const { writeCinematicRenderManifest } = require('../remotion/cinema/CinematicEpisode');
+        writeCinematicRenderManifest(timelineData, runId, runDir);
+        saveCheckpoint('cinematic_grade', { compositor: 'CinematicEpisode', grade: '35mm' });
+        stagesCompleted.push('cinematic_grade');
         break;
       }
 

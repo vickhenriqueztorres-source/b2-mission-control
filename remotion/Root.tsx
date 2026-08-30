@@ -9,6 +9,8 @@ import {EpisodeTest1Min} from './EpisodeTest1Min';
 import {EPISODE_TEST_1MIN_TOTAL_FRAMES} from './episodeTest1MinTimelineData';
 import {EpisodeGasolina} from './EpisodeGasolina';
 import {EPISODE_GASOLINA_TOTAL_FRAMES} from './episodeGasolinaTimelineData';
+import {EpisodeGps} from './EpisodeGps';
+import {EPISODE_GPS_TOTAL_FRAMES} from './episodeGpsTimelineData';
 import {HslThumbnail, HslThumbnailProps} from './HslThumbnail';
 import {HslEpisodeRenderProps} from './types';
 
@@ -75,6 +77,14 @@ export const RemotionRoot: React.FC = () => <>
     id="EpisodeGasolina"
     component={EpisodeGasolina}
     durationInFrames={EPISODE_GASOLINA_TOTAL_FRAMES}
+    fps={HSL_FPS}
+    width={HSL_VIDEO_RESOLUTION.WIDTH}
+    height={HSL_VIDEO_RESOLUTION.HEIGHT}
+  />
+  <Composition
+    id="EpisodeGps"
+    component={EpisodeGps}
+    durationInFrames={EPISODE_GPS_TOTAL_FRAMES}
     fps={HSL_FPS}
     width={HSL_VIDEO_RESOLUTION.WIDTH}
     height={HSL_VIDEO_RESOLUTION.HEIGHT}
