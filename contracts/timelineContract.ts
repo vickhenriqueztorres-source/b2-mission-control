@@ -1,5 +1,3 @@
-import fs from 'fs';
-import path from 'path';
 import { z } from 'zod';
 import { HSL_FPS } from '../spec/hsl-spec';
 import { isRegisteredComponent } from '../remotion/cinema/componentRegistry';
@@ -337,15 +335,18 @@ export function parseAndCalculateTimeline(rawInput: unknown): CalculatedTimeline
  */
 export function loadTimelineContract(filePathOrData: string | unknown): CalculatedTimeline {
   if (typeof filePathOrData === 'string') {
-    const resolvedPath = path.isAbsolute(filePathOrData)
-      ? filePathOrData
-      : path.resolve(process.cwd(), filePathOrData);
+    const nodePath = require('path');
+    const nodeFs = require('fs');
 
-    if (!fs.existsSync(resolvedPath)) {
+    const resolvedPath = nodePath.isAbsolute(filePathOrData)
+      ? filePathOrData
+      : nodePath.resolve(process.cwd(), filePathOrData);
+
+    if (!nodeFs.existsSync(resolvedPath)) {
       throw new Error(`TIMELINE_CONTRACT_FILE_NOT_FOUND: O arquivo '${resolvedPath}' não foi encontrado.`);
     }
 
-    const content = fs.readFileSync(resolvedPath, 'utf8');
+    const content = nodeFs.readFileSync(resolvedPath, 'utf8');
     const rawData = JSON.parse(content);
     return parseAndCalculateTimeline(rawData);
   }

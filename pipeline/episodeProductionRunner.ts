@@ -121,7 +121,9 @@ export async function runEpisodeProduction(options: EpisodeProductionOptions): P
       case 'narration': {
         const { plan, wordStatus } = await runNarrationDispatch({
           runId,
-          forceDispatch: !options.dryRun
+          forceDispatch: !options.dryRun,
+          contractPath: options.contractPath,
+          scenesPath: options.scenesPath
         });
 
         saveCheckpoint('narration', {
@@ -169,7 +171,9 @@ export async function runEpisodeProduction(options: EpisodeProductionOptions): P
         const { plan, wordStatus } = await runAudioBedDispatch({
           runId,
           stage: 'sfx',
-          forceDispatch: !options.dryRun
+          forceDispatch: !options.dryRun,
+          contractPath: options.contractPath,
+          scenesPath: options.scenesPath
         });
 
         saveCheckpoint('sfx', { totalScenes: plan.totalScenes, totalCues: plan.totalSfxCues, status: wordStatus });
@@ -181,7 +185,9 @@ export async function runEpisodeProduction(options: EpisodeProductionOptions): P
         const { plan, wordStatus } = await runAudioBedDispatch({
           runId,
           stage: 'music',
-          forceDispatch: !options.dryRun
+          forceDispatch: !options.dryRun,
+          contractPath: options.contractPath,
+          scenesPath: options.scenesPath
         });
 
         saveCheckpoint('music', { mood: plan.musicMood, targetSeconds: plan.musicTargetSeconds, status: wordStatus });
@@ -193,7 +199,9 @@ export async function runEpisodeProduction(options: EpisodeProductionOptions): P
         const { plan, wordStatus } = await runAudioBedDispatch({
           runId,
           stage: 'mix',
-          forceDispatch: !options.dryRun
+          forceDispatch: !options.dryRun,
+          contractPath: options.contractPath,
+          scenesPath: options.scenesPath
         });
 
         saveCheckpoint('mix', { targetSeconds: plan.contract.mix.targetSeconds, status: wordStatus });

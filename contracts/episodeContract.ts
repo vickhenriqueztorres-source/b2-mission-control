@@ -1,5 +1,3 @@
-import fs from 'fs';
-import path from 'path';
 import { z } from 'zod';
 
 export const REQUIRED_EPISODE_STAGES = [
@@ -96,19 +94,21 @@ export interface EpisodeContract {
 export function parseEpisodeContract(jsonPathOrData: string | unknown): EpisodeContract {
   let rawData: unknown;
   let sourceLabel = 'input_object';
+  const nodePath = require('path');
+  const nodeFs = require('fs');
 
   if (typeof jsonPathOrData === 'string') {
     sourceLabel = jsonPathOrData;
-    const resolvedPath = path.isAbsolute(jsonPathOrData)
+    const resolvedPath = nodePath.isAbsolute(jsonPathOrData)
       ? jsonPathOrData
-      : path.resolve(process.cwd(), jsonPathOrData);
+      : nodePath.resolve(process.cwd(), jsonPathOrData);
 
-    if (!fs.existsSync(resolvedPath)) {
+    if (!nodeFs.existsSync(resolvedPath)) {
       throw new Error(`EPISODE_CONTRACT_FILE_NOT_FOUND: O arquivo de contrato '${resolvedPath}' não existe no disco.`);
     }
 
     try {
-      const fileContent = fs.readFileSync(resolvedPath, 'utf8');
+      const fileContent = nodeFs.readFileSync(resolvedPath, 'utf8');
       rawData = JSON.parse(fileContent);
     } catch (err: any) {
       throw new Error(`EPISODE_CONTRACT_JSON_CORRUPTED: Falha ao ler/parsear JSON de '${resolvedPath}': ${err.message}`);
@@ -129,13 +129,13 @@ export function parseEpisodeContract(jsonPathOrData: string | unknown): EpisodeC
   const validData = parseResult.data;
 
   // Derivação obrigatória e estrita do outputDir a partir de runs/<episodeId>/
-  const expectedOutputDir = path.join(process.cwd(), 'runs', validData.episodeId);
-  const normalizedExpected = path.normalize(expectedOutputDir).toLowerCase();
+  const expectedOutputDir = nodePath.join(process.cwd(), 'runs', validData.episodeId);
+  const normalizedExpected = nodePath.normalize(expectedOutputDir).toLowerCase();
 
   if (validData.outputDir) {
-    const normalizedProvided = path.isAbsolute(validData.outputDir)
-      ? path.normalize(validData.outputDir).toLowerCase()
-      : path.normalize(path.resolve(process.cwd(), validData.outputDir)).toLowerCase();
+    const normalizedProvided = nodePath.isAbsolute(validData.outputDir)
+      ? nodePath.normalize(validData.outputDir).toLowerCase()
+      : nodePath.normalize(nodePath.resolve(process.cwd(), validData.outputDir)).toLowerCase();
 
     if (normalizedProvided !== normalizedExpected) {
       throw new Error(

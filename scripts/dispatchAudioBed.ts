@@ -114,9 +114,11 @@ export async function runAudioBedDispatch(options?: {
   runId?: string;
   forceDispatch?: boolean;
   stage?: 'sfx' | 'music' | 'mix' | 'all';
+  contractPath?: string;
+  scenesPath?: string;
 }): Promise<{ plan: AudioBedPlanReport; wordStatus: 'AUDIO_DRY_ONLY' | 'AUDIO_DISPATCHED' | 'NO_AUDIO_PACK' }> {
-  const contractPath = path.join(process.cwd(), 'contracts', 'episodes', 'gasolina-adulterada.episode.json');
-  const scenesPath = path.join(process.cwd(), 'contracts', 'episodes', 'gasolina-adulterada.scenes.json');
+  const contractPath = options?.contractPath || path.join(process.cwd(), 'contracts', 'episodes', 'gasolina-adulterada.episode.json');
+  const scenesPath = options?.scenesPath || path.join(process.cwd(), 'contracts', 'episodes', 'gasolina-adulterada.scenes.json');
 
   const episodeContract = parseEpisodeContract(contractPath);
   const rawScenes: RawSceneInput[] = JSON.parse(fs.readFileSync(scenesPath, 'utf8'));

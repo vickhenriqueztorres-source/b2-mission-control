@@ -110,9 +110,11 @@ export function validateNarrationBatch(runId: string, customBaseDir?: string): N
 export async function runNarrationDispatch(options?: {
   runId?: string;
   forceDispatch?: boolean;
+  contractPath?: string;
+  scenesPath?: string;
 }): Promise<{ plan: NarrationPlanReport; wordStatus: 'NARRATION_DRY_ONLY' | 'NARRATION_DISPATCHED' | 'NO_ELEVENLABS_KEY' }> {
-  const contractPath = path.join(process.cwd(), 'contracts', 'episodes', 'gasolina-adulterada.episode.json');
-  const scenesPath = path.join(process.cwd(), 'contracts', 'episodes', 'gasolina-adulterada.scenes.json');
+  const contractPath = options?.contractPath || path.join(process.cwd(), 'contracts', 'episodes', 'gasolina-adulterada.episode.json');
+  const scenesPath = options?.scenesPath || path.join(process.cwd(), 'contracts', 'episodes', 'gasolina-adulterada.scenes.json');
 
   const episodeContract = parseEpisodeContract(contractPath);
   const rawScenes: RawSceneInput[] = JSON.parse(fs.readFileSync(scenesPath, 'utf8'));

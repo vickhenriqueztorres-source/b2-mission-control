@@ -1,6 +1,6 @@
 import scenesData from '../contracts/episodes/gasolina-adulterada.scenes.json';
-import { SceneVisualContract } from '../contracts/sceneVisualContract';
-import { RawSceneInput } from '../contracts/buildSceneContracts';
+import type { SceneVisualContract } from '../contracts/sceneVisualContract';
+import type { RawSceneInput } from '../contracts/buildSceneContracts';
 import {
   CalculatedTimeline,
   TimelineContractInput,

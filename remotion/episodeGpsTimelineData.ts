@@ -1,5 +1,5 @@
 import scenesData from '../contracts/episodes/gps-tempo.scenes.json';
-import { RawSceneInput } from '../contracts/buildSceneContracts';
+import type { RawSceneInput } from '../contracts/buildSceneContracts';
 import {
   CalculatedTimeline,
   TimelineContractInput,

@@ -1,7 +1,5 @@
 import React from 'react';
 import { AbsoluteFill, Sequence } from 'remotion';
-import fs from 'fs';
-import path from 'path';
 import {
   CalculatedTimeline,
   TimelineContract,
@@ -63,15 +61,18 @@ export function writeCinematicRenderManifest(
   runId: string = 'latest',
   baseOutputDir?: string
 ): string {
+  const nodePath = require('path');
+  const nodeFs = require('fs');
+
   const manifest = generateCinematicRenderManifest(timeline, runId);
   const calc = (timeline && typeof timeline === 'object' && 'totalDurationFrames' in timeline)
     ? (timeline as CalculatedTimeline)
     : parseAndCalculateTimeline(timeline);
 
-  const targetDir = baseOutputDir || path.join(process.cwd(), 'runs', calc.episodeId, runId);
-  fs.mkdirSync(targetDir, { recursive: true });
-  const manifestPath = path.join(targetDir, 'render_manifest.json');
-  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), 'utf8');
+  const targetDir = baseOutputDir || nodePath.join(process.cwd(), 'runs', calc.episodeId, runId);
+  nodeFs.mkdirSync(targetDir, { recursive: true });
+  const manifestPath = nodePath.join(targetDir, 'render_manifest.json');
+  nodeFs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), 'utf8');
   return manifestPath;
 }
 
