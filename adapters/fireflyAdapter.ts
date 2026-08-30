@@ -7,6 +7,7 @@ import { Logger } from '../event-hub/logger';
 import { AgentTelemetryAdapter } from './agentTelemetryAdapter';
 import { ProductionSafetyGuard } from '../config/productionSafetyGuard';
 import { PipelineContractGate } from '../pipeline/pipelineContractGate';
+import { isFireflySessionLive, FireflySessionLiveResult } from '../config/fireflySessionLive';
 
 export class FireflyAdapter extends BaseAdapter {
   private fireflyPath: string;
@@ -43,7 +44,12 @@ export class FireflyAdapter extends BaseAdapter {
   }
 
   public async checkHealth(): Promise<boolean> {
-    return fs.existsSync(this.dbPath);
+    const liveResult = await isFireflySessionLive();
+    return fs.existsSync(this.dbPath) && liveResult.live;
+  }
+
+  public async isSessionLive(): Promise<FireflySessionLiveResult> {
+    return isFireflySessionLive();
   }
 
   public async feedGuideAndRunReal(
@@ -121,13 +127,10 @@ export class FireflyAdapter extends BaseAdapter {
         Logger.warn(this.name, `Aviso ao preparar banco SQLite: ${e.message}`);
       }
 
-      // 3. Executar --feed-guide no Firefly Bot com a guia filtrada
       try {
-<<<<<<< HEAD
-        const feedCmd = `"${this.pythonExec}" -m firefly_bot.main --root "${this.runtimeRoot}" --feed-guide "${guideJsonPath}"`;
-=======
-        const feedCmd = `"${this.pythonExec}" -m firefly_bot.main --feed-guide "${effectiveGuidePath}"`;
->>>>>>> 83e11b5 (feat: complete end-to-end documentary production engine and EP06 Gasolina)
+        const feedCmd = this.runtimeRoot !== this.fireflyPath
+          ? `"${this.pythonExec}" -m firefly_bot.main --root "${this.runtimeRoot}" --feed-guide "${effectiveGuidePath}"`
+          : `"${this.pythonExec}" -m firefly_bot.main --feed-guide "${effectiveGuidePath}"`;
         Logger.info(this.name, `Executando: ${feedCmd}`);
         const feedOutput = execSync(feedCmd, { cwd: this.fireflyPath, encoding: 'utf-8' });
         Logger.info(this.name, `Feed Output: ${feedOutput.trim()}`);
@@ -164,9 +167,18 @@ export class FireflyAdapter extends BaseAdapter {
       const concurrency = Number.isFinite(configuredConcurrency)
         ? Math.max(1, Math.min(6, Math.floor(configuredConcurrency)))
         : 1;
+
+      const customEnv = {
+        ...process.env,
+        FIREFLY_CHROME_PROFILE_DIR: process.env.FIREFLY_CHROME_PROFILE_DIR || path.join(this.fireflyPath, 'data', 'chrome_profile'),
+        FIREFLY_ALLOW_CREDIT_SPEND: 'true',
+        PYTHONUNBUFFERED: '1'
+      };
+
       runWorker = spawn(this.pythonExec, ['-m', 'firefly_bot.main', '--root', this.runtimeRoot, '--concurrency', String(concurrency), '--run'], {
         cwd: this.fireflyPath,
-        stdio: ['ignore', 'pipe', 'pipe']
+        stdio: ['ignore', 'pipe', 'pipe'],
+        env: customEnv
       });
 
       runWorker.stdout?.on('data', (data) => {

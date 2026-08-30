@@ -21,19 +21,20 @@ runs/
 public/hsl-runs/
 public/hsl-publication/
 public/editorial/execution/
-public/postproduction_*/
+public/postproduction*/
+public/episodes/
 backups/
 
 # Heavy raw audio/video files (keep structure, exclude large binaries)
-assets/audio_library/audio/music/*.wav
-assets/audio_library/audio/music/*.mp3
-assets/audio_library/audio/sfx/*.wav
-assets/audio_library/audio/sfx/*.mp3
+assets/audio_library/audio/
 assets/legacy_banned_mock_archive/
 
 # Local caches and coverage.
 .cache/
 .remotion/
+.remotion-bundle/
+.claude/
+*.lock
 coverage/
 *.log
 scratch/

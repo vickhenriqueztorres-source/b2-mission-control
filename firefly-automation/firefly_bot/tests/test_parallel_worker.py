@@ -156,6 +156,9 @@ def test_polling_tolerates_transient_unknown_before_result(
         async def read_screen_state(self, _job_id: int) -> ScreenObservation:
             return ScreenObservation(self.states.pop(0))
 
+        async def read_dom_state_fast(self, _job_id: int) -> ScreenObservation:
+            return ScreenObservation(ScreenState.UNKNOWN)
+
     async def no_delay(_seconds: float) -> None:
         return None
 

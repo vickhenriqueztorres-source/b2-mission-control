@@ -90,20 +90,18 @@ function enabledFlags() {
   });
 }
 
-test('1. feature flag OFF leaves pipeline artifacts unchanged', async () => {
+test('1. feature flag OFF blocks production and requires HSL_CINEMATIC_PIPELINE_V1', async () => {
   const {root, packagePath} = fixture();
-  const before = filesUnder(root);
-  const result = await runCinematicDirectionShadowHook({
-    productionId: 'PROD_OFF',
-    editorialPackagePath: packagePath,
-    flags: getHslCinematicFlags({}),
-    runner: {run: async () => { throw new Error('runner must not execute'); }}
-  });
-
-  assert.deepEqual(result, {executed: false, success: true});
-  assert.deepEqual(filesUnder(root), before);
-  assert.equal(getHslCinematicFlags({HSL_CINEMATIC_PIPELINE_V1: 'true'}).shouldRunShadow, false);
-  assert.equal(getHslCinematicFlags({HSL_CINEMATIC_SHADOW_MODE: 'true'}).shouldRunShadow, false);
+  await assert.rejects(
+    runCinematicDirectionShadowHook({
+      productionId: 'PROD_OFF',
+      editorialPackagePath: packagePath,
+      flags: getHslCinematicFlags({ HSL_CINEMATIC_PIPELINE_V1: '0', HSL_CINEMATIC_SHADOW_MODE: '0' }),
+      runner: {run: async () => { throw new Error('runner must not execute'); }}
+    }),
+    /CINEMATIC_DIRECTION_REQUIRED/
+  );
+  assert.equal(getHslCinematicFlags({HSL_CINEMATIC_PIPELINE_V1: 'true', HSL_CINEMATIC_SHADOW_MODE: '0'}).shouldRunShadow, false);
 });
 
 test('2. shadow mode ON creates versioned scene and episode sidecars', async () => {
@@ -238,13 +236,14 @@ test('10. runner failure emits validation_failed and failed telemetry', async ()
   );
   assert.equal(telemetry.events[2].data.errorCode, 'CINEMATIC_SOURCE_PACKAGE_INVALID');
 
-  const hookResult = await runCinematicDirectionShadowHook({
-    productionId: 'PROD_NON_BLOCKING',
-    editorialPackagePath: 'unused.json',
-    flags: enabledFlags(),
-    runner: {run: async () => { throw new Error('shadow-only failure'); }}
-  });
-  assert.equal(hookResult.executed, true);
-  assert.equal(hookResult.success, false);
-  assert.match(hookResult.error || '', /shadow-only failure/);
+  await assert.rejects(
+    runCinematicDirectionShadowHook({
+      productionId: 'PROD_BLOCKING',
+      editorialPackagePath: 'unused.json',
+      flags: enabledFlags(),
+      runner: {run: async () => { throw new Error('cinematic-direction failure'); }}
+    }),
+    /CINEMATIC_DIRECTION_GATE_FAILED: cinematic-direction failure/
+  );
 });
+

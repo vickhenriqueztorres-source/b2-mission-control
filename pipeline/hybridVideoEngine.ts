@@ -25,6 +25,9 @@ export interface HybridSceneInput {
   motion_mode?: string;
   tags?: string[];
   required_category?: string;
+  visual_must_include?: string[];
+  visual_must_not?: string[];
+  allowed_sources?: ('firefly' | 'bank' | 'dossier')[];
 }
 
 export interface HybridVideoEngineOptions {
@@ -104,6 +107,12 @@ export class HybridVideoEngine {
     // ══════════════════════════════════════════════════════════════════════
     for (let i = 0; i < scenes.length; i++) {
       const sc = scenes[i];
+
+      // Verificação obrigatória do SceneVisualContract
+      if (!sc.visual_must_include || sc.visual_must_include.length < 2 || !sc.required_category) {
+        throw new Error(`SCENE_CONTRACT_REQUIRED: Cena '${sc.scene_id}' não possui SceneVisualContract válido (mínimo 2 visual_must_include e required_category específica).`);
+      }
+
       const sceneDir = path.join(executionScenesDir, sc.scene_id);
       const pubSceneDir = path.join(publicExecutionDirectory, sc.scene_id);
       fs.mkdirSync(sceneDir, { recursive: true });
@@ -161,13 +170,16 @@ export class HybridVideoEngine {
         continue;
       }
 
-      // Consulta semântica ao Banco de Vídeos
+      // Consulta semântica ao Banco de Vídeos com governança de contrato visual
       const matchResult = VideoRepositoryMatcher.matchScene({
         sceneId: sc.scene_id,
         chapterTitle: sc.chapter_title,
         visualSubject: sc.visual_subject,
         tags: sc.tags || [],
-        requiredCategory: sc.required_category
+        requiredCategory: sc.required_category,
+        visualMustInclude: sc.visual_must_include,
+        visualMustNot: sc.visual_must_not,
+        allowedSources: sc.allowed_sources
       }, mode);
 
       if (matchResult.recommendedAction === 'USE_MATCHED_VIDEO' && matchResult.absoluteVideoPath) {
@@ -200,8 +212,15 @@ export class HybridVideoEngine {
           isDossier: false
         };
       } else {
-        // Cache Miss -> Força geração cirúrgica sob demanda no Firefly
-        Logger.info('HybridVideoEngine', `  🔥 [${sc.scene_id}] Cache Miss (${matchResult.reason}). ENFILEIRANDO GERAÇÃO ON-DEMAND NO FIREFLY.`);
+        // Cache Miss -> Verifica permissão de Firefly
+        const allowsFirefly = !sc.allowed_sources || sc.allowed_sources.includes('firefly');
+        if (!allowsFirefly) {
+          throw new Error(
+            `NO_LEGAL_VISUAL: Cena '${sc.scene_id}' não encontrou vídeo compatível no banco e 'allowed_sources' não permite Firefly.`
+          );
+        }
+
+        Logger.info('HybridVideoEngine', `  🔥 [${sc.scene_id}] PENDING_FIREFLY (${matchResult.reason}). ENFILEIRANDO GERAÇÃO ON-DEMAND NO FIREFLY.`);
         
         this.ensureStartFrameExists(startFramePath, promptMaster, sc.scene_id);
         fs.copyFileSync(startFramePath, pubStartFramePath);
@@ -220,7 +239,7 @@ export class HybridVideoEngine {
           action: 'DISPATCH_FIREFLY_ON_DEMAND',
           startFramePath,
           matchScore: matchResult.matchScore,
-          reason: matchResult.reason
+          reason: `PENDING_FIREFLY: ${matchResult.reason}`
         };
 
         availableMedia[sc.scene_id] = {
@@ -336,20 +355,9 @@ export class HybridVideoEngine {
       return;
     }
 
-    const bancoDeVideosDir = path.join(process.cwd(), 'banco de videos');
-    if (fs.existsSync(bancoDeVideosDir)) {
-      const videos = fs.readdirSync(bancoDeVideosDir).filter(f => f.endsWith('.mp4'));
-      if (videos.length > 0) {
-        const seedVideo = path.join(bancoDeVideosDir, videos[Math.abs(this.hashString(sceneId)) % videos.length]);
-        try {
-          execSync(`ffmpeg -y -ss 00:00:01 -i "${seedVideo}" -frames:v 1 -q:v 2 "${startFramePath}"`);
-          return;
-        } catch {}
-      }
-    }
-
-    // Fallback de alta resolução
-    execSync(`ffmpeg -y -f lavfi -i "color=c=#060709:s=1920x1080:d=1,drawgrid=w=120:h=120:t=2:c=#00F0FF@0.15" -frames:v 1 -q:v 2 "${startFramePath}"`);
+    throw new Error(
+      `START_FRAME_NOT_FOUND: Cena '${sceneId}' exige um Start Frame 35mm cinematográfico válido no disco (${startFramePath}, mínimo 10KB). Sorteio aleatório de vídeo do banco é estritamente proibido pelas leis de produção.`
+    );
   }
 
   private writeStartFrameReceipt(

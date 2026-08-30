@@ -13,10 +13,10 @@ class Config:
 
     # A UI pode demorar para materializar elementos mesmo após a navegação terminar.
     SELECTOR_TIMEOUT: int = 60_000
-    # Dez minutos cobrem o tempo de renderização do Kling 3.0 no Firefly.
-    GENERATION_BUDGET: int = 600_000
-    # O watchdog recebe margem de treze minutos.
-    WATCHDOG_WALL_CLOCK: int = 800_000
+    # Vinte minutos cobrem o tempo de renderização em filas de alta demanda no Firefly.
+    GENERATION_BUDGET: int = 1_200_000
+    # O watchdog recebe margem de vinte e cinco minutos.
+    WATCHDOG_WALL_CLOCK: int = 1_500_000
     # Navegação do Firefly é pesada e não deve falhar por um timeout de poucos segundos.
     NAV_TIMEOUT: int = 90_000
     # Exportação pode iniciar renderização adicional antes de disponibilizar o arquivo.
@@ -82,6 +82,9 @@ class Config:
 
     @property
     def profile_dir(self) -> Path:
+        env_profile = os.environ.get("FIREFLY_CHROME_PROFILE_DIR")
+        if env_profile and Path(env_profile).exists():
+            return Path(env_profile).resolve()
         return self.root_dir / self.CHROME_PROFILE_DIR
 
     @property

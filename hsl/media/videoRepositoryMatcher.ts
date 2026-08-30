@@ -98,60 +98,14 @@ export class VideoRepositoryMatcher {
   /**
    * Realiza matching inteligente de uma cena contra o repositório central
    */
+  /**
+   * Realiza matching inteligente e governado de uma cena contra o repositório central
+   * com verificação estrita de fail-fast na ordem canônica.
+   */
   public static matchScene(
     request: VideoMatchRequest,
     mode: VideoExecutionMode = 'smart'
   ): VideoMatchResult {
-    const catalog = this.loadCatalog();
-    const queryTokens = new Set([
-      ...this.tokenize(request.visualSubject || ''),
-      ...this.tokenize(request.chapterTitle || ''),
-      ...this.tokenize(request.narrativeFunction || ''),
-      ...(request.tags || []).flatMap(t => this.tokenize(t))
-    ]);
-
-    let bestMatch: VideoCatalogEntry | null = null;
-    let highestScore = 0;
-    let highestRawScore = 0;
-
-    for (const video of catalog.videos) {
-      let score = 0;
-      const videoTokens = new Set([
-        ...this.tokenize(video.description || ''),
-        ...this.tokenize(video.category || ''),
-        ...(video.tags || []).flatMap(t => this.tokenize(t))
-      ]);
-
-      // 1. Tag direct match (ponderação alta)
-      for (const tag of video.tags) {
-        const normTag = tag.toLowerCase().trim();
-        for (const qToken of queryTokens) {
-          if (normTag === qToken) score += 5.0;
-          else if (normTag.includes(qToken) || qToken.includes(normTag)) score += 2.0;
-        }
-      }
-
-      // 2. Token overlap score
-      for (const token of queryTokens) {
-        if (videoTokens.has(token)) {
-          score += 1.0;
-        }
-      }
-
-      // 3. Category match
-      if (request.requiredCategory) {
-        if (video.category.toLowerCase() === request.requiredCategory.toLowerCase()) {
-          score += 4.0;
-        }
-      }
-
-      if (score > highestRawScore) {
-        highestRawScore = score;
-        highestScore = Math.min(1.0, score / 12.0);
-        bestMatch = video;
-      }
-    }
-
     if (mode === 'generate-all' || (mode as string) === 'force-firefly') {
       return {
         sceneId: request.sceneId,
@@ -162,66 +116,161 @@ export class VideoRepositoryMatcher {
       };
     }
 
-    const configuredThreshold = parseFloat(process.env.HSL_VIDEO_MATCH_THRESHOLD || '0.50');
-    const MATCH_THRESHOLD = Number.isFinite(configuredThreshold) ? configuredThreshold : 0.50;
-    const isCacheHit = bestMatch !== null && highestScore >= MATCH_THRESHOLD;
+    // 1. BANK_CLIP_UNINDEXED (Catálogo vazio)
+    const catalog = this.loadCatalog();
+    if (!catalog.videos || catalog.videos.length === 0) {
+      return {
+        sceneId: request.sceneId,
+        matched: false,
+        matchScore: 0,
+        recommendedAction: mode === 'repository' ? 'STOP_UNMATCHED' : 'DISPATCH_FIREFLY_ON_DEMAND',
+        reason: 'BANK_CLIP_UNINDEXED: Catálogo de vídeos está vazio ou sem clips indexados.'
+      };
+    }
 
-    if (isCacheHit && bestMatch) {
+    // matchText = subject + domainTags + must_include (NUNCA estilo Villeneuve)
+    const substantiveQueryTokens = new Set([
+      ...this.tokenize(request.visualSubject || ''),
+      ...(request.domainTags || []).flatMap(t => this.tokenize(t)),
+      ...(request.tags || []).flatMap(t => this.tokenize(t)),
+      ...(request.visualMustInclude || []).flatMap(t => this.tokenize(t))
+    ]);
+
+    const mustIncludeTokens = (request.visualMustInclude || []).flatMap(t => this.tokenize(t));
+    const mustNotTokens = (request.visualMustNot || []).flatMap(t => this.tokenize(t));
+    const domainTokens = (request.domainTags || []).flatMap(t => this.tokenize(t));
+
+    let bestMatch: VideoCatalogEntry | null = null;
+    let highestScore = 0;
+    let highestRawScore = 0;
+    let bestMatchPath = '';
+    let lastRejectionReason = 'BANK_CLIP_UNINDEXED: Nenhum clip compatível encontrado no banco.';
+
+    for (const video of catalog.videos) {
+      // 1. BANK_CLIP_UNINDEXED (Arquivo físico não existe)
       const candidatePaths = [
-        path.join(this.REPO_PATH, bestMatch.filename),
-        path.join(process.cwd(), 'banco de videos', path.basename(bestMatch.filename)),
-        path.join(process.cwd(), bestMatch.filename)
+        path.join(this.REPO_PATH, video.filename),
+        path.join(process.cwd(), 'banco de videos', path.basename(video.filename)),
+        path.join(process.cwd(), video.filename)
       ];
-
       const resolvedPath = candidatePaths.find(p => fs.existsSync(p));
+      if (!resolvedPath) {
+        lastRejectionReason = `BANK_CLIP_UNINDEXED: Arquivo '${video.filename}' não encontrado no disco.`;
+        continue;
+      }
 
-      if (resolvedPath) {
-        return {
-          sceneId: request.sceneId,
-          matched: true,
-          matchScore: highestScore,
-          videoEntry: bestMatch,
-          absoluteVideoPath: resolvedPath,
-          relativePublicSrc: `video_repository/${bestMatch.filename.replace(/\\/g, '/')}`,
-          recommendedAction: 'USE_MATCHED_VIDEO',
-          reason: `MATCH_FOUND: Clip '${bestMatch.id}' (${bestMatch.category}) com relevância ${(highestScore * 100).toFixed(1)}% (Threshold: ${(MATCH_THRESHOLD * 100).toFixed(0)}%).`
-        };
+      const clipTagTokens = new Set([
+        ...(video.tags || []).flatMap(t => this.tokenize(t)),
+        ...this.tokenize(video.description || ''),
+        ...this.tokenize(video.category || '')
+      ]);
+
+      // 2. BANK_DOMAIN_MISMATCH (clip.tags ∩ episode.domainTags vazio)
+      if (domainTokens.length > 0) {
+        const hasDomainOverlap = domainTokens.some(dt => clipTagTokens.has(dt));
+        if (!hasDomainOverlap) {
+          lastRejectionReason = `BANK_DOMAIN_MISMATCH: Clip '${video.id}' não possui interseção com domainTags do episódio [${domainTokens.join(', ')}].`;
+          continue;
+        }
+      }
+
+      // 3. BANK_SUBJECT_MISS (clip.tags ∩ visual_must_include vazio)
+      if (mustIncludeTokens.length > 0) {
+        const hasSubjectOverlap = mustIncludeTokens.some(mit => clipTagTokens.has(mit));
+        if (!hasSubjectOverlap) {
+          lastRejectionReason = `BANK_SUBJECT_MISS: Clip '${video.id}' não contém nenhum dos termos obrigatórios [${mustIncludeTokens.join(', ')}].`;
+          continue;
+        }
+      }
+
+      // 4. BANK_FORBIDDEN_TAG (clip.tags ∩ visual_must_not não vazio)
+      if (mustNotTokens.length > 0) {
+        const forbiddenFound = mustNotTokens.find(fnt => clipTagTokens.has(fnt));
+        if (forbiddenFound) {
+          lastRejectionReason = `BANK_FORBIDDEN_TAG: Clip '${video.id}' contém tag proibida '${forbiddenFound}'.`;
+          continue;
+        }
+      }
+
+      // 5. BANK_CATEGORY_MISS
+      if (request.requiredCategory) {
+        const reqCat = request.requiredCategory.toLowerCase().trim();
+        const vidCat = (video.category || '').toLowerCase().trim();
+        if (reqCat !== vidCat) {
+          lastRejectionReason = `BANK_CATEGORY_MISS: Categoria do clip '${vidCat}' não confere com required_category '${reqCat}'.`;
+          continue;
+        }
+      }
+
+      // 6. BANK_SCORE_LOW (cálculo substantivo)
+      let score = 0;
+      for (const tag of video.tags || []) {
+        const normTag = tag.toLowerCase().trim();
+        for (const qToken of substantiveQueryTokens) {
+          if (normTag === qToken) score += 4.0;
+          else if (normTag.includes(qToken) || qToken.includes(normTag)) score += 2.0;
+        }
+      }
+
+      for (const reqToken of mustIncludeTokens) {
+        if (clipTagTokens.has(reqToken)) score += 6.0;
+      }
+
+      for (const token of substantiveQueryTokens) {
+        if (clipTagTokens.has(token)) {
+          score += 1.0;
+        }
+      }
+
+      if (score > highestRawScore) {
+        highestRawScore = score;
+        highestScore = Math.min(1.0, score / 15.0);
+        bestMatch = video;
+        bestMatchPath = resolvedPath;
       }
     }
 
-    // Sem correspondência satisfatória acima do threshold
-    if (mode === 'repository') {
+    const configuredThreshold = parseFloat(process.env.HSL_VIDEO_MATCH_THRESHOLD || '0.85');
+    const MATCH_THRESHOLD = Number.isFinite(configuredThreshold) ? configuredThreshold : 0.85;
+
+    // Se nenhum vídeo atingiu score mínimo -> BANK_SCORE_LOW
+    if (!bestMatch || highestScore < MATCH_THRESHOLD) {
+      if (bestMatch && highestScore < MATCH_THRESHOLD) {
+        lastRejectionReason = `BANK_SCORE_LOW: Melhor score obtido foi ${(highestScore * 100).toFixed(1)}% (Threshold mínimo é ${(MATCH_THRESHOLD * 100).toFixed(0)}%).`;
+      }
       return {
         sceneId: request.sceneId,
         matched: false,
         matchScore: highestScore,
-        recommendedAction: 'FALLBACK_REMOTION_PARALLAX',
-        reason: `REPOSITORY_ONLY_MODE: Nenhum clip exato encontrado (Score ${(highestScore * 100).toFixed(1)}% < ${(MATCH_THRESHOLD * 100).toFixed(0)}%). Usando animação Remotion Parallax/Dossier 2.5D.`
+        recommendedAction: mode === 'repository' ? 'STOP_UNMATCHED' : 'DISPATCH_FIREFLY_ON_DEMAND',
+        reason: lastRejectionReason
       };
     }
 
-    if (mode === 'smart') {
+    // 7. BANK_SOURCE_NOT_ALLOWED
+    if (request.allowedSources && !request.allowedSources.includes('bank')) {
       return {
         sceneId: request.sceneId,
         matched: false,
         matchScore: highestScore,
         recommendedAction: 'DISPATCH_FIREFLY_ON_DEMAND',
-        reason: `ON_DEMAND_REQUIRED: Score ${(highestScore * 100).toFixed(1)}% abaixo do threshold ${(MATCH_THRESHOLD * 100).toFixed(0)}%. Disparar geração cirúrgica de take no Firefly.`
+        reason: 'BANK_SOURCE_NOT_ALLOWED: allowed_sources não autoriza uso de banco para esta cena.'
       };
     }
 
+    // 8. HIT
     return {
       sceneId: request.sceneId,
-      matched: false,
+      matched: true,
       matchScore: highestScore,
-      recommendedAction: 'FALLBACK_REMOTION_PARALLAX',
-      reason: 'DEFAULT_FALLBACK: Usando Remotion Parallax/Dossier.'
+      videoEntry: bestMatch,
+      absoluteVideoPath: bestMatchPath,
+      relativePublicSrc: `video_repository/${bestMatch.filename.replace(/\\/g, '/')}`,
+      recommendedAction: 'USE_MATCHED_VIDEO',
+      reason: `HIT: Clip '${bestMatch.id}' aprovado no banco (Score ${(highestScore * 100).toFixed(1)}% >= ${(MATCH_THRESHOLD * 100).toFixed(0)}%). Cobre domínio, assunto e categoria exata sem tags proibidas.`
     };
   }
 
-  /**
-   * Ingesta um vídeo gerado pelo Firefly diretamente no repositório central e no catálogo
-   */
   public static ingestGeneratedVideo(
     sourceVideoPath: string,
     metadata: {
@@ -237,6 +286,7 @@ export class VideoRepositoryMatcher {
       throw new Error(`SOURCE_VIDEO_NOT_FOUND: ${sourceVideoPath}`);
     }
 
+    const autoIngestEnabled = process.env.HSL_AUTO_INGEST === 'true';
     const filename = path.basename(sourceVideoPath);
     const category = metadata.category || 'industrial';
     const categoryDir = path.join(this.REPO_PATH, category);
@@ -247,23 +297,12 @@ export class VideoRepositoryMatcher {
       fs.copyFileSync(sourceVideoPath, targetPath);
     }
 
-    // Copia também para banco de videos/ se existir
-    const bancoDeVideosDir = path.join(process.cwd(), 'banco de videos');
-    if (fs.existsSync(bancoDeVideosDir)) {
-      const bancoTargetPath = path.join(bancoDeVideosDir, filename);
-      if (!fs.existsSync(bancoTargetPath)) {
-        try {
-          fs.copyFileSync(sourceVideoPath, bancoTargetPath);
-        } catch {}
-      }
-    }
-
     const buf = fs.readFileSync(targetPath);
     const sha = crypto.createHash('sha256').update(buf).digest('hex');
 
-    let durationSeconds = 6.0;
-    let fps = 24;
-    let resolution = '1280x720';
+    let durationSeconds = 5.0;
+    let fps = 30;
+    let resolution = '1920x1080';
 
     try {
       const { spawnSync } = require('child_process');
@@ -298,10 +337,13 @@ export class VideoRepositoryMatcher {
       colorTone: metadata.colorTone || 'Chiaroscuro / Industrial 35mm',
       recommendedMotion: (metadata.recommendedMotion as any) || 'slow_push_in',
       sha256: sha,
+      provenance: 'firefly_ai',
       createdAt: new Date().toISOString()
     };
 
-    this.registerVideo(entry);
+    if (autoIngestEnabled) {
+      this.registerVideo(entry);
+    }
     return entry;
   }
 

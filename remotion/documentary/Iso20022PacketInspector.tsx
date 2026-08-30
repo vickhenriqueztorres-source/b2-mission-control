@@ -2,23 +2,25 @@ import React from 'react';
 import {AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 
 export interface Iso20022PacketInspectorProps {
-  txId?: string;
-  amount?: string;
-  senderCpfMasked?: string;
-  receiverCpfMasked?: string;
-  routingKey?: string;
-  encryptionStandard?: string;
-  latencyMs?: number;
+  pulserCount?: string;
+  measuredVolume?: string;
+  realDeliveredVolume?: string;
+  discrepancyPercent?: string;
+  transducerStatus?: string;
+  sealStatus?: string;
+  accentColor?: string;
+  telemetryColor?: string;
 }
 
 export const Iso20022PacketInspector: React.FC<Iso20022PacketInspectorProps> = ({
-  txId = 'E00038166202608242109S881920',
-  amount = 'R$ 1,00',
-  senderCpfMasked = '***.842.199-**',
-  receiverCpfMasked = '***.103.488-**',
-  routingKey = 'pix@bacen.gov.br (DICT_HASH)',
-  encryptionStandard = 'AES-256-GCM + RSA-4096 (HSM FIPS 140-2)',
-  latencyMs = 1.4
+  pulserCount = '4.000 PULSOS GERADOS (200 p/L)',
+  measuredVolume = '20,000 LITROS (PAINEL DIGITAL)',
+  realDeliveredVolume = '18,400 LITROS (MEDIDOR PADRÃO)',
+  discrepancyPercent = '-1.600 mL (-8,0% // ILEGAL)',
+  transducerStatus = 'PULSE DISCREPANCY DETECTED // CHIP PARASITA 433MHz',
+  sealStatus = 'LACRE INMETRO VIOLADO // PORTARIA 559 METROLOGIA LEGAL',
+  accentColor = '#FF5500',
+  telemetryColor = '#00F0FF'
 }) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
@@ -80,39 +82,39 @@ export const Iso20022PacketInspector: React.FC<Iso20022PacketInspectorProps> = (
           }}
         >
           <div style={{display: 'flex', alignItems: 'center', gap: 12}}>
-            <div style={{width: 10, height: 10, borderRadius: '50%', backgroundColor: '#FF5500'}} />
+            <div style={{width: 10, height: 10, borderRadius: '50%', backgroundColor: accentColor}} />
             <span style={{color: '#F4F4F0', fontWeight: 700, fontSize: 15, letterSpacing: '0.1em'}}>
-              SPI PACKET INSPECTOR — ISO 20022 (pacs.008.001.08)
+              AUDITORIA METROLÓGICA FORENSE // CABEÇOTE COMPUTACIONAL DA BOMBA
             </span>
           </div>
-          <div style={{color: '#00F0FF', fontSize: 13}}>
-            TEMPO DECORRIDO: <strong style={{color: '#FF5500'}}>{latencyMs}ms</strong>
+          <div style={{color: telemetryColor, fontSize: 13}}>
+            STATUS: <strong style={{color: accentColor}}>ANOMALIA DE PULSOS</strong>
           </div>
         </div>
 
-        {/* Corpo do Pacote Hex / Estruturado */}
+        {/* Corpo dos Dados Forenses de Vazão */}
         <div style={{padding: 28, display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 24}}>
-          {/* Lado Esquerdo: Tags Estruturadas */}
+          {/* Lado Esquerdo: Telemetria da Bomba */}
           <div style={{display: 'flex', flexDirection: 'column', gap: 12, fontSize: 14}}>
             <div style={{borderBottom: '1px solid #1E2133', paddingBottom: 8}}>
-              <span style={{color: '#656A8A'}}>EndToEndId:</span>{' '}
-              <span style={{color: '#FF5500', fontWeight: 600}}>{txId}</span>
+              <span style={{color: '#656A8A'}}>Pulsador Óptico:</span>{' '}
+              <span style={{color: accentColor, fontWeight: 600}}>{pulserCount}</span>
             </div>
             <div style={{borderBottom: '1px solid #1E2133', paddingBottom: 8}}>
-              <span style={{color: '#656A8A'}}>IntrBkSttlmAmt (Valor):</span>{' '}
-              <span style={{color: '#00F0FF', fontWeight: 800, fontSize: 18}}>{amount} BRL</span>
+              <span style={{color: '#656A8A'}}>Volume Mostrador:</span>{' '}
+              <span style={{color: telemetryColor, fontWeight: 800, fontSize: 18}}>{measuredVolume}</span>
             </div>
             <div style={{borderBottom: '1px solid #1E2133', paddingBottom: 8}}>
-              <span style={{color: '#656A8A'}}>Dbtr / Cdtr (Partes):</span>{' '}
-              <span style={{color: '#F4F4F0'}}>{senderCpfMasked} ➔ {receiverCpfMasked}</span>
+              <span style={{color: '#656A8A'}}>Volume Real Entregue:</span>{' '}
+              <span style={{color: '#F4F4F0'}}>{realDeliveredVolume}</span>
             </div>
             <div style={{borderBottom: '1px solid #1E2133', paddingBottom: 8}}>
-              <span style={{color: '#656A8A'}}>RmtInf (Chave DICT):</span>{' '}
-              <span style={{color: '#8A8D9F'}}>{routingKey}</span>
+              <span style={{color: '#656A8A'}}>Desvio Volumétrico:</span>{' '}
+              <span style={{color: accentColor, fontWeight: 700}}>{discrepancyPercent}</span>
             </div>
           </div>
 
-          {/* Lado Direito: Criptografia de Hardware */}
+          {/* Lado Direito: Diagnóstico da Placa */}
           <div
             style={{
               background: '#090A10',
@@ -124,14 +126,14 @@ export const Iso20022PacketInspector: React.FC<Iso20022PacketInspectorProps> = (
               color: '#8A8D9F'
             }}
           >
-            <div style={{color: '#00F0FF', fontWeight: 700, marginBottom: 8}}>
-              [HARDWARE HSM STATUS]
+            <div style={{color: telemetryColor, fontWeight: 700, marginBottom: 8}}>
+              [DIAGNÓSTICO ELETRÔNICO // INMETRO]
             </div>
-            <div>PADRÃO: {encryptionStandard}</div>
-            <div>ASSINATURA: ICP-BRASIL / RSASSA-PSS</div>
-            <div>STATUS LIQUIDAÇÃO: <span style={{color: '#00F0FF'}}>ATÔMICA (SEM DUPLICIDADE)</span></div>
-            <div style={{marginTop: 12, color: '#FF5500', fontSize: 11}}>
-              INTEGRIDADE MATEMÁTICA CONFIRMADA (SHA-256)
+            <div>STATUS PULSADOR: {transducerStatus}</div>
+            <div>STATUS DO LACRE: {sealStatus}</div>
+            <div>TOLERÂNCIA LEGAL: <span style={{color: '#00F0FF'}}>MÁXIMO ±0,5% (±100 mL / 20L)</span></div>
+            <div style={{marginTop: 12, color: accentColor, fontSize: 11, fontWeight: 700}}>
+              FRAUDE NA BOMBA CONFIRMADA: 1.600 mL RETIDOS NO TANQUE
             </div>
           </div>
         </div>

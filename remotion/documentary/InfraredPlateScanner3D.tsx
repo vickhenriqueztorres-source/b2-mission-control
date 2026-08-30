@@ -10,22 +10,21 @@ import {
 export interface InfraredPlateScanner3DProps {
   accentColor?: string;
   telemetryColor?: string;
-  detectedPlate?: string;
+  sealNumber?: string;
   confidenceScore?: number;
   durationInFrames?: number;
 }
 
 /**
- * Scanner 3D Infravermelho & OCR Noturno de Placas (O Outro Lado / HSL)
- * Demonstra a captura da câmera estroboscópica a 850nm no escuro total,
- * o flash infravermelho de 1/10.000s, a camada retrorrefletiva da placa Mercosul
- * e o algoritmo OCR de visão computacional.
+ * Scanner 3D Metrológico de Lacres INMETRO (O Outro Lado / HSL)
+ * Demonstra a auditoria forense do lacre físico de chumbo/arame,
+ * a inspeção do cabeçote mecânico e a comprovação de rompimento do lacre regulatório.
  */
 export const InfraredPlateScanner3D: React.FC<InfraredPlateScanner3DProps> = ({
   accentColor = '#FF5500',
   telemetryColor = '#00F0FF',
-  detectedPlate = 'BRA-2E19',
-  confidenceScore = 99.4,
+  sealNumber = 'INMETRO-559-PR',
+  confidenceScore = 99.8,
   durationInFrames = 180
 }) => {
   const frame = useCurrentFrame();
@@ -59,7 +58,7 @@ export const InfraredPlateScanner3D: React.FC<InfraredPlateScanner3DProps> = ({
         color: '#F4F4F0'
       }}
     >
-      {/* 1. Flash Estroboscópico Infravermelho de 1/10.000s */}
+      {/* 1. Flash Estroboscópico de Inspeção */}
       <div
         style={{
           position: 'absolute',
@@ -71,7 +70,7 @@ export const InfraredPlateScanner3D: React.FC<InfraredPlateScanner3DProps> = ({
         }}
       />
 
-      {/* 2. Grid de Visão Noturna Infravermelha (850nm Monocromática) */}
+      {/* 2. Grid Forense de Auditoria */}
       <div
         style={{
           position: 'absolute',
@@ -86,7 +85,7 @@ export const InfraredPlateScanner3D: React.FC<InfraredPlateScanner3DProps> = ({
         }}
       />
 
-      {/* 3. Cabeçalho Técnico / Câmera Estroboscópica */}
+      {/* 3. Cabeçalho Técnico / Auditoria Metrológica */}
       <div style={{position: 'absolute', top: 70, left: 90, zIndex: 30}}>
         <div
           style={{
@@ -109,7 +108,7 @@ export const InfraredPlateScanner3D: React.FC<InfraredPlateScanner3DProps> = ({
               boxShadow: `0 0 12px ${accentColor}`
             }}
           />
-          CÂMERA ESTROBOSCÓPICA INFRAVERMELHA // ESPECTRO 850 NM
+          AUDITORIA METROLÓGICA OFICIAL // PORTARIA 559
         </div>
         <div
           style={{
@@ -120,14 +119,14 @@ export const InfraredPlateScanner3D: React.FC<InfraredPlateScanner3DProps> = ({
             textTransform: 'uppercase'
           }}
         >
-          RECONHECIMENTO AUTOMÁTICO DE PLACAS (ALPR / OCR)
+          INSPEÇÃO DE LACRE MECÂNICO E BLOCO MEDIDOR
         </div>
         <div style={{fontSize: 14, color: '#8A8D9F', letterSpacing: 1.5, marginTop: 4}}>
-          OBTURADOR GLOBAL: 1/10.000S // VELOCIDADE MÁXIMA ALVO: 250 KM/H NA ESCURIDÃO
+          VERIFICAÇÃO DE LACRE OFICIAL // INTEGRIDADE DO BLOCO DE PISTÕES E PULSADOR
         </div>
       </div>
 
-      {/* 4. Mockup 3D da Placa com Bounding Box e Extração de Caracteres */}
+      {/* 4. Card 3D do Lacre Oficial com Bounding Box */}
       <div
         style={{
           position: 'absolute',
@@ -147,11 +146,11 @@ export const InfraredPlateScanner3D: React.FC<InfraredPlateScanner3DProps> = ({
           overflow: 'hidden'
         }}
       >
-        {/* Faixa Superior Mercosul */}
+        {/* Faixa Superior Inmetro */}
         <div
           style={{
             height: 44,
-            backgroundColor: '#002244',
+            backgroundColor: '#1E2235',
             borderTopLeftRadius: 6,
             borderTopRightRadius: 6,
             display: 'flex',
@@ -163,24 +162,24 @@ export const InfraredPlateScanner3D: React.FC<InfraredPlateScanner3DProps> = ({
             color: '#FFFFFF'
           }}
         >
-          <span>BRASIL</span>
-          <span style={{fontSize: 10, color: '#00F0FF'}}>MERCOSUL RETRORREFLETIVO</span>
+          <span>INMETRO METROLOGIA LEGAL</span>
+          <span style={{fontSize: 10, color: accentColor}}>LACRE DE CHUMBO E ARAME</span>
         </div>
 
-        {/* Caracteres da Placa em Alto Contraste Retrorrefletivo */}
+        {/* Identificação do Lacre Forense */}
         <div
           style={{
             fontFamily: "'Inter', sans-serif",
-            fontSize: 68,
+            fontSize: 48,
             fontWeight: 900,
-            letterSpacing: 12,
+            letterSpacing: 6,
             color: '#F4F4F0',
             textAlign: 'center',
             margin: '10px 0',
             textShadow: '0 0 20px rgba(255,255,255,0.6)'
           }}
         >
-          {detectedPlate}
+          {sealNumber}
         </div>
 
         {/* Linha de Scanner Laser Y */}
@@ -196,12 +195,12 @@ export const InfraredPlateScanner3D: React.FC<InfraredPlateScanner3DProps> = ({
           }}
         />
 
-        {/* Bounding Box Algorítmico de IA */}
+        {/* Bounding Box Algorítmico de Violação */}
         <div
           style={{
             position: 'absolute',
             inset: 10,
-            border: `2px solid ${telemetryColor}`,
+            border: `2px solid ${accentColor}`,
             opacity: ocrProgress,
             pointerEvents: 'none'
           }}
@@ -214,11 +213,11 @@ export const InfraredPlateScanner3D: React.FC<InfraredPlateScanner3DProps> = ({
               backgroundColor: '#060709',
               padding: '0 8px',
               fontSize: 11,
-              color: telemetryColor,
+              color: accentColor,
               fontWeight: 700
             }}
           >
-            CONFIDÊNCIA OCR: {confidenceScore}%
+            VIOLAÇÃO DETECTADA: CONFIDÊNCIA {confidenceScore}%
           </div>
         </div>
       </div>
@@ -232,48 +231,48 @@ export const InfraredPlateScanner3D: React.FC<InfraredPlateScanner3DProps> = ({
           transform: 'translate(0, -50%)',
           width: 380,
           backgroundColor: 'rgba(13, 14, 21, 0.85)',
-          border: '1px solid rgba(0, 240, 255, 0.3)',
+          border: '1px solid rgba(255, 85, 0, 0.3)',
           borderRadius: 12,
           padding: 24,
           backdropFilter: 'blur(16px)',
           boxShadow: '0 20px 40px rgba(0,0,0,0.8)'
         }}
       >
-        <div style={{fontSize: 12, color: telemetryColor, letterSpacing: 2, marginBottom: 12}}>
-          PACOTE DE EVIDÊNCIA DIGITAL
+        <div style={{fontSize: 12, color: accentColor, letterSpacing: 2, marginBottom: 12}}>
+          PACOTE DE EVIDÊNCIA FORENSE
         </div>
 
         <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: 10}}>
-          <span style={{color: '#8A8D9F'}}>PLACA IDENTIFICADA:</span>
-          <span style={{color: '#F4F4F0', fontWeight: 800}}>{detectedPlate}</span>
+          <span style={{color: '#8A8D9F'}}>EQUIPAMENTO:</span>
+          <span style={{color: '#F4F4F0', fontWeight: 800}}>BOMBA DE GASOLINA BICO 04</span>
         </div>
         <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: 10}}>
-          <span style={{color: '#8A8D9F'}}>EXPOSIÇÃO:</span>
-          <span style={{color: accentColor, fontWeight: 700}}>0,000100 s (100 µs)</span>
+          <span style={{color: '#8A8D9F'}}>INTEGRIDADE DO LACRE:</span>
+          <span style={{color: accentColor, fontWeight: 700}}>ROMPIDO / REVIOLADO</span>
         </div>
         <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: 10}}>
-          <span style={{color: '#8A8D9F'}}>ILUMINAÇÃO:</span>
-          <span style={{color: '#F4F4F0', fontWeight: 700}}>LED INFRAVERMELHO 850nm</span>
+          <span style={{color: '#8A8D9F'}}>DESVIO MEDIDO:</span>
+          <span style={{color: accentColor, fontWeight: 700}}>-1.600 mL / 20 LITROS</span>
         </div>
         <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: 10}}>
-          <span style={{color: '#8A8D9F'}}>ASSINATURA DIGITAL:</span>
-          <span style={{color: telemetryColor, fontWeight: 700, fontSize: 11}}>SHA-256 / ICP-BRASIL</span>
+          <span style={{color: '#8A8D9F'}}>ENQUADRAMENTO:</span>
+          <span style={{color: telemetryColor, fontWeight: 700, fontSize: 11}}>LEI 8.137 / ART. 7º</span>
         </div>
 
         <div
           style={{
             marginTop: 18,
             padding: 12,
-            backgroundColor: 'rgba(0, 255, 102, 0.1)',
-            border: '1px solid #00FF66',
+            backgroundColor: 'rgba(255, 85, 0, 0.15)',
+            border: '1px solid #FF5500',
             borderRadius: 6,
-            color: '#00FF66',
+            color: '#FF5500',
             fontSize: 12,
             fontWeight: 800,
             textAlign: 'center'
           }}
         >
-          ✓ EVIDÊNCIA FÍSICA E ÓTICA HOMOLOGADA
+          ⚠️ INTERDIÇÃO CAUTELAR DA BOMBA
         </div>
       </div>
     </AbsoluteFill>

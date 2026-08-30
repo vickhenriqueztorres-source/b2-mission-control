@@ -1,0 +1,625 @@
+{
+  "version": "1.0.0",
+  "name": "O Outro Lado - Master Image Repository & Knowledge Hub",
+  "description": "Banco central de imagens cinematograficas 35mm e blueprints documentais do canal para reutilizacao permanente.",
+  "topics": [
+    "radares_transito",
+    "sistema_bancario_pix",
+    "cabos_submarinos_internet",
+    "distribuicao_eletrica_itaipu",
+    "logistica_correios_portos",
+    "refino_petroleo_combustiveis",
+    "tratamento_agua_cantareira"
+  ],
+  "totalImages": 38,
+  "images": [
+    {
+      "id": "OOL-EP02-CABOS_SC_001",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_001.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_001",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_001"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "7d06557c134b7b88eb31d2f46a8ca5769b6bf0a7a3dc00226577fc367ba4fc4e",
+      "createdAt": "2026-08-28T05:31:58.831Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_002",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_002.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_002",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_002"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "a8e1e40407a7d334f7c48b28e3bd5455b9febecff527d504a7552a51725947ec",
+      "createdAt": "2026-08-28T05:31:58.846Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_023",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_023.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_023",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_023"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "ef801206d6da679cda4f340f73b2d2827c9ff0c5a9f319299b99a2340a467b0f",
+      "createdAt": "2026-08-28T05:31:59.339Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_019",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_019.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_019",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_019"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "1a8d5733d51ad22c236087f55f418b0a7b8b3476ff6e42b2f6fd0209b2f982e4",
+      "createdAt": "2026-08-28T05:31:59.267Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_010",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_010.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_010",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_010"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "f9cbdc5fa50852fec252212bcde09653d6c433a8d2e688460189f6f548bf16d2",
+      "createdAt": "2026-08-28T05:31:59.017Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_026",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_026.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_026",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_026"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "12d1fcb778590405a6d1d9d1f8802c0790d2e6883ffc3447bed054946c4b6b99",
+      "createdAt": "2026-08-28T05:31:59.399Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_007",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_007.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_007",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_007"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "770800d8e32324f06ca17fd262078417a1261428ae1a71eb254d2389cd8ce8ed",
+      "createdAt": "2026-08-28T05:31:58.955Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_008",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_008.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_008",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_008"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "73078c845cbf719e33aac160813a2b1642b2975d27e1e8593567bc830e2a21f3",
+      "createdAt": "2026-08-28T05:31:58.972Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_009",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_009.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_009",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_009"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "811e736d2cde08141c9414cb6af6dfd13271fbad13baee6262949a75b99f0a21",
+      "createdAt": "2026-08-28T05:31:58.995Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_046",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_046.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_046",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_046"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "4025e528cf65ba95ecccb6d24a09988fd2fd899765459afd9154baa1303a8c32",
+      "createdAt": "2026-08-28T05:31:59.863Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_022",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_022.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_022",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_022"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "4cbb2967632573ad13be959f1f17cda94935ed8021d6811bcb72ce16a79fe30e",
+      "createdAt": "2026-08-28T05:31:59.319Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_048",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_048.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_048",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_048"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "57c4dffef98d45592f0b4af6539f6b0ef7d5f011a7b9597aa1ae1fccb1bfa0b5",
+      "createdAt": "2026-08-28T05:31:59.903Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_044",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_044.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_044",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_044"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "45b03df18184ae0cb7aa5722c9d39caafe63fc9518d44b7d49bba96dcda6276e",
+      "createdAt": "2026-08-28T05:31:59.820Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_015",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_015.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_015",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_015"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "7fc5e7bc89d453dd8bcf46f6e2bccf60a301f208a3cc2e36074f2f5b67bf40b6",
+      "createdAt": "2026-08-28T05:31:59.114Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_036",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_036.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_036",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_036"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "4d4d9f0332397dfdb9910e12d8913b334422d2496793f5ac1e34cabad181a446",
+      "createdAt": "2026-08-28T05:31:59.633Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_017",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_017.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_017",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_017"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "95137a386798f230c83ea7fb273a12a71f7dea063b56bea6a2c18b993eb98948",
+      "createdAt": "2026-08-28T05:31:59.170Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_018",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_018.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_018",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_018"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "539ecafff0e4f457ff031afdde9b5abe279092c6dda20d1b586fcdd0f3a3874b",
+      "createdAt": "2026-08-28T05:31:59.212Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_020",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_020.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_020",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_020"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "2ab044674a62ce88555b2c0825980af669777a1eadc762699c8218e3b931b9dc",
+      "createdAt": "2026-08-28T05:31:59.285Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_021",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_021.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_021",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_021"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "9ea031a07246b8360d2c619ef628bf25c1cae411070f2452ff34cff878c37086",
+      "createdAt": "2026-08-28T05:31:59.303Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_024",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_024.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_024",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_024"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "ebb4e60814e811f6977947f0832833524ac81f554a1a29dab09162433f0149a7",
+      "createdAt": "2026-08-28T05:31:59.358Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_025",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_025.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_025",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_025"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "0c00750393d477228e656d5a28a77a8059c1377bd74654a1d0a66de088cd7896",
+      "createdAt": "2026-08-28T05:31:59.379Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_027",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_027.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_027",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_027"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "b03072fd0e41c18492ef0d16226fed9774f815de6bfe251200f458d5a8bee107",
+      "createdAt": "2026-08-28T05:31:59.417Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_029",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_029.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_029",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_029"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "d044f333dabf1408fe7788aee7cc05fa6d74ef436f2a42a7ea84c56f00fae976",
+      "createdAt": "2026-08-28T05:31:59.455Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_045",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_045.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_045",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_045"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "e7b2fd04805adc51340aabfcd5d515bb63c4bfadc5dbf0ad8ce94e9f61e12309",
+      "createdAt": "2026-08-28T05:31:59.840Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_032",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_032.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_032",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_032"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "4472289d5e49ce3d176cfcdd1f369d9d28fdf4d1e0065c32007db2b51e1e0b10",
+      "createdAt": "2026-08-28T05:31:59.523Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_033",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_033.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_033",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_033"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "8ce7934e6057ddbb6f7c6d44612d9c717d19ef42699a4366da8cd2eb15a08704",
+      "createdAt": "2026-08-28T05:31:59.540Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_034",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_034.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_034",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_034"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "8ad98123440c4778a3d8fcf5da139d454602483ab93b9c440cdf81e217d28062",
+      "createdAt": "2026-08-28T05:31:59.563Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_035",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_035.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_035",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_035"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "cadf3204720c1d28cfb8d2af571b87e070051b4f734c318e16e5b6ac683e2deb",
+      "createdAt": "2026-08-28T05:31:59.583Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_037",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_037.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_037",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_037"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "87c93c5d297c2e2afe631558629048f8f53f85518dd0d4a1fe31230a7c6da4aa",
+      "createdAt": "2026-08-28T05:31:59.651Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_038",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_038.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_038",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_038"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "9071aa4d2c4183cfc772d70432ec137146bf34dc11bc8eef6224911a1992a39e",
+      "createdAt": "2026-08-28T05:31:59.669Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_039",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_039.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_039",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_039"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "af2c64e5e52bc3b77b6849f45aede6799759a3a206c4bd6a6d1b098cf1699155",
+      "createdAt": "2026-08-28T05:31:59.685Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_040",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_040.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_040",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_040"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "5e6207df331c5217277cc5deac81221e42e440980b127160f9877888e8a1ecb1",
+      "createdAt": "2026-08-28T05:31:59.719Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_041",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_041.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_041",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_041"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "30550b0e3a1a05e3fadac132d9a202b63eedc043359d0497e70b04b4e71d8947",
+      "createdAt": "2026-08-28T05:31:59.739Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_042",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_042.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_042",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_042"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "de5c912bbdf8eca96379cae80a84b0ef8de7533503fa4e2a9e02c3afffbf089f",
+      "createdAt": "2026-08-28T05:31:59.781Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_043",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_043.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_043",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_043"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "611a681bf486a73e3285f259e20b8362e62502ba4931371fefa8f5f08b7d7127",
+      "createdAt": "2026-08-28T05:31:59.797Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_047",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_047.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_047",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_047"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "135f906a3a5e98fb94950c1f4e342e299c95186d020e407b88f61deba6acc9a4",
+      "createdAt": "2026-08-28T05:31:59.885Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_049",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_049.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_049",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_049"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "93c9ed659a6f2e1ae7b2ca9e684aeefca3cd6bd5deae7a13dc86ea8f6bddfaed",
+      "createdAt": "2026-08-28T05:31:59.920Z"
+    },
+    {
+      "id": "OOL-EP02-CABOS_SC_050",
+      "filename": "episodes_archive/OOL-EP02-CABOS/SC_050.png",
+      "topic": "cabos_submarinos_internet",
+      "episodeSource": "OOL-EP02-CABOS",
+      "sceneId": "SC_050",
+      "prompt": "Denis Villeneuve 35mm Industrial X-Ray",
+      "tags": [
+        "35mm",
+        "industrial",
+        "sc_050"
+      ],
+      "resolution": "1920x1080",
+      "sha256": "cc917810c11432f5f5ee715d701bc067b9c490b27abadaede8c5be9113acddbb",
+      "createdAt": "2026-08-28T05:31:59.944Z"
+    }
+  ]
+}

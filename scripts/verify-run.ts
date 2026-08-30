@@ -1,14 +1,18 @@
 import { PipelineContractGate } from '../pipeline/pipelineContractGate';
 
-function parseArgs(): { runId: string; scope: 'PRE_RENDER' | 'PRE_MUX' | 'FULL_PACKAGE'; heal: boolean } {
+function parseArgs(): { runId: string; scope: 'PRE_RENDER' | 'PRE_MUX' | 'FULL_PACKAGE'; heal: boolean; contractPath?: string } {
   const args = process.argv.slice(2);
   let runId = 'OOL-EP02-CABOS';
   let scope: 'PRE_RENDER' | 'PRE_MUX' | 'FULL_PACKAGE' = 'PRE_RENDER';
   let heal = false;
+  let contractPath: string | undefined;
 
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--runId' && args[i + 1]) {
       runId = args[i + 1];
+      i++;
+    } else if (args[i] === '--contract' && args[i + 1]) {
+      contractPath = args[i + 1];
       i++;
     } else if (args[i] === '--pre-render') {
       scope = 'PRE_RENDER';
@@ -21,15 +25,16 @@ function parseArgs(): { runId: string; scope: 'PRE_RENDER' | 'PRE_MUX' | 'FULL_P
     }
   }
 
-  return { runId, scope, heal };
+  return { runId, scope, heal, contractPath };
 }
 
 async function main(): Promise<void> {
-  const { runId, scope, heal } = parseArgs();
+  const { runId, scope, heal, contractPath } = parseArgs();
 
   let report = PipelineContractGate.auditRun({
     runId,
-    stageScope: scope
+    stageScope: scope,
+    contractPath
   });
 
   if (!report.passed && heal) {

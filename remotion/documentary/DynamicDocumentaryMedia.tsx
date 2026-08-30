@@ -12,6 +12,7 @@ const availableMedia = availableMediaJson as Record<
 export interface DynamicDocumentaryMediaProps {
   sceneId: string;
   mediaPath?: string;
+  imagePath?: string;
   kenBurns?: 'crash_push_in' | 'slow_push_in' | 'dramatic_pull_out' | 'pan_right' | 'pan_left' | 'cinematic_drift';
   durationInFrames: number;
   opacity?: number;
@@ -24,6 +25,7 @@ export interface DynamicDocumentaryMediaProps {
 export const DynamicDocumentaryMedia: React.FC<DynamicDocumentaryMediaProps> = ({
   sceneId,
   mediaPath,
+  imagePath,
   kenBurns = 'slow_push_in',
   durationInFrames,
   opacity = 1.0,
@@ -32,11 +34,10 @@ export const DynamicDocumentaryMedia: React.FC<DynamicDocumentaryMediaProps> = (
   isDossierTake = false,
   dossierTag
 }) => {
-  const sceneMeta = availableMedia[sceneId];
-  const isDossier = isDossierTake || (sceneMeta && sceneMeta.isDossier);
-  const hasVideo = !isDossier && (sceneMeta ? sceneMeta.hasVideo : true);
-  const videoSrc = mediaPath || `editorial/execution/${sceneId}/firefly_take.mp4`;
-  const imageSrc = `editorial/execution/${sceneId}/firefly_start_frame.png`;
+  const isDossier = isDossierTake;
+  const hasVideo = !isDossier;
+  const videoSrc = mediaPath || `episodes/gasolina-adulterada/takes/${sceneId}.mp4`;
+  const imageSrc = imagePath || `episodes/gasolina-adulterada/takes/${sceneId}.png`;
 
   // 1. Cenas do tipo KEYFRAME_DOSSIER: Motion Graphics 2.5D com scanline e HUD
   if (isDossier) {
@@ -61,6 +62,7 @@ export const DynamicDocumentaryMedia: React.FC<DynamicDocumentaryMediaProps> = (
       <AbsoluteFill style={{ backgroundColor: '#060709', overflow: 'hidden' }}>
         <OffthreadVideo
           src={staticFile(videoSrc)}
+          volume={0}
           style={{
             width: '100%',
             height: '100%',

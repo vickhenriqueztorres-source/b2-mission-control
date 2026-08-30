@@ -23,9 +23,11 @@ export interface CinematicShadowHookResult {
 
 export async function runCinematicDirectionShadowHook(
   input: Readonly<CinematicShadowHookInput>
-): Promise<CinematicShadowHookResult> {
+): Promise<CinematicShadowRunResult> {
   const flags = input.flags || getHslCinematicFlags();
-  if (!flags.shouldRunShadow) return {executed: false, success: true};
+  if (!flags.pipelineV1Enabled && !flags.shouldRunShadow) {
+    throw new Error('CINEMATIC_DIRECTION_REQUIRED: Cinematic direction (Beat, Shot, and Continuity directors) must run for episode production. Set HSL_CINEMATIC_PIPELINE_V1=on.');
+  }
 
   const runner = input.runner || new (await import('./cinematicDirectionShadowRunner')).CinematicDirectionShadowRunner();
   try {
@@ -34,13 +36,14 @@ export async function runCinematicDirectionShadowHook(
       editorialPackagePath: input.editorialPackagePath,
       expectedEpisodeId: input.expectedEpisodeId
     });
-    return {executed: true, success: true, result};
+    return result;
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     Logger.error(
       'CinematicDirectionShadowHook',
-      `Shadow failure recorded without changing production truth: ${message}`
+      `FATAL: Cinematic Direction gate failed. Blocking production: ${message}`
     );
-    return {executed: true, success: false, error: message};
+    throw new Error(`CINEMATIC_DIRECTION_GATE_FAILED: ${message}`);
   }
 }
+

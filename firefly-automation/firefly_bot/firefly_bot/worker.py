@@ -574,9 +574,8 @@ class Worker:
         await self._configure_resolution(job.resolution)
         await self._configure_aspect_ratio(job.aspect_ratio)
         await self._configure_audio(job.generate_audio)
-        if not job.image_path:
-            raise RuntimeError(f"job_id={job.id} não possui image_path para image-to-video")
-        await self._upload_first_frame(job.image_path)
+        if job.image_path:
+            await self._upload_first_frame(job.image_path)
 
         await dismiss_overlays(page, human_input, self.logger, job.id)
         prompt_input = locator_for(page, "prompt_input")
@@ -932,11 +931,10 @@ class Worker:
             )
             return False
         if status in {408, 429}:
-            # Capacidade e rate limit precisam de um circuit breaker real. Repetir
-            # em 30 s apenas devolve a mesma carga ao provider.
-            backoff_seconds = min(600, 300 * max(1, job.attempts))
+            # Capacidade e rate limit com backoff ágil para automação
+            backoff_seconds = min(60, 15 * max(1, job.attempts))
         else:
-            backoff_seconds = min(180, 60 * max(1, job.attempts))
+            backoff_seconds = min(60, 10 * max(1, job.attempts))
         reason = (
             f"provider capacity HTTP {status}; retry {job.attempts + 1}/"
             f"{capacity_max_attempts} após {backoff_seconds}s"
@@ -1260,13 +1258,29 @@ class Worker:
         )
 
     async def _configure_aspect_ratio(self, aspect: str) -> None:
-        if aspect in {"16:9", "Widescreen (16:9)"}:
+        if aspect in {"16:9", "Widescreen (16:9)", "widescreen"}:
             option_key = "aspect_ratio_widescreen"
-            expected_values = {'{"height":720,"width":1280}', '{"height":1080,"width":1920}', "16:9", "Widescreen (16:9)"}
+            expected_values = {
+                '{"height":720,"width":1280}',
+                '{"height":1080,"width":1920}',
+                "16:9",
+                "Widescreen (16:9)",
+                "widescreen",
+                "widescreen (16:9)",
+                "firefly-menu-item-widescreen"
+            }
             description = "aspect ratio Widescreen 16:9"
-        elif aspect in {"9:16", "Vertical (9:16)"}:
+        elif aspect in {"9:16", "Vertical (9:16)", "vertical"}:
             option_key = "aspect_ratio_vertical"
-            expected_values = {'{"height":1280,"width":720}', '{"height":1920,"width":1080}', "9:16", "Vertical (9:16)"}
+            expected_values = {
+                '{"height":1280,"width":720}',
+                '{"height":1920,"width":1080}',
+                "9:16",
+                "Vertical (9:16)",
+                "vertical",
+                "vertical (9:16)",
+                "firefly-menu-item-vertical"
+            }
             description = "aspect ratio Vertical 9:16"
         else:
             raise ValueError(f"aspect ratio ainda não suportado pelo fluxo v1: {aspect}")
@@ -1583,6 +1597,7 @@ class Worker:
     async def _poll_generation(self, job: Job, state_reader: StateReader) -> ScreenObservation:
         started = asyncio.get_running_loop().time()
         consecutive_unknown = 0
+        next_reload_after = 120.0  # Primeira tentativa de refresh aos 120 segundos
         while True:
             if hasattr(state_reader, "page") and self._human is not None:
                 await dismiss_overlays(state_reader.page, self._human, self.logger, job.id)
@@ -1616,9 +1631,6 @@ class Worker:
                     consecutive=consecutive_unknown,
                     elapsed_seconds=round(elapsed, 1),
                 )
-                # O Firefly pode remover o texto de progresso enquanto move o
-                # resultado para o histórico. Três leituras (~9 s) eram curtas
-                # demais e transformavam uma transição normal em falha.
                 if consecutive_unknown >= max(self.config.UNKNOWN_THRESHOLD, 20):
                     return observation
                 if elapsed >= self.config.generation_budget_seconds:
@@ -1637,6 +1649,23 @@ class Worker:
                 state=observation.state.value,
                 elapsed_seconds=round(elapsed, 1),
             )
+            # Se a renderização demorar mais de 120s, atualiza a página para destravar o evento de vídeo pronto
+            if elapsed >= next_reload_after and hasattr(state_reader, "page") and state_reader.page is not None:
+                event(
+                    self.logger,
+                    logging.INFO,
+                    "generation_poll_refreshing_page",
+                    job_id=job.id,
+                    elapsed_seconds=round(elapsed, 1),
+                )
+                try:
+                    await state_reader.page.reload(wait_until="domcontentloaded", timeout=self.config.nav_timeout_ms)
+                    await asyncio.sleep(2.0)
+                    if self._human is not None:
+                        await dismiss_overlays(state_reader.page, self._human, self.logger, job.id)
+                except Exception as reload_err:
+                    event(self.logger, logging.WARNING, "generation_poll_refresh_failed", error=str(reload_err))
+                next_reload_after = elapsed + 60.0  # Próximo reload a cada 60s
             if elapsed >= self.config.generation_budget_seconds:
                 raise PatchrightTimeoutError("orçamento de geração excedido")
             # Polling explícito de estado, não uma espera cega por UI.

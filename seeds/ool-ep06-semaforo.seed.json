@@ -1,0 +1,732 @@
+{
+  "episode_id": "OOL-EP06-SEMAFORO",
+  "title": "O Outro Lado do Semaforo: Quem Decide Quando Voce Para",
+  "format": "SYSTEM_ANATOMY",
+  "target_duration_minutes": 8.4,
+  "central_question": "O que acontece dentro da cidade nos segundos em que um carro fica parado no sinal vermelho?",
+  "thesis": "O semaforo nao e apenas uma lampada obedecendo a um relogio. Ele e a interface visivel de um sistema de decisao urbana que distribui tempo entre carros, pedestres, onibus, ambulancias e gargalos fisicos em cruzamentos reais.",
+  "object_or_flow": "Um carro parado no vermelho enquanto o ciclo semaforico mede demanda, protege conflitos, libera fases e redistribui filas pela avenida",
+  "system_being_analyzed": "Controladores semaforicos, grupos focais, sensores de presenca, lacos virtuais, centrais de controle de trafego, planos de tempo e prioridade operacional",
+  "main_constraint": "A cidade precisa repartir segundos finitos entre fluxos concorrentes sem criar conflito, atraso excessivo, fila em cadeia, risco ao pedestre ou bloqueio de veiculos prioritarios.",
+  "primary_consequence": "Quando o tempo e mal distribuido ou um cruzamento falha, a fila nao fica presa apenas naquele ponto: ela se propaga pela rede, consome combustivel, atrasa entregas, prende ambulancias e muda a experiencia inteira da cidade.",
+  "hero_visual": "Cruzamento urbano noturno em asfalto molhado, luz vermelha refletida sobre carros parados, gabinete controlador aberto em raio-x, rotas laranja mostrando filas e telemetria ciano revelando sensores e fases.",
+  "causal_flow": [
+    "aproximacao_do_carro",
+    "linha_de_retencao",
+    "sensor_ou_plano_fixo",
+    "controlador_semaforico",
+    "fases_e_estagios",
+    "grupo_focal",
+    "travessia_de_pedestres",
+    "corredor_de_onibus",
+    "central_de_operacao",
+    "onda_verde",
+    "falha_ou_prioridade",
+    "fila_propagada"
+  ],
+  "system_interfaces": [
+    "faixa_de_rolamento",
+    "linha_de_retencao",
+    "botoeira_de_pedestre",
+    "camera_de_deteccao",
+    "laco_virtual",
+    "controlador_de_campo",
+    "gabinete_semaforico",
+    "grupo_focal",
+    "fibra_otica",
+    "central_de_monitoramento",
+    "sistema_de_prioridade",
+    "equipe_de_manutencao"
+  ],
+  "original_interpretation": "O motorista acha que perdeu quarenta segundos para uma luz vermelha, mas na pratica a cidade acabou de comprar seguranca em um cruzamento e empurrar custo para alguma fila.",
+  "counterargument_or_limitation": "A arquitetura semaforica muda por municipio, tipo de via, contrato, tecnologia instalada e politica operacional. Este episodio explica uma cadeia urbana representativa, usando o Brasil como contexto principal.",
+  "audience_strategy": {
+    "primary_audience": "Brasileiros que dirigem, pegam onibus, atravessam ruas ou ficam presos em cruzamentos todos os dias",
+    "awareness_level": 1,
+    "sophistication_level": 2,
+    "what_they_know": "Eles sabem que o sinal vermelho atrasa, que alguns cruzamentos parecem injustos e que uma falha de semaforo bagunca tudo.",
+    "knowledge_gap": "Eles nao veem o controlador, os planos de tempo, sensores, prioridades e gargalos que transformam segundos em fluxo urbano.",
+    "mass_desire": "Revelar quem decide o tempo perdido no sinal vermelho.",
+    "human_conflict": "Um motorista parado acha que esta sozinho esperando, enquanto uma ambulancia, um corredor de onibus, uma travessia e uma fila lateral competem pelos mesmos segundos.",
+    "thumbnail_text": "QUEM DECIDE?",
+    "title_candidates": [
+      "O Outro Lado do Semaforo: Quem Decide Quando Voce Para",
+      "A Maquina Invisivel Por Tras do Sinal Vermelho"
+    ],
+    "next_video_question": "O que acontece quando voce aperta o botao da faixa de pedestre?"
+  },
+  "sources": [
+    {
+      "source_id": "SENATRAN-MBST-V-SEMAFORICA-2023",
+      "category": "primary",
+      "url": "https://www.gov.br/transportes/pt-br/assuntos/transito/arquivos-senatran/docs/Sinalizacao_semaforicavol_V_alterado.pdf",
+      "accessed_at": "2026-08-30",
+      "claims": [
+        "O Manual Brasileiro de Sinalizacao de Transito Volume V trata de sinalizacao semaforica, criterios de implantacao, controle semaforico e elementos de programacao.",
+        "O manual descreve a sinalizacao semaforica como controle do direito de passagem de veiculos e pedestres em movimentos conflitantes.",
+        "O manual diferencia programacao de tempo fixo, controle atuado e sinalizacao semaforica em rede."
+      ],
+      "limitations": [
+        "O manual define principios e criterios nacionais, mas nao substitui projetos especificos de cada municipio."
+      ]
+    },
+    {
+      "source_id": "CET-SP-REVITALIZACAO-SEMAFORICA-2026",
+      "category": "primary",
+      "url": "https://www.cetsp.com.br/consultas/seguranca-e-mobilidade/revitalizacao-semaforica.aspx",
+      "accessed_at": "2026-08-30",
+      "claims": [
+        "A CET de Sao Paulo apresenta a revitalizacao semaforica como parte do monitoramento de transito e transporte coletivo.",
+        "O projeto CIMU e descrito como caminho para integrar dados e informacoes entre centrais de operacao da SPTrans e da CET."
+      ],
+      "limitations": [
+        "A pagina descreve o programa institucional de Sao Paulo e nao representa todos os municipios brasileiros."
+      ]
+    },
+    {
+      "source_id": "PBH-SEMAFOROS-INTELIGENTES-ONIBUS-2026",
+      "category": "primary",
+      "url": "https://prefeitura.pbh.gov.br/noticias/bh-inicia-projeto-piloto-de-semaforos-inteligentes-para-onibus",
+      "accessed_at": "2026-08-30",
+      "claims": [
+        "Belo Horizonte iniciou projeto piloto de semaforos inteligentes para onibus em 2026.",
+        "O sistema descrito usa cameras em intersecoes para criar laco virtual e ajustar programacao semaforica, ampliando ou antecipando o verde para favorecer o transporte coletivo."
+      ],
+      "limitations": [
+        "Trata-se de um piloto local e nao de uma regra universal de todos os cruzamentos."
+      ]
+    },
+    {
+      "source_id": "FHWA-SIGNAL-TIMING-MANUAL",
+      "category": "technical",
+      "url": "https://ops.fhwa.dot.gov/publications/fhwahop08024/",
+      "accessed_at": "2026-08-30",
+      "claims": [
+        "O manual da FHWA trata de fundamentos de temporizacao semaforica, fases, ciclos, coordenacao e operacao em rede.",
+        "A temporizacao de sinais depende de demanda, seguranca, geometria, progressoes e objetivos operacionais."
+      ],
+      "limitations": [
+        "E uma referencia tecnica dos Estados Unidos; os principios sao uteis, mas a aplicacao legal brasileira segue normas locais."
+      ]
+    },
+    {
+      "source_id": "NACTO-TRANSIT-SIGNAL-PRIORITY",
+      "category": "independent",
+      "url": "https://nacto.org/publication/transit-street-design-guide/intersections/signals-operations/transit-signal-priority/",
+      "accessed_at": "2026-08-30",
+      "claims": [
+        "A NACTO descreve prioridade semaforica para transporte coletivo como estrategia operacional para reduzir atraso e melhorar confiabilidade.",
+        "Sistemas de prioridade podem estender ou antecipar o verde em intersecoes selecionadas."
+      ],
+      "limitations": [
+        "A NACTO e uma entidade tecnica de desenho urbano, nao um operador brasileiro de transito."
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "scene_id": "OOL6_001",
+      "chapter_id": "HOOK",
+      "chapter_title": "A Luz Que Decide",
+      "narrative_function": "introduce_puzzle",
+      "voiceover": "Voce freia no vermelho e sente que perdeu quarenta segundos. Mas aquela luz nao apareceu sozinha. A cidade acabou de escolher quem passa, quem espera e onde a fila vai nascer.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Cruzamento urbano noturno sob chuva, carro parado na linha de retencao, reflexo vermelho no asfalto molhado, gabinete semaforico escuro ao fundo",
+      "claim_source_ids": [],
+      "visual_function": "scale"
+    },
+    {
+      "scene_id": "OOL6_002",
+      "chapter_id": "HOOK",
+      "chapter_title": "A Luz Que Decide",
+      "narrative_function": "false_simplicity",
+      "voiceover": "De longe, o semaforo parece uma lampada colorida. De perto, ele e uma decisao tecnica repetida milhares de vezes por dia, com consequencias em cada esquina.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Close cinematografico de grupo focal semaforico vermelho com gotas de chuva e cabos internos sugeridos em raio-x discreto",
+      "claim_source_ids": [
+        "SENATRAN-MBST-V-SEMAFORICA-2023"
+      ],
+      "visual_function": "invisible_process"
+    },
+    {
+      "scene_id": "OOL6_003",
+      "chapter_id": "HOOK",
+      "chapter_title": "A Luz Que Decide",
+      "narrative_function": "object_lock",
+      "voiceover": "Este episodio segue um unico carro parado. Nao para reclamar do transito, mas para descobrir que tipo de maquina precisa funcionar antes de um cruzamento nao virar disputa.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Camera baixa atras de um carro parado, linha de retencao molhada em primeiro plano, fluxos laranja e ciano aparecendo sob o asfalto",
+      "claim_source_ids": [],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_004",
+      "chapter_id": "HOOK",
+      "chapter_title": "A Luz Que Decide",
+      "narrative_function": "stakes",
+      "voiceover": "Porque o semaforo nao controla apenas carros. Ele controla travessias, onibus, ambulancias, combustivel queimado, entregas atrasadas e minutos que nunca voltam.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Montagem em uma avenida escura mostrando carro, onibus, pedestre e ambulancia como camadas de fluxo em um mesmo cruzamento",
+      "claim_source_ids": [],
+      "visual_function": "scale"
+    },
+    {
+      "scene_id": "OOL6_005",
+      "chapter_id": "HOOK",
+      "chapter_title": "A Luz Que Decide",
+      "narrative_function": "open_question",
+      "voiceover": "A pergunta e simples: quem decide quando voce para?",
+      "visual_mode": "remotion",
+      "visual_subject": "Question status beat: empty carbon black intersection, red signal suspended, one orange line cutting the stop line, no embedded readable text",
+      "claim_source_ids": [],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_006",
+      "chapter_id": "CH01",
+      "chapter_title": "O Cruzamento Como Maquina",
+      "narrative_function": "intersection_anatomy",
+      "voiceover": "O cruzamento e uma maquina de conflitos. Um movimento corta o outro. Um pedestre atravessa onde um carro quer virar. Sem regra, cada segundo vira negociacao no improviso.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Vista superior de cruzamento molhado com setas de fluxo discretas, movimentos conflitantes marcados por linhas laranja pontuais",
+      "claim_source_ids": [
+        "SENATRAN-MBST-V-SEMAFORICA-2023"
+      ],
+      "visual_function": "scale"
+    },
+    {
+      "scene_id": "OOL6_007",
+      "chapter_id": "CH01",
+      "chapter_title": "O Cruzamento Como Maquina",
+      "narrative_function": "right_of_way",
+      "voiceover": "A funcao basica do sinal e distribuir direito de passagem. Ele nao cria espaco novo. Ele so decide qual fluxo pode usar o espaco que ja existe.",
+      "visual_mode": "remotion",
+      "visual_subject": "Conflict metric chart over aerial intersection: two vehicle flows competing for the same conflict area, deterministic route overlay and exact phase status",
+      "claim_source_ids": [
+        "SENATRAN-MBST-V-SEMAFORICA-2023"
+      ],
+      "visual_function": "invisible_process"
+    },
+    {
+      "scene_id": "OOL6_008",
+      "chapter_id": "CH01",
+      "chapter_title": "O Cruzamento Como Maquina",
+      "narrative_function": "stop_line",
+      "voiceover": "A linha de retencao e o limite fisico dessa decisao. O carro para ali porque alguns metros adiante existe uma zona onde trajetorias incompatíveis se cruzam.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Macro 35mm da linha de retencao branca no asfalto molhado, pneus parados e zona de conflito brilhando em ciano ao fundo",
+      "claim_source_ids": [
+        "SENATRAN-MBST-V-SEMAFORICA-2023"
+      ],
+      "visual_function": "invisible_process"
+    },
+    {
+      "scene_id": "OOL6_009",
+      "chapter_id": "CH01",
+      "chapter_title": "O Cruzamento Como Maquina",
+      "narrative_function": "phase_intro",
+      "voiceover": "Dentro do controle semaforico, cada permissao de movimento vira uma fase. Uma fase libera um conjunto de direcoes e bloqueia as outras para impedir conflito.",
+      "visual_mode": "remotion",
+      "visual_subject": "Phase timing chart for north-south and east-west movements, exact stage status over dark intersection blueprint",
+      "claim_source_ids": [
+        "FHWA-SIGNAL-TIMING-MANUAL"
+      ],
+      "visual_function": "invisible_process"
+    },
+    {
+      "scene_id": "OOL6_010",
+      "chapter_id": "CH01",
+      "chapter_title": "O Cruzamento Como Maquina",
+      "narrative_function": "cycle_intro",
+      "voiceover": "A soma dessas fases forma um ciclo. Parece pequeno, mas um ciclo de noventa segundos repetido o dia inteiro vira uma politica urbana em loop.",
+      "visual_mode": "remotion",
+      "visual_subject": "Cycle clock metric: industrial signal controller beside circular timing dial, exact phase timeline and diagnostic status",
+      "claim_source_ids": [
+        "FHWA-SIGNAL-TIMING-MANUAL"
+      ],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_011",
+      "chapter_id": "CH02",
+      "chapter_title": "O Cerebro No Gabinete",
+      "narrative_function": "controller_reveal",
+      "voiceover": "A lampada obedece a uma caixa. No gabinete metalico da calçada, um controlador guarda planos, troca estagios e envia comandos eletricos para cada grupo focal.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Gabinete semaforico aberto na calcada a noite, placas eletronicas industriais, cabos organizados e luz ciano de diagnostico",
+      "claim_source_ids": [
+        "SENATRAN-MBST-V-SEMAFORICA-2023"
+      ],
+      "visual_function": "invisible_process"
+    },
+    {
+      "scene_id": "OOL6_012",
+      "chapter_id": "CH02",
+      "chapter_title": "O Cerebro No Gabinete",
+      "narrative_function": "fixed_time",
+      "voiceover": "Em muitos lugares, o plano e de tempo fixo. A maquina nao pergunta se voce chegou. Ela segue uma programacao criada para aquele horario e aquela demanda esperada.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Controlador antigo em gabinete de aço, relogio digital interno, cabos saindo para grupos focais em uma avenida vazia",
+      "claim_source_ids": [
+        "SENATRAN-MBST-V-SEMAFORICA-2023"
+      ],
+      "visual_function": "scale"
+    },
+    {
+      "scene_id": "OOL6_013",
+      "chapter_id": "CH02",
+      "chapter_title": "O Cerebro No Gabinete",
+      "narrative_function": "empty_cycle",
+      "voiceover": "E por isso voce as vezes espera no vermelho sem ninguem passando. O plano esta protegendo um fluxo que, naquele ciclo especifico, simplesmente nao apareceu.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Avenida transversal vazia recebendo verde enquanto o carro principal espera no vermelho sob chuva fina",
+      "claim_source_ids": [
+        "SENATRAN-MBST-V-SEMAFORICA-2023"
+      ],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_014",
+      "chapter_id": "CH02",
+      "chapter_title": "O Cerebro No Gabinete",
+      "narrative_function": "actuated_control",
+      "voiceover": "No controle atuado, sensores mudam a historia. A presenca de veiculos ou pedestres pode estender, encurtar ou chamar uma fase que nao precisaria acontecer vazia.",
+      "visual_mode": "remotion",
+      "visual_subject": "Sensor status diagram: asphalt detector, camera input, exact call timing and controller response metric",
+      "claim_source_ids": [
+        "SENATRAN-MBST-V-SEMAFORICA-2023",
+        "FHWA-SIGNAL-TIMING-MANUAL"
+      ],
+      "visual_function": "invisible_process"
+    },
+    {
+      "scene_id": "OOL6_015",
+      "chapter_id": "CH02",
+      "chapter_title": "O Cerebro No Gabinete",
+      "narrative_function": "controller_failure",
+      "voiceover": "Quando esse gabinete falha, a cidade descobre que o semaforo era infraestrutura critica. Um cruzamento apagado obriga milhares de pessoas a negociar prioridade no olho.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Cruzamento com semaforo apagado, reflexos de farois cruzando no asfalto, gabinete com alerta laranja discreto",
+      "claim_source_ids": [],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_016",
+      "chapter_id": "CH03",
+      "chapter_title": "Os Sensores Que A Rua Esconde",
+      "narrative_function": "sensor_intro",
+      "voiceover": "Para a cidade reagir, ela precisa enxergar sem olhos humanos. Essa visao pode vir de sensores no asfalto, botoeiras, cameras, radares, laços virtuais ou dados de frota.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Cruzamento em raio-x com sensores enterrados, camera no poste, botoeira de pedestre e linhas ciano indo ao controlador",
+      "claim_source_ids": [
+        "PBH-SEMAFOROS-INTELIGENTES-ONIBUS-2026"
+      ],
+      "visual_function": "scale"
+    },
+    {
+      "scene_id": "OOL6_017",
+      "chapter_id": "CH03",
+      "chapter_title": "Os Sensores Que A Rua Esconde",
+      "narrative_function": "virtual_loop",
+      "voiceover": "Em Belo Horizonte, um piloto usa cameras para criar um laco virtual. O sistema reconhece o onibus antes do cruzamento e ajusta a programacao para favorecer o transporte coletivo.",
+      "visual_mode": "remotion",
+      "visual_subject": "Virtual loop data record: bus approach zone, camera detection field, exact distance window and controller status",
+      "claim_source_ids": [
+        "PBH-SEMAFOROS-INTELIGENTES-ONIBUS-2026"
+      ],
+      "visual_function": "invisible_process"
+    },
+    {
+      "scene_id": "OOL6_018",
+      "chapter_id": "CH03",
+      "chapter_title": "Os Sensores Que A Rua Esconde",
+      "narrative_function": "pedestrian_call",
+      "voiceover": "A botoeira do pedestre tambem e uma entrada do sistema. O botao nao abre a rua instantaneamente. Ele pede que o controlador encaixe uma travessia segura no ciclo.",
+      "visual_mode": "remotion",
+      "visual_subject": "Pedestrian call status diagram: button press, controller queue, crossing phase timeline and exact wait state",
+      "claim_source_ids": [
+        "SENATRAN-MBST-V-SEMAFORICA-2023"
+      ],
+      "visual_function": "invisible_process"
+    },
+    {
+      "scene_id": "OOL6_019",
+      "chapter_id": "CH03",
+      "chapter_title": "Os Sensores Que A Rua Esconde",
+      "narrative_function": "data_arrives_late",
+      "voiceover": "Mas dado atrasado e quase tao ruim quanto dado nenhum. Se o sensor detecta tarde, o verde pode chegar quando a fila ja bloqueou a proxima esquina.",
+      "visual_mode": "remotion",
+      "visual_subject": "Delayed data timeline: sensor call arrives after queue spillback, exact latency metric and orange risk threshold",
+      "claim_source_ids": [
+        "FHWA-SIGNAL-TIMING-MANUAL"
+      ],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_020",
+      "chapter_id": "CH03",
+      "chapter_title": "Os Sensores Que A Rua Esconde",
+      "narrative_function": "sensor_blindness",
+      "voiceover": "E quando o sensor suja, quebra ou fica mal calibrado, o cruzamento volta a ser quase cego. A lampada continua acendendo, mas a decisao perde contato com a rua.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Camera urbana coberta por sujeira e chuva, sensor no asfalto rachado, controlador recebendo sinal fraco em painel ciano",
+      "claim_source_ids": [],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_021",
+      "chapter_id": "CH04",
+      "chapter_title": "A Avenida Como Rede",
+      "narrative_function": "network_intro",
+      "voiceover": "Um semaforo isolado resolve um cruzamento. Mas uma avenida precisa de rede. Se cada sinal decide sozinho, a fila que sai de um vermelho encontra outro vermelho logo adiante.",
+      "visual_mode": "remotion",
+      "visual_subject": "Signal network map: long avenue, nodes, route progression, cycle status and exact coordination timeline",
+      "claim_source_ids": [
+        "FHWA-SIGNAL-TIMING-MANUAL"
+      ],
+      "visual_function": "scale"
+    },
+    {
+      "scene_id": "OOL6_022",
+      "chapter_id": "CH04",
+      "chapter_title": "A Avenida Como Rede",
+      "narrative_function": "coordination",
+      "voiceover": "A coordenacao tenta transformar verdes separados em uma progressao. O objetivo e fazer um pelotao de carros atravessar varios cruzamentos com menos paradas.",
+      "visual_mode": "remotion",
+      "visual_subject": "Network route map metric of coordinated avenue signals, green wave timeline crossing cyan nodes and exact offset status",
+      "claim_source_ids": [
+        "FHWA-SIGNAL-TIMING-MANUAL"
+      ],
+      "visual_function": "invisible_process"
+    },
+    {
+      "scene_id": "OOL6_023",
+      "chapter_id": "CH04",
+      "chapter_title": "A Avenida Como Rede",
+      "narrative_function": "offset",
+      "voiceover": "O segredo dessa progressao e o deslocamento de tempo. Um sinal abre alguns segundos depois do anterior, calculando quanto o pelotao demora para chegar.",
+      "visual_mode": "remotion",
+      "visual_subject": "Offset timeline chart for three consecutive intersections, exact seconds between openings and vehicle platoon position",
+      "claim_source_ids": [
+        "FHWA-SIGNAL-TIMING-MANUAL"
+      ],
+      "visual_function": "invisible_process"
+    },
+    {
+      "scene_id": "OOL6_024",
+      "chapter_id": "CH04",
+      "chapter_title": "A Avenida Como Rede",
+      "narrative_function": "spillback",
+      "voiceover": "Quando a fila cresce alem do espaco disponivel, nasce o bloqueio de retorno. Um cruzamento enche o outro, e a cidade comeca a travar para tras.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Fila de carros bloqueando duas intersecoes consecutivas, fluxo laranja retornando pela avenida em efeito domino",
+      "claim_source_ids": [
+        "FHWA-SIGNAL-TIMING-MANUAL"
+      ],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_025",
+      "chapter_id": "CH04",
+      "chapter_title": "A Avenida Como Rede",
+      "narrative_function": "red_time_cost",
+      "voiceover": "Por isso segundos pequenos ficam grandes. Cinco segundos a menos de verde em um ponto podem virar centenas de metros de fila no ponto seguinte.",
+      "visual_mode": "remotion",
+      "visual_subject": "Comparison chart metric: five seconds removed from green time and queue length increasing in meters across an avenue",
+      "claim_source_ids": [],
+      "visual_function": "scale"
+    },
+    {
+      "scene_id": "OOL6_026",
+      "chapter_id": "CH05",
+      "chapter_title": "Prioridade e Poder",
+      "narrative_function": "priority_intro",
+      "voiceover": "O sinal tambem revela uma escolha politica. Quando o sistema da prioridade a um onibus, ele esta dizendo que quarenta pessoas dentro dele valem mais que quarenta carros parados separados.",
+      "visual_mode": "remotion",
+      "visual_subject": "Priority comparison chart: bus passenger capacity versus individual cars, green allocation metric and delay status",
+      "claim_source_ids": [
+        "NACTO-TRANSIT-SIGNAL-PRIORITY",
+        "PBH-SEMAFOROS-INTELIGENTES-ONIBUS-2026"
+      ],
+      "visual_function": "scale"
+    },
+    {
+      "scene_id": "OOL6_027",
+      "chapter_id": "CH05",
+      "chapter_title": "Prioridade e Poder",
+      "narrative_function": "green_extension",
+      "voiceover": "A prioridade pode estender o verde que ja existe ou antecipar uma abertura. Parece cortesia, mas e uma tecnica para reduzir atraso acumulado no transporte coletivo.",
+      "visual_mode": "remotion",
+      "visual_subject": "Transit priority timing chart: bus arrival, green extension window, controller status and exact phase adjustment",
+      "claim_source_ids": [
+        "NACTO-TRANSIT-SIGNAL-PRIORITY",
+        "PBH-SEMAFOROS-INTELIGENTES-ONIBUS-2026"
+      ],
+      "visual_function": "invisible_process"
+    },
+    {
+      "scene_id": "OOL6_028",
+      "chapter_id": "CH05",
+      "chapter_title": "Prioridade e Poder",
+      "narrative_function": "ambulance_path",
+      "voiceover": "Com uma ambulancia, a decisao fica ainda mais sensivel. O sistema precisa abrir caminho sem criar uma colisao nova no cruzamento seguinte.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Ambulancia se aproximando com luzes refletidas no asfalto, rota laranja abrindo em cruzamentos sucessivos com bloqueios ciano de seguranca",
+      "claim_source_ids": [],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_029",
+      "chapter_id": "CH05",
+      "chapter_title": "Prioridade e Poder",
+      "narrative_function": "pedestrian_tradeoff",
+      "voiceover": "O pedestre entra no mesmo conflito. Dar mais tempo para carros pode encurtar a janela de travessia. Dar mais tempo para pedestres pode formar fila de veiculos.",
+      "visual_mode": "remotion",
+      "visual_subject": "Pedestrian crossing timeline: countdown phase, clearance time, conflict zone and exact safety status",
+      "claim_source_ids": [
+        "SENATRAN-MBST-V-SEMAFORICA-2023"
+      ],
+      "visual_function": "invisible_process"
+    },
+    {
+      "scene_id": "OOL6_030",
+      "chapter_id": "CH05",
+      "chapter_title": "Prioridade e Poder",
+      "narrative_function": "fairness_reframe",
+      "voiceover": "E aqui esta o ponto: um semaforo nunca e neutro. Ele transforma tempo publico em prioridade operacional. Alguem ganha fluidez; alguem absorve espera.",
+      "visual_mode": "remotion",
+      "visual_subject": "Priority allocation chart: bus, cars and pedestrian crossing competing for one green time window, exact status",
+      "claim_source_ids": [],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_031",
+      "chapter_id": "CH06",
+      "chapter_title": "Quando A Decisao Falha",
+      "narrative_function": "failure_intro",
+      "voiceover": "O gargalo real aparece quando a decisao chega errada. Verde demais para uma rua vazia. Verde de menos para uma avenida cheia. Ou nenhum comando quando a energia cai.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Controlador semaforico com erro em painel interno, cruzamento sob chuva formando filas assimetricas",
+      "claim_source_ids": [],
+      "visual_function": "scale"
+    },
+    {
+      "scene_id": "OOL6_032",
+      "chapter_id": "CH06",
+      "chapter_title": "Quando A Decisao Falha",
+      "narrative_function": "rain_factor",
+      "voiceover": "A chuva muda tudo. Carros aceleram menos, freiam antes, pedestres atravessam mais devagar e a capacidade real da via cai sem que o asfalto tenha encolhido.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Chuva intensa em cruzamento, pneus levantando agua, pedestres atravessando devagar e luzes refletidas no asfalto",
+      "claim_source_ids": [
+        "FHWA-SIGNAL-TIMING-MANUAL"
+      ],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_033",
+      "chapter_id": "CH06",
+      "chapter_title": "Quando A Decisao Falha",
+      "narrative_function": "power_dependency",
+      "voiceover": "A energia tambem e parte do sistema. Sem alimentacao, a decisao desaparece da esquina e volta para agentes, placas, prudencia e improviso.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Semaforo apagado em avenida escura, equipe de manutencao abrindo gabinete e gerador ao fundo com brilho laranja",
+      "claim_source_ids": [],
+      "visual_function": "invisible_process"
+    },
+    {
+      "scene_id": "OOL6_034",
+      "chapter_id": "CH06",
+      "chapter_title": "Quando A Decisao Falha",
+      "narrative_function": "communication_failure",
+      "voiceover": "Se a comunicacao com a central cai, o cruzamento pode continuar operando localmente. Mas ele perde parte da consciencia da rede ao redor.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Fibra otica urbana interrompida em caixa subterranea, controlador local ainda ativo mas mapa ciano da rede ficando escuro",
+      "claim_source_ids": [
+        "CET-SP-REVITALIZACAO-SEMAFORICA-2026"
+      ],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_035",
+      "chapter_id": "CH06",
+      "chapter_title": "Quando A Decisao Falha",
+      "narrative_function": "maintenance",
+      "voiceover": "Por tras de cada luz funcionando existe manutencao: lampadas, controladores, nobreaks, cabeamento, comunicacao, botoeiras e sensores que envelhecem na rua.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Tecnico noturno revisando gabinete semaforico, cabos, bateria e modulo eletronico sob luz de vapor de sodio",
+      "claim_source_ids": [],
+      "visual_function": "scale"
+    },
+    {
+      "scene_id": "OOL6_036",
+      "chapter_id": "CH06",
+      "chapter_title": "Quando A Decisao Falha",
+      "narrative_function": "central_reveal",
+      "voiceover": "Em cidades grandes, a esquina pode estar conectada a uma central. Ali, operadores observam mapas, incidentes, obras, corredores de onibus e falhas abertas.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Centro de controle de trafego escuro com paineis monumentais, mapas urbanos em ciano e alertas laranja pontuais",
+      "claim_source_ids": [
+        "CET-SP-REVITALIZACAO-SEMAFORICA-2026"
+      ],
+      "visual_function": "scale"
+    },
+    {
+      "scene_id": "OOL6_037",
+      "chapter_id": "CH06",
+      "chapter_title": "Quando A Decisao Falha",
+      "narrative_function": "integrated_city",
+      "voiceover": "A integracao entre transito e transporte coletivo muda o jogo. O semaforo deixa de ser uma ilha e passa a participar de uma sala de situacao urbana.",
+      "visual_mode": "remotion",
+      "visual_subject": "Integrated mobility data map: bus lines, intersections, incidents, source status and coordination timeline",
+      "claim_source_ids": [
+        "CET-SP-REVITALIZACAO-SEMAFORICA-2026"
+      ],
+      "visual_function": "invisible_process"
+    },
+    {
+      "scene_id": "OOL6_038",
+      "chapter_id": "CH06",
+      "chapter_title": "Quando A Decisao Falha",
+      "narrative_function": "human_cost",
+      "voiceover": "O custo aparece no corpo. O motorista se irrita. O passageiro perde a conexao. A ambulancia desacelera. O comercio recebe tarde. A cidade cobra em minutos.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Sequencia documental faceless de volante parado, passageiro olhando relogio, ambulancia atras de fila e entrega presa no cruzamento",
+      "claim_source_ids": [],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_039",
+      "chapter_id": "CH06",
+      "chapter_title": "Quando A Decisao Falha",
+      "narrative_function": "network_failure",
+      "voiceover": "Transito nao quebra como uma maquina unica. Ele degrada. Primeiro um cruzamento. Depois uma avenida. Depois rotas alternativas que tambem ja estavam perto do limite.",
+      "visual_mode": "remotion",
+      "visual_subject": "Network failure map chart: congestion propagation from one orange node to secondary cyan routes, exact status timeline",
+      "claim_source_ids": [],
+      "visual_function": "scale"
+    },
+    {
+      "scene_id": "OOL6_040",
+      "chapter_id": "CH06",
+      "chapter_title": "Quando A Decisao Falha",
+      "narrative_function": "constraint_payoff",
+      "voiceover": "O gargalo, portanto, nao e a cor vermelha. O gargalo e a quantidade finita de segundos que uma esquina consegue distribuir antes da fila invadir o resto da rede.",
+      "visual_mode": "remotion",
+      "visual_subject": "Finite seconds capacity chart: signal cycle clock inside metal controller cabinet, exact threshold and time allocation",
+      "claim_source_ids": [],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_041",
+      "chapter_id": "CONCLUSION",
+      "chapter_title": "O Veredito Da Esquina",
+      "narrative_function": "full_chain",
+      "voiceover": "Agora a cadeia esta visivel. O carro chega. A linha segura. O sensor detecta. O controlador decide. A fase abre. A fila anda. A proxima esquina recebe a consequencia.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Corte completo de cruzamento mostrando carro, sensor, controlador, grupo focal, pedestre e proxima esquina conectados por rotas laranja e ciano",
+      "claim_source_ids": [],
+      "visual_function": "scale"
+    },
+    {
+      "scene_id": "OOL6_042",
+      "chapter_id": "CONCLUSION",
+      "chapter_title": "O Veredito Da Esquina",
+      "narrative_function": "not_lamp",
+      "voiceover": "A lampada e apenas a parte que a cidade deixa voce ver. A decisao real mora no tempo, nos sensores, no gabinete e nas prioridades programadas.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Grupo focal vermelho em primeiro plano, gabinete e rede subterranea revelados em profundidade cinematografica",
+      "claim_source_ids": [],
+      "visual_function": "invisible_process"
+    },
+    {
+      "scene_id": "OOL6_043",
+      "chapter_id": "CONCLUSION",
+      "chapter_title": "O Veredito Da Esquina",
+      "narrative_function": "reframe",
+      "voiceover": "Da proxima vez que voce parar no vermelho, talvez a pergunta mude. Nao e so por que eu parei. E quem este cruzamento esta protegendo agora?",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Motorista faceless visto apenas pelas maos no volante, luz vermelha refletida no vidro e faixa de pedestre vazia a frente",
+      "claim_source_ids": [],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_044",
+      "chapter_id": "CONCLUSION",
+      "chapter_title": "O Veredito Da Esquina",
+      "narrative_function": "city_as_processor",
+      "voiceover": "Uma cidade processa movimento com concreto, fio, regra e atraso. O semaforo e o processador lento, visivel e inevitavel dessa operacao.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Cidade noturna vista de cima como placa de circuito urbano, cruzamentos brilhando como processadores discretos",
+      "claim_source_ids": [],
+      "visual_function": "scale"
+    },
+    {
+      "scene_id": "OOL6_045",
+      "chapter_id": "CONCLUSION",
+      "chapter_title": "O Veredito Da Esquina",
+      "narrative_function": "final_verdict",
+      "voiceover": "Segundos no semaforo viram quilometros de transito porque a rua nao e um lugar isolado. Ela e uma rede de decisoes encostadas umas nas outras.",
+      "visual_mode": "remotion",
+      "visual_subject": "Verdict comparison chart: seconds at a red signal become kilometers of queue through connected intersections",
+      "claim_source_ids": [],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_046",
+      "chapter_id": "CONCLUSION",
+      "chapter_title": "O Veredito Da Esquina",
+      "narrative_function": "brand_bridge",
+      "voiceover": "A verdade do sistema aparece quando seus rastros sao colocados lado a lado: a linha no chao, a caixa na calcada, o sensor invisivel e a fila que cresceu atras de voce.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Quatro evidencias alinhadas: linha de retencao, gabinete, sensor em raio-x e fila de carros em perspectiva industrial",
+      "claim_source_ids": [],
+      "visual_function": "scale"
+    },
+    {
+      "scene_id": "OOL6_047",
+      "chapter_id": "CONCLUSION",
+      "chapter_title": "O Veredito Da Esquina",
+      "narrative_function": "daily_action",
+      "voiceover": "Isso e o que acontece depois que voce aperta o freio e espera.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Pe no pedal de freio, luz vermelha no painel do carro, cruzamento molhado no para-brisa sem mostrar rosto",
+      "claim_source_ids": [],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_048",
+      "chapter_id": "CONCLUSION",
+      "chapter_title": "O Veredito Da Esquina",
+      "narrative_function": "next_hook",
+      "voiceover": "No proximo sistema, a pergunta desce para a faixa: quando voce aperta o botao do pedestre, quem realmente escuta?",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Botoeira de pedestre iluminada em ciano em uma esquina vazia, sinal vermelho ao fundo e chuva fina",
+      "claim_source_ids": [],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_049",
+      "chapter_id": "CONCLUSION",
+      "chapter_title": "O Veredito Da Esquina",
+      "narrative_function": "cta",
+      "voiceover": "O Outro Lado investiga as maquinas que sustentam a rotina antes que elas aparecam como problema.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Mesa de investigacao industrial com fotografias de cruzamento, gabinete semaforico e linhas de telemetria conectando evidencias",
+      "claim_source_ids": [],
+      "visual_function": "transition"
+    },
+    {
+      "scene_id": "OOL6_050",
+      "chapter_id": "CONCLUSION",
+      "chapter_title": "O Veredito Da Esquina",
+      "narrative_function": "brand_signature",
+      "voiceover": "Investigar. Revelar. Compreender.",
+      "visual_mode": "generated_ai",
+      "visual_subject": "Simbolo split core industrial fisico em metal escuro dividido por laser laranja, anel tecnico ciano de auditoria em fundo carbon black",
+      "claim_source_ids": [],
+      "visual_function": "transition"
+    }
+  ],
+  "human_approval_status": "APPROVED"
+}

@@ -6,12 +6,22 @@
   "scripts": {
     "build": "tsc",
     "test": "ts-node tests/integration.test.ts && ts-node tests/hsl_bridge.test.ts && ts-node tests/kling_provider_prompt_adapter.test.ts && ts-node tests/hsl_episode_gate.test.ts && ts-node tests/cinematic_shadow.test.ts && ts-node tests/narrative_beat_director.test.ts && ts-node tests/cinematic_shot_director.test.ts && ts-node tests/continuity_director.test.ts && ts-node tests/hsl_reference_attention.test.ts && ts-node tests/hsl_eugene_rag.test.ts && ts-node tests/hsl_motion_design.test.ts && ts-node tests/hsl_veo_motion.test.ts && ts-node tests/hsl_visual_identity.test.ts && ts-node tests/hsl_publication_packaging.test.ts && ts-node tests/hsl_video2_preproduction.test.ts && ts-node tests/hsl_video3_preproduction.test.ts && ts-node tests/hsl_video4_preproduction.test.ts && ts-node tests/hsl_full_pipeline.test.ts",
+    "test:contract": "ts-node tests/episode_contract.test.ts",
+    "test:gate": "ts-node tests/pipeline_contract_gate.test.ts",
     "hsl:chatgpt-generate": "ts-node scripts/runChatgptImageBot.ts",
     "hsl:pipeline-dry-run": "ts-node scripts/hslPipelineDryRun.ts",
     "hsl:video-example-finish": "ts-node scripts/hslVideoExampleFinish.ts",
     "hsl:episode-1-pix": "ts-node scripts/buildEpisode1Pix.ts",
     "test:pipeline-1min": "ts-node scripts/runFullPipelineTest1Min.ts",
     "produce:gasolina": "ts-node scripts/produceGasolinaEpisode.ts",
+    "bank:inventory-gasolina": "ts-node scripts/inventoryBankAgainstEpisode.ts",
+    "firefly:lote1-gasolina": "ts-node scripts/dispatchFireflyBatch.ts",
+    "firefly:lote2-gasolina": "ts-node scripts/dispatchFireflyBatch.ts --lote=2",
+    "narration:gasolina": "ts-node scripts/dispatchNarrationBatch.ts",
+    "audio:gasolina": "ts-node scripts/dispatchAudioBed.ts",
+    "render:gasolina": "ts-node scripts/renderGasolinaMaster.ts",
+    "render:gasolina:preview": "ts-node scripts/renderGasolinaMaster.ts --preview",
+    "e2e:gasolina": "ts-node scripts/e2eGasolinaDebug.ts",
     "render:pipeline-1min": "remotion render remotion/index.ts EpisodeTest1Min runs/OOL-TEST-1MIN/final_master.mp4",
     "verify:run": "ts-node scripts/verify-run.ts",
     "gate:pre-render": "ts-node scripts/verify-run.ts --pre-render",
@@ -135,7 +145,8 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "remotion": "^4.0.513",
-    "ws": "^8.18.0"
+    "ws": "^8.18.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.12",

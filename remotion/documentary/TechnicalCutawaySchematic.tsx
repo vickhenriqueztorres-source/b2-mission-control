@@ -15,15 +15,15 @@ export interface TechnicalCutawaySchematicProps {
  * Esquema técnico 3D com corte transversal (Cutaway / X-Ray) e chamada HUD ancorada.
  */
 export const TechnicalCutawaySchematic: React.FC<TechnicalCutawaySchematicProps> = ({
-  systemTitle = 'BOEING E-4B // SISTEMA NACIONAL DE COMANDO AEROTRANSPORTADO',
-  compartmentName = 'CENTRO DE COMUNICAÇÕES & TRAILING WIRE VLF',
+  systemTitle = 'BLOCO MEDIDOR HIDRÁULICO // 4 PISTÕES DE DESLOCAMENTO POSITIVO',
+  compartmentName = 'CÂMARA DE MEDIÇÃO VOLUMÉTRICA & ACOPLAMENTO MAGNÉTICO',
   compartmentSpecs = [
-    'ANTENA VLF: 8.000 METROS (5 MILHAS)',
-    'POTÊNCIA DE EMISSÃO: 200 KW',
-    'FREQUÊNCIA: 17-30 KHZ (PENETRAÇÃO OCEÂNICA)',
-    'ENLACE: SUBMARINOS BALÍSTICOS CLASSE OHIO'
+    'DESLOCAMENTO: 0,500 L POR CICLO COMPLETO',
+    'RESOLUÇÃO: 200 PULSOS POR LITRO (DISCO ÓPTICO)',
+    'TOLERÂNCIA INMETRO: ±0,5% (PORTARIA 559)',
+    'ACIONAMENTO: ACOPLAMENTO MAGNÉTICO BLINDADO'
   ],
-  schematicTag = 'CORTE TRANSVERSAL SEC-04B',
+  schematicTag = 'CORTE TRANSVERSAL METROLÓGICO // INMETRO',
   accentColor = '#FF5500',
   telemetryColor = '#00F0FF'
 }) => {

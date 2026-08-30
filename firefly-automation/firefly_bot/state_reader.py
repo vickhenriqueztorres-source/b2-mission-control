@@ -259,7 +259,16 @@ class StateReader:
         elif payload.get("downloadVisible") and not payload.get("downloadDisabled"):
             state = ScreenState.RESULT_READY
             selectors_found.append("dom_fallback:result_ready_download_button")
-        elif "gerando vídeo" in body_text or "generating video" in body_text:
+        elif (
+            "gerando vídeo" in body_text
+            or "generating video" in body_text
+            or "gerando..." in body_text
+            or "generating..." in body_text
+            or "gerando" in body_text
+            or "generating" in body_text
+            or "cancelar geração" in body_text
+            or "cancel generation" in body_text
+        ):
             state = ScreenState.STILL_GENERATING
             selectors_found.append("dom_fallback:active_generation_text")
         elif (

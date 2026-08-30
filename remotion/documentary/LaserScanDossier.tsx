@@ -16,11 +16,11 @@ export interface LaserScanDossierProps {
  * varrendo a página e destacando o número ou cláusula crítica.
  */
 export const LaserScanDossier: React.FC<LaserScanDossierProps> = ({
-  documentTitle = 'RELATÓRIO DE RISCO SISTÊMICO // BANCO CENTRAL DO BRASIL',
-  documentSource = 'FONTE: BACEN / DEORF / PROT-88219',
-  criticalClause = 'FLUXO FINANCEIRO NÃO-RASTREÁVEL ESTIMADO EM R$ 14,2 BILHÕES',
-  clauseContext = 'Conforme apurado nos registros de liquidação em tempo real, a vulnerabilidade estrutural identificada permite a injeção de liquidez sintética antes da conciliação final do CIP.',
-  stampText = 'CONFIDENCIAL // INVESTIGAÇÃO',
+  documentTitle = 'AUTO DE INFRAÇÃO METROLÓGICA // FRAUDE NA MEDIÇÃO VOLUMÉTRICA',
+  documentSource = 'FONTE: INMETRO / IPEM / PROCESSO ADMINISTRATIVO SANÇÃO',
+  criticalClause = 'DESVIO VOLUMÉTRICO DE -8,0% DETECTADO EM BICO ELETRÔNICO MEDIDOR',
+  clauseContext = 'A perícia constatou a adulteração do circuito eletrônico do cabeçote da bomba de combustível, alterando a contagem de pulsos por litro em desfavor do consumidor sem alterar o visor digital.',
+  stampText = 'PERÍCIA CONCLUÍDA // AUTUAÇÃO',
   accentColor = '#FF5500'
 }) => {
   const frame = useCurrentFrame();

@@ -3,6 +3,8 @@ import path from 'path';
 import crypto from 'crypto';
 import { spawnSync } from 'child_process';
 import { RunManifest } from './runManifest';
+import { EpisodeContract, parseEpisodeContract } from '../contracts/episodeContract';
+import { SceneVisualContract } from '../contracts/sceneVisualContract';
 import {
   HSL_BYTE_CONSTRAINTS,
   HSL_MAX_AUDIO_VIDEO_DESYNC_SECONDS,
@@ -26,10 +28,15 @@ export interface RunContractValidationOptions {
   publicDir?: string;
   stageScope?: 'PRE_RENDER' | 'PRE_MUX' | 'FULL_PACKAGE';
   allowedTimingDeltaSeconds?: number;
+  targetDurationMinutes?: number;
+  contract?: EpisodeContract;
+  contractPath?: string;
+  sceneContracts?: SceneVisualContract[];
 }
 
 export interface RunValidationReport {
   runId: string;
+  contract?: EpisodeContract;
   totalScenesExpected: number;
   validStartFrames: number;
   validVideoTakes: number;
@@ -38,6 +45,7 @@ export interface RunValidationReport {
   timelineDurationSeconds: number;
   timingDeltaSeconds: number;
   packagingValid: boolean;
+  degradedScenes: Array<{ sceneId: string; reason?: string }>;
   failures: BeatValidationFailure[];
   passed: boolean;
 }
@@ -126,9 +134,56 @@ export class PipelineContractGate {
         timelineDurationSeconds: 0,
         timingDeltaSeconds: 0,
         packagingValid: false,
+        degradedScenes: [],
         failures,
         passed: false
       };
+    }
+
+    // Resolução antecipada do Contrato de Episódio (EpisodeContract)
+    let contract: EpisodeContract | undefined = options.contract;
+    if (!contract && options.contractPath) {
+      try {
+        contract = parseEpisodeContract(options.contractPath);
+      } catch (err: any) {
+        failures.push({
+          sceneId: 'ROOT',
+          shotId: 'CONTRACT_PARSE',
+          index: 0,
+          assetType: 'TIMING',
+          expectedPath: options.contractPath,
+          reason: err.message
+        });
+      }
+    }
+
+    if (!contract) {
+      // Auto-descoberta de contratos de episódio em locais canônicos
+      const candidatePaths = [
+        path.join(runDir, 'episode.contract.json'),
+        path.join(runDir, 'episode.json'),
+        path.join(process.cwd(), 'contracts', 'episodes', `${options.runId}.episode.json`),
+        path.join(process.cwd(), 'contracts', 'episodes', `${options.runId.toLowerCase()}.episode.json`)
+      ];
+      if (options.runId.includes('GASOLINA')) {
+        candidatePaths.push(path.join(process.cwd(), 'contracts', 'episodes', 'gasolina-adulterada.episode.json'));
+      }
+
+      const foundContractPath = candidatePaths.find((p) => fs.existsSync(p));
+      if (foundContractPath) {
+        try {
+          contract = parseEpisodeContract(foundContractPath);
+        } catch (err: any) {
+          failures.push({
+            sceneId: 'ROOT',
+            shotId: 'CONTRACT_PARSE',
+            index: 0,
+            assetType: 'TIMING',
+            expectedPath: foundContractPath,
+            reason: err.message
+          });
+        }
+      }
     }
 
     const editPackagePath = path.join(runDir, 'editorial', 'execution', 'documentary-edit-package.json');
@@ -188,10 +243,39 @@ export class PipelineContractGate {
     let validStartFrames = 0;
     let validVideoTakes = 0;
 
+    const contractMap = new Map<string, SceneVisualContract>();
+    if (options.sceneContracts && options.sceneContracts.length > 0) {
+      options.sceneContracts.forEach(sc => contractMap.set(sc.sceneId, sc));
+    } else if (contract) {
+      const scenesJsonPath = path.join(process.cwd(), 'contracts', 'episodes', `${contract.episodeId}.scenes.json`);
+      if (fs.existsSync(scenesJsonPath)) {
+        try {
+          const rawScenes = JSON.parse(fs.readFileSync(scenesJsonPath, 'utf8'));
+          if (Array.isArray(rawScenes)) {
+            rawScenes.forEach((rawSc: any) => {
+              if (rawSc.sceneId) contractMap.set(rawSc.sceneId, rawSc);
+            });
+          }
+        } catch {}
+      }
+    }
+
     for (let i = 0; i < scenes.length; i++) {
       const sc = scenes[i];
       const scId = sc.sceneId;
       const shotId = sc.shotId || `SHOT_${i + 1}`;
+
+      // 1. UNCONTRACTED_SCENE Check
+      if ((contract || options.sceneContracts || contractMap.size > 0) && !contractMap.has(scId)) {
+        failures.push({
+          sceneId: scId,
+          shotId,
+          index: i + 1,
+          assetType: 'VIDEO_TAKE',
+          expectedPath: editPackagePath,
+          reason: `UNCONTRACTED_SCENE: Cena '${scId}' não possui SceneVisualContract registrado.`
+        });
+      }
 
       const runFramePath = path.join(runDir, 'editorial', 'execution', 'scenes', scId, 'firefly_start_frame.png');
       const pubRunFramePath = path.join(publicDir, 'editorial', 'execution', options.runId, 'scenes', scId, 'firefly_start_frame.png');
@@ -322,9 +406,21 @@ export class PipelineContractGate {
           index: i + 1,
           assetType: 'VIDEO_TAKE',
           expectedPath: pubDirectVideoPath,
-          reason: 'VIDEO_TAKE_FILE_MISSING: O take de vídeo .mp4 não foi gerado, não consta no Repositório Central e não possui animação procedural configurada.'
+          reason: `PENDING_FIREFLY: Cena '${scId}' não possui take de vídeo .mp4 gerado e está pendente de geração no Firefly.`
         });
       } else {
+        const lowerPath = resolvedVideo.toLowerCase();
+        if (lowerPath.includes('fallback') || lowerPath.includes('placeholder') || lowerPath.includes('mock')) {
+          failures.push({
+            sceneId: scId,
+            shotId,
+            index: i + 1,
+            assetType: 'VIDEO_TAKE',
+            expectedPath: resolvedVideo,
+            reason: `FALLBACK_IN_MASTER: Cena '${scId}' utilizou fallback procedural ou mock no master final.`
+          });
+        }
+
         const stat = fs.statSync(resolvedVideo);
         if (stat.size < this.MIN_MP4_BYTES) {
           failures.push({
@@ -356,15 +452,31 @@ export class PipelineContractGate {
     }
 
     const narrationPath1 = path.join(runDir, 'postproduction', 'narration.mp3');
-    const narrationPath2 = path.join(publicDir, 'postproduction_ep02', 'narration.mp3');
+    const narrationPath2 = path.join(runDir, 'narration.mp3');
     const narrationPath3 = path.join(publicDir, 'editorial', 'execution', options.runId, 'narration.mp3');
+    const narrationSceneDir = path.join(runDir, 'audio', 'narration');
 
-    const resolvedNarration = [narrationPath1, narrationPath2, narrationPath3].find(p => fs.existsSync(p));
+    let resolvedNarration = [narrationPath1, narrationPath2, narrationPath3].find(p => fs.existsSync(p));
 
     let narrationDurationSeconds = 0;
     let timelineDurationSeconds = 0;
+    let narrationSceneCount = 0;
+    let narrationSceneDuration = 0;
 
-    if (!resolvedNarration) {
+    if (fs.existsSync(narrationSceneDir)) {
+      const files = fs.readdirSync(narrationSceneDir).filter(f => f.endsWith('.mp3'));
+      narrationSceneCount = files.length;
+      for (const f of files) {
+        const fullP = path.join(narrationSceneDir, f);
+        const st = fs.statSync(fullP);
+        if (st.size > 0) {
+          const pr = this.probeMedia(fullP);
+          narrationSceneDuration += (pr.duration > 0 ? pr.duration : 12.0);
+        }
+      }
+    }
+
+    if (!resolvedNarration && narrationSceneCount === 0) {
       failures.push({
         sceneId: 'GLOBAL',
         shotId: 'AUDIO_NARRATION',
@@ -373,7 +485,7 @@ export class PipelineContractGate {
         expectedPath: narrationPath1,
         reason: 'NARRATION_AUDIO_MISSING: O arquivo de narração narration.mp3 não foi encontrado.'
       });
-    } else {
+    } else if (resolvedNarration) {
       const stat = fs.statSync(resolvedNarration);
       if (stat.size < this.MIN_AUDIO_BYTES) {
         failures.push({
@@ -389,6 +501,8 @@ export class PipelineContractGate {
         const probe = this.probeMedia(resolvedNarration);
         narrationDurationSeconds = probe.duration;
       }
+    } else if (narrationSceneCount > 0) {
+      narrationDurationSeconds = narrationSceneDuration;
     }
 
     const sceneTimingsPath = path.join(runDir, 'postproduction', 'scene_timings.json');
@@ -417,10 +531,46 @@ export class PipelineContractGate {
       });
     }
 
+    // DURATION GATE (Tolerância estrita de 15% em relação ao briefing/seed)
+    const actualDuration = narrationDurationSeconds > 0 ? narrationDurationSeconds : timelineDurationSeconds;
+    if (options.targetDurationMinutes && options.targetDurationMinutes > 0 && actualDuration > 0) {
+      const expectedSeconds = options.targetDurationMinutes * 60;
+      const durationDeltaPercent = Math.abs(actualDuration - expectedSeconds) / expectedSeconds;
+      if (durationDeltaPercent > 0.15) {
+        failures.push({
+          sceneId: 'GLOBAL',
+          shotId: 'EPISODE_TARGET_DURATION',
+          index: 0,
+          assetType: 'TIMING',
+          expectedPath: editPackagePath,
+          actualDurationSeconds: actualDuration,
+          reason: `DURATION_TARGET_MISMATCH: Duração real (${actualDuration.toFixed(1)}s) difere em ${(durationDeltaPercent * 100).toFixed(1)}% do target do seed/briefing (${expectedSeconds.toFixed(1)}s / ${options.targetDurationMinutes} min). Limite de tolerância é 15%.`
+        });
+      }
+    }
+
+    // Detecção e Listagem de Cenas Degradadas / Fallback (Report Only)
+    const degradedScenes: Array<{ sceneId: string; reason?: string }> = [];
+    for (const sc of scenes) {
+      const scAny = sc as any;
+      if (
+        scAny.isFallback ||
+        scAny.degraded ||
+        scAny.isDegraded ||
+        scAny.visualMode === 'fallback' ||
+        scAny.takeType === 'FALLBACK'
+      ) {
+        degradedScenes.push({
+          sceneId: sc.sceneId,
+          reason: scAny.fallbackReason || scAny.degradedReason || 'Cena marcada como fallback/degradada'
+        });
+      }
+    }
+
     let packagingValid = true;
     if (scope === 'FULL_PACKAGE') {
       const requiredArtifacts = [
-        ...HSL_CANONICAL_THUMBNAILS.map(t => path.join(runDir, 'postproduction', 'thumbnails', t.filename)),
+        ...HSL_CANONICAL_THUMBNAILS.map((t) => path.join(runDir, 'postproduction', 'thumbnails', t.filename)),
         path.join(runDir, 'postproduction', 'description.txt'),
         path.join(runDir, 'postproduction', 'youtube-metadata.json')
       ];
@@ -440,10 +590,239 @@ export class PipelineContractGate {
       }
     }
 
+    // Validações de nível de EPISÓDIO a partir do Contrato Zod
+    if (contract) {
+      // 1. Duração mínima: somaDuraçõesReais >= targetDurationSeconds * minDurationRatio
+      const minRequiredDuration = contract.targetDurationSeconds * contract.minDurationRatio;
+      if (actualDuration < minRequiredDuration) {
+        failures.push({
+          sceneId: 'GLOBAL',
+          shotId: 'EPISODE_DURATION',
+          index: 0,
+          assetType: 'TIMING',
+          expectedPath: resolvedNarration || path.join(runDir, 'postproduction', 'narration.mp3'),
+          actualDurationSeconds: actualDuration,
+          reason: `EPISODE_TOO_SHORT: ${actualDuration.toFixed(0)}s < ${minRequiredDuration.toFixed(0)}s (meta ${contract.targetDurationSeconds}s)`
+        });
+      }
+
+      // 2. Contagem mínima de cenas: numeroDeCenas >= minScenes
+      if (scenes.length < contract.minScenes) {
+        failures.push({
+          sceneId: 'GLOBAL',
+          shotId: 'SCENE_COUNT',
+          index: 0,
+          assetType: 'TIMING',
+          expectedPath: editPackagePath,
+          reason: `TOO_FEW_SCENES: ${scenes.length} cenas encontradas, mínimo exigido pelo contrato é ${contract.minScenes}.`
+        });
+      }
+
+      // 3. Presença obrigatória de artefatos para cada stage em requiredStages
+      const manifestPath = path.join(runDir, 'run-manifest.json');
+      let manifestData: any = null;
+      if (fs.existsSync(manifestPath)) {
+        try {
+          manifestData = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+        } catch {}
+      }
+
+      for (const stage of contract.requiredStages) {
+        switch (stage) {
+          case 'narration': {
+            const hasFullNarration = resolvedNarration && narrationDurationSeconds > 0;
+            const hasAllSceneNarrations = narrationSceneCount >= contract.minScenes && narrationSceneDuration >= (contract.targetDurationSeconds * contract.minDurationRatio);
+
+            if (!hasFullNarration && !hasAllSceneNarrations) {
+              if (narrationSceneCount > 0 && narrationSceneCount < contract.minScenes) {
+                failures.push({
+                  sceneId: 'STAGE',
+                  shotId: 'NARRATION',
+                  index: 0,
+                  assetType: 'VOICEOVER',
+                  expectedPath: narrationSceneDir,
+                  reason: `NARRATION_INCOMPLETE: ${narrationSceneCount}/${contract.minScenes}`
+                });
+              }
+              failures.push({
+                sceneId: 'STAGE',
+                shotId: 'NARRATION',
+                index: 0,
+                assetType: 'VOICEOVER',
+                expectedPath: path.join(runDir, 'postproduction', 'narration.mp3'),
+                reason: 'MISSING_STAGE: narration - Trilha de narração ausente ou incompleta.'
+              });
+            }
+            break;
+          }
+          case 'visuals': {
+            if (scenes.length === 0 || validStartFrames < scenes.length || validVideoTakes < scenes.length) {
+              failures.push({
+                sceneId: 'STAGE',
+                shotId: 'VISUALS',
+                index: 0,
+                assetType: 'VIDEO_TAKE',
+                expectedPath: path.join(runDir, 'editorial', 'execution', 'scenes'),
+                reason: `MISSING_STAGE: visuals - Assets visuais incompletos (${validStartFrames}/${scenes.length} start frames, ${validVideoTakes}/${scenes.length} takes válidos).`
+              });
+            }
+            break;
+          }
+          case 'sfx': {
+            const sfxSceneDir = path.join(runDir, 'audio', 'sfx');
+            let sfxSceneCount = 0;
+            if (fs.existsSync(sfxSceneDir)) {
+              const files = fs.readdirSync(sfxSceneDir).filter(f => f.endsWith('.wav') || f.endsWith('.mp3'));
+              for (const f of files) {
+                if (fs.statSync(path.join(sfxSceneDir, f)).size > 100) {
+                  sfxSceneCount++;
+                }
+              }
+            }
+
+            const sfxCandidates = [
+              path.join(runDir, 'audio', 'sfx', 'bed.wav'),
+              path.join(runDir, 'postproduction', 'soundfx-bed.wav'),
+              path.join(runDir, 'postproduction', 'soundfx-bed.mp3'),
+              path.join(runDir, 'postproduction', 'sfx_track.wav'),
+              path.join(runDir, 'postproduction', 'sfx_track.mp3'),
+              path.join(runDir, 'postproduction', 'sfx.wav'),
+              path.join(runDir, 'postproduction', 'sfx.mp3'),
+              path.join(publicDir, 'hsl-runs', options.runId, 'soundfx-bed.wav')
+            ];
+            const sfxFile = sfxCandidates.find((p) => fs.existsSync(p) && fs.statSync(p).size > 100);
+            let sfxDuration = 0;
+            if (sfxFile) {
+              const probe = this.probeMedia(sfxFile);
+              sfxDuration = probe.duration;
+            }
+            const manifestHasSfx =
+              manifestData?.assetInventory &&
+              Object.keys(manifestData.assetInventory).some(
+                (k) => (k.includes('sfx') || k.includes('soundfx')) && manifestData.assetInventory[k].sizeBytes > 100
+              );
+
+            const hasAllSceneSfx = contract && sfxSceneCount >= contract.minScenes;
+            const hasSingleSfx = (sfxFile && sfxDuration > 0) || manifestHasSfx;
+
+            if (!hasSingleSfx && !hasAllSceneSfx) {
+              if (contract && sfxSceneCount > 0 && sfxSceneCount < contract.minScenes) {
+                failures.push({
+                  sceneId: 'STAGE',
+                  shotId: 'SFX',
+                  index: 0,
+                  assetType: 'VOICEOVER',
+                  expectedPath: sfxSceneDir,
+                  reason: `SFX_PLAN_INCOMPLETE: ${sfxSceneCount}/${contract.minScenes} - Stems de SFX parciais.`
+                });
+              }
+              failures.push({
+                sceneId: 'STAGE',
+                shotId: 'SFX',
+                index: 0,
+                assetType: 'VOICEOVER',
+                expectedPath: path.join(runDir, 'audio', 'sfx'),
+                reason: 'MISSING_STAGE: sfx - Trilha ou stems de SFX ausentes ou vazios.'
+              });
+            }
+            break;
+          }
+          case 'music': {
+            const musicCandidates = [
+              path.join(runDir, 'audio', 'music', 'bed.wav'),
+              path.join(runDir, 'audio', 'music', 'bed.mp3'),
+              path.join(runDir, 'postproduction', 'music_track.mp3'),
+              path.join(runDir, 'postproduction', 'music_track.wav'),
+              path.join(runDir, 'postproduction', 'music.mp3'),
+              path.join(runDir, 'postproduction', 'music.wav'),
+              path.join(runDir, 'postproduction', 'soundtrack.mp3'),
+              path.join(publicDir, 'hsl-runs', options.runId, 'music.mp3')
+            ];
+            const musicFile = musicCandidates.find((p) => fs.existsSync(p) && fs.statSync(p).size > 100);
+            let musicDuration = 0;
+            if (musicFile) {
+              const probe = this.probeMedia(musicFile);
+              musicDuration = probe.duration;
+            }
+            const manifestHasMusic =
+              manifestData?.assetInventory &&
+              Object.keys(manifestData.assetInventory).some(
+                (k) => (k.includes('music') || k.includes('soundtrack')) && manifestData.assetInventory[k].sizeBytes > 100
+              );
+
+            if ((!musicFile || musicDuration <= 0) && !manifestHasMusic) {
+              failures.push({
+                sceneId: 'STAGE',
+                shotId: 'MUSIC',
+                index: 0,
+                assetType: 'VOICEOVER',
+                expectedPath: path.join(runDir, 'audio', 'music', 'bed.wav'),
+                reason: 'MISSING_STAGE: music - Trilha musical ausente ou com duração 0s.'
+              });
+            }
+            break;
+          }
+          case 'mix': {
+            const mixCandidates = [
+              path.join(runDir, 'audio', 'mix', 'mix.wav'),
+              path.join(runDir, 'audio', 'mix', 'mix.mp3'),
+              path.join(runDir, 'postproduction', 'mixed_audio.wav'),
+              path.join(runDir, 'postproduction', 'mixed_audio.mp3'),
+              path.join(runDir, 'postproduction', 'master_audio.mp3'),
+              path.join(runDir, 'final_master.mp4')
+            ];
+            const mixFile = mixCandidates.find((p) => fs.existsSync(p) && fs.statSync(p).size > 100);
+            const manifestHasMix = manifestData?.stages?.FFMPEG_MUX?.status === 'DONE';
+
+            if (!mixFile && !manifestHasMix) {
+              failures.push({
+                sceneId: 'STAGE',
+                shotId: 'MIX',
+                index: 0,
+                assetType: 'VOICEOVER',
+                expectedPath: path.join(runDir, 'audio', 'mix', 'mix.wav'),
+                reason: 'MISSING_STAGE: mix - Áudio mixado final ausente ou vazio.'
+              });
+            }
+            break;
+          }
+          case 'thumbnail': {
+            if (!packagingValid && scope === 'FULL_PACKAGE') {
+              failures.push({
+                sceneId: 'STAGE',
+                shotId: 'THUMBNAIL',
+                index: 0,
+                assetType: 'PACKAGING',
+                expectedPath: path.join(runDir, 'postproduction', 'thumbnails'),
+                reason: 'MISSING_STAGE: thumbnail - Pacote de thumbnails 4K ausente ou incompleto.'
+              });
+            }
+            break;
+          }
+          case 'render': {
+            const renderFile = path.join(runDir, 'final_master.mp4');
+            const isRendered = fs.existsSync(renderFile) && fs.statSync(renderFile).size > 1000;
+            if (!isRendered && scope === 'FULL_PACKAGE') {
+              failures.push({
+                sceneId: 'STAGE',
+                shotId: 'RENDER',
+                index: 0,
+                assetType: 'VIDEO_TAKE',
+                expectedPath: renderFile,
+                reason: 'MISSING_STAGE: render - Vídeo final final_master.mp4 não renderizado.'
+              });
+            }
+            break;
+          }
+        }
+      }
+    }
+
     const passed = failures.length === 0;
 
     return {
       runId: options.runId,
+      contract,
       totalScenesExpected: scenes.length,
       validStartFrames,
       validVideoTakes,
@@ -452,6 +831,7 @@ export class PipelineContractGate {
       timelineDurationSeconds,
       timingDeltaSeconds: timingDelta,
       packagingValid,
+      degradedScenes,
       failures,
       passed
     };
@@ -472,9 +852,14 @@ export class PipelineContractGate {
     const publicDir = options.publicDir || path.join(process.cwd(), 'public');
     const runDir = path.join(runsDir, options.runId);
 
-    const curatedDir = path.join(process.cwd(), 'assets', 'submarine_curated');
-    const curatedPhotos = fs.existsSync(curatedDir)
-      ? fs.readdirSync(curatedDir).filter(f => f.endsWith('.jpg') || f.endsWith('.png')).map(f => path.join(curatedDir, f))
+    const curatedDirs = [
+      path.join(process.cwd(), 'assets', 'submarine_curated'),
+      path.join(process.cwd(), 'public', 'assets', 'submarine_curated'),
+      path.join(process.cwd(), 'assets', 'submarine_references')
+    ];
+    const existingCuratedDir = curatedDirs.find((d) => fs.existsSync(d));
+    const curatedPhotos = existingCuratedDir
+      ? fs.readdirSync(existingCuratedDir).filter((f) => f.endsWith('.jpg') || f.endsWith('.png')).map((f) => path.join(existingCuratedDir, f))
       : [];
 
     for (const failure of reportBefore.failures) {
@@ -498,6 +883,23 @@ export class PipelineContractGate {
           ]);
           if (fs.existsSync(targetFrame)) {
             fs.copyFileSync(targetFrame, pubFrame);
+            const receiptPath = path.join(path.dirname(targetFrame), 'start_frame_receipt.json');
+            const fileBuf = fs.readFileSync(targetFrame);
+            const sha = crypto.createHash('sha256').update(fileBuf).digest('hex');
+            fs.writeFileSync(
+              receiptPath,
+              JSON.stringify(
+                {
+                  sceneId: scId,
+                  sha256: sha,
+                  generatedAt: new Date().toISOString(),
+                  model: 'curated_healer'
+                },
+                null,
+                2
+              ),
+              'utf8'
+            );
             console.log(`[HEALER] ✅ Start Frame regenerado para ${scId}: ${targetFrame}`);
           }
         }
@@ -550,7 +952,7 @@ export class PipelineContractGate {
     this.printReport(report);
 
     if (!report.passed) {
-      console.error(`\n[FATAL_GATE_ERROR] O Gate Pré-Render BARRheadline A PRODUÇÃO DA RUN '${runId}'.`);
+      console.error(`\n[FATAL_GATE_ERROR] O Gate Pré-Render BARROU A PRODUÇÃO DA RUN '${runId}'.`);
       console.error(`Total de violações contratuais encontradas: ${report.failures.length}.`);
       console.error(`O Remotion NÃO iniciará até que 100% dos assets e durações estejam íntegros.\n`);
       process.exit(1);
@@ -561,10 +963,19 @@ export class PipelineContractGate {
     console.log(`\n══════════════════════════════════════════════════════════════════════════════════════`);
     console.log(`🛡️ RELATÓRIO DO GATE DETERMINÍSTICO DE CONTRATO // RUN: ${report.runId}`);
     console.log(`══════════════════════════════════════════════════════════════════════════════════════`);
+    if (report.contract) {
+      console.log(`Contrato de Episódio: ${report.contract.episodeId} ("${report.contract.title}")`);
+      const minSec = (report.contract.targetDurationSeconds * report.contract.minDurationRatio).toFixed(0);
+      console.log(`Meta Duração:         ${report.contract.targetDurationSeconds}s (Mínimo: ${minSec}s) | Meta Cenas: ${report.contract.minScenes}`);
+      console.log(`Etapas Obrigatórias:  ${report.contract.requiredStages.join(', ')}`);
+    }
     console.log(`Cenas Esperadas:      ${report.totalScenesExpected}`);
     console.log(`Start Frames Válidos: ${report.validStartFrames} / ${report.totalScenesExpected}`);
     console.log(`Video Takes Válidos:  ${report.validVideoTakes} / ${report.totalScenesExpected}`);
     console.log(`Narração Duração:     ${report.narrationDurationSeconds.toFixed(2)}s | Timeline: ${report.timelineDurationSeconds.toFixed(2)}s (Delta: ${report.timingDeltaSeconds.toFixed(2)}s)`);
+    if (report.degradedScenes && report.degradedScenes.length > 0) {
+      console.log(`⚠️ Cenas em Fallback/Degradadas: ${report.degradedScenes.length} cena(s) (${report.degradedScenes.map(d => d.sceneId).join(', ')}) [REPORT ONLY]`);
+    }
     console.log(`Resultado do Gate:    ${report.passed ? '✅ APROVADO (100% ÍNTEGRO)' : '❌ REPROVADO (CONTRATO VIOLADO)'}`);
     console.log(`══════════════════════════════════════════════════════════════════════════════════════`);
 

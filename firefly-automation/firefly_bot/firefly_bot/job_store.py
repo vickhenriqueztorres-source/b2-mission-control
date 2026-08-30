@@ -262,14 +262,15 @@ def _batch_rows(
         )
         aspect_ratio = str(
             raw_item.get(
-                "aspect_ratio", guide.get("aspect_ratio", BATCH_DEFAULTS["aspect_ratio"])
+                "aspect_ratio",
+                raw_item.get("aspectRatio", guide.get("aspect_ratio", guide.get("aspectRatio", BATCH_DEFAULTS["aspect_ratio"]))),
             )
         )
         try:
             duration_seconds = int(
                 raw_item.get(
                     "duration_seconds",
-                    guide.get("duration_seconds", BATCH_DEFAULTS["duration_seconds"]),
+                    raw_item.get("durationSeconds", guide.get("duration_seconds", guide.get("durationSeconds", BATCH_DEFAULTS["duration_seconds"]))),
                 )
             )
         except (TypeError, ValueError) as exc:
@@ -278,27 +279,35 @@ def _batch_rows(
             raise GuideValidationError("duration_seconds precisa ser positivo")
         generate_audio = bool(
             raw_item.get(
-                "generate_audio", guide.get("generate_audio", BATCH_DEFAULTS["generate_audio"])
+                "generate_audio",
+                raw_item.get("generateAudio", guide.get("generate_audio", guide.get("generateAudio", BATCH_DEFAULTS["generate_audio"]))),
             )
         )
-        image_name = str(raw_item.get("image", ""))
-        image_path = _safe_child(images_dir, image_name, "image")
-        if image_path.suffix.lower() not in IMAGE_EXTENSIONS or not image_path.is_file():
-            raise FileNotFoundError(f"imagem inválida ou ausente: {image_path}")
-        item_name = _validate_output_name(raw_item.get("name"), image_path.stem)
+        image_name = str(raw_item.get("image", "") or "").strip()
+        if image_name:
+            image_path = _safe_child(images_dir, image_name, "image")
+            if image_path.suffix.lower() not in IMAGE_EXTENSIONS or not image_path.is_file():
+                raise FileNotFoundError(f"imagem inválida ou ausente: {image_path}")
+            image_str = str(image_path)
+            default_stem = image_path.stem
+        else:
+            image_str = None
+            default_stem = str(raw_item.get("name", "shot"))
+
+        item_name = _validate_output_name(raw_item.get("name"), default_stem)
         inline_prompt = raw_item.get("prompt")
         if inline_prompt is not None:
             prompt = str(inline_prompt).strip()
             if not prompt:
                 raise GuideValidationError(f"prompt vazio para name={item_name}")
         else:
-            prompt_file = str(raw_item.get("prompt_file", f"{image_path.stem}.txt"))
+            prompt_file = str(raw_item.get("prompt_file", f"{default_stem}.txt"))
             prompt_path = _safe_child(prompts_dir, prompt_file, "prompt_file")
             prompt = _read_prompt(prompt_path, item_name)
         rows.append(
             (
                 prompt,
-                str(image_path),
+                image_str,
                 time.time(),
                 model,
                 resolution,

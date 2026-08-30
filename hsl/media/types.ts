@@ -65,6 +65,8 @@ export interface ImageCatalog {
   images: ImageCatalogEntry[];
 }
 
+export { SceneVisualContract, AllowedVisualSource, TakeType } from '../../contracts/sceneVisualContract';
+
 export interface VideoMatchRequest {
   sceneId: string;
   shotId?: string;
@@ -72,7 +74,11 @@ export interface VideoMatchRequest {
   visualSubject: string;
   narrativeFunction?: string;
   tags?: string[];
+  domainTags?: string[];
   requiredCategory?: VideoCategory | string;
+  visualMustInclude?: string[];
+  visualMustNot?: string[];
+  allowedSources?: ('firefly' | 'bank' | 'dossier')[];
   targetDurationSeconds?: number;
 }
 
@@ -83,7 +89,7 @@ export interface VideoMatchResult {
   videoEntry?: VideoCatalogEntry;
   absoluteVideoPath?: string;
   relativePublicSrc?: string;
-  recommendedAction: 'USE_MATCHED_VIDEO' | 'DISPATCH_FIREFLY_ON_DEMAND' | 'FALLBACK_REMOTION_PARALLAX';
+  recommendedAction: 'USE_MATCHED_VIDEO' | 'DISPATCH_FIREFLY_ON_DEMAND' | 'FALLBACK_REMOTION_PARALLAX' | 'STOP_UNMATCHED';
   reason: string;
 }
 
