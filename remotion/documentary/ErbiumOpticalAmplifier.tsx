@@ -7,7 +7,7 @@ interface ErbiumOpticalAmplifierProps {
 }
 
 export const ErbiumOpticalAmplifier: React.FC<ErbiumOpticalAmplifierProps> = ({
-  title = 'AMPLIFICADOR ÓPTICO DE ÉRBIO (EDFA) // REPETIDOR 10.000V'
+  title = ''
 }) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();

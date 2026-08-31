@@ -9,6 +9,7 @@ import {HslSoundFxRuntime, HslSoundFxRuntimeResult} from './soundFxRuntime';
 import {DialogLevelingAgent, LoudnessQaAgent, NarrationPerformanceAgent} from './narrationAudioRuntime';
 import {HybridSoundBedAgent, NativeGeneratedAudioAgent} from './nativeGeneratedAudioRuntime';
 import {assertOfficialHslNarrationConfig} from '../../config/hslProductionRules';
+import {ElevenLabsAdapter} from '../../adapters/elevenLabsAdapter';
 
 export interface HslLicensedAssetItem {
   readonly scene_id: string;
@@ -38,10 +39,12 @@ function writeJson(filePath: string, value: unknown): void {
 export class NarrationVoiceAgent {
   async generate(text: string, outputPath: string): Promise<string> {
     assertOfficialHslNarrationConfig();
-    if ((process.env.HSL_NARRATION_PROVIDER || '').toLowerCase() === 'voicebox') {
-      return this.generateWithVoicebox(text, outputPath);
-    }
-    throw new Error('HSL_OFFICIAL_VOICEBOX_REQUIRED');
+    if (!text.trim()) throw new Error('HSL_NARRATION_TEXT_REQUIRED');
+    const adapter = new ElevenLabsAdapter();
+    await adapter.initialize();
+    if (!await adapter.checkHealth()) throw new Error('HSL_ELEVENLABS_HEALTHCHECK_FAILED');
+    await adapter.synthesizeText(text, outputPath);
+    return outputPath;
   }
 
   private chunkLongForm(text: string, maxCharacters = 9000): string[] {

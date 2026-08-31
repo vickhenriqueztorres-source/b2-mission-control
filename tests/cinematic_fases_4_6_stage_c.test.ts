@@ -14,34 +14,36 @@ console.log('══════════════════════�
 let allPassed = true;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 1. CÂMERA VIVA: Direção Alternada de Drift e Escala PushIn (FASE 4)
+// 1. CAMERA DOCUMENTAL: deriva de ombro sem zoom digital permanente
 // ─────────────────────────────────────────────────────────────────────────────
-console.log('[TEST C1] Validando direção alternada de drift e escala pushIn...');
+console.log('[TEST C1] Validando deriva documental e retorno a escala natural...');
 try {
-  // Cena 0 (par): drift de -16px para 16px (X) e 8px para -8px (Y)
+  // Cena 0 (par): drift contido de -5px para 5px.
   const driftScene0_Start = calculateCameraTransform(0, 240, 'drift', 0);
   const driftScene0_End = calculateCameraTransform(240, 240, 'drift', 0);
 
-  // Cena 1 (ímpar): drift oposto de 16px para -16px (X) e -8px para 8px (Y)
+  // Cena 1 (impar): direcao oposta.
   const driftScene1_Start = calculateCameraTransform(0, 240, 'drift', 1);
   const driftScene1_End = calculateCameraTransform(240, 240, 'drift', 1);
 
-  assert.equal(driftScene0_Start.translateX, -16, 'Cena 0 deve iniciar em X = -16');
-  assert.equal(driftScene0_End.translateX, 16, 'Cena 0 deve terminar em X = 16');
-  assert.equal(driftScene1_Start.translateX, 16, 'Cena 1 deve iniciar em X = 16 (direção oposta)');
-  assert.equal(driftScene1_End.translateX, -16, 'Cena 1 deve terminar em X = -16 (direção oposta)');
+  assert.equal(driftScene0_Start.translateX, -5, 'Cena 0 deve iniciar em X = -5');
+  assert.equal(driftScene0_End.translateX, 5, 'Cena 0 deve terminar em X = 5');
+  assert.equal(driftScene1_Start.translateX, 5, 'Cena 1 deve iniciar em X = 5');
+  assert.equal(driftScene1_End.translateX, -5, 'Cena 1 deve terminar em X = -5');
 
-  // PushIn: scale 1.00 -> 1.06
+  // O identificador legado pushIn agora respira no meio e retorna a 1.0.
   const pushIn_Start = calculateCameraTransform(0, 240, 'pushIn', 0);
+  const pushIn_Middle = calculateCameraTransform(120, 240, 'pushIn', 0);
   const pushIn_End = calculateCameraTransform(240, 240, 'pushIn', 0);
   assert.equal(pushIn_Start.scale, 1.0, 'PushIn no início deve ter escala 1.0');
-  assert.equal(pushIn_End.scale, 1.06, 'PushIn no fim deve ter escala 1.06');
+  assert.equal(pushIn_Middle.scale, 1.004, 'Correcao de ombro deve ser minima no meio');
+  assert.equal(pushIn_End.scale, 1.0, 'Plano deve terminar sem zoom digital acumulado');
 
   // Static: transform none
   const staticTransform = calculateCameraTransform(120, 240, 'static', 0);
   assert.equal(staticTransform.transformStyle, 'none');
 
-  console.log('✅ TEST C1 PASSOU: Câmera viva respeita regra de direção alternada e avanço pushIn 1.06.');
+  console.log('✅ TEST C1 PASSOU: camera documental sem push-in permanente.');
 } catch (err: any) {
   console.error('❌ FALHA NO TEST C1:', err.message);
   allPassed = false;

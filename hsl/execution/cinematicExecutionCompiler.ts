@@ -15,10 +15,10 @@ import {
 } from './agents/executionAgents';
 import {HslExecutableScene, HslExecutionPlan} from './types/execution';
 import {
-  buildHslStartFramePrompt,
   HSL_PREMIUM_MOTION_REFERENCE_SET,
   HSL_VISUAL_IDENTITY_CONTRACT_VERSION
 } from '../../config/hslVisualIdentity';
+import {buildFireflyPrompt} from '../../contracts/buildFireflyPrompt';
 
 function canonical(value: unknown): string {
   if (Array.isArray(value)) return `[${value.map(canonical).join(',')}]`;
@@ -72,7 +72,13 @@ export class CinematicExecutionCompiler {
       const timing = rhythm.run(scene);
       const motion = kling.run(scene, source);
       const startFramePrompt = scene.visual_mode === 'generated_ai'
-        ? `Extreme cinematic 35mm anamorphic still from a Denis Villeneuve film, ${scene.visual_subject}, monumental scale, atmospheric chiaroscuro lighting, deep carbon blacks (#060709), illuminated by glowing sodium-vapor amber reflections (#FF5500) and sharp cyan laser telemetry lights (#00F0FF), dense volumetric fog and steam, wet reflective ground, shallow depth of field, creamy anamorphic bokeh, filmic texture, raw realistic industrial photography, 8k, no text, no human faces --ar 16:9`
+        ? buildFireflyPrompt({
+          sceneId: scene.scene_id,
+          visualSubject: scene.visual_subject,
+          visual_must_include: [scene.visual_subject],
+          visual_must_not: [],
+          required_category: scene.visual_function || 'documentary_evidence',
+        }).prompt
         : null;
       const seed: Omit<HslExecutableScene, 'execution_revision'> = {
         schema: 'hsl.execution.scene.v1', schema_version: '1.0.0', episode_id: episode.episode_id,

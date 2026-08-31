@@ -88,9 +88,9 @@ export function buildGpsTimeline(): SceneTimelineItem[] {
       sfxFile: `episodes/gps-tempo/audio/sfx/${sc.sceneId}.mp3`,
       videoFile: `episodes/gps-tempo/takes/${sc.sceneId}.mp4`,
       integratedText: `TELEMETRIA ORBITAL // ${sc.sceneId}`,
-      calloutMain: sc.visualSubject ? sc.visualSubject.split(' ')[0].toUpperCase() : 'TELEMETRIA',
+      calloutMain: sc.visualSubject ? (sc.visualSubject.toUpperCase().startsWith('DOSSIÊ') ? sc.visualSubject.split(' ').slice(1, 3).join(' ').toUpperCase() : sc.visualSubject.split(' ')[0].toUpperCase()) : 'ORBITA',
       calloutSub: `RELATÓRIO DE ÓRBITA ${sc.sceneId}`,
-      calloutCategory: isDossier ? 'DOSSIÊ' : 'CINEMATOGRÁFICO'
+      calloutCategory: isDossier ? 'REGISTRO TÉCNICO' : 'CINEMATOGRÁFICO'
     });
   }
 
@@ -112,6 +112,7 @@ export function buildGpsTimelineContract(): TimelineContractInput {
     hudWindows: [
       {
         componentName: 'AtomicStopwatch',
+        props: { label: 'CRONÔMETRO ATÔMICO DE CÉSIO 133' },
         appearances: [
           { startScene: 3, seconds: 8 },
           { startScene: 12, seconds: 8 },
@@ -151,6 +152,14 @@ export function buildGpsTimelineContract(): TimelineContractInput {
         subtitle: s.chapterTitle,
         sourceText: 'FONTE: US SPACE FORCE // NIST TIME FREQUENCY DIVISION',
         dateText: 'TELEMETRIA: CONSTELAÇÃO GPS BLOCK III',
+        headerFormula: '\\Delta t = \\Delta t_0 / \\sqrt{1 - v^2/c^2}',
+        circuitTitle: 'ORBITA GPS BLOCK III // 14.000 KM/H',
+        systemTitle: 'SATÉLITE GPS ORBITAL',
+        compartmentName: 'MÓDULO DE RELÓGIO ATÔMICO',
+        routeTitle: 'TELEMETRIA ORBITAL DE SINAIS DE RÁDIO',
+        meterTitle: 'FREQUÊNCIA DE CÉSIO 9.192.631.770 HZ',
+        documentTitle: 'RELATÓRIO DE DILATAÇÃO TEMPORAL',
+        criticalClause: 'DERIVA RELATIVÍSTICA DE 38 MICROSSEGUNDOS / DIA',
         zoomIntensity: 1.12,
         isDossierTake: s.take_type === 'KEYFRAME_DOSSIER',
         dossierTag: `EVIDÊNCIA RELATIVÍSTICA // ${s.sceneId}`

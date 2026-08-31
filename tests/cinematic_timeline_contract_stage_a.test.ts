@@ -30,14 +30,15 @@ function createValidTimeline(overrides: Record<string, any> = {}) {
     scenes: [
       { id: 'SCENE_01', component: 'DynamicDocumentaryMedia', durationSeconds: 8.0 },
       { id: 'SCENE_02', component: 'CinematicKeyframeDossier', durationSeconds: 8.0, take_type: 'KEYFRAME_DOSSIER' },
-      { id: 'SCENE_03', component: 'TechnicalCutawaySchematic', durationSeconds: 5.0 },
-      { id: 'SCENE_04', component: 'FlowDiscrepancyHUD', durationSeconds: 11.0 },
-      { id: 'SCENE_05', component: 'AtomicStopwatch', durationSeconds: 7.0 },
+      { id: 'SCENE_03', component: 'TechnicalCutawaySchematic', durationSeconds: 5.0, props: { systemTitle: 'SISTEMA DE CORTE', compartmentName: 'CAMARA_01' } },
+      { id: 'SCENE_04', component: 'FlowDiscrepancyHUD', durationSeconds: 11.0, props: { card1Title: 'MEDICAO A' } },
+      { id: 'SCENE_05', component: 'AtomicStopwatch', durationSeconds: 7.0, props: { label: 'TEMPO DE TESTE' } },
       { id: 'SCENE_06', component: 'DynamicDocumentaryMedia', durationSeconds: 6.0 }
     ],
     hudWindows: [
       {
         componentName: 'AtomicStopwatch',
+        props: { label: 'CRONOMETRO GLOBAL' },
         appearances: [{ startScene: 1, seconds: 8 }]
       }
     ],
@@ -107,9 +108,9 @@ try {
     scenes: [
       { id: 'SCENE_01', component: 'DynamicDocumentaryMedia', durationSeconds: 8.0 },
       { id: 'SCENE_02', component: 'CinematicKeyframeDossier', durationSeconds: 8.0 },
-      { id: 'SCENE_03', component: 'TechnicalCutawaySchematic', durationSeconds: 8.1 },
-      { id: 'SCENE_04', component: 'FlowDiscrepancyHUD', durationSeconds: 8.0 },
-      { id: 'SCENE_05', component: 'AtomicStopwatch', durationSeconds: 8.2 },
+      { id: 'SCENE_03', component: 'TechnicalCutawaySchematic', durationSeconds: 8.1, props: { systemTitle: 'SISTEMA', compartmentName: 'CAMARA' } },
+      { id: 'SCENE_04', component: 'FlowDiscrepancyHUD', durationSeconds: 8.0, props: { card1Title: 'MED' } },
+      { id: 'SCENE_05', component: 'AtomicStopwatch', durationSeconds: 8.2, props: { label: 'STOPWATCH' } },
       { id: 'SCENE_06', component: 'DynamicDocumentaryMedia', durationSeconds: 8.0 }
     ]
   });
@@ -182,9 +183,9 @@ try {
     scenes: [
       { id: 'SCENE_01', component: 'DynamicDocumentaryMedia', durationSeconds: 8.0 },
       { id: 'SCENE_02', component: 'CinematicKeyframeDossier', durationSeconds: 8.0 },
-      { id: 'SCENE_03', component: 'TechnicalCutawaySchematic', durationSeconds: 2.0 }, // rajada 1
-      { id: 'SCENE_04', component: 'FlowDiscrepancyHUD', durationSeconds: 2.5 }, // rajada 2
-      { id: 'SCENE_05', component: 'AtomicStopwatch', durationSeconds: 4.0 }, // FALHA: respiro de 4s (<6s)
+      { id: 'SCENE_03', component: 'TechnicalCutawaySchematic', durationSeconds: 2.0, props: { systemTitle: 'SISTEMA', compartmentName: 'CAMARA' } }, // rajada 1
+      { id: 'SCENE_04', component: 'FlowDiscrepancyHUD', durationSeconds: 2.5, props: { card1Title: 'MED' } }, // rajada 2
+      { id: 'SCENE_05', component: 'AtomicStopwatch', durationSeconds: 4.0, props: { label: 'STOPWATCH' } }, // FALHA: respiro de 4s (<6s)
       { id: 'SCENE_06', component: 'DynamicDocumentaryMedia', durationSeconds: 8.0 }
     ]
   });
@@ -208,9 +209,9 @@ try {
     scenes: [
       { id: 'SCENE_01', component: 'DynamicDocumentaryMedia', durationSeconds: 8.0, take_type: 'CINEMATIC_TAKE' },
       { id: 'SCENE_02', component: 'CinematicKeyframeDossier', durationSeconds: 8.0, take_type: 'KEYFRAME_DOSSIER' },
-      { id: 'SCENE_03', component: 'TechnicalCutawaySchematic', durationSeconds: 5.0 },
-      { id: 'SCENE_04', component: 'FlowDiscrepancyHUD', durationSeconds: 11.0 },
-      { id: 'SCENE_05', component: 'AtomicStopwatch', durationSeconds: 7.0 },
+      { id: 'SCENE_03', component: 'TechnicalCutawaySchematic', durationSeconds: 5.0, props: { systemTitle: 'TITULO', compartmentName: 'COMP' } },
+      { id: 'SCENE_04', component: 'FlowDiscrepancyHUD', durationSeconds: 11.0, props: { card1Title: 'MED' } },
+      { id: 'SCENE_05', component: 'AtomicStopwatch', durationSeconds: 7.0, props: { label: 'STOPWATCH' } },
       { id: 'SCENE_06', component: 'DynamicDocumentaryMedia', durationSeconds: 6.0 }
     ]
   });
@@ -247,6 +248,102 @@ try {
   console.log(`✅ TEST A8 PASSOU: render_manifest.json gravado com sucesso em: ${manifestPath}`);
 } catch (err: any) {
   console.error('❌ FALHA NO TEST A8:', err.message);
+  allPassed = false;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 9. TIMELINE_MISSING_EDITORIAL_PROPS (Fail-closed de componentes do registro)
+// ─────────────────────────────────────────────────────────────────────────────
+console.log('\n[TEST A9] Validando TIMELINE_MISSING_EDITORIAL_PROPS em componente sem props...');
+try {
+  const missingPropsTimeline = createValidTimeline({
+    scenes: [
+      { id: 'SCENE_01', component: 'DynamicDocumentaryMedia', durationSeconds: 8.0 },
+      { id: 'SCENE_02', component: 'CinematicKeyframeDossier', durationSeconds: 8.0 },
+      { id: 'SCENE_03', component: 'TechnicalCutawaySchematic', durationSeconds: 5.0, props: {} }, // Sem systemTitle e compartmentName
+      { id: 'SCENE_04', component: 'FlowDiscrepancyHUD', durationSeconds: 11.0, props: { card1Title: 'MED' } },
+      { id: 'SCENE_05', component: 'AtomicStopwatch', durationSeconds: 7.0, props: { label: 'STOPWATCH' } },
+      { id: 'SCENE_06', component: 'DynamicDocumentaryMedia', durationSeconds: 6.0 }
+    ]
+  });
+
+  assert.throws(
+    () => parseAndCalculateTimeline(missingPropsTimeline),
+    /TIMELINE_MISSING_EDITORIAL_PROPS/
+  );
+  console.log('✅ TEST A9 PASSOU: Cena sem props editoriais obrigatórias reprovada com TIMELINE_MISSING_EDITORIAL_PROPS.');
+} catch (err: any) {
+  console.error('❌ FALHA NO TEST A9:', err.message);
+  allPassed = false;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 10. TIMELINE_CALLOUT_INVALID (Proibição de kicker === título)
+// ─────────────────────────────────────────────────────────────────────────────
+console.log('\n[TEST A10] Validando TIMELINE_CALLOUT_INVALID para callout com título duplicando kicker...');
+try {
+  const invalidCalloutTimeline = createValidTimeline({
+    scenes: [
+      {
+        id: 'SCENE_01',
+        component: 'DynamicDocumentaryMedia',
+        durationSeconds: 8.0,
+        callout: { categoryText: 'DOSSIÊ', mainText: 'DOSSIÊ', subText: 'Sublabel' }
+      },
+      { id: 'SCENE_02', component: 'CinematicKeyframeDossier', durationSeconds: 8.0 },
+      { id: 'SCENE_03', component: 'TechnicalCutawaySchematic', durationSeconds: 5.0, props: { systemTitle: 'TITULO', compartmentName: 'COMP' } },
+      { id: 'SCENE_04', component: 'FlowDiscrepancyHUD', durationSeconds: 11.0, props: { card1Title: 'MED' } },
+      { id: 'SCENE_05', component: 'AtomicStopwatch', durationSeconds: 7.0, props: { label: 'STOPWATCH' } },
+      { id: 'SCENE_06', component: 'DynamicDocumentaryMedia', durationSeconds: 6.0 }
+    ]
+  });
+
+  assert.throws(
+    () => parseAndCalculateTimeline(invalidCalloutTimeline),
+    /TIMELINE_CALLOUT_INVALID/
+  );
+  console.log('✅ TEST A10 PASSOU: Callout com kicker === título reprovado com TIMELINE_CALLOUT_INVALID.');
+} catch (err: any) {
+  console.error('❌ FALHA NO TEST A10:', err.message);
+  allPassed = false;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 11. TIMELINE_HUD_COLLISION (Prevenção de sobreposição na mesma safe zone)
+// ─────────────────────────────────────────────────────────────────────────────
+console.log('\n[TEST A11] Validando TIMELINE_HUD_COLLISION para elementos concorrendo na mesma zona...');
+try {
+  const collisionTimeline = createValidTimeline({
+    scenes: [
+      {
+        id: 'SCENE_01',
+        component: 'DynamicDocumentaryMedia',
+        durationSeconds: 8.0,
+        callout: { categoryText: 'AUTUAÇÃO', mainText: 'INFRAÇÃO DETECTADA', subText: 'PORTARIA 559', position: 'top_center' }
+      },
+      { id: 'SCENE_02', component: 'CinematicKeyframeDossier', durationSeconds: 8.0 },
+      { id: 'SCENE_03', component: 'TechnicalCutawaySchematic', durationSeconds: 5.0, props: { systemTitle: 'TITULO', compartmentName: 'COMP' } },
+      { id: 'SCENE_04', component: 'FlowDiscrepancyHUD', durationSeconds: 11.0, props: { card1Title: 'MED' } },
+      { id: 'SCENE_05', component: 'AtomicStopwatch', durationSeconds: 7.0, props: { label: 'STOPWATCH' } },
+      { id: 'SCENE_06', component: 'DynamicDocumentaryMedia', durationSeconds: 6.0 }
+    ],
+    hudWindows: [
+      {
+        componentName: 'AtomicStopwatch',
+        zone: 'top_center',
+        props: { label: 'CRONOMETRO' },
+        appearances: [{ startScene: 0, seconds: 8 }] // Concorre na mesma cena 0 e mesma zona top_center
+      }
+    ]
+  });
+
+  assert.throws(
+    () => parseAndCalculateTimeline(collisionTimeline),
+    /TIMELINE_HUD_COLLISION/
+  );
+  console.log('✅ TEST A11 PASSOU: Conflito de HUD na mesma zona reprovado com TIMELINE_HUD_COLLISION.');
+} catch (err: any) {
+  console.error('❌ FALHA NO TEST A11:', err.message);
   allPassed = false;
 }
 

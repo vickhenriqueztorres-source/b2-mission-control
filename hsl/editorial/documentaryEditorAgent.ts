@@ -2,17 +2,18 @@ import fs from 'fs';
 import path from 'path';
 import {AgentTelemetryAdapter} from '../../adapters/agentTelemetryAdapter';
 import {EventBus} from '../../event-hub/eventBus';
+import {buildFireflyPrompt} from '../../contracts/buildFireflyPrompt';
+import {HSL_COLOR_TOKENS} from '../../config/visualIdentity';
 import {HslOverlaySpecV1, VisualSceneType} from '../types/overlaySpec';
 
 export type DocumentaryTechnique =
-  | 'PARALLAX_RACK_FOCUS_2_5D'
-  | 'CYBER_MAP_TRACE_3D'
-  | 'LASER_SCAN_DOSSIER'
-  | 'ANAMORPHIC_CINEMATIC_OVERLAY'
+  | 'OBSERVATIONAL_FIELD_TAKE'
+  | 'CARTOGRAPHIC_ROUTE_2D'
+  | 'DOCUMENT_EVIDENCE_DESK'
   | 'DOCUMENTARY_TEXT_TYPOGRAPHY'
   | 'ON_SCREEN_RESEARCH_LAPSE'
-  | 'TECHNICAL_CUTAWAY_SCHEMATIC'
-  | 'VLF_SUBMARINE_ANTENNA_TRACE';
+  | 'PHYSICAL_CUTAWAY_EVIDENCE'
+  | 'LOCATION_SIGNAL_TRACE';
 
 export interface DocumentaryScenePlan {
   sceneId: string;
@@ -45,9 +46,13 @@ export class DocumentaryEditorAgent {
   private readonly telemetry: AgentTelemetryAdapter;
 
   constructor(ragIndexPath?: string) {
-    this.ragIndexPath =
-      ragIndexPath ||
-      path.join(process.cwd(), 'assets', 'editorial-references', 'editor', 'editor-rag-index.json');
+    this.ragIndexPath = ragIndexPath || path.join(
+      process.cwd(),
+      'assets',
+      'editorial-references',
+      'editor',
+      'editor-rag-index.json',
+    );
     this.telemetry = AgentTelemetryAdapter.getInstance();
   }
 
@@ -59,78 +64,55 @@ export class DocumentaryEditorAgent {
   }
 
   public generateMasterStartFramePrompt(subject: string): string {
-    return (
-      `Extreme cinematic 35mm anamorphic still from a Denis Villeneuve film, ` +
-      `${subject}, monumental scale, atmospheric chiaroscuro lighting, deep carbon blacks (#060709), ` +
-      `illuminated by glowing sodium-vapor amber reflections (#FF5500) and sharp cyan laser telemetry lights (#00F0FF), ` +
-      `dense volumetric fog and steam, wet reflective ground, shallow depth of field, creamy anamorphic bokeh, ` +
-      `filmic texture, raw realistic industrial photography, 8k, no text, no human faces --ar 16:9`
-    );
+    return buildFireflyPrompt({
+      sceneId: 'MASTER_START_FRAME',
+      visualSubject: subject,
+      visual_must_include: [subject],
+      visual_must_not: [],
+      required_category: 'matter',
+      domainTags: ['present-day', 'on-location', 'documentary'],
+    }).prompt;
   }
 
-  /**
-   * Camada 1A: Blueprint Visual para o Remotion (com textos, HUD e layout de referência)
-   */
   public generateBlueprintPrompt(subject: string, title: string, subtitle?: string): string {
-    return (
-      `Cinematic documentary visual layout blueprint, Industrial X-Ray style, ` +
-      `scene: ${subject}. Title overlay: "${title.toUpperCase()}" ${subtitle ? `with subtitle "${subtitle}"` : ''}. ` +
-      `Deep carbon black (#060709) background with bright orange laser (#FF5500) split line, ` +
-      `cyan telemetry coordinates (#00F0FF), latency monitors, latency curve graph, system stress indicator, ` +
-      `O Outro Lado official branding, 4k editorial layout graphic design --ar 16:9`
-    );
+    return [
+      'Contemporary investigative documentary layout blueprint',
+      `real photographed scene: ${subject}`,
+      `small editorial title: "${title.toUpperCase()}"`,
+      subtitle ? `small supporting line: "${subtitle}"` : '',
+      'white typography placed over naturally dark negative space',
+      'one thin sodium-orange evidence mark',
+      'flat cartographic annotation only when factual',
+      'no permanent black bar, no HUD, no glow, no futuristic interface',
+      '--ar 16:9',
+    ].filter(Boolean).join(', ');
   }
 
-  /**
-   * Camada 1B: Frame Cinematográfico 100% Limpo para o Firefly Video
-   * (ZERO texto, ZERO números, ZERO HUD, ZERO logo, ZERO laser)
-   */
   public generateCleanFireflyPrompt(subject: string): string {
-    return (
-      `Cinematic 35mm photograph of ${subject}, monumental industrial scale, ` +
-      `dramatic chiaroscuro low-key lighting, dense volumetric atmospheric haze and steam, ` +
-      `wet reflective floor, subtle amber glow and soft cyan environmental accent lights, ` +
-      `creamy anamorphic bokeh, photorealistic physical cinema, 8k, ` +
-      `NO TEXT, NO NUMBERS, NO HUD, NO GRAPHICS, NO LOGOS, NO LASER LINES, NO LABELS, NO HUMAN FACES --ar 16:9`
-    );
+    return this.generateMasterStartFramePrompt(subject);
   }
 
-  /**
-   * Camada 1C: Camada Interna / Raio-X
-   */
   public generateXRayPrompt(subject: string): string {
-    return (
-      `Internal mechanical cross-section cutaway and technical X-Ray diagram of ${subject}, ` +
-      `illuminated in glowing sodium-vapor amber (#FF5500) and sharp cyan wireframe (#00F0FF), ` +
-      `carbon black backdrop (#060709), high contrast internal engineering components, 8k, no text --ar 16:9`
-    );
+    return buildFireflyPrompt({
+      sceneId: 'PHYSICAL_CUTAWAY',
+      visualSubject: `physical cutaway evidence of ${subject}, real components exposed or arranged for inspection`,
+      visual_must_include: [subject, 'commercially plausible components', 'observable material evidence'],
+      visual_must_not: ['glowing wireframe', 'holographic x-ray', 'invented internal mechanism'],
+      required_category: 'reveal',
+      domainTags: ['engineering', 'physical-evidence', 'documentary'],
+    }).prompt;
   }
 
-  /**
-   * Camada 2: Prompt de Movimento Físico para o Firefly Video
-   */
   public generateFireflyMotionPrompt(sceneType: string): string {
-    if (sceneType === 'industrial_xray') {
-      return (
-        `Slow cinematic dolly forward, subtle camera drift, blinking server rack LED lights, ` +
-        `gentle atmospheric fog drifting, smooth physical motion, no camera whip, no text, no UI`
-      );
+    if (sceneType === 'evidence') {
+      return 'Real macro rack focus from the physical component to its observable effect, subtle operator breathing, natural subject motion, no digital zoom, no text, no UI';
     }
     if (sceneType === 'map_data') {
-      return (
-        `Gentle 3D aerial perspective drift over dark terrain, subtle glowing fiber routes, ` +
-        `smooth continuous tracking, high quality cinematic motion`
-      );
+      return 'Slow elevated documentary camera movement over the real location, physical geography and infrastructure remain legible, no glowing route, no hologram, no UI';
     }
-    return (
-      `Slow cinematic push-in, subtle natural atmospheric movement, shallow depth of field, ` +
-      `cinematic lighting, smooth camera track, no fast panning`
-    );
+    return 'On-location observational camera, restrained shoulder drift and human reframing while the real operation moves, practical light behavior, no permanent push-in, no text, no UI';
   }
 
-  /**
-   * Camada 3: Compilador de Especificação de Overlay Remotion (overlay_spec.json)
-   */
   public createSceneOverlaySpec(scene: {
     sceneId: string;
     title: string;
@@ -139,66 +121,36 @@ export class DocumentaryEditorAgent {
     latencyMs?: number;
     stressPercent?: number;
   }): HslOverlaySpecV1 {
-    const visualType = scene.visualType || 'industrial_xray';
+    const telemetry = [];
+    if (scene.latencyMs !== undefined) {
+      telemetry.push({
+        type: 'metric' as const,
+        label: 'LATENCIA',
+        value: scene.latencyMs,
+        unit: 'ms',
+        accentColor: HSL_COLOR_TOKENS.LASER_CYAN,
+      });
+    }
+    if (scene.stressPercent !== undefined) {
+      telemetry.push({
+        type: 'stress' as const,
+        label: 'CARGA MEDIDA',
+        value: scene.stressPercent,
+        unit: '%',
+        accentColor: HSL_COLOR_TOKENS.SODIUM_ORANGE,
+      });
+    }
+
     return {
       schema: 'hsl.overlay.spec.v1',
       sceneId: scene.sceneId,
-      visualType,
+      visualType: scene.visualType || 'cinematic_real',
       title: scene.title,
-      subtitle: scene.subtitle || 'MILHÕES DE TRANSAÇÕES. UM ÚNICO GARGALO.',
+      subtitle: scene.subtitle,
       chapterTag: `CENA ${scene.sceneId.replace(/[^0-9]/g, '').padStart(2, '0') || '01'}`,
-      laser: {
-        direction: 'vertical',
-        position: 0.5,
-        color: '#FF5500',
-        startFrame: 20,
-        sweepDurationFrames: 50
-      },
-      telemetry: [
-        {
-          type: 'metric',
-          label: 'LATÊNCIA ATUAL',
-          value: scene.latencyMs || 132,
-          unit: 'ms',
-          idealThreshold: 'IDEAL < 100ms',
-          accentColor: '#FF5500'
-        },
-        {
-          type: 'stress',
-          label: 'ESTRESSE DO SISTEMA',
-          value: scene.stressPercent || 89,
-          unit: '%',
-          accentColor: '#FF5500'
-        },
-        {
-          type: 'status',
-          label: 'STATUS: SOB CARGA',
-          value: 'CAMADA: ANTI-FRAUDE',
-          accentColor: '#00F0FF'
-        }
-      ],
-      verificationFlow: [
-        {id: '1', label: 'RECEBIDO', status: 'completed'},
-        {id: '2', label: 'ANÁLISE', status: 'completed'},
-        {id: '3', label: 'VERIFICAÇÃO', status: 'active'},
-        {id: '4', label: 'DECISÃO', status: 'pending'}
-      ],
-      regulatorySource: {
-        sourceName: 'BANCO CENTRAL DO BRASIL',
-        documentTitle: 'RELATÓRIO DE INFRAESTRUTURA PIX',
-        timestamp: '24/05/2026 22:47:31'
-      },
-      branding: {
-        showLogo: true,
-        showTagline: true,
-        channelHandle: 'YOUTUBE.COM/0OUTROLADO',
-        taglineText: 'INVESTIGAR. REVELAR. COMPREENDER.'
-      },
-      targetResolution: {
-        width: 1920,
-        height: 1080,
-        aspectRatio: '16:9'
-      }
+      telemetry,
+      branding: {showLogo: false, showTagline: false},
+      targetResolution: {width: 1920, height: 1080, aspectRatio: '16:9'},
     };
   }
 
@@ -209,25 +161,21 @@ export class DocumentaryEditorAgent {
     visualSubject: string;
   }): DocumentaryScenePlan {
     const text = `${scene.narrativeFunction} ${scene.visualSubject}`.toLowerCase();
-    let technique: DocumentaryTechnique = 'PARALLAX_RACK_FOCUS_2_5D';
+    let technique: DocumentaryTechnique = 'OBSERVATIONAL_FIELD_TAKE';
 
     if (/antena|vlf|submarino|oceano|profundidade|onda eletromagnetica|trailing wire/i.test(text)) {
-      technique = 'VLF_SUBMARINE_ANTENNA_TRACE';
-    } else if (/corte transversal|cutaway|x-ray|chassis|fuselagem|motor|turbina|interior do aviao|compartimento|esquema tecnico/i.test(text)) {
-      technique = 'TECHNICAL_CUTAWAY_SCHEMATIC';
-    } else if (/map|rota|trajeto|cabo|fibra|duto|geografia|cidade|sp|barueri|brasilia|subterrane/i.test(text)) {
-      technique = 'CYBER_MAP_TRACE_3D';
+      technique = 'LOCATION_SIGNAL_TRACE';
+    } else if (/corte transversal|cutaway|x-ray|chassis|fuselagem|motor|turbina|compartimento|esquema tecnico/i.test(text)) {
+      technique = 'PHYSICAL_CUTAWAY_EVIDENCE';
+    } else if (/map|rota|trajeto|cabo|fibra|duto|geografia|cidade|subterrane/i.test(text)) {
+      technique = 'CARTOGRAPHIC_ROUTE_2D';
     } else if (/document|relat|contrat|banco central|bacen|regul|lei|clausula|portaria|anp/i.test(text)) {
-      technique = 'LASER_SCAN_DOSSIER';
+      technique = 'DOCUMENT_EVIDENCE_DESK';
     } else if (/pesquis|dado|codigo|log|ip|servidor|terminal|query|busca/i.test(text)) {
       technique = 'ON_SCREEN_RESEARCH_LAPSE';
     } else if (/tese|frase|impacto|revel|conclus|aviso|segredo/i.test(text)) {
       technique = 'DOCUMENTARY_TEXT_TYPOGRAPHY';
-    } else {
-      technique = 'PARALLAX_RACK_FOCUS_2_5D';
     }
-
-    const startFramePrompt = this.generateCleanFireflyPrompt(scene.visualSubject);
 
     return {
       sceneId: scene.sceneId,
@@ -235,57 +183,45 @@ export class DocumentaryEditorAgent {
       narrativeFunction: scene.narrativeFunction,
       visualSubject: scene.visualSubject,
       recommendedTechnique: technique,
-      startFramePromptFormula: startFramePrompt,
+      startFramePromptFormula: this.generateCleanFireflyPrompt(scene.visualSubject),
       overlayConfig: {
-        letterbox: true,
-        brackets: true,
+        letterbox: false,
+        brackets: false,
         filmGrain: true,
-        horizontalFlare: /reveal|climax|impact/i.test(scene.narrativeFunction)
+        horizontalFlare: false,
       },
       componentProps: {
-        accentColor: '#FF5500',
-        telemetryColor: '#00F0FF'
-      }
+        accentColor: HSL_COLOR_TOKENS.SODIUM_ORANGE,
+        telemetryColor: HSL_COLOR_TOKENS.LASER_CYAN,
+        overlayMaximumFrameRatio: 0.12,
+      },
     };
   }
 
   public compileDocumentaryPackage(
     productionId: string,
     scenes: Array<{sceneId: string; shotId: string; narrativeFunction: string; visualSubject: string}>,
-    outputDirectory: string
+    outputDirectory: string,
   ): DocumentaryEditPackage {
-    EventBus.getInstance().emit('AGENT_STARTED', {
-      agentName: 'DocumentaryEditorAgent',
-      productionId
-    });
+    EventBus.getInstance().emit('AGENT_STARTED', {agentName: 'DocumentaryEditorAgent', productionId});
+    const plannedScenes = scenes.map((scene) => this.planScene(scene));
 
-    const plannedScenes = scenes.map((s) => this.planScene(s));
-
-    // Gera o pacote individual de cada cena seguindo a arquitetura em 3 camadas
     for (const scene of plannedScenes) {
       const sceneDir = path.join(outputDirectory, scene.sceneId);
       fs.mkdirSync(sceneDir, {recursive: true});
-
-      // 1. Gera o arquivo de especificação Remotion (overlay_spec.json)
+      const isMap = scene.recommendedTechnique === 'CARTOGRAPHIC_ROUTE_2D' || scene.recommendedTechnique === 'LOCATION_SIGNAL_TRACE';
+      const isEvidence = scene.recommendedTechnique === 'DOCUMENT_EVIDENCE_DESK' || scene.recommendedTechnique === 'PHYSICAL_CUTAWAY_EVIDENCE';
       const overlaySpec = this.createSceneOverlaySpec({
         sceneId: scene.sceneId,
         title: scene.visualSubject.slice(0, 45).toUpperCase(),
-        subtitle: scene.narrativeFunction.replace(/_/g, ' ').toUpperCase()
+        subtitle: scene.narrativeFunction.replace(/_/g, ' ').toUpperCase(),
+        visualType: isMap ? 'map_data' : isEvidence ? 'document_evidence' : 'cinematic_real',
       });
-      fs.writeFileSync(
-        path.join(sceneDir, 'overlay_spec.json'),
-        JSON.stringify(overlaySpec, null, 2),
-        'utf8'
-      );
-
-      // 2. Gera a instrução de movimento limpo do Firefly (firefly_motion_prompt.txt)
-      const motionPrompt = this.generateFireflyMotionPrompt(
-        scene.recommendedTechnique === 'CYBER_MAP_TRACE_3D' ? 'map_data' : 'industrial_xray'
-      );
+      fs.writeFileSync(path.join(sceneDir, 'overlay_spec.json'), JSON.stringify(overlaySpec, null, 2), 'utf8');
       fs.writeFileSync(
         path.join(sceneDir, 'firefly_motion_prompt.txt'),
-        motionPrompt,
-        'utf8'
+        this.generateFireflyMotionPrompt(isMap ? 'map_data' : isEvidence ? 'evidence' : 'matter'),
+        'utf8',
       );
     }
 
@@ -293,23 +229,16 @@ export class DocumentaryEditorAgent {
       schema: 'hsl.documentary.edit-package.v1',
       productionId,
       generatedAt: new Date().toISOString(),
-      aesthetic: 'Villeneuve Cyber-Industrial (Denis Villeneuve 35mm Anamorphic)',
+      aesthetic: 'Documentario de Campo Investigativo v4.0',
       totalScenes: plannedScenes.length,
       scenes: plannedScenes,
-      masterStartFramePromptTemplate: this.generateMasterStartFramePrompt('[SUBJECT]')
+      masterStartFramePromptTemplate: this.generateMasterStartFramePrompt('[SUBJECT]'),
     };
 
     fs.mkdirSync(outputDirectory, {recursive: true});
     const packagePath = path.join(outputDirectory, 'documentary-edit-package.json');
     fs.writeFileSync(packagePath, JSON.stringify(editPackage, null, 2), 'utf8');
-
-    EventBus.getInstance().emit('AGENT_COMPLETED', {
-      agentName: 'DocumentaryEditorAgent',
-      productionId,
-      artifactPath: packagePath
-    });
-
+    EventBus.getInstance().emit('AGENT_COMPLETED', {agentName: 'DocumentaryEditorAgent', productionId, artifactPath: packagePath});
     return editPackage;
   }
 }
-

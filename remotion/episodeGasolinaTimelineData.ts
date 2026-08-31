@@ -156,6 +156,7 @@ export function buildGasolinaTimelineContract(): TimelineContractInput {
     hudWindows: [
       {
         componentName: 'AtomicStopwatch',
+        props: { label: 'CRONÔMETRO DE VAZÃO // MEDIÇÃO FORENSE' },
         appearances: [
           { startScene: 3, seconds: 8 },
           { startScene: 12, seconds: 8 },
@@ -198,6 +199,14 @@ export function buildGasolinaTimelineContract(): TimelineContractInput {
         systemStressPercent: s.sceneId === 'GAS_015' ? 98 : 42,
         sourceText: 'FONTE: INMETRO // PORTARIA 559 METROLOGIA LEGAL',
         dateText: 'TELEMETRIA: BOMBA DE COMBUSTÍVEL DIGITAL',
+        meterTitle: 'BLOCO MEDIDOR DE DESLOCAMENTO POSITIVO 250ML',
+        systemTitle: 'SISTEMA HIDRÁULICO DA BOMBA DE COMBUSTÍVEL',
+        compartmentName: 'CÂMARA DE PISTÕES MECÂNICOS',
+        pulserCount: '200 PULSOS POR LITRO',
+        card1Title: 'DESVIO METROLÓGICO (-8.4%)',
+        headerTitle: 'AUDITORIA METROLÓGICA INMETRO',
+        documentTitle: 'LAUDO TÉCNICO DE CALIBRAÇÃO',
+        criticalClause: 'PORTARIA INMETRO 559 // ERRO MÁXIMO TOLERADO ±0.5%',
         kenBurns: s.motionMode || 'slow_push_in',
         zoomIntensity: 1.15,
         isDossierTake: s.take_type === 'KEYFRAME_DOSSIER',

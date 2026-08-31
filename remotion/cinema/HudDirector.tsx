@@ -31,7 +31,7 @@ export interface HudDirectorProps {
 export const HudDirector: React.FC<HudDirectorProps> = ({
   totalFrames,
   hudWindows = [],
-  showMasterStopwatch = true,
+  showMasterStopwatch = false,
   accentColor = '#FF5500',
   telemetryColor = '#00F0FF',
   children
@@ -56,7 +56,7 @@ export const HudDirector: React.FC<HudDirectorProps> = ({
         <div
           style={{
             position: 'absolute',
-            top: '16px',
+            top: '104px',
             left: 0,
             right: 0,
             display: 'flex',
@@ -157,7 +157,12 @@ export const HudDirector: React.FC<HudDirectorProps> = ({
               style={{
                 color: CINEMATIC_TYPOGRAPHY.COLORS.TEXT_PRIMARY,
                 fontSize: '13px',
-                lineHeight: 1.4
+                lineHeight: 1.4,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                display: '-webkit-box',
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: 'vertical'
               }}
             >
               {win.props?.title || win.component}
@@ -168,7 +173,10 @@ export const HudDirector: React.FC<HudDirectorProps> = ({
                   marginTop: '6px',
                   fontSize: CINEMATIC_TYPOGRAPHY.SIZES.TELEMETRY_DATA,
                   color: accentColor,
-                  fontWeight: 'bold'
+                  fontWeight: 'bold',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap'
                 }}
               >
                 STATUS: {win.props.status}

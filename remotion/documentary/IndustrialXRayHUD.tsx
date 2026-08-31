@@ -24,19 +24,15 @@ export interface IndustrialXRayHUDProps {
  */
 export const IndustrialXRayHUD: React.FC<IndustrialXRayHUDProps> = ({
   spec,
-  sceneNumber = 'CENA 04',
-  title = 'O PONTO DE ESTRANGULAMENTO',
-  subtitle = 'MILHÕES DE TRANSAÇÕES. UM ÚNICO GARGALO.',
-  bulletPoints = [
-    'MILHÕES DE TRANSAÇÕES.',
-    'UM ÚNICO GARGALO.',
-    'A DECISÃO ACONTECE EM MILISSEGUNDOS.'
-  ],
-  latencyMs = 132,
-  transactionsPerSec = '3.842 tx/s',
-  systemStressPercent = 89,
-  sourceText = 'FONTE: BANCO CENTRAL DO BRASIL / INFRAESTRUTURA PIX',
-  dateText = 'DATA: 24/05/2026 22:47:31',
+  sceneNumber = '',
+  title = '',
+  subtitle = '',
+  bulletPoints = [],
+  latencyMs = 0,
+  transactionsPerSec = '',
+  systemStressPercent = 0,
+  sourceText = '',
+  dateText = '',
   accentColor = '#FF5500',
   telemetryColor = '#00F0FF'
 }) => {

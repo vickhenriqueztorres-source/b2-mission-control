@@ -10,22 +10,42 @@ import {
 export interface VelocityPhysicsCalculationHUDProps {
   accentColor?: string;
   telemetryColor?: string;
+  headerTag?: string;
+  headerFormula?: string;
+  headerFormulaSubtitle?: string;
+  circuitTitle?: string;
+  circuitFormula?: string;
+  loop01Label?: string;
+  loop02Label?: string;
+  measuredIntervalLabel?: string;
+  measuredValueFormatted?: string;
+  calculatedValueLabel?: string;
+  calculatedValueNumber?: number;
+  calculatedUnit?: string;
+  statusLines?: Array<{ label: string; value: string; color?: string }>;
   measuredSpeed?: number;
   timeDeltaMicros?: number;
   durationInFrames?: number;
 }
 
-/**
- * HUD 3D de Física e Cálculo de Velocidade em Microssegundos (O Outro Lado / HSL)
- * Demonstra a física do radar de solo:
- * V = ΔS / ΔT -> 3,00m / 0,060000s = 50 m/s = 180 km/h (ou 118 km/h).
- * Oscilador LC, curva de ressonância eletromagnética e telemetria vetorial.
- */
 export const VelocityPhysicsCalculationHUD: React.FC<VelocityPhysicsCalculationHUDProps> = ({
   accentColor = '#FF5500',
   telemetryColor = '#00F0FF',
-  measuredSpeed = 118,
-  timeDeltaMicros = 91525, // 91.525 µs para ~118 km/h em 3m
+  headerTag = '',
+  headerFormula = '',
+  headerFormulaSubtitle = '',
+  circuitTitle = '',
+  circuitFormula = '',
+  loop01Label = '',
+  loop02Label = '',
+  measuredIntervalLabel = '',
+  measuredValueFormatted = '',
+  calculatedValueLabel = '',
+  calculatedValueNumber = 0,
+  calculatedUnit = '',
+  statusLines = [],
+  measuredSpeed = 0,
+  timeDeltaMicros = 0,
   durationInFrames = 180
 }) => {
   const frame = useCurrentFrame();
@@ -120,29 +140,31 @@ export const VelocityPhysicsCalculationHUD: React.FC<VelocityPhysicsCalculationH
 
       {/* 2. Cabeçalho da Equação Mestra */}
       <div style={{position: 'absolute', top: 70, left: 90, zIndex: 30}}>
-        <div
-          style={{
-            fontSize: 13,
-            color: telemetryColor,
-            letterSpacing: 4,
-            fontWeight: 800,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 10,
-            marginBottom: 6
-          }}
-        >
+        {headerTag ? (
           <div
             style={{
-              width: 8,
-              height: 8,
-              borderRadius: '50%',
-              backgroundColor: accentColor,
-              boxShadow: `0 0 12px ${accentColor}`
+              fontSize: 13,
+              color: telemetryColor,
+              letterSpacing: 4,
+              fontWeight: 800,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 10,
+              marginBottom: 6
             }}
-          />
-          MICROPROCESSADOR EMBARCADO // FÓRMULA DE MEDIÇÃO CINEMÁTICA
-        </div>
+          >
+            <div
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
+                backgroundColor: accentColor,
+                boxShadow: `0 0 12px ${accentColor}`
+              }}
+            />
+            {headerTag}
+          </div>
+        ) : null}
         <div
           style={{
             fontFamily: "'Inter', sans-serif",
@@ -155,10 +177,12 @@ export const VelocityPhysicsCalculationHUD: React.FC<VelocityPhysicsCalculationH
             gap: 20
           }}
         >
-          <span>V = ΔS / ΔT</span>
-          <span style={{fontSize: 24, color: accentColor, fontWeight: 700}}>
-            [ EQUAÇÃO DE MICROSSEGUNDOS ]
-          </span>
+          {headerFormula ? <span>{headerFormula}</span> : null}
+          {headerFormulaSubtitle ? (
+            <span style={{fontSize: 24, color: accentColor, fontWeight: 700}}>
+              {headerFormulaSubtitle}
+            </span>
+          ) : null}
         </div>
       </div>
 
@@ -180,10 +204,10 @@ export const VelocityPhysicsCalculationHUD: React.FC<VelocityPhysicsCalculationH
       >
         <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: 12}}>
           <span style={{fontSize: 13, color: telemetryColor, letterSpacing: 2}}>
-            VARIAÇÃO DE RESSONÂNCIA LC (CIRCUITO TANQUE)
+            {circuitTitle}
           </span>
           <span style={{fontSize: 13, color: accentColor, fontWeight: 800}}>
-            f = 1 / (2π√LC)
+            {circuitFormula}
           </span>
         </div>
 
@@ -221,48 +245,52 @@ export const VelocityPhysicsCalculationHUD: React.FC<VelocityPhysicsCalculationH
           </svg>
 
           {/* Marcadores de Trigger T0 e T1 */}
-          <div
-            style={{
-              position: 'absolute',
-              top: 10,
-              left: 140,
-              fontSize: 11,
-              color: telemetryColor,
-              backgroundColor: 'rgba(0,240,255,0.15)',
-              padding: '2px 6px',
-              borderRadius: 3
-            }}
-          >
-            LAÇO 1 [T0]
-          </div>
-          <div
-            style={{
-              position: 'absolute',
-              top: 10,
-              right: 140,
-              fontSize: 11,
-              color: accentColor,
-              backgroundColor: 'rgba(255,85,0,0.15)',
-              padding: '2px 6px',
-              borderRadius: 3
-            }}
-          >
-            LAÇO 2 [T1]
-          </div>
+          {loop01Label ? (
+            <div
+              style={{
+                position: 'absolute',
+                top: 10,
+                left: 140,
+                fontSize: 11,
+                color: telemetryColor,
+                backgroundColor: 'rgba(0,240,255,0.15)',
+                padding: '2px 6px',
+                borderRadius: 3
+              }}
+            >
+              {loop01Label}
+            </div>
+          ) : null}
+          {loop02Label ? (
+            <div
+              style={{
+                position: 'absolute',
+                top: 10,
+                right: 140,
+                fontSize: 11,
+                color: accentColor,
+                backgroundColor: 'rgba(255,85,0,0.15)',
+                padding: '2px 6px',
+                borderRadius: 3
+              }}
+            >
+              {loop02Label}
+            </div>
+          ) : null}
         </div>
 
         {/* Barra de Progresso Temporal de Amostragem */}
         <div style={{marginTop: 16}}>
           <div style={{display: 'flex', justifyContent: 'space-between', fontSize: 12, color: '#8A8D9F', marginBottom: 6}}>
-            <span>INTERVALO MEDIDO (ΔT):</span>
+            <span>{measuredIntervalLabel || 'INTERVALO MEDIDO:'}</span>
             <span style={{color: '#F4F4F0', fontWeight: 800, fontSize: 14}}>
-              {currentMicros.toLocaleString('pt-BR')} µs (0,0915 s)
+              {measuredValueFormatted || (timeDeltaMicros > 0 ? `${currentMicros.toLocaleString('pt-BR')} µs` : '')}
             </span>
           </div>
           <div style={{width: '100%', height: 6, backgroundColor: '#060709', borderRadius: 3, overflow: 'hidden'}}>
             <div
               style={{
-                width: `${(currentMicros / timeDeltaMicros) * 100}%`,
+                width: `${timeDeltaMicros > 0 ? (currentMicros / timeDeltaMicros) * 100 : 100}%`,
                 height: '100%',
                 backgroundColor: accentColor,
                 boxShadow: `0 0 10px ${accentColor}`
@@ -272,7 +300,7 @@ export const VelocityPhysicsCalculationHUD: React.FC<VelocityPhysicsCalculationH
         </div>
       </div>
 
-      {/* 4. Display Gigante de Velocidade Calculada à Direita */}
+      {/* 4. Display Gigante de Valor Calculado à Direita */}
       <div
         style={{
           position: 'absolute',
@@ -289,9 +317,11 @@ export const VelocityPhysicsCalculationHUD: React.FC<VelocityPhysicsCalculationH
           boxShadow: `0 0 50px ${accentColor}30, inset 0 0 30px rgba(0,0,0,0.8)`
         }}
       >
-        <div style={{fontSize: 13, color: telemetryColor, letterSpacing: 3, fontWeight: 800, marginBottom: 12}}>
-          VELOCIDADE CALCULADA
-        </div>
+        {calculatedValueLabel ? (
+          <div style={{fontSize: 13, color: telemetryColor, letterSpacing: 3, fontWeight: 800, marginBottom: 12}}>
+            {calculatedValueLabel}
+          </div>
+        ) : null}
 
         <div
           style={{
@@ -304,32 +334,32 @@ export const VelocityPhysicsCalculationHUD: React.FC<VelocityPhysicsCalculationH
             textShadow: `0 0 40px ${accentColor}80`
           }}
         >
-          {currentSpeed}
+          {calculatedValueNumber || currentSpeed}
         </div>
-        <div style={{fontSize: 20, color: accentColor, fontWeight: 800, letterSpacing: 4, marginTop: 8}}>
-          KM / H
-        </div>
+        {calculatedUnit ? (
+          <div style={{fontSize: 20, color: accentColor, fontWeight: 800, letterSpacing: 4, marginTop: 8}}>
+            {calculatedUnit}
+          </div>
+        ) : null}
 
-        <div
-          style={{
-            marginTop: 24,
-            paddingTop: 16,
-            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-            fontSize: 12,
-            color: '#8A8D9F',
-            textAlign: 'left'
-          }}
-        >
-          <div style={{marginBottom: 4}}>
-            LIMITE DA VIA: <strong style={{color: '#F4F4F0'}}>100 KM/H</strong>
+        {statusLines && statusLines.length > 0 ? (
+          <div
+            style={{
+              marginTop: 24,
+              paddingTop: 16,
+              borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+              fontSize: 12,
+              color: '#8A8D9F',
+              textAlign: 'left'
+            }}
+          >
+            {statusLines.map((line, idx) => (
+              <div key={idx} style={{marginBottom: 4}}>
+                {line.label}: <strong style={{color: line.color || '#F4F4F0'}}>{line.value}</strong>
+              </div>
+            ))}
           </div>
-          <div style={{marginBottom: 4}}>
-            STATUS: <strong style={{color: '#FF3333'}}>ACIMA DO LIMITE REGULAMENTAR</strong>
-          </div>
-          <div>
-            DISPARO DE CÂMERA: <strong style={{color: telemetryColor}}>ATIVADO (FLASH IR)</strong>
-          </div>
-        </div>
+        ) : null}
       </div>
     </AbsoluteFill>
   );

@@ -1,0 +1,39 @@
+{
+  "schema": "hsl.documentary-field.reference-set.v4",
+  "name": "Documentary Field Reference Set V4",
+  "status": "APPROVED_VISUAL_IDENTITY",
+  "authority": "IDENTIDADE_VISUAL.md",
+  "visual_standard": "present-day physical reality + observational camera + restrained editorial evidence",
+  "items": [
+    {
+      "id": "OBSERVATIONAL_FIELD",
+      "file": "observational-field.png",
+      "best_use": "matter",
+      "sha256": "0b885812cfe45e2b18c890673ea3dfd8a17f039706b839fd9eef443cdb0990b9"
+    },
+    {
+      "id": "FIELD_REPORTAGE",
+      "file": "field-reportage.png",
+      "best_use": "matter",
+      "sha256": "03ac80b1c15b5818b21ff4ea004dca9a1c788974f4ce6df291c8d6503cdff14c"
+    },
+    {
+      "id": "PHYSICAL_EVIDENCE",
+      "file": "physical-evidence.png",
+      "best_use": "evidence",
+      "sha256": "dc33e2ffbc3a4dacad28a22b7d730827c55287676f7737fd2f351d0b77af2354"
+    },
+    {
+      "id": "OPERATIONAL_SCALE",
+      "file": "operational-scale.png",
+      "best_use": "maps",
+      "sha256": "23bea35d6d56c5d446a2fab075be336437bf3d482dd5cbd05270a2b8b8a08b2f"
+    }
+  ],
+  "production_rules": [
+    "The subject and physical action stay visible while editorial graphics are present.",
+    "Use current commercially plausible equipment and a real operating environment.",
+    "Do not use holograms, floating HUDs, decorative lasers, dominant neon or staged fog.",
+    "Editorial overlays locate, compare or prove; they never replace physical footage."
+  ]
+}

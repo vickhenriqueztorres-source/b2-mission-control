@@ -10,6 +10,8 @@ import { RunManifest } from './runManifest';
 import { Logger } from '../event-hub/logger';
 import { AgentTelemetryAdapter } from '../adapters/agentTelemetryAdapter';
 import { ProductionSafetyGuard } from '../config/productionSafetyGuard';
+import { buildFireflyPrompt } from '../contracts/buildFireflyPrompt';
+import { IDENTITY_SUFFIX, GLOBAL_NEGATIVE } from '../config/visualIdentity';
 
 export interface HybridSceneInput {
   scene_id: string;
@@ -25,6 +27,7 @@ export interface HybridSceneInput {
   callout_category?: string;
   motion_mode?: string;
   tags?: string[];
+  domain_tags?: string[];
   required_category?: string;
   visual_must_include?: string[];
   visual_must_not?: string[];
@@ -34,6 +37,7 @@ export interface HybridSceneInput {
 export interface HybridVideoEngineOptions {
   runId: string;
   scenes: HybridSceneInput[];
+  domainTags?: string[];
   runDirectory: string;
   publicExecutionDirectory: string;
   mode?: VideoExecutionMode;
@@ -93,6 +97,7 @@ export class HybridVideoEngine {
       sceneDir: string;
       pubSceneDir: string;
       prompt: string;
+      negativePrompt?: string;
       startFramePath: string;
     }> = [];
 
@@ -103,6 +108,22 @@ export class HybridVideoEngine {
 
     const txtPrompts: string[] = [];
     const jsonlPrompts: string[] = [];
+
+    // Validação de integridade de negativas específicas:
+    if (scenes.length > 1) {
+      const firstNeg = scenes[0].visual_must_not ? JSON.stringify([...scenes[0].visual_must_not].sort()) : null;
+      if (firstNeg !== null) {
+        const allIdentical = scenes.every(sc => {
+          const currentNeg = sc.visual_must_not ? JSON.stringify([...sc.visual_must_not].sort()) : null;
+          return currentNeg === firstNeg;
+        });
+        if (allIdentical) {
+          throw new Error(
+            `SCENES_NEGATIVE_NOT_SPECIFIC: O episódio '${runId}' possui 'visual_must_not' idêntico em todas as ${scenes.length} cenas (negativo copiado). Cada cena deve conter negações específicas do seu contexto.`
+          );
+        }
+      }
+    }
 
     // ══════════════════════════════════════════════════════════════════════
     // FASE 1: Avaliação e Triagem Semântica das Cenas
@@ -122,13 +143,19 @@ export class HybridVideoEngine {
 
       const isDossier = sc.take_type === 'KEYFRAME_DOSSIER';
 
-      // 1. Gera o prompt Master Denis Villeneuve 35mm
-      let promptMaster = '';
-      if (isDossier && sc.integrated_text) {
-        promptMaster = `Extreme cinematic 35mm anamorphic still from a Denis Villeneuve film, ${sc.visual_subject}, monumental scale, atmospheric chiaroscuro lighting, deep carbon blacks (#060709). Featuring a sharp industrial digital display or metallic embossed faceplate clearly showing the bold text "${sc.integrated_text}" illuminated in glowing sodium-vapor amber (#FF5500) and laser cyan (#00F0FF) telemetry coordinates. Dense volumetric fog and steam, wet metallic reflection, shallow depth of field, creamy anamorphic bokeh, filmic texture, raw realistic industrial photography, 8k, no human faces --ar 16:9`;
-      } else {
-        promptMaster = `Extreme cinematic 35mm anamorphic still from a Denis Villeneuve film, ${sc.visual_subject}, monumental scale, atmospheric chiaroscuro lighting, deep carbon blacks (#060709), illuminated by glowing sodium-vapor amber reflections (#FF5500) and sharp cyan laser telemetry lights (#00F0FF), dense volumetric fog and steam, wet reflective ground, shallow depth of field, creamy anamorphic bokeh, filmic texture, raw realistic industrial photography, 8k, no text, no human faces --ar 16:9`;
-      }
+      // 1. Gera o prompt governado através de buildFireflyPrompt
+      const promptResult = buildFireflyPrompt({
+        sceneId: sc.scene_id,
+        visual_subject: sc.visual_subject,
+        visual_must_include: sc.visual_must_include,
+        visual_must_not: sc.visual_must_not,
+        required_category: sc.required_category,
+        domainTags: (sc as any).domain_tags || (sc as any).domainTags || sc.tags || [],
+        take_type: sc.take_type
+      });
+
+      const promptMaster = promptResult.prompt;
+      const negativePrompt = promptResult.negativePrompt;
 
       fs.writeFileSync(path.join(sceneDir, 'clean_start_frame_prompt.txt'), promptMaster, 'utf8');
 
@@ -137,12 +164,13 @@ export class HybridVideoEngine {
         name: sc.name,
         takeType: isDossier ? 'KEYFRAME_DOSSIER' : 'CINEMATIC_TAKE',
         integratedText: sc.integrated_text,
-        prompt: promptMaster
+        prompt: promptMaster,
+        negativePrompt: negativePrompt
       };
       fs.writeFileSync(path.join(sceneDir, 'scene_plan.json'), JSON.stringify(scenePlanData, null, 2), 'utf8');
 
       txtPrompts.push(`[${sc.scene_id}] ${promptMaster}`);
-      jsonlPrompts.push(JSON.stringify({ id: sc.scene_id, prompt: promptMaster, filename: `${sc.scene_id}.png`, takeType: scenePlanData.takeType }, null, 0));
+      jsonlPrompts.push(JSON.stringify({ id: sc.scene_id, prompt: promptMaster, negativePrompt, filename: `${sc.scene_id}.png`, takeType: scenePlanData.takeType }, null, 0));
 
       const startFramePath = path.join(sceneDir, 'firefly_start_frame.png');
       const pubStartFramePath = path.join(pubSceneDir, 'firefly_start_frame.png');
@@ -179,6 +207,7 @@ export class HybridVideoEngine {
         chapterTitle: sc.chapter_title,
         visualSubject: sc.visual_subject,
         tags: sc.tags || [],
+        domainTags: sc.domain_tags || options.domainTags || [],
         requiredCategory: sc.required_category,
         visualMustInclude: sc.visual_must_include,
         visualMustNot: sc.visual_must_not,
@@ -236,6 +265,7 @@ export class HybridVideoEngine {
           sceneDir,
           pubSceneDir,
           prompt: promptMaster,
+          negativePrompt: negativePrompt,
           startFramePath
         });
 
@@ -271,9 +301,10 @@ export class HybridVideoEngine {
         sceneId: item.scene.scene_id,
         takeType: 'CINEMATIC_TAKE',
         prompt: item.prompt,
+        negativePrompt: item.negativePrompt,
         image: path.basename(item.startFramePath),
         duration_seconds: 5,
-        resolution: '720p',
+        resolution: '1080p',
         aspect_ratio: '16:9'
       }));
 
@@ -297,14 +328,21 @@ export class HybridVideoEngine {
           origin: 'firefly_real' as const
         }));
       } catch (err: any) {
-        Logger.warn('HybridVideoEngine', `⚠️ Firefly Bot encontrou exceção: ${err.message}. Aplicando fallback com interpolação de movimento de alta fidelidade.`);
+        Logger.warn('HybridVideoEngine', `⚠️ Firefly Bot encontrou exceção: ${err.message}. Aplicando fallback determinístico Remotion 2.5D.`);
         
-        // Em caso de falha de conexão no bot, gera take de contingência com FFmpeg Ken Burns 60fps
+        // Em caso de falha de conexão no bot, aplica fallback determinístico Remotion 2.5D
         for (const pending of fireflyPendingScenes) {
-          const targetVideo = path.join(pending.sceneDir, 'firefly_take.mp4');
-          const vf = "scale=1920:1080,zoompan=z='min(zoom+0.0015,1.25)':d=180:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1920x1080";
-          execSync(`ffmpeg -y -loop 1 -i "${pending.startFramePath}" -vf "${vf}" -c:v libx264 -t 6 -pix_fmt yuv420p "${targetVideo}"`, { stdio: 'ignore' });
-          completedJobs.push({ name: pending.scene.scene_id, output_path: targetVideo, origin: 'fallback_kenburns' });
+          sceneOutcomes[pending.scene.scene_id] = {
+            action: 'KEYFRAME_DOSSIER_2.5D',
+            startFramePath: pending.startFramePath,
+            takeOrigin: 'dossier_25d',
+            reason: `FALLBACK_REMOTION_PARALLAX: Geração on-demand indisponível (${err.message}). Fallback determinístico Remotion 2.5D registrado.`
+          };
+          availableMedia[pending.scene.scene_id] = {
+            hasVideo: false,
+            hasImage: true,
+            isDossier: true
+          };
         }
       }
 

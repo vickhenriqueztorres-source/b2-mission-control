@@ -29,7 +29,7 @@
       "description": "Câmera avançando em direção a estrutura de concreto monumental em 35mm chiaroscuro.",
       "durationSeconds": 6.016,
       "fps": 24,
-      "resolution": "1280x720",
+      "resolution": "1920x1080",
       "colorTone": "Chiaroscuro / Deep Steel",
       "recommendedMotion": "slow_push_in",
       "sha256": "f8ce973aeae93ec099efa4ce74d5ff55e73a681b9d0d516423de02a3e6689eaf",
@@ -37,7 +37,12 @@
       "qaStatus": "approved",
       "provenance": "curated_broll",
       "approvedBy": "backfill_script",
-      "approvedAt": "2026-08-30T02:56:20.743Z"
+      "approvedAt": "2026-08-30T02:56:20.743Z",
+      "domains": [
+        "infrastructure",
+        "urban",
+        "civil_engineering"
+      ]
     },
     {
       "id": "INFRA_CAR_CROSSING_STREET_01",
@@ -56,7 +61,7 @@
       "description": "Carro cruzando rua residencial observada em ângulo documental 35mm.",
       "durationSeconds": 6.016,
       "fps": 24,
-      "resolution": "1280x720",
+      "resolution": "1920x1080",
       "colorTone": "Low-Key / Sodium Amber",
       "recommendedMotion": "slow_push_in",
       "sha256": "69940253b195398a2e4360fd3fd6a4fd9a958b6bd3c320512e6777e8dd973246",
@@ -64,7 +69,13 @@
       "qaStatus": "approved",
       "provenance": "curated_broll",
       "approvedBy": "backfill_script",
-      "approvedAt": "2026-08-30T02:56:20.743Z"
+      "approvedAt": "2026-08-30T02:56:20.743Z",
+      "domains": [
+        "infrastructure",
+        "urban",
+        "transportation",
+        "traffic"
+      ]
     },
     {
       "id": "ATMOS_CITY_SKYLINE_DAWN_01",
@@ -84,7 +95,7 @@
       "description": "Skyline urbano de metrópole ao amanhecer com luz suave e névoa atmosférica.",
       "durationSeconds": 6.016,
       "fps": 24,
-      "resolution": "1280x720",
+      "resolution": "1920x1080",
       "colorTone": "Chiaroscuro / Muted Slate",
       "recommendedMotion": "cinematic_drift",
       "sha256": "ab80ff866ca4be08a518a3d099f7e693821ce4b28ab15982d3fe172a89ed89d5",
@@ -92,7 +103,12 @@
       "qaStatus": "approved",
       "provenance": "curated_broll",
       "approvedBy": "backfill_script",
-      "approvedAt": "2026-08-30T02:56:20.743Z"
+      "approvedAt": "2026-08-30T02:56:20.743Z",
+      "domains": [
+        "urban",
+        "atmospheric",
+        "cityscape"
+      ]
     },
     {
       "id": "ATMOS_CLOUDS_OVER_NEIGHBORHOOD_01",
@@ -111,7 +127,7 @@
       "description": "Nuvens densas se movendo sobre área urbana em escala documental.",
       "durationSeconds": 6.016,
       "fps": 24,
-      "resolution": "1280x720",
+      "resolution": "1920x1080",
       "colorTone": "Atmospheric Fog",
       "recommendedMotion": "cinematic_drift",
       "sha256": "0563d3759a27f3f578a3baf13fdb8fc32a5b10f1dffbf94992898b7f652c4acc",
@@ -119,7 +135,12 @@
       "qaStatus": "approved",
       "provenance": "curated_broll",
       "approvedBy": "backfill_script",
-      "approvedAt": "2026-08-30T02:56:20.743Z"
+      "approvedAt": "2026-08-30T02:56:20.743Z",
+      "domains": [
+        "atmospheric",
+        "urban",
+        "weather"
+      ]
     },
     {
       "id": "IND_FORKLIFT_WAREHOUSE_01",
@@ -138,7 +159,7 @@
       "description": "Empilhadeira operando e manobrando cargas em centro de distribuição logístico.",
       "durationSeconds": 6.016,
       "fps": 24,
-      "resolution": "1280x720",
+      "resolution": "1920x1080",
       "colorTone": "Sodium Amber / Industrial",
       "recommendedMotion": "cinematic_drift",
       "sha256": "6f0591b5a823c3028dc126c76f6037aa0878822dadff0ab66764c0b9b23149a3",
@@ -146,7 +167,12 @@
       "qaStatus": "approved",
       "provenance": "curated_broll",
       "approvedBy": "backfill_script",
-      "approvedAt": "2026-08-30T02:56:20.743Z"
+      "approvedAt": "2026-08-30T02:56:20.743Z",
+      "domains": [
+        "logistics",
+        "industrial",
+        "supply_chain"
+      ]
     },
     {
       "id": "INFRA_FREIGHT_TRAIN_TRACKS_01",
@@ -165,7 +191,7 @@
       "description": "Trem de carga pesado em movimento lateral sobre malha ferroviária.",
       "durationSeconds": 6.016,
       "fps": 24,
-      "resolution": "1280x720",
+      "resolution": "1920x1080",
       "colorTone": "Deep Steel / Chiaroscuro",
       "recommendedMotion": "cinematic_drift",
       "sha256": "9095535088644c22f831e31afadfcce86437a13b34eb46aafd692111bd5f8efd",
@@ -173,7 +199,13 @@
       "qaStatus": "approved",
       "provenance": "curated_broll",
       "approvedBy": "backfill_script",
-      "approvedAt": "2026-08-30T02:56:20.743Z"
+      "approvedAt": "2026-08-30T02:56:20.743Z",
+      "domains": [
+        "transportation",
+        "infrastructure",
+        "railway",
+        "logistics"
+      ]
     },
     {
       "id": "IND_GLOVED_HAND_VALVE_01",
@@ -194,7 +226,7 @@
       "description": "Mão com luva industrial de segurança girando válvula de alta pressão em tubulação.",
       "durationSeconds": 6.016,
       "fps": 24,
-      "resolution": "1280x720",
+      "resolution": "1920x1080",
       "colorTone": "Industrial Chiaroscuro",
       "recommendedMotion": "slow_push_in",
       "sha256": "6664cbc38ecb4ebd3d136ab534df9d67db590aa3048de32231d2fa62e1dcf732",
@@ -202,7 +234,13 @@
       "qaStatus": "approved",
       "provenance": "curated_broll",
       "approvedBy": "backfill_script",
-      "approvedAt": "2026-08-30T02:56:20.743Z"
+      "approvedAt": "2026-08-30T02:56:20.743Z",
+      "domains": [
+        "industrial",
+        "hydraulics",
+        "infrastructure",
+        "utilities"
+      ]
     },
     {
       "id": "CYBER_HANDS_COMPARING_DOCUMENTS_01",
@@ -222,7 +260,7 @@
       "description": "Mãos examinando e comparando relatórios e documentos técnicos em visão superior de investigação.",
       "durationSeconds": 6.016,
       "fps": 24,
-      "resolution": "1280x720",
+      "resolution": "1920x1080",
       "colorTone": "Documentary Desk / Frosted",
       "recommendedMotion": "slow_push_in",
       "sha256": "7ecf9f44a0ad0c39dcadef5a3d0ca1a0c73047473cab509d82d3d93df56545ee",
@@ -230,7 +268,14 @@
       "qaStatus": "approved",
       "provenance": "curated_broll",
       "approvedBy": "backfill_script",
-      "approvedAt": "2026-08-30T02:56:20.743Z"
+      "approvedAt": "2026-08-30T02:56:20.743Z",
+      "domains": [
+        "audit",
+        "investigation",
+        "cyber_telemetry",
+        "finance",
+        "regulatory"
+      ]
     },
     {
       "id": "CYBER_PHONE_ROOFTOP_ANTENNA_01",
@@ -251,7 +296,7 @@
       "description": "Mão segurando e ajustando smartphone no topo de edifício com antenas de telecomunicação.",
       "durationSeconds": 6.016,
       "fps": 24,
-      "resolution": "1280x720",
+      "resolution": "1920x1080",
       "colorTone": "Laser Cyan / Amber",
       "recommendedMotion": "slow_push_in",
       "sha256": "f13ca1c0ead14bd612c3ebb9d60f848ea76ebac2d9fe3ef63ea41cac305d7148",
@@ -259,7 +304,13 @@
       "qaStatus": "approved",
       "provenance": "curated_broll",
       "approvedBy": "backfill_script",
-      "approvedAt": "2026-08-30T02:56:20.743Z"
+      "approvedAt": "2026-08-30T02:56:20.743Z",
+      "domains": [
+        "telecommunications",
+        "cyber_telemetry",
+        "networks",
+        "radio_frequency"
+      ]
     },
     {
       "id": "INFRA_MAINTENANCE_VEHICLE_SECURITY_01",
@@ -279,7 +330,7 @@
       "description": "Veículo de manutenção e vistoria técnica passando por guarita de segurança perimetral.",
       "durationSeconds": 6.016,
       "fps": 24,
-      "resolution": "1280x720",
+      "resolution": "1920x1080",
       "colorTone": "Low-Key Surveillance",
       "recommendedMotion": "cinematic_drift",
       "sha256": "6b5636e2b77ac348642568cdf4c7aadc7a0dac0de558f2d735d2b088bd73b1a7",
@@ -287,7 +338,13 @@
       "qaStatus": "approved",
       "provenance": "curated_broll",
       "approvedBy": "backfill_script",
-      "approvedAt": "2026-08-30T02:56:20.743Z"
+      "approvedAt": "2026-08-30T02:56:20.743Z",
+      "domains": [
+        "infrastructure",
+        "security",
+        "surveillance",
+        "perimeter"
+      ]
     },
     {
       "id": "IND_PARCEL_CONVEYOR_BELT_01",
@@ -307,7 +364,7 @@
       "description": "Pacote de encomenda deslizando sobre esteira rolante automatizada de triagem.",
       "durationSeconds": 6.016,
       "fps": 24,
-      "resolution": "1280x720",
+      "resolution": "1920x1080",
       "colorTone": "Sodium Amber / Industrial",
       "recommendedMotion": "cinematic_drift",
       "sha256": "29fe47be84f4a29c3298d5f8a02f1ccb32c82e71afdeda61362d2d3d6d652730",
@@ -315,7 +372,13 @@
       "qaStatus": "approved",
       "provenance": "curated_broll",
       "approvedBy": "backfill_script",
-      "approvedAt": "2026-08-30T02:56:20.743Z"
+      "approvedAt": "2026-08-30T02:56:20.743Z",
+      "domains": [
+        "logistics",
+        "ecommerce",
+        "supply_chain",
+        "industrial"
+      ]
     },
     {
       "id": "IND_PARCEL_SCANNER_LASER_01",
@@ -335,7 +398,7 @@
       "description": "Pacote passando sob feixe laser de scanner óptico e raio-x de verificação.",
       "durationSeconds": 6.016,
       "fps": 24,
-      "resolution": "1280x720",
+      "resolution": "1920x1080",
       "colorTone": "Laser Cyan / Sodium Orange",
       "recommendedMotion": "slow_push_in",
       "sha256": "cbd5fc22f55c4fd61b55e37b041d535985d1b0f933dc06c3ddeb4640e13d4b84",
@@ -343,7 +406,14 @@
       "qaStatus": "approved",
       "provenance": "curated_broll",
       "approvedBy": "backfill_script",
-      "approvedAt": "2026-08-30T02:56:20.743Z"
+      "approvedAt": "2026-08-30T02:56:20.743Z",
+      "domains": [
+        "logistics",
+        "security",
+        "customs",
+        "optics",
+        "inspection"
+      ]
     },
     {
       "id": "CYBER_PHONE_TO_FIBER_CONNECTOR_01",
@@ -364,7 +434,7 @@
       "description": "Transição visual entre tela de smartphone e conector óptico de alta velocidade.",
       "durationSeconds": 6.016,
       "fps": 24,
-      "resolution": "1280x720",
+      "resolution": "1920x1080",
       "colorTone": "Laser Cyan / Laser Orange",
       "recommendedMotion": "slow_push_in",
       "sha256": "bb3d271ac7369adb4a43311ddf5927fcc0fd57bd79d85f6835e43578f9fb5b47",
@@ -372,7 +442,14 @@
       "qaStatus": "approved",
       "provenance": "curated_broll",
       "approvedBy": "backfill_script",
-      "approvedAt": "2026-08-30T02:56:20.743Z"
+      "approvedAt": "2026-08-30T02:56:20.743Z",
+      "domains": [
+        "telecommunications",
+        "fiber_optics",
+        "cyber_telemetry",
+        "networks",
+        "internet"
+      ]
     },
     {
       "id": "CYBER_PRINTER_EJECTS_PAPER_01",
@@ -392,7 +469,7 @@
       "description": "Impressora emitindo folha de documento oficial e relatório técnico em ambiente de escritório.",
       "durationSeconds": 6.016,
       "fps": 24,
-      "resolution": "1280x720",
+      "resolution": "1920x1080",
       "colorTone": "Muted Slate / Office",
       "recommendedMotion": "slow_push_in",
       "sha256": "b8d626652ce50986acc72fd5d46b9b44b82f687ed14d6604d8d870ad1db5d1d8",
@@ -400,7 +477,14 @@
       "qaStatus": "approved",
       "provenance": "curated_broll",
       "approvedBy": "backfill_script",
-      "approvedAt": "2026-08-30T02:56:20.743Z"
+      "approvedAt": "2026-08-30T02:56:20.743Z",
+      "domains": [
+        "office",
+        "audit",
+        "regulatory",
+        "financial",
+        "documentation"
+      ]
     },
     {
       "id": "PHYS_WATER_GLASS_FAUCET_01",
@@ -420,7 +504,7 @@
       "description": "Fluxo límpido de água saindo da torneira e preenchendo copo de vidro em close macro.",
       "durationSeconds": 6.016,
       "fps": 24,
-      "resolution": "1280x720",
+      "resolution": "1920x1080",
       "colorTone": "High Contrast / Clean Water",
       "recommendedMotion": "slow_push_in",
       "sha256": "873faae91c5963b534c768b2a092a941835baf0b72a1369522c600f21870c785",
@@ -428,7 +512,13 @@
       "qaStatus": "approved",
       "provenance": "curated_broll",
       "approvedBy": "backfill_script",
-      "approvedAt": "2026-08-30T02:56:20.743Z"
+      "approvedAt": "2026-08-30T02:56:20.743Z",
+      "domains": [
+        "hydraulics",
+        "utilities",
+        "physics",
+        "water_supply"
+      ]
     },
     {
       "id": "IND_WORKER_REDIRECTS_PARCEL_01",
@@ -448,7 +538,7 @@
       "description": "Operador de centro de distribuição redirecionando caixas e encomendas na linha de triagem.",
       "durationSeconds": 6.016,
       "fps": 24,
-      "resolution": "1280x720",
+      "resolution": "1920x1080",
       "colorTone": "Industrial Chiaroscuro",
       "recommendedMotion": "cinematic_drift",
       "sha256": "16089397a9c80897b075507f3fc31395c52c4f86ed7758a82d5d9efaef45457f",
@@ -456,7 +546,13 @@
       "qaStatus": "approved",
       "provenance": "curated_broll",
       "approvedBy": "backfill_script",
-      "approvedAt": "2026-08-30T02:56:20.743Z"
+      "approvedAt": "2026-08-30T02:56:20.743Z",
+      "domains": [
+        "logistics",
+        "supply_chain",
+        "industrial",
+        "ecommerce"
+      ]
     }
   ]
 }

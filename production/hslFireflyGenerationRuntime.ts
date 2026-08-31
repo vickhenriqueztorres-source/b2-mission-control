@@ -13,7 +13,10 @@ export class HslFireflyGenerationRuntime {
   prepare(handoffs: readonly HslGenerationHandoff[], outputDirectory: string): HslFireflyPreparedBatch {
     if (!handoffs.length) throw new Error('HSL_FIREFLY_HANDOFF_SET_EMPTY');
     const outputRoot = path.resolve(outputDirectory);
-    const targetResolution = process.env.HSL_FIREFLY_TARGET_RESOLUTION || '720p';
+    const targetResolution = process.env.HSL_FIREFLY_TARGET_RESOLUTION || '1080p';
+    if (targetResolution !== '1080p') {
+      throw new Error(`HSL_VISUAL_IDENTITY_RESOLUTION_FORBIDDEN:${targetResolution}`);
+    }
     const items: Array<{name: string; image: string; prompt: string; model: string; resolution: string; aspect_ratio: string; duration_seconds: number; generate_audio: boolean; source_shot_id: string; source_start_frame_sha256: string; motion_package_sha256: string}> = [];
     const lineageByJobName: Record<string, {motion_package_hash: string; start_frame_sha256: string; model?: string; generate_audio?: boolean; start_frame_path?: string; generation_strategy?: string}> = {};
     for (const handoff of handoffs) {

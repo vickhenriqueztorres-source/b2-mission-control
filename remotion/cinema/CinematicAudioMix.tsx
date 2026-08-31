@@ -211,7 +211,15 @@ export const CinematicAudioMix: React.FC<CinematicAudioMixProps> = ({
         />
       )}
 
-      {/* 4. Stems de Narração e SFX com Envelope e J-CUT nos Act Breaks */}
+      {/* 4. Faixa narrativa de SFX aprovada e sincronizada à timeline */}
+      {audio.sfxBed && (
+        <Audio
+          src={staticFile(audio.sfxBed)}
+          volume={(f) => calculateSfxVolumeAtFrame(f, totalFrames, sfxBaseVol)}
+        />
+      )}
+
+      {/* 5. Stems de Narração e SFX com Envelope e J-CUT nos Act Breaks */}
       {scenes.map((scene) => {
         // J-CUT: em viradas de ato, a locução pode entrar 12 frames antes da imagem
         const jCutOffset = scene.isActBreak ? -12 : 0;

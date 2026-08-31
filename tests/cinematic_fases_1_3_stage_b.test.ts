@@ -144,9 +144,24 @@ try {
     scenes: [
       { id: 'SC_01', component: 'DynamicDocumentaryMedia', durationSeconds: 8.0 },
       { id: 'SC_02', component: 'CinematicKeyframeDossier', durationSeconds: 8.0 },
-      { id: 'SC_03', component: 'TechnicalCutawaySchematic', durationSeconds: 6.0 },
-      { id: 'SC_04', component: 'FlowDiscrepancyHUD', durationSeconds: 10.0 },
-      { id: 'SC_05', component: 'AtomicStopwatch', durationSeconds: 7.0 },
+      {
+        id: 'SC_03',
+        component: 'TechnicalCutawaySchematic',
+        durationSeconds: 6.0,
+        props: {systemTitle: 'Sistema real', compartmentName: 'Componente observado'}
+      },
+      {
+        id: 'SC_04',
+        component: 'FlowDiscrepancyHUD',
+        durationSeconds: 10.0,
+        props: {card1Title: 'Medicao verificada'}
+      },
+      {
+        id: 'SC_05',
+        component: 'AtomicStopwatch',
+        durationSeconds: 7.0,
+        props: {label: 'Tempo medido'}
+      },
       { id: 'SC_06', component: 'DynamicDocumentaryMedia', durationSeconds: 6.0 }
     ]
   };

@@ -1,0 +1,1952 @@
+[
+  {
+    "sceneId": "DAN_001",
+    "chapter": "CAPITULO 1: O HECTARE NO ESCURO",
+    "voiceover": "À meia-noite, um hectare de soja continua trabalhando. Sobre ele, uma aeronave agrícola pesada inicia uma missão planejada linha por linha.",
+    "visualSubject": "octocoptero agricola de 100 kg pairando sobre soja no cerrado a meia-noite",
+    "visual_must_include": [
+      "octocoptero agricola de 100 kg pairando sobre soja no cerrado a meia-noite",
+      "physical subject visible in master frame 1",
+      "wet soybean field at midnight for DAN_001"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for octocoptero agricola de 100 kg pairando sobre soja no cerrado a meia-noite"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 9,
+    "title": "MEIA-NOITE NO CERRADO",
+    "subtitle": "um hectare acorda antes do operador",
+    "telemetryLine": "ALTITUDE // 2,5 m // VELOCIDADE // 28 km/h // MISSAO AUTOMATIZADA",
+    "evidenceLine": "HECTARE // 2% // LOG DAN_001",
+    "mechanismLine": "FIBRA DE CARBONO // BATERIA // SENSORIO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_002",
+    "chapter": "CAPITULO 1: O HECTARE NO ESCURO",
+    "voiceover": "Os cem quilos não descrevem o drone vazio. São a ordem de grandeza da massa máxima de decolagem, já com bateria e carga.",
+    "visualSubject": "drone gigante de fibra de carbono cruzando fileiras de soja com solo molhado",
+    "visual_must_include": [
+      "drone gigante de fibra de carbono cruzando fileiras de soja com solo molhado",
+      "physical subject visible in master frame 2",
+      "wet soybean field at midnight for DAN_002"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for drone gigante de fibra de carbono cruzando fileiras de soja com solo molhado"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 9,
+    "title": "ATÉ 103 KG NA DECOLAGEM",
+    "subtitle": "o octocoptero entra na linha de plantio",
+    "telemetryLine": "RTK // POSICAO CORRIGIDA // PILOTO REMOTO RESPONSAVEL",
+    "evidenceLine": "HECTARE // 4% // LOG DAN_002",
+    "mechanismLine": "FIBRA DE CARBONO // BATERIA // SENSORIO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_003",
+    "chapter": "CAPITULO 1: O HECTARE NO ESCURO",
+    "voiceover": "Antes da primeira hélice girar, o talhão vira rota: limite, dose, altura, velocidade, obstáculos e ponto de retorno entram no plano.",
+    "visualSubject": "tablet industrial rugoso exibindo plano de missao agricola sem rostos humanos",
+    "visual_must_include": [
+      "tablet industrial rugoso exibindo plano de missao agricola sem rostos humanos",
+      "physical subject visible in master frame 6",
+      "wet soybean field at midnight for DAN_003"
+    ],
+    "visual_must_not": [
+      "fake readable brand logos",
+      "office presentation slide",
+      "hands holding smiling tablet",
+      "unrelated substitute for tablet industrial rugoso exibindo plano de missao agricola sem rostos humanos"
+    ],
+    "required_category": "evidence",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 9.08,
+    "title": "ORDEM DE MISSAO",
+    "subtitle": "talhao, dose e janela de vento",
+    "telemetryLine": "LIDAR // LASER // RADAR // RADIOFREQUENCIA",
+    "evidenceLine": "HECTARE // 6% // LOG DAN_003",
+    "mechanismLine": "FIBRA DE CARBONO // BATERIA // SENSORIO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_004",
+    "chapter": "CAPITULO 1: O HECTARE NO ESCURO",
+    "voiceover": "Braços de fibra de carbono reduzem massa estrutural, mas cada união precisa suportar vibração, torque e repetidos ciclos de carga.",
+    "visualSubject": "chassi tubular de fibra de carbono aeroespacial com fixadores industriais",
+    "visual_must_include": [
+      "chassi tubular de fibra de carbono aeroespacial com fixadores industriais",
+      "physical subject visible in master frame 2",
+      "wet soybean field at midnight for DAN_004"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for chassi tubular de fibra de carbono aeroespacial com fixadores industriais"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 10.38,
+    "title": "FIBRA DE CARBONO",
+    "subtitle": "bracos de 2.5 metros em carga",
+    "telemetryLine": "ALTITUDE // 2,5 m // VELOCIDADE // 28 km/h // MISSAO AUTOMATIZADA",
+    "evidenceLine": "HECTARE // 8% // LOG DAN_004",
+    "mechanismLine": "FIBRA DE CARBONO // BATERIA // SENSORIO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_005",
+    "chapter": "CAPITULO 1: O HECTARE NO ESCURO",
+    "voiceover": "Nesta plataforma octocóptero, o empuxo é distribuído entre oito rotores. Isso muda estabilidade, consumo e o ar lançado sobre as folhas.",
+    "visualSubject": "conjunto de oito rotores brushless com helices de passo variavel",
+    "visual_must_include": [
+      "conjunto de oito rotores brushless com helices de passo variavel",
+      "physical subject visible in master frame 2",
+      "wet soybean field at midnight for DAN_005"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for conjunto de oito rotores brushless com helices de passo variavel"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 7.79,
+    "title": "OITO ROTORES",
+    "subtitle": "empuxo distribuido sobre a soja",
+    "telemetryLine": "RTK // POSICAO CORRIGIDA // PILOTO REMOTO RESPONSAVEL",
+    "evidenceLine": "HECTARE // 10% // LOG DAN_005",
+    "mechanismLine": "FIBRA DE CARBONO // BATERIA // SENSORIO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_006",
+    "chapter": "CAPITULO 1: O HECTARE NO ESCURO",
+    "voiceover": "Baterias de trinta mil miliampère-hora alimentam voos curtos e intensos. No campo, a logística depende de troca, resfriamento e recarga.",
+    "visualSubject": "estacao movel de recarga com baterias 30000 mAh e gerador de campo",
+    "visual_must_include": [
+      "estacao movel de recarga com baterias 30000 mAh e gerador de campo",
+      "physical subject visible in master frame 3",
+      "wet soybean field at midnight for DAN_006"
+    ],
+    "visual_must_not": [
+      "fake readable brand logos",
+      "office presentation slide",
+      "hands holding smiling tablet",
+      "unrelated substitute for estacao movel de recarga com baterias 30000 mAh e gerador de campo"
+    ],
+    "required_category": "evidence",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 11.68,
+    "title": "BATERIAS 30000 MAH",
+    "subtitle": "energia trocada no campo",
+    "telemetryLine": "LIDAR // LASER // RADAR // RADIOFREQUENCIA",
+    "evidenceLine": "HECTARE // 12% // LOG DAN_006",
+    "mechanismLine": "FIBRA DE CARBONO // BATERIA // SENSORIO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_007",
+    "chapter": "CAPITULO 1: O HECTARE NO ESCURO",
+    "voiceover": "A rota não é um desenho decorativo. Cada faixa precisa respeitar o contorno real do cultivo e manter margem contra árvores e postes.",
+    "visualSubject": "mapa escuro de talhao com linhas de plantio e rota ativa em laranja",
+    "visual_must_include": [
+      "mapa escuro de talhao com linhas de plantio e rota ativa em laranja",
+      "physical subject visible in master frame 6",
+      "wet soybean field at midnight for DAN_007"
+    ],
+    "visual_must_not": [
+      "consumer GPS phone map",
+      "bright satellite daylight view",
+      "decorative fantasy interface",
+      "unrelated substitute for mapa escuro de talhao com linhas de plantio e rota ativa em laranja"
+    ],
+    "required_category": "maps",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 9.08,
+    "title": "MAPA DO TALHAO",
+    "subtitle": "a rota nasce como coordenada",
+    "telemetryLine": "ALTITUDE // 2,5 m // VELOCIDADE // 28 km/h // MISSAO AUTOMATIZADA",
+    "evidenceLine": "HECTARE // 14% // LOG DAN_007",
+    "mechanismLine": "FIBRA DE CARBONO // BATERIA // SENSORIO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_008",
+    "chapter": "CAPITULO 1: O HECTARE NO ESCURO",
+    "voiceover": "Dois sensores cumprem tarefas diferentes: o LiDAR mede distância com laser; o radar usa radiofrequência para perceber terreno e obstáculos.",
+    "visualSubject": "corte tecnico do sensor LiDAR 360 e radar de ondas milimetricas no drone",
+    "visual_must_include": [
+      "corte tecnico do sensor LiDAR 360 e radar de ondas milimetricas no drone",
+      "physical subject visible in master frame 4",
+      "wet soybean field at midnight for DAN_008"
+    ],
+    "visual_must_not": [
+      "video game sci fi aircraft",
+      "explosion crash scene",
+      "generic neon tunnel",
+      "unrelated substitute for corte tecnico do sensor LiDAR 360 e radar de ondas milimetricas no drone"
+    ],
+    "required_category": "reveal",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 10.38,
+    "title": "LASER E RADAR, SEPARADOS",
+    "subtitle": "LiDAR e radar montam o invisivel",
+    "telemetryLine": "RTK // POSICAO CORRIGIDA // PILOTO REMOTO RESPONSAVEL",
+    "evidenceLine": "HECTARE // 16% // LOG DAN_008",
+    "mechanismLine": "FIBRA DE CARBONO // BATERIA // SENSORIO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_009",
+    "chapter": "CAPITULO 2: A MAQUINA DE CARBONO",
+    "voiceover": "O posicionamento RTK corrige a trajetória em tempo real. Precisão centimétrica de posição, porém, não significa deposição centimétrica do produto.",
+    "visualSubject": "trem de pouso do drone levantando poeira fria sobre folhas de soja",
+    "visual_must_include": [
+      "trem de pouso do drone levantando poeira fria sobre folhas de soja",
+      "physical subject visible in master frame 5",
+      "wet soybean field at midnight for DAN_009"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for trem de pouso do drone levantando poeira fria sobre folhas de soja"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 11.68,
+    "title": "RTK POSICIONA A ROTA",
+    "subtitle": "as folhas viram pista de voo",
+    "telemetryLine": "LIDAR // LASER // RADAR // RADIOFREQUENCIA",
+    "evidenceLine": "HECTARE // 18% // LOG DAN_009",
+    "mechanismLine": "FIBRA DE CARBONO // BATERIA // SENSORIO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_010",
+    "chapter": "CAPITULO 2: A MAQUINA DE CARBONO",
+    "voiceover": "Quando a aeronave sobe carregada, o controlador compara atitude, rotação dos motores e resposta dos sensores antes de liberar a missão.",
+    "visualSubject": "perfil lateral do drone a 2.5 metros acima do dossel vegetal",
+    "visual_must_include": [
+      "perfil lateral do drone a 2.5 metros acima do dossel vegetal",
+      "physical subject visible in master frame 5",
+      "wet soybean field at midnight for DAN_010"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for perfil lateral do drone a 2.5 metros acima do dossel vegetal"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 9.08,
+    "title": "ALTITUDE 2.5M",
+    "subtitle": "baixo o bastante para agir",
+    "telemetryLine": "ALTITUDE // 2,5 m // VELOCIDADE // 28 km/h // MISSAO AUTOMATIZADA",
+    "evidenceLine": "HECTARE // 20% // LOG DAN_010",
+    "mechanismLine": "FIBRA DE CARBONO // BATERIA // SENSORIO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_011",
+    "chapter": "CAPITULO 2: A MAQUINA DE CARBONO",
+    "voiceover": "A noite costuma oferecer vento mais estável, mas não elimina deriva. Um anemômetro ainda pode interromper toda a aplicação.",
+    "visualSubject": "cabo de alta tensao e arvore isolada detectados como obstaculos noturnos",
+    "visual_must_include": [
+      "cabo de alta tensao e arvore isolada detectados como obstaculos noturnos",
+      "physical subject visible in master frame 4",
+      "wet soybean field at midnight for DAN_011"
+    ],
+    "visual_must_not": [
+      "fake readable brand logos",
+      "office presentation slide",
+      "hands holding smiling tablet",
+      "unrelated substitute for cabo de alta tensao e arvore isolada detectados como obstaculos noturnos"
+    ],
+    "required_category": "evidence",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 10.38,
+    "title": "LISTA DE OBSTACULOS",
+    "subtitle": "fios, arvores e mourões",
+    "telemetryLine": "RTK // POSICAO CORRIGIDA // PILOTO REMOTO RESPONSAVEL",
+    "evidenceLine": "HECTARE // 22% // LOG DAN_011",
+    "mechanismLine": "FIBRA DE CARBONO // BATERIA // SENSORIO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_012",
+    "chapter": "CAPITULO 2: A MAQUINA DE CARBONO",
+    "voiceover": "Na borda do talhão, fios e galhos são gargalos físicos. Detectar cedo importa; a decisão final continua sob supervisão humana.",
+    "visualSubject": "nariz do drone inclinando para desvio automatico com vetor de evasao",
+    "visual_must_include": [
+      "nariz do drone inclinando para desvio automatico com vetor de evasao",
+      "physical subject visible in master frame 1",
+      "wet soybean field at midnight for DAN_012"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for nariz do drone inclinando para desvio automatico com vetor de evasao"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 7.79,
+    "title": "DESVIO EM 20 MS",
+    "subtitle": "o vetor muda antes do susto",
+    "telemetryLine": "LIDAR // LASER // RADAR // RADIOFREQUENCIA",
+    "evidenceLine": "HECTARE // 24% // LOG DAN_012",
+    "mechanismLine": "FIBRA DE CARBONO // BATERIA // SENSORIO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_013",
+    "chapter": "CAPITULO 2: A MAQUINA DE CARBONO",
+    "voiceover": "A altura operacional é pequena porque o alvo está nas plantas. Voar baixo reduz dispersão, mas aproxima o drone do terreno irregular.",
+    "visualSubject": "vortices de oito helices desenhados por fumaca tecnica sobre plantio",
+    "visual_must_include": [
+      "vortices de oito helices desenhados por fumaca tecnica sobre plantio",
+      "physical subject visible in master frame 5",
+      "wet soybean field at midnight for DAN_013"
+    ],
+    "visual_must_not": [
+      "video game sci fi aircraft",
+      "explosion crash scene",
+      "generic neon tunnel",
+      "unrelated substitute for vortices de oito helices desenhados por fumaca tecnica sobre plantio"
+    ],
+    "required_category": "reveal",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 11.68,
+    "title": "VORTICES ABERTOS",
+    "subtitle": "o ar ganha desenho fisico",
+    "telemetryLine": "ALTITUDE // 2,5 m // VELOCIDADE // 28 km/h // MISSAO AUTOMATIZADA",
+    "evidenceLine": "HECTARE // 26% // LOG DAN_013",
+    "mechanismLine": "FIBRA DE CARBONO // BATERIA // SENSORIO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_014",
+    "chapter": "CAPITULO 2: A MAQUINA DE CARBONO",
+    "voiceover": "A velocidade de vinte e oito quilômetros por hora é um parâmetro de missão, não uma promessa universal para qualquer lavoura.",
+    "visualSubject": "tanque pressurizado de 50 litros fixado no centro de gravidade",
+    "visual_must_include": [
+      "tanque pressurizado de 50 litros fixado no centro de gravidade",
+      "physical subject visible in master frame 3",
+      "wet soybean field at midnight for DAN_014"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for tanque pressurizado de 50 litros fixado no centro de gravidade"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 9.08,
+    "title": "TANQUE PRESSURIZADO",
+    "subtitle": "50 litros no centro de massa",
+    "telemetryLine": "RTK // POSICAO CORRIGIDA // PILOTO REMOTO RESPONSAVEL",
+    "evidenceLine": "HECTARE // 28% // LOG DAN_014",
+    "mechanismLine": "FIBRA DE CARBONO // BATERIA // SENSORIO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_015",
+    "chapter": "CAPITULO 2: A MAQUINA DE CARBONO",
+    "voiceover": "A bomba mede vazão enquanto os bicos atomizadores formam gotas. Pressão, rotação e formulação alteram o espectro lançado sobre o dossel.",
+    "visualSubject": "rota centimetrica sobre linhas paralelas de soja em mapa tecnico",
+    "visual_must_include": [
+      "rota centimetrica sobre linhas paralelas de soja em mapa tecnico",
+      "physical subject visible in master frame 7",
+      "wet soybean field at midnight for DAN_015"
+    ],
+    "visual_must_not": [
+      "consumer GPS phone map",
+      "bright satellite daylight view",
+      "decorative fantasy interface",
+      "unrelated substitute for rota centimetrica sobre linhas paralelas de soja em mapa tecnico"
+    ],
+    "required_category": "maps",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 10.38,
+    "title": "ROTA CENTIMETRICA",
+    "subtitle": "a linha de plantio vira trilho",
+    "telemetryLine": "LIDAR // LASER // RADAR // RADIOFREQUENCIA",
+    "evidenceLine": "HECTARE // 30% // LOG DAN_015",
+    "mechanismLine": "FIBRA DE CARBONO // BATERIA // SENSORIO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_016",
+    "chapter": "CAPITULO 2: A MAQUINA DE CARBONO",
+    "voiceover": "Se a vazão real diverge da dose programada, o mapa bonito deixa de valer. O sistema precisa registrar e reagir à diferença.",
+    "visualSubject": "cartao de evidencia mostrando diametro de gota, vazao e velocidade",
+    "visual_must_include": [
+      "cartao de evidencia mostrando diametro de gota, vazao e velocidade",
+      "physical subject visible in master frame 6",
+      "wet soybean field at midnight for DAN_016"
+    ],
+    "visual_must_not": [
+      "fake readable brand logos",
+      "office presentation slide",
+      "hands holding smiling tablet",
+      "unrelated substitute for cartao de evidencia mostrando diametro de gota, vazao e velocidade"
+    ],
+    "required_category": "evidence",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 7.79,
+    "title": "DOSSIER DA GOTA",
+    "subtitle": "diametro e vazao sob auditoria",
+    "telemetryLine": "ALTITUDE // 2,5 m // VELOCIDADE // 28 km/h // MISSAO AUTOMATIZADA",
+    "evidenceLine": "HECTARE // 32% // LOG DAN_016",
+    "mechanismLine": "FIBRA DE CARBONO // BATERIA // SENSORIO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_017",
+    "chapter": "CAPITULO 3: O RADAR QUE ENXERGA SEM LUZ",
+    "voiceover": "Aqui começa a parte invisível: cada rotor produz uma esteira de ar descendente, turbulenta e diferente perto do solo.",
+    "visualSubject": "bico centrifugo rotativo pulverizando microgotas em cone controlado",
+    "visual_must_include": [
+      "bico centrifugo rotativo pulverizando microgotas em cone controlado",
+      "physical subject visible in master frame 5",
+      "wet soybean field at midnight for DAN_017"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for bico centrifugo rotativo pulverizando microgotas em cone controlado"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 11.68,
+    "title": "BICO CENTRIFUGO",
+    "subtitle": "microgotas sem mangueira grossa",
+    "telemetryLine": "RTK // POSICAO CORRIGIDA // PILOTO REMOTO RESPONSAVEL",
+    "evidenceLine": "HECTARE // 34% // LOG DAN_017",
+    "mechanismLine": "LIDAR // DOWNWASH // EFEITO SOLO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_018",
+    "chapter": "CAPITULO 3: O RADAR QUE ENXERGA SEM LUZ",
+    "voiceover": "Oito esteiras se encontram sobre a soja. Essa interação abre o dossel, movimenta folhas e transporta gotas para regiões escondidas.",
+    "visualSubject": "nevoa agricola densa descendo verticalmente entre folhas molhadas",
+    "visual_must_include": [
+      "nevoa agricola densa descendo verticalmente entre folhas molhadas",
+      "physical subject visible in master frame 5",
+      "wet soybean field at midnight for DAN_018"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for nevoa agricola densa descendo verticalmente entre folhas molhadas"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 10.38,
+    "title": "NEVOA CONTROLADA",
+    "subtitle": "pulverizacao sem deriva livre",
+    "telemetryLine": "LIDAR // LASER // RADAR // RADIOFREQUENCIA",
+    "evidenceLine": "HECTARE // 36% // LOG DAN_018",
+    "mechanismLine": "LIDAR // DOWNWASH // EFEITO SOLO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_019",
+    "chapter": "CAPITULO 3: O RADAR QUE ENXERGA SEM LUZ",
+    "voiceover": "O efeito solo aumenta a pressão sob a aeronave quando ela voa baixo. O mesmo fenômeno que sustenta também reorganiza a pulverização.",
+    "visualSubject": "documento operacional de janela de vento noturna e umidade relativa",
+    "visual_must_include": [
+      "documento operacional de janela de vento noturna e umidade relativa",
+      "physical subject visible in master frame 1",
+      "wet soybean field at midnight for DAN_019"
+    ],
+    "visual_must_not": [
+      "fake readable brand logos",
+      "office presentation slide",
+      "hands holding smiling tablet",
+      "unrelated substitute for documento operacional de janela de vento noturna e umidade relativa"
+    ],
+    "required_category": "evidence",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 9.08,
+    "title": "JANELA NOTURNA",
+    "subtitle": "vento baixo, risco alto",
+    "telemetryLine": "ALTITUDE // 2,5 m // VELOCIDADE // 28 km/h // MISSAO AUTOMATIZADA",
+    "evidenceLine": "HECTARE // 38% // LOG DAN_019",
+    "mechanismLine": "LIDAR // DOWNWASH // EFEITO SOLO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_020",
+    "chapter": "CAPITULO 3: O RADAR QUE ENXERGA SEM LUZ",
+    "voiceover": "Gotas muito finas acompanham o vento; gotas grandes podem escorrer. O tamanho precisa equilibrar cobertura, retenção e risco de deriva.",
+    "visualSubject": "corte de efeito solo mostrando coluna de ar refletida pelo dossel",
+    "visual_must_include": [
+      "corte de efeito solo mostrando coluna de ar refletida pelo dossel",
+      "physical subject visible in master frame 5",
+      "wet soybean field at midnight for DAN_020"
+    ],
+    "visual_must_not": [
+      "video game sci fi aircraft",
+      "explosion crash scene",
+      "generic neon tunnel",
+      "unrelated substitute for corte de efeito solo mostrando coluna de ar refletida pelo dossel"
+    ],
+    "required_category": "reveal",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 11.68,
+    "title": "EFEITO SOLO",
+    "subtitle": "o chao devolve o ar para a folha",
+    "telemetryLine": "RTK // POSICAO CORRIGIDA // PILOTO REMOTO RESPONSAVEL",
+    "evidenceLine": "HECTARE // 40% // LOG DAN_020",
+    "mechanismLine": "LIDAR // DOWNWASH // EFEITO SOLO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_021",
+    "chapter": "CAPITULO 3: O RADAR QUE ENXERGA SEM LUZ",
+    "voiceover": "Vista de cima, a faixa parece uniforme. Sob as folhas, a cobertura depende de turbulência, arquitetura da planta e ajuste dos bicos.",
+    "visualSubject": "macro fisico do verso da folha recebendo microgotas finas",
+    "visual_must_include": [
+      "macro fisico do verso da folha recebendo microgotas finas",
+      "physical subject visible in master frame 5",
+      "wet soybean field at midnight for DAN_021"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for macro fisico do verso da folha recebendo microgotas finas"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 7.79,
+    "title": "VERSO DA FOLHA",
+    "subtitle": "a gota chega onde o trator nao ve",
+    "telemetryLine": "LIDAR // LASER // RADAR // RADIOFREQUENCIA",
+    "evidenceLine": "HECTARE // 42% // LOG DAN_021",
+    "mechanismLine": "LIDAR // DOWNWASH // EFEITO SOLO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_022",
+    "chapter": "CAPITULO 3: O RADAR QUE ENXERGA SEM LUZ",
+    "voiceover": "O verso da folha é a prova mais difícil. É ali que o downwash pode ajudar, mas nenhum controlador garante cobertura perfeita sozinho.",
+    "visualSubject": "faixas paralelas de pulverizacao sem sobreposicao de dose",
+    "visual_must_include": [
+      "faixas paralelas de pulverizacao sem sobreposicao de dose",
+      "physical subject visible in master frame 7",
+      "wet soybean field at midnight for DAN_022"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for faixas paralelas de pulverizacao sem sobreposicao de dose"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 10.38,
+    "title": "LINHA SEM SOBREPOSICAO",
+    "subtitle": "dose repetida vira prejuizo",
+    "telemetryLine": "ALTITUDE // 2,5 m // VELOCIDADE // 28 km/h // MISSAO AUTOMATIZADA",
+    "evidenceLine": "HECTARE // 44% // LOG DAN_022",
+    "mechanismLine": "LIDAR // DOWNWASH // EFEITO SOLO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_023",
+    "chapter": "CAPITULO 3: O RADAR QUE ENXERGA SEM LUZ",
+    "voiceover": "Uma rajada lateral muda o problema em segundos. A missão deve reduzir velocidade, corrigir a faixa ou pausar antes de sair do alvo.",
+    "visualSubject": "painel de telemetria agricola com altitude, velocidade e modo autonomo",
+    "visual_must_include": [
+      "painel de telemetria agricola com altitude, velocidade e modo autonomo",
+      "physical subject visible in master frame 1",
+      "wet soybean field at midnight for DAN_023"
+    ],
+    "visual_must_not": [
+      "consumer GPS phone map",
+      "bright satellite daylight view",
+      "decorative fantasy interface",
+      "unrelated substitute for painel de telemetria agricola com altitude, velocidade e modo autonomo"
+    ],
+    "required_category": "maps",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 9.08,
+    "title": "TELEMETRIA VIVA",
+    "subtitle": "ALT 2.5M // 28 KM/H",
+    "telemetryLine": "RTK // POSICAO CORRIGIDA // PILOTO REMOTO RESPONSAVEL",
+    "evidenceLine": "HECTARE // 46% // LOG DAN_023",
+    "mechanismLine": "LIDAR // DOWNWASH // EFEITO SOLO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_024",
+    "chapter": "CAPITULO 3: O RADAR QUE ENXERGA SEM LUZ",
+    "voiceover": "A aeronave também estima a distância do dossel. Manter altura relativa é diferente de manter uma altitude fixa sobre terreno ondulado.",
+    "visualSubject": "log tecnico de aplicacao por metro quadrado e timestamp de rota",
+    "visual_must_include": [
+      "log tecnico de aplicacao por metro quadrado e timestamp de rota",
+      "physical subject visible in master frame 1",
+      "wet soybean field at midnight for DAN_024"
+    ],
+    "visual_must_not": [
+      "fake readable brand logos",
+      "office presentation slide",
+      "hands holding smiling tablet",
+      "unrelated substitute for log tecnico de aplicacao por metro quadrado e timestamp de rota"
+    ],
+    "required_category": "evidence",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 11.68,
+    "title": "LOG DE APLICACAO",
+    "subtitle": "cada metro deixa rastro",
+    "telemetryLine": "LIDAR // LASER // RADAR // RADIOFREQUENCIA",
+    "evidenceLine": "HECTARE // 48% // LOG DAN_024",
+    "mechanismLine": "LIDAR // DOWNWASH // EFEITO SOLO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_025",
+    "chapter": "CAPITULO 3: O RADAR QUE ENXERGA SEM LUZ",
+    "voiceover": "Quando a bateria chega ao limite de retorno, a rota é interrompida em um ponto conhecido. A próxima unidade retoma dali.",
+    "visualSubject": "drone retornando a base com bateria critica e tanque parcial",
+    "visual_must_include": [
+      "drone retornando a base com bateria critica e tanque parcial",
+      "physical subject visible in master frame 3",
+      "wet soybean field at midnight for DAN_025"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for drone retornando a base com bateria critica e tanque parcial"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 10.38,
+    "title": "RETORNO A BASE",
+    "subtitle": "10 por cento de bateria decide",
+    "telemetryLine": "ALTITUDE // 2,5 m // VELOCIDADE // 28 km/h // MISSAO AUTOMATIZADA",
+    "evidenceLine": "HECTARE // 50% // LOG DAN_025",
+    "mechanismLine": "LIDAR // DOWNWASH // EFEITO SOLO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_026",
+    "chapter": "CAPITULO 4: O DOWNWASH COMO FERRAMENTA",
+    "voiceover": "Na estação móvel, energia e produto precisam chegar no mesmo ritmo. Um gargalo de recarga deixa o enxame parado no chão.",
+    "visualSubject": "gerador movel alimentando packs de bateria em carreta no cerrado",
+    "visual_must_include": [
+      "gerador movel alimentando packs de bateria em carreta no cerrado",
+      "physical subject visible in master frame 3",
+      "wet soybean field at midnight for DAN_026"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for gerador movel alimentando packs de bateria em carreta no cerrado"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 9.08,
+    "title": "RECARGA MOVEL",
+    "subtitle": "gerador vira hangar de campo",
+    "telemetryLine": "RTK // POSICAO CORRIGIDA // PILOTO REMOTO RESPONSAVEL",
+    "evidenceLine": "HECTARE // 52% // LOG DAN_026",
+    "mechanismLine": "LIDAR // DOWNWASH // EFEITO SOLO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_027",
+    "chapter": "CAPITULO 4: O DOWNWASH COMO FERRAMENTA",
+    "voiceover": "O tanque, as mangueiras e os filtros carregam outra vulnerabilidade: contaminação, bolhas ou entupimento alteram a dose aplicada.",
+    "visualSubject": "base GNSS RTK rural com antena UHF e cabos industriais",
+    "visual_must_include": [
+      "base GNSS RTK rural com antena UHF e cabos industriais",
+      "physical subject visible in master frame 1",
+      "wet soybean field at midnight for DAN_027"
+    ],
+    "visual_must_not": [
+      "fake readable brand logos",
+      "office presentation slide",
+      "hands holding smiling tablet",
+      "unrelated substitute for base GNSS RTK rural com antena UHF e cabos industriais"
+    ],
+    "required_category": "evidence",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 11.68,
+    "title": "CHECKLIST RTK",
+    "subtitle": "base fixa corrige o enxame",
+    "telemetryLine": "LIDAR // LASER // RADAR // RADIOFREQUENCIA",
+    "evidenceLine": "HECTARE // 54% // LOG DAN_027",
+    "mechanismLine": "LIDAR // DOWNWASH // EFEITO SOLO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_028",
+    "chapter": "CAPITULO 4: O DOWNWASH COMO FERRAMENTA",
+    "voiceover": "O bico centrífugo usa rotação para atomizar líquido. A escolha do modelo e da rotação define gotas; não é detalhe cosmético.",
+    "visualSubject": "segundo drone armado em espera ao lado de estacao de recarga",
+    "visual_must_include": [
+      "segundo drone armado em espera ao lado de estacao de recarga",
+      "physical subject visible in master frame 3",
+      "wet soybean field at midnight for DAN_028"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for segundo drone armado em espera ao lado de estacao de recarga"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 7.79,
+    "title": "DRONE RESERVA",
+    "subtitle": "a missao nao espera a bateria",
+    "telemetryLine": "ALTITUDE // 2,5 m // VELOCIDADE // 28 km/h // MISSAO AUTOMATIZADA",
+    "evidenceLine": "HECTARE // 56% // LOG DAN_028",
+    "mechanismLine": "LIDAR // DOWNWASH // EFEITO SOLO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_029",
+    "chapter": "CAPITULO 4: O DOWNWASH COMO FERRAMENTA",
+    "voiceover": "Sob cada rotor, a vorticidade não forma uma coluna limpa. Ela pulsa, mistura ar lateral e varia com altura, massa e velocidade.",
+    "visualSubject": "mapa de enxame com cinco drones e corredores de seguranca",
+    "visual_must_include": [
+      "mapa de enxame com cinco drones e corredores de seguranca",
+      "physical subject visible in master frame 7",
+      "wet soybean field at midnight for DAN_029"
+    ],
+    "visual_must_not": [
+      "consumer GPS phone map",
+      "bright satellite daylight view",
+      "decorative fantasy interface",
+      "unrelated substitute for mapa de enxame com cinco drones e corredores de seguranca"
+    ],
+    "required_category": "maps",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 10.38,
+    "title": "MALHA DO ENXAME",
+    "subtitle": "cinco rotas sem colisao",
+    "telemetryLine": "RTK // POSICAO CORRIGIDA // PILOTO REMOTO RESPONSAVEL",
+    "evidenceLine": "HECTARE // 58% // LOG DAN_029",
+    "mechanismLine": "LIDAR // DOWNWASH // EFEITO SOLO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_030",
+    "chapter": "CAPITULO 4: O DOWNWASH COMO FERRAMENTA",
+    "voiceover": "É essa turbulência controlada que pode empurrar microgotas para o interior da planta sem simplesmente lançá-las para fora da linha.",
+    "visualSubject": "diagrama de falha entre rajada lateral e downwash das helices",
+    "visual_must_include": [
+      "diagrama de falha entre rajada lateral e downwash das helices",
+      "physical subject visible in master frame 5",
+      "wet soybean field at midnight for DAN_030"
+    ],
+    "visual_must_not": [
+      "video game sci fi aircraft",
+      "explosion crash scene",
+      "generic neon tunnel",
+      "unrelated substitute for diagrama de falha entre rajada lateral e downwash das helices"
+    ],
+    "required_category": "reveal",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 9.08,
+    "title": "FALHA CRITICA",
+    "subtitle": "quando vento e rotor brigam",
+    "telemetryLine": "LIDAR // LASER // RADAR // RADIOFREQUENCIA",
+    "evidenceLine": "HECTARE // 60% // LOG DAN_030",
+    "mechanismLine": "LIDAR // DOWNWASH // EFEITO SOLO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_031",
+    "chapter": "CAPITULO 4: O DOWNWASH COMO FERRAMENTA",
+    "voiceover": "O gargalo é estreito: downwash suficiente para penetrar o dossel, mas vento e gotas ajustados para conter a deriva noturna.",
+    "visualSubject": "plantacao de soja noturna com reflexos sodium vapor em solo umido",
+    "visual_must_include": [
+      "plantacao de soja noturna com reflexos sodium vapor em solo umido",
+      "physical subject visible in master frame 1",
+      "wet soybean field at midnight for DAN_031"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for plantacao de soja noturna com reflexos sodium vapor em solo umido"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 11.68,
+    "title": "CERRADO MOLHADO",
+    "subtitle": "chiaroscuro sobre plantio real",
+    "telemetryLine": "ALTITUDE // 2,5 m // VELOCIDADE // 28 km/h // MISSAO AUTOMATIZADA",
+    "evidenceLine": "HECTARE // 62% // LOG DAN_031",
+    "mechanismLine": "LIDAR // DOWNWASH // EFEITO SOLO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_032",
+    "chapter": "CAPITULO 4: O DOWNWASH COMO FERRAMENTA",
+    "voiceover": "Sensores não enxergam química. Eles medem distância, movimento e vazão; a eficácia agronômica ainda precisa de amostragem no campo.",
+    "visualSubject": "dossier de dose por hectare com medidores e trilha de auditoria",
+    "visual_must_include": [
+      "dossier de dose por hectare com medidores e trilha de auditoria",
+      "physical subject visible in master frame 6",
+      "wet soybean field at midnight for DAN_032"
+    ],
+    "visual_must_not": [
+      "fake readable brand logos",
+      "office presentation slide",
+      "hands holding smiling tablet",
+      "unrelated substitute for dossier de dose por hectare com medidores e trilha de auditoria"
+    ],
+    "required_category": "evidence",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 7.79,
+    "title": "AUDITORIA DE DOSE",
+    "subtitle": "litros por hectare conferidos",
+    "telemetryLine": "RTK // POSICAO CORRIGIDA // PILOTO REMOTO RESPONSAVEL",
+    "evidenceLine": "HECTARE // 64% // LOG DAN_032",
+    "mechanismLine": "LIDAR // DOWNWASH // EFEITO SOLO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_033",
+    "chapter": "CAPITULO 4: O DOWNWASH COMO FERRAMENTA",
+    "voiceover": "No último passe, o sistema fecha a faixa e grava posição, horário e dose. O hectare começa a virar um documento auditável.",
+    "visualSubject": "drone fechando ultimo passe da faixa sobre fileiras regulares",
+    "visual_must_include": [
+      "drone fechando ultimo passe da faixa sobre fileiras regulares",
+      "physical subject visible in master frame 1",
+      "wet soybean field at midnight for DAN_033"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for drone fechando ultimo passe da faixa sobre fileiras regulares"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 10.38,
+    "title": "PASSE FINAL",
+    "subtitle": "o hectare fecha em linhas paralelas",
+    "telemetryLine": "LIDAR // LASER // RADAR // RADIOFREQUENCIA",
+    "evidenceLine": "HECTARE // 66% // LOG DAN_033",
+    "mechanismLine": "LIDAR // DOWNWASH // EFEITO SOLO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_034",
+    "chapter": "CAPITULO 4: O DOWNWASH COMO FERRAMENTA",
+    "voiceover": "Sem pneus sobre o talhão, não há trilha de compactação causada por essa passagem. Ainda assim, logística terrestre continua na borda.",
+    "visualSubject": "solo intacto entre linhas de soja sem marca de pneu ou compactacao",
+    "visual_must_include": [
+      "solo intacto entre linhas de soja sem marca de pneu ou compactacao",
+      "physical subject visible in master frame 1",
+      "wet soybean field at midnight for DAN_034"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for solo intacto entre linhas de soja sem marca de pneu ou compactacao"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 9.08,
+    "title": "SEM COMPACTAR SOLO",
+    "subtitle": "a maquina nunca toca a terra",
+    "telemetryLine": "ALTITUDE // 2,5 m // VELOCIDADE // 28 km/h // MISSAO AUTOMATIZADA",
+    "evidenceLine": "HECTARE // 68% // LOG DAN_034",
+    "mechanismLine": "LIDAR // DOWNWASH // EFEITO SOLO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_035",
+    "chapter": "CAPITULO 5: O ENXAME EM MALHA RTK",
+    "voiceover": "Mapas de infestação permitem dose variável, mas só funcionam quando a origem dos dados, a resolução e a data são conhecidas.",
+    "visualSubject": "mapa de calor de infestacao guiando rota de pulverizacao variavel",
+    "visual_must_include": [
+      "mapa de calor de infestacao guiando rota de pulverizacao variavel",
+      "physical subject visible in master frame 6",
+      "wet soybean field at midnight for DAN_035"
+    ],
+    "visual_must_not": [
+      "consumer GPS phone map",
+      "bright satellite daylight view",
+      "decorative fantasy interface",
+      "unrelated substitute for mapa de calor de infestacao guiando rota de pulverizacao variavel"
+    ],
+    "required_category": "maps",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 11.68,
+    "title": "MAPA DE CALOR",
+    "subtitle": "onde a praga concentra a rota",
+    "telemetryLine": "RTK // POSICAO CORRIGIDA // PILOTO REMOTO RESPONSAVEL",
+    "evidenceLine": "HECTARE // 70% // LOG DAN_035",
+    "mechanismLine": "RTK // ENXAME // LOG DE APLICACAO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_036",
+    "chapter": "CAPITULO 5: O ENXAME EM MALHA RTK",
+    "voiceover": "A escuridão não é autonomia. É apenas uma condição operacional em que iluminação, sensores e supervisão precisam compensar a baixa visibilidade.",
+    "visualSubject": "drone em espera no breu com neblina baixa e luz industrial pontual",
+    "visual_must_include": [
+      "drone em espera no breu com neblina baixa e luz industrial pontual",
+      "physical subject visible in master frame 1",
+      "wet soybean field at midnight for DAN_036"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for drone em espera no breu com neblina baixa e luz industrial pontual"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 10.38,
+    "title": "NOITE COMO INFRA",
+    "subtitle": "menos vento, mais decisao",
+    "telemetryLine": "LIDAR // LASER // RADAR // RADIOFREQUENCIA",
+    "evidenceLine": "HECTARE // 72% // LOG DAN_036",
+    "mechanismLine": "RTK // ENXAME // LOG DE APLICACAO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_037",
+    "chapter": "CAPITULO 5: O ENXAME EM MALHA RTK",
+    "voiceover": "O recibo técnico reúne logs de voo, coordenadas, volume e alertas. Sem esses dados, não há como reconstruir o que aconteceu.",
+    "visualSubject": "relatorio tecnico de voo assinado por hash e coordenadas",
+    "visual_must_include": [
+      "relatorio tecnico de voo assinado por hash e coordenadas",
+      "physical subject visible in master frame 6",
+      "wet soybean field at midnight for DAN_037"
+    ],
+    "visual_must_not": [
+      "fake readable brand logos",
+      "office presentation slide",
+      "hands holding smiling tablet",
+      "unrelated substitute for relatorio tecnico de voo assinado por hash e coordenadas"
+    ],
+    "required_category": "evidence",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 7.79,
+    "title": "RECIBO TECNICO",
+    "subtitle": "o arquivo prova o voo",
+    "telemetryLine": "ALTITUDE // 2,5 m // VELOCIDADE // 28 km/h // MISSAO AUTOMATIZADA",
+    "evidenceLine": "HECTARE // 74% // LOG DAN_037",
+    "mechanismLine": "RTK // ENXAME // LOG DE APLICACAO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_038",
+    "chapter": "CAPITULO 5: O ENXAME EM MALHA RTK",
+    "voiceover": "O raio-X aerodinâmico revela o mecanismo central: o produto não cai em silêncio; ele atravessa um campo de ar criado pelas hélices.",
+    "visualSubject": "corte x-ray do fluxo descendente abrindo o dossel vegetal",
+    "visual_must_include": [
+      "corte x-ray do fluxo descendente abrindo o dossel vegetal",
+      "physical subject visible in master frame 5",
+      "wet soybean field at midnight for DAN_038"
+    ],
+    "visual_must_not": [
+      "video game sci fi aircraft",
+      "explosion crash scene",
+      "generic neon tunnel",
+      "unrelated substitute for corte x-ray do fluxo descendente abrindo o dossel vegetal"
+    ],
+    "required_category": "reveal",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 11.68,
+    "title": "RAIO-X DO DOWNWASH",
+    "subtitle": "o segredo esta no ar empurrado",
+    "telemetryLine": "RTK // POSICAO CORRIGIDA // PILOTO REMOTO RESPONSAVEL",
+    "evidenceLine": "HECTARE // 76% // LOG DAN_038",
+    "mechanismLine": "RTK // ENXAME // LOG DE APLICACAO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_039",
+    "chapter": "CAPITULO 5: O ENXAME EM MALHA RTK",
+    "voiceover": "A última fileira recebe a mesma checagem da primeira. Erros acumulados de posição ou vazão não podem ser escondidos no final.",
+    "visualSubject": "fileira final iluminada por telemetria ciano e rotor distante",
+    "visual_must_include": [
+      "fileira final iluminada por telemetria ciano e rotor distante",
+      "physical subject visible in master frame 2",
+      "wet soybean field at midnight for DAN_039"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for fileira final iluminada por telemetria ciano e rotor distante"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 9.08,
+    "title": "ULTIMA FILEIRA",
+    "subtitle": "o algoritmo termina a faixa",
+    "telemetryLine": "LIDAR // LASER // RADAR // RADIOFREQUENCIA",
+    "evidenceLine": "HECTARE // 78% // LOG DAN_039",
+    "mechanismLine": "RTK // ENXAME // LOG DE APLICACAO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_040",
+    "chapter": "CAPITULO 5: O ENXAME EM MALHA RTK",
+    "voiceover": "O hangar móvel é uma pequena fábrica: gera energia, mistura produto, resfria baterias e devolve aeronaves ao ciclo.",
+    "visualSubject": "hangar movel rural com baterias, tanque e cabos sobre metal molhado",
+    "visual_must_include": [
+      "hangar movel rural com baterias, tanque e cabos sobre metal molhado",
+      "physical subject visible in master frame 3",
+      "wet soybean field at midnight for DAN_040"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for hangar movel rural com baterias, tanque e cabos sobre metal molhado"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 10.38,
+    "title": "HANGAR MOVEL",
+    "subtitle": "campo, bateria e gerador",
+    "telemetryLine": "ALTITUDE // 2,5 m // VELOCIDADE // 28 km/h // MISSAO AUTOMATIZADA",
+    "evidenceLine": "HECTARE // 80% // LOG DAN_040",
+    "mechanismLine": "RTK // ENXAME // LOG DE APLICACAO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_041",
+    "chapter": "CAPITULO 5: O ENXAME EM MALHA RTK",
+    "voiceover": "Depois do voo, folhas amostradas e mapas de aplicação ficam lado a lado. A evidência física precisa concordar com a telemetria.",
+    "visualSubject": "mesa industrial com mapa, amostra de folha e comprovante de aplicacao",
+    "visual_must_include": [
+      "mesa industrial com mapa, amostra de folha e comprovante de aplicacao",
+      "physical subject visible in master frame 6",
+      "wet soybean field at midnight for DAN_041"
+    ],
+    "visual_must_not": [
+      "fake readable brand logos",
+      "office presentation slide",
+      "hands holding smiling tablet",
+      "unrelated substitute for mesa industrial com mapa, amostra de folha e comprovante de aplicacao"
+    ],
+    "required_category": "evidence",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 11.68,
+    "title": "RELATORIO FINAL",
+    "subtitle": "o hectare vira documento",
+    "telemetryLine": "RTK // POSICAO CORRIGIDA // PILOTO REMOTO RESPONSAVEL",
+    "evidenceLine": "HECTARE // 82% // LOG DAN_041",
+    "mechanismLine": "RTK // ENXAME // LOG DE APLICACAO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_042",
+    "chapter": "CAPITULO 5: O ENXAME EM MALHA RTK",
+    "voiceover": "Não ver um piloto na imagem não torna o voo sem responsabilidade. A operação automatizada permanece supervisionada por piloto remoto habilitado.",
+    "visualSubject": "drone autonomo sem piloto visivel executando curva sobre talhao",
+    "visual_must_include": [
+      "drone autonomo sem piloto visivel executando curva sobre talhao",
+      "physical subject visible in master frame 1",
+      "wet soybean field at midnight for DAN_042"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for drone autonomo sem piloto visivel executando curva sobre talhao"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 7.79,
+    "title": "AUTOMAÇÃO SUPERVISIONADA",
+    "subtitle": "o operador saiu da imagem",
+    "telemetryLine": "LIDAR // LASER // RADAR // RADIOFREQUENCIA",
+    "evidenceLine": "HECTARE // 84% // LOG DAN_042",
+    "mechanismLine": "RTK // ENXAME // LOG DE APLICACAO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_043",
+    "chapter": "CAPITULO 5: O ENXAME EM MALHA RTK",
+    "voiceover": "A trilha GNSS mostra onde a aeronave passou. Ela não prova sozinha quanto produto ficou em cada centímetro da folha.",
+    "visualSubject": "trilha GPS ciano seguindo linhas de soja em mapa escuro",
+    "visual_must_include": [
+      "trilha GPS ciano seguindo linhas de soja em mapa escuro",
+      "physical subject visible in master frame 6",
+      "wet soybean field at midnight for DAN_043"
+    ],
+    "visual_must_not": [
+      "consumer GPS phone map",
+      "bright satellite daylight view",
+      "decorative fantasy interface",
+      "unrelated substitute for trilha GPS ciano seguindo linhas de soja em mapa escuro"
+    ],
+    "required_category": "maps",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 10.38,
+    "title": "TRILHA GPS",
+    "subtitle": "coordenada por coordenada",
+    "telemetryLine": "ALTITUDE // 2,5 m // VELOCIDADE // 28 km/h // MISSAO AUTOMATIZADA",
+    "evidenceLine": "HECTARE // 86% // LOG DAN_043",
+    "mechanismLine": "RTK // ENXAME // LOG DE APLICACAO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_044",
+    "chapter": "CAPITULO 6: A FAZENDA OPERADA POR ALGORITMO",
+    "voiceover": "A primeira luz revela fileiras intactas e a estação ainda ativa. O resultado da noite aparece no campo, não no painel.",
+    "visualSubject": "primeira luz distante revelando faixas pulverizadas durante a noite",
+    "visual_must_include": [
+      "primeira luz distante revelando faixas pulverizadas durante a noite",
+      "physical subject visible in master frame 8",
+      "wet soybean field at midnight for DAN_044"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for primeira luz distante revelando faixas pulverizadas durante a noite"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 9.08,
+    "title": "AMANHECER SEM TRATOR",
+    "subtitle": "o rastro aparece no solo",
+    "telemetryLine": "RTK // POSICAO CORRIGIDA // PILOTO REMOTO RESPONSAVEL",
+    "evidenceLine": "HECTARE // 88% // LOG DAN_044",
+    "mechanismLine": "RTK // ENXAME // LOG DE APLICACAO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_045",
+    "chapter": "CAPITULO 6: A FAZENDA OPERADA POR ALGORITMO",
+    "voiceover": "Autonomia tem custo físico: baterias, gerador, água, produto, manutenção e equipe de supervisão fazem parte da conta.",
+    "visualSubject": "dossier de custo fisico com bateria, produto e horas de voo",
+    "visual_must_include": [
+      "dossier de custo fisico com bateria, produto e horas de voo",
+      "physical subject visible in master frame 6",
+      "wet soybean field at midnight for DAN_045"
+    ],
+    "visual_must_not": [
+      "fake readable brand logos",
+      "office presentation slide",
+      "hands holding smiling tablet",
+      "unrelated substitute for dossier de custo fisico com bateria, produto e horas de voo"
+    ],
+    "required_category": "evidence",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 11.68,
+    "title": "CUSTO DA PRECISAO",
+    "subtitle": "autonomia tem preco fisico",
+    "telemetryLine": "LIDAR // LASER // RADAR // RADIOFREQUENCIA",
+    "evidenceLine": "HECTARE // 90% // LOG DAN_045",
+    "mechanismLine": "RTK // ENXAME // LOG DE APLICACAO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_046",
+    "chapter": "CAPITULO 6: A FAZENDA OPERADA POR ALGORITMO",
+    "voiceover": "Cisterna e tanque alimentam o ciclo, mas a mistura precisa de rastreabilidade. Volume sem concentração correta não representa dose correta.",
+    "visualSubject": "cisterna tecnica alimentando tanque pressurizado em carreta agricola",
+    "visual_must_include": [
+      "cisterna tecnica alimentando tanque pressurizado em carreta agricola",
+      "physical subject visible in master frame 3",
+      "wet soybean field at midnight for DAN_046"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for cisterna tecnica alimentando tanque pressurizado em carreta agricola"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 10.38,
+    "title": "CISTERNA E TANQUE",
+    "subtitle": "agua, produto e pressao",
+    "telemetryLine": "ALTITUDE // 2,5 m // VELOCIDADE // 28 km/h // MISSAO AUTOMATIZADA",
+    "evidenceLine": "HECTARE // 92% // LOG DAN_046",
+    "mechanismLine": "RTK // ENXAME // LOG DE APLICACAO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_047",
+    "chapter": "CAPITULO 6: A FAZENDA OPERADA POR ALGORITMO",
+    "voiceover": "O som das hélices denuncia energia transformada em empuxo e turbulência. Cada minuto de voo consome uma reserva limitada.",
+    "visualSubject": "oito helices recortadas contra neblina e fibra de carbono escura",
+    "visual_must_include": [
+      "oito helices recortadas contra neblina e fibra de carbono escura",
+      "physical subject visible in master frame 2",
+      "wet soybean field at midnight for DAN_047"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for oito helices recortadas contra neblina e fibra de carbono escura"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 9.08,
+    "title": "OITO HELICES",
+    "subtitle": "a assinatura sonora do agro",
+    "telemetryLine": "RTK // POSICAO CORRIGIDA // PILOTO REMOTO RESPONSAVEL",
+    "evidenceLine": "HECTARE // 94% // LOG DAN_047",
+    "mechanismLine": "RTK // ENXAME // LOG DE APLICACAO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_048",
+    "chapter": "CAPITULO 6: A FAZENDA OPERADA POR ALGORITMO",
+    "voiceover": "A linha invisível é uma margem operacional. Sair dela pode atingir cultura vizinha, área protegida ou equipamento energizado.",
+    "visualSubject": "linha de plantio marcada por margem de erro centimetrica",
+    "visual_must_include": [
+      "linha de plantio marcada por margem de erro centimetrica",
+      "physical subject visible in master frame 1",
+      "wet soybean field at midnight for DAN_048"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for linha de plantio marcada por margem de erro centimetrica"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 11.68,
+    "title": "A LINHA INVISIVEL",
+    "subtitle": "um metro fora vira perda",
+    "telemetryLine": "LIDAR // LASER // RADAR // RADIOFREQUENCIA",
+    "evidenceLine": "HECTARE // 96% // LOG DAN_048",
+    "mechanismLine": "RTK // ENXAME // LOG DE APLICACAO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  },
+  {
+    "sceneId": "DAN_049",
+    "chapter": "CAPITULO 6: A FAZENDA OPERADA POR ALGORITMO",
+    "voiceover": "Mapa, bateria, bico, vento e amostra de folha formam uma cadeia de evidências. Nenhuma peça isolada conta a história inteira.",
+    "visualSubject": "mesa de evidencias com mapa, bateria, bico e log de vento",
+    "visual_must_include": [
+      "mesa de evidencias com mapa, bateria, bico e log de vento",
+      "physical subject visible in master frame 6",
+      "wet soybean field at midnight for DAN_049"
+    ],
+    "visual_must_not": [
+      "fake readable brand logos",
+      "office presentation slide",
+      "hands holding smiling tablet",
+      "unrelated substitute for mesa de evidencias com mapa, bateria, bico e log de vento"
+    ],
+    "required_category": "evidence",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 7.79,
+    "title": "CADEIA DE EVIDENCIAS",
+    "subtitle": "mapa, dose, bateria, vento",
+    "telemetryLine": "ALTITUDE // 2,5 m // VELOCIDADE // 28 km/h // MISSAO AUTOMATIZADA",
+    "evidenceLine": "HECTARE // 98% // LOG DAN_049",
+    "mechanismLine": "RTK // ENXAME // LOG DE APLICACAO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "dossier"
+    ]
+  },
+  {
+    "sceneId": "DAN_050",
+    "chapter": "CAPITULO 6: A FAZENDA OPERADA POR ALGORITMO",
+    "voiceover": "Um hectare concluído é o resultado de matéria, sensores e decisões supervisionadas. O outro lado do agro está nesse sistema conectado.",
+    "visualSubject": "hectare finalizado visto como matriz de evidencias e rota apagando",
+    "visual_must_include": [
+      "hectare finalizado visto como matriz de evidencias e rota apagando",
+      "physical subject visible in master frame 8",
+      "wet soybean field at midnight for DAN_050"
+    ],
+    "visual_must_not": [
+      "sunlit harvest commercial",
+      "toy quadcopter on desk",
+      "pilot portrait beside drone",
+      "unrelated substitute for hectare finalizado visto como matriz de evidencias e rota apagando"
+    ],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 10.38,
+    "title": "O OUTRO LADO DO AGRO",
+    "subtitle": "o clique vira voo autonomo",
+    "telemetryLine": "RTK // POSICAO CORRIGIDA // PILOTO REMOTO RESPONSAVEL",
+    "evidenceLine": "HECTARE // 100% // LOG DAN_050",
+    "mechanismLine": "RTK // ENXAME // LOG DE APLICACAO",
+    "episodeId": "drones-agro-noturnos",
+    "domainTags": [
+      "agriculture",
+      "drone",
+      "aerospace",
+      "autonomous",
+      "night-ops",
+      "precision-spraying",
+      "lidar",
+      "industrial"
+    ],
+    "allowed_sources": [
+      "firefly"
+    ]
+  }
+]

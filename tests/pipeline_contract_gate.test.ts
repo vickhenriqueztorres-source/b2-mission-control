@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import crypto from 'crypto';
 import { spawnSync } from 'child_process';
 import { PipelineContractGate } from '../pipeline/pipelineContractGate';
 
@@ -36,6 +37,26 @@ function setupTestRun(): void {
     fs.rmSync(testRunDir, { recursive: true, force: true });
   }
   copyDirFiltered(srcRunDir, testRunDir);
+  const scenesDir = path.join(testRunDir, 'editorial', 'execution', 'scenes');
+  if (fs.existsSync(scenesDir)) {
+    for (const sceneId of fs.readdirSync(scenesDir)) {
+      const sceneDir = path.join(scenesDir, sceneId);
+      const videoPath = path.join(sceneDir, 'firefly_take.mp4');
+      if (!fs.statSync(sceneDir).isDirectory() || !fs.existsSync(videoPath)) continue;
+      const sha256 = crypto.createHash('sha256').update(fs.readFileSync(videoPath)).digest('hex');
+      fs.writeFileSync(
+        path.join(sceneDir, 'firefly_take_receipt.json'),
+        JSON.stringify({
+          schema: 'hsl.video.provenance.v2',
+          sourceSystem: 'adobe_firefly',
+          sceneId,
+          sha256,
+          productionUse: 'TEST_APPROVED_TEMPORAL_VIDEO_TAKE',
+        }, null, 2),
+        'utf8',
+      );
+    }
+  }
 }
 
 function teardownTestRun(): void {

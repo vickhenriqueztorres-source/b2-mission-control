@@ -15,12 +15,12 @@ export interface Iso20022PacketInspectorProps {
 }
 
 export const Iso20022PacketInspector: React.FC<Iso20022PacketInspectorProps> = ({
-  pulserCount = '4.000 PULSOS GERADOS (200 p/L)',
-  measuredVolume = '20,000 LITROS (PAINEL DIGITAL)',
-  realDeliveredVolume = '18,400 LITROS (MEDIDOR PADRÃO)',
-  discrepancyPercent = '-1.600 mL (-8,0% // ILEGAL)',
-  transducerStatus = 'PULSE DISCREPANCY DETECTED // CHIP PARASITA 433MHz',
-  sealStatus = 'LACRE INMETRO VIOLADO // PORTARIA 559 METROLOGIA LEGAL',
+  pulserCount = '',
+  measuredVolume = '',
+  realDeliveredVolume = '',
+  discrepancyPercent = '',
+  transducerStatus = '',
+  sealStatus = '',
   accentColor = '#FF5500',
   telemetryColor = '#00F0FF'
 }) => {

@@ -18,8 +18,8 @@ const LAYERS = [
 ];
 
 export const SubmarineCableCrossSection3D: React.FC<SubmarineCableCrossSection3DProps> = ({
-  title = 'ANATOMIA DO CABO SUBMARINO // 25MM',
-  subtitle = 'CORTE TRANSVERSAL DEEP TECH — 7 CAMADAS DE BLINDAGEM'
+  title = '',
+  subtitle = ''
 }) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();

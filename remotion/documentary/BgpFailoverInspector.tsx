@@ -7,7 +7,7 @@ interface BgpFailoverInspectorProps {
 }
 
 export const BgpFailoverInspector: React.FC<BgpFailoverInspectorProps> = ({
-  title = 'DETECÇÃO DE RUPTURA SUBMARINA // FAILOVER BGP EM 15MS'
+  title = ''
 }) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();

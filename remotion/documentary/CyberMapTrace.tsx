@@ -17,9 +17,9 @@ export interface CyberMapTraceProps {
  * e coordenadas ciano pulsando (#00F0FF).
  */
 export const CyberMapTrace: React.FC<CyberMapTraceProps> = ({
-  cityName = 'BARUERI // SP',
-  coordinates = '-23.5057, -46.8789',
-  routeTitle = 'DUTO DE DADOS FIBRA SUBTERRÂNEA CIP',
+  cityName = '',
+  coordinates = '',
+  routeTitle = '',
   pathD = 'M 250,850 Q 700,450 1450,320',
   pathLength = 1200,
   accentColor = '#FF5500',

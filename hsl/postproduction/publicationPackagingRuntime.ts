@@ -212,14 +212,14 @@ export class ThumbnailArtDirectorAgent {
         composition: definition.composition,
         text_side: definition.textSide,
         image_prompt: [
-          'Cinematic investigative documentary thumbnail base, 16:9, photorealistic, one dominant focal subject.',
+          'Present-day on-location investigative documentary thumbnail base, 16:9, photorealistic, one dominant physical subject.',
           `Subject: ${definition.focal}.`,
           `Visual tension: ${definition.conflict}.`,
-          'O Outro Lado Industrial X-Ray palette: deep carbon black (#060709), sodium-vapor orange (#FF5500) for revealed interiors/bottlenecks, laser cyan (#00F0FF) for data telemetry.',
+          'Natural Rec.709 color, moderate contrast, readable shadows and practical available lighting; orange only from a real warm source or one evidence accent, cyan only for verified telemetry.',
           `Composition: ${definition.composition}. Preserve clean negative space on the ${definition.textSide.toLowerCase()} for exact typography added later.`,
-          'High contrast at mobile size, credible industrial detail, one readable visual idea, no embedded words.'
+          'Clear contrast at mobile size, credible present-day physical detail, one readable visual idea, no embedded words, no futuristic interface.'
         ].join(' '),
-        negative_prompt: 'No embedded text, logos, watermarks, illegible labels, fake documents, extra aircraft parts, excessive glow, crowded collage, clickbait faces, or events absent from the documentary.',
+        negative_prompt: 'No embedded text, logos, watermarks, illegible labels, fake documents, invented equipment, holograms, floating HUD, decorative lasers, dominant neon, staged fog, crowded collage, clickbait faces, or events absent from the documentary.',
         promise_evidence: [input.strategy.promise, input.strategy.hook_contract.first_scene_id, input.strategy.hook_contract.early_evidence_scene_id],
         base_image_path: path.resolve(input.baseImages[definition.id])
       };

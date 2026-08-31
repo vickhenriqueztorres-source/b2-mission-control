@@ -20,7 +20,7 @@ async function main(): Promise<void> {
     process.stdout.write(`${JSON.stringify({
       status: 'NARRATION_ALREADY_PRESENT',
       official_voice: process.env.HSL_OFFICIAL_VOICE_NAME || 'Echo',
-      provider: process.env.HSL_NARRATION_PROVIDER || 'voicebox',
+      provider: process.env.HSL_NARRATION_PROVIDER || 'elevenlabs',
       preset_voice_id: process.env.HSL_VOICEBOX_PRESET_VOICE_ID || null,
       scene_count: scenes.length,
       output_path: outputPath
@@ -31,7 +31,7 @@ async function main(): Promise<void> {
   process.stdout.write(`${JSON.stringify({
     status: 'NARRATION_GENERATED',
     official_voice: process.env.HSL_OFFICIAL_VOICE_NAME || 'Echo',
-    provider: process.env.HSL_NARRATION_PROVIDER || 'voicebox',
+    provider: process.env.HSL_NARRATION_PROVIDER || 'elevenlabs',
     preset_voice_id: process.env.HSL_VOICEBOX_PRESET_VOICE_ID || null,
     scene_count: scenes.length,
     character_count: text.length,

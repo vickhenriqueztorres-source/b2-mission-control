@@ -13,11 +13,15 @@ import { SceneTransition } from './SceneTransition';
 import { CameraLanguage } from './CameraLanguage';
 import { CinematicAudioMix } from './CinematicAudioMix';
 import { resolveSceneComponent } from './componentRegistry';
-import { DynamicSpotlightFocus } from '../documentary/DynamicSpotlightFocus';
 import { KineticEditorialCallout } from '../documentary/KineticEditorialCallout';
+import {
+  DocumentaryMotionStage,
+  DocumentaryOverlayDirector,
+} from '../motion-documentary';
 
 export interface CinematicRenderManifest {
   compositor: 'CinematicEpisode';
+  renderEngine: 'remotion';
   version: string;
   transitionsApplied: number;
   duckingApplied: boolean;
@@ -27,11 +31,25 @@ export interface CinematicRenderManifest {
   totalDurationFrames: number;
   totalDurationSeconds: number;
   timestamp: string;
+  compositionId?: string;
+  output?: {
+    path: string;
+    sha256: string;
+    sizeBytes: number;
+    durationSeconds: number;
+    codec: string;
+    width: number;
+    height: number;
+    frozenRatio: number;
+  };
 }
+
+export type CinematicRenderEvidence = Pick<CinematicRenderManifest, 'compositionId' | 'output'>;
 
 export function generateCinematicRenderManifest(
   timeline: CalculatedTimeline | TimelineContract | TimelineContractInput | unknown,
-  _runId?: string
+  _runId?: string,
+  evidence?: CinematicRenderEvidence,
 ): CinematicRenderManifest {
   const calc = (timeline && typeof timeline === 'object' && 'totalDurationFrames' in timeline)
     ? (timeline as CalculatedTimeline)
@@ -44,6 +62,7 @@ export function generateCinematicRenderManifest(
 
   return {
     compositor: 'CinematicEpisode',
+    renderEngine: 'remotion',
     version: '3.0.0',
     transitionsApplied,
     duckingApplied,
@@ -52,19 +71,21 @@ export function generateCinematicRenderManifest(
     episodeId: calc.episodeId,
     totalDurationFrames: calc.totalDurationFrames,
     totalDurationSeconds: calc.totalDurationSeconds,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    ...(evidence || {}),
   };
 }
 
 export function writeCinematicRenderManifest(
   timeline: CalculatedTimeline | TimelineContract | TimelineContractInput | unknown,
   runId: string = 'latest',
-  baseOutputDir?: string
+  baseOutputDir?: string,
+  evidence?: CinematicRenderEvidence,
 ): string {
   const nodePath = require('path');
   const nodeFs = require('fs');
 
-  const manifest = generateCinematicRenderManifest(timeline, runId);
+  const manifest = generateCinematicRenderManifest(timeline, runId, evidence);
   const calc = (timeline && typeof timeline === 'object' && 'totalDurationFrames' in timeline)
     ? (timeline as CalculatedTimeline)
     : parseAndCalculateTimeline(timeline);
@@ -108,14 +129,15 @@ export const CinematicEpisode: React.FC<CinematicEpisodeProps> = ({
 
   return (
     <AbsoluteFill style={{ backgroundColor: '#060709', color: '#FFFFFF' }}>
-      {/* 1. Master Film Grade 35mm (Chiaroscuro, Grão, Vinheta, Letterbox 2.39:1) */}
+      {/* 1. Master Film Grade documental: Rec.709 natural, grao fino e vinheta discreta. */}
       <FilmGrade>
-        {/* 2. Diretor de HUDs Persistentes e Telemetria de Topo */}
+        {/* 2. Diretor de anotacoes factuais em janelas declaradas. */}
         <HudDirector
           totalFrames={calculatedTimeline.totalDurationFrames}
           hudWindows={calculatedTimeline.hudWindows}
           accentColor={accentColor}
           telemetryColor={telemetryColor}
+          showMasterStopwatch={false}
         >
           {/* 3. Sequenciador Canônico de Cenas com Transições e Câmera */}
           {scenes.map((scene, index) => {
@@ -132,41 +154,45 @@ export const CinematicEpisode: React.FC<CinematicEpisodeProps> = ({
               accentColor,
               telemetryColor,
               mediaPath: scene.mediaFile || scene.props?.mediaPath,
+              imageSrc: scene.props?.imageSrc || `episodes/${calculatedTimeline.episodeId}/images/${scene.id}.png`,
               ...scene.props
             };
+
+            const overlapFrames = !isFirst && scene.transition === 'crossfade' ? Math.min(8, Math.floor(scene.durationFrames / 4)) : 0;
+            const sequenceFrom = Math.max(0, scene.startFrame - overlapFrames);
+            const sequenceDuration = scene.durationFrames + overlapFrames;
 
             return (
               <Sequence
                 key={scene.id}
-                from={scene.startFrame}
-                durationInFrames={scene.durationFrames}
+                from={sequenceFrom}
+                durationInFrames={sequenceDuration}
                 name={`${scene.id}_${scene.name || scene.component}`}
               >
                 <AbsoluteFill style={{ backgroundColor: '#060709' }}>
                   {/* Transição Cinematográfica (Crossfade por padrão, DipToBlack em Act Breaks) */}
                   <SceneTransition
                     transitionType={scene.transition}
-                    durationInFrames={scene.durationFrames}
+                    durationInFrames={sequenceDuration}
+                    transitionDurationFrames={overlapFrames || 8}
                     isFirstScene={isFirst}
                     isLastScene={isLast}
                   >
-                    {/* Micro-movimento de Câmera 35mm (PushIn para vídeo, Drift para dossiês) */}
-                    <CameraLanguage
-                      motion={scene.camera}
-                      durationInFrames={scene.durationFrames}
-                      sceneIndex={index}
-                    >
-                      <SceneComponent {...mergedProps} />
-                    </CameraLanguage>
+                    {/* Movimento fisico discreto, definido pela linguagem da cena. */}
+                    <DocumentaryMotionStage recipes={scene.motionRecipes} fps={calculatedTimeline.fps}>
+                      <CameraLanguage
+                        motion={scene.camera}
+                        durationInFrames={sequenceDuration}
+                        sceneIndex={index}
+                      >
+                        <SceneComponent {...mergedProps} />
+                      </CameraLanguage>
+                    </DocumentaryMotionStage>
 
-                    {/* Spotlight Chiaroscuro Denis Villeneuve */}
-                    <DynamicSpotlightFocus
-                      durationInFrames={scene.durationFrames}
-                      intensity={0.28}
-                    />
+                    <DocumentaryOverlayDirector recipes={scene.motionRecipes} fps={calculatedTimeline.fps} />
 
                     {/* Tipografia Editorial Cinética Opcional */}
-                    {scene.callout && (
+                    {scene.callout && scene.callout.mainText.trim().toLowerCase() !== String(scene.props?.title || '').trim().toLowerCase() && (
                       <KineticEditorialCallout
                         mainText={scene.callout.mainText}
                         subText={scene.callout.subText}

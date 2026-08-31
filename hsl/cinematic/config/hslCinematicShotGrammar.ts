@@ -11,12 +11,13 @@ export const HSL_CINEMATIC_BRAND_RULES: HslCinematicBrandRules = Object.freeze({
     'room for information',
     'mechanical specificity',
     'photoreal documentary base',
-    'kinetic pop documentary identity',
-    'acid yellow active flow only',
-    'electric blue infrastructure only',
-    'hyper orange constraint only',
-    'one dominant luminous focus',
-    'approved premium motion reference lineage',
+    'documentary field investigative identity',
+    'natural Rec.709 base with readable shadows',
+    'practical available lighting preserved',
+    'orange only for a practical source or one evidence accent',
+    'cyan only for verified telemetry',
+    'present-day commercially plausible equipment',
+    'approved documentary field reference lineage',
     'no embedded text in generated start frames',
     'no procedural previs in production'
   ]),
@@ -33,5 +34,8 @@ export const HSL_CAMERA_BLACKLIST = Object.freeze([
   'HANDHELD_CHAOTIC',
   'WHIP_CAMERA',
   'FISHEYE_SWING',
-  'UNMOTIVATED_ORBIT'
+  'UNMOTIVATED_ORBIT',
+  'PERMANENT_DIGITAL_PUSH_IN',
+  'ZOOM_LOOP',
+  'FAKE_PARALLAX'
 ] as const);

@@ -38,7 +38,7 @@ test('identity gate accepts reference-conditioned lineage and rejects procedural
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'hsl-identity-gate-'));
   roots.push(root);
   const framePath = path.join(root, 'HSL_TEST_001.png');
-  fs.copyFileSync(path.resolve('assets/hsl/motion-reference-set-v1/last-meters.png'), framePath);
+  fs.copyFileSync(path.resolve('assets/visual_identity/documentary-field-v4/observational-field.png'), framePath);
   const prompt = buildHslStartFramePrompt({
     subject: 'a pump station moving stormwater through a buried gallery',
     composition: 'medium-wide mechanical composition',
@@ -58,7 +58,7 @@ test('identity gate accepts reference-conditioned lineage and rejects procedural
       prompt_sha256: sha256Text(prompt),
       generator: 'TEST_REFERENCE_CONDITIONED_GENERATOR',
       identity_contract_version: HSL_VISUAL_IDENTITY_CONTRACT_VERSION,
-      reference_asset_ids: ['LAST_METERS']
+      reference_asset_ids: ['OBSERVATIONAL_FIELD']
     }]
   } as const;
   fs.writeFileSync(provenancePath, `${JSON.stringify({

@@ -12,15 +12,13 @@ export interface SceneTransitionProps {
 }
 
 /**
- * ⚡ SceneTransition: Transições Cinematográficas Denis Villeneuve
- * Aplica crossfade orgânico com overlap, dipToBlack em viradas de ato,
- * whipPan direcional ou corte seco apenas quando estritamente declarado.
+ * Documentary transitions: short crossfade, chapter dip and restrained action wipes.
  */
 export const SceneTransition: React.FC<SceneTransitionProps> = ({
   children,
   transitionType = 'crossfade',
   durationInFrames,
-  transitionDurationFrames = 15,
+  transitionDurationFrames = 8,
   isFirstScene = false,
   isLastScene = false
 }) => {
@@ -116,7 +114,7 @@ export const SceneTransition: React.FC<SceneTransitionProps> = ({
     );
   }
 
-  // 4. Laser Wipe (Corte tecnológico industrial ciano)
+  // 4. Legacy wipe mapped to a neutral editorial reveal, without laser or glow.
   if (transitionType === 'laserWipe' || transitionType === 'wipe') {
     const wipeProgress = interpolate(frame, [0, transitionLen], [0, 100], {
       extrapolateLeft: 'clamp',
@@ -134,9 +132,8 @@ export const SceneTransition: React.FC<SceneTransitionProps> = ({
               top: 0,
               bottom: 0,
               left: `${wipeProgress}%`,
-              width: '3px',
-              backgroundColor: '#00F0FF',
-              boxShadow: '0 0 12px #00F0FF, 0 0 24px #00F0FF'
+              width: '1px',
+              backgroundColor: 'rgba(244,244,240,0.55)'
             }}
           />
         )}
@@ -144,7 +141,7 @@ export const SceneTransition: React.FC<SceneTransitionProps> = ({
     );
   }
 
-  // 5. Crossfade Canônico (12-18 frames com overlap orgânico)
+  // 5. Documentary crossfade (6-8 frames).
   let entryOpacity = 1;
   if (!isFirstScene) {
     entryOpacity = interpolate(frame, [0, transitionLen], [0, 1], {
@@ -153,24 +150,9 @@ export const SceneTransition: React.FC<SceneTransitionProps> = ({
     });
   }
 
-  let exitOpacity = 1;
-  if (!isLastScene) {
-    exitOpacity = interpolate(
-      frame,
-      [durationInFrames - transitionLen, durationInFrames],
-      [1, 0],
-      {
-        extrapolateLeft: 'clamp',
-        extrapolateRight: 'clamp'
-      }
-    );
-  }
-
-  const combinedOpacity = Math.min(entryOpacity, exitOpacity);
-
   return (
-    <AbsoluteFill style={{ backgroundColor: '#060709' }}>
-      <AbsoluteFill style={{ opacity: combinedOpacity }}>
+    <AbsoluteFill>
+      <AbsoluteFill style={{ opacity: entryOpacity }}>
         {children}
       </AbsoluteFill>
     </AbsoluteFill>

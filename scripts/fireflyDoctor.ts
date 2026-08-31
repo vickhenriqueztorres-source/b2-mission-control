@@ -160,19 +160,19 @@ export async function runFireflyDoctor(): Promise<boolean> {
       }
     } catch {}
 
-    if (probeJson && probeJson.authenticated === true) {
+    if (probeJson && probeJson.authenticated === true && probeJson.production_ui_ready === true) {
       checks.push({
-        id: 'SESSION_LIVE',
-        name: 'Sessão Ativa no Adobe Firefly',
+        id: 'PRODUCTION_UI_READY',
+        name: 'Firefly Video pronto para produção',
         passed: true,
-        details: probeJson.reason || 'Autenticação verificada no navegador'
+        details: `${probeJson.reason}; modelo=${probeJson.model}; duração=${probeJson.duration_seconds}s`
       });
     } else {
       checks.push({
-        id: 'SESSION_LIVE',
-        name: 'Sessão Ativa no Adobe Firefly',
+        id: 'PRODUCTION_UI_READY',
+        name: 'Firefly Video pronto para produção',
         passed: false,
-        details: probeJson?.reason || 'FIREFLY_SESSION_DEAD: Deslogado ou tela de login detectada',
+        details: probeJson?.reason || 'FIREFLY_SESSION_DEAD: Deslogado ou compositor indisponível',
         fixInstruction: 'Execute login_firefly.bat, clique em "Fazer logon" no Chrome e pressione ENTER no terminal para salvar a sessão.'
       });
     }

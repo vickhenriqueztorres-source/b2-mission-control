@@ -94,6 +94,22 @@ export function buildSceneContracts(
     );
   }
 
+  // Validação de negativos específicos: proibido copiar visual_must_not idêntico em todas as cenas
+  if (scenes.length > 1) {
+    const firstNeg = scenes[0].visual_must_not ? JSON.stringify([...scenes[0].visual_must_not].sort()) : null;
+    if (firstNeg !== null) {
+      const allIdentical = scenes.every(sc => {
+        const currentNeg = sc.visual_must_not ? JSON.stringify([...sc.visual_must_not].sort()) : null;
+        return currentNeg === firstNeg;
+      });
+      if (allIdentical) {
+        throw new Error(
+          `SCENES_NEGATIVE_NOT_SPECIFIC: O episódio '${episodeContract.episodeId}' possui 'visual_must_not' idêntico em todas as ${scenes.length} cenas (negativo copiado). Cada cena deve conter negações específicas do seu contexto.`
+        );
+      }
+    }
+  }
+
   const contracts: SceneVisualContract[] = [];
 
   for (let i = 0; i < scenes.length; i++) {
@@ -107,9 +123,9 @@ export function buildSceneContracts(
 
     // 1. visual_must_include
     let mustInclude = sc.visual_must_include;
-    if (!mustInclude || mustInclude.length < 2) {
+    if (!mustInclude || mustInclude.length === 0) {
       const extracted = extractKeywordsFromSubject(subjectTrimmed);
-      mustInclude = Array.from(new Set([...(mustInclude || []), ...extracted]));
+      mustInclude = extracted;
     }
 
     // Filtrar termos proibidos

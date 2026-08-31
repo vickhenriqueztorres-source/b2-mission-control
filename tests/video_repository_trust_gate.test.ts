@@ -115,8 +115,8 @@ async function runTrustGateTests() {
 
       const matchResult = VideoRepositoryMatcher.matchScene({
         sceneId: 'SC_TEST_NO_PROVENANCE',
-        visualSubject: 'Impressora emitindo folha de documento oficial e relatorio tecnico em escritorio',
-        tags: ['impressora', 'papel', 'documento', 'escritorio'],
+        visualSubject: 'Impressora emitindo folha de documento oficial e relatorio tecnico',
+        tags: ['impressora', 'papel', 'documento', 'fiscal'],
         domainTags: ['impressora', 'papel'],
         visualMustInclude: ['impressora'],
         requiredCategory: 'cyber_telemetry',
@@ -162,31 +162,65 @@ async function runTrustGateTests() {
     }
 
     // ─────────────────────────────────────────────────────────────────────────────
-    // TESTE 5: Catálogo 100% não-aprovado retorna falha com motivo de confiança
+    // TESTE 6: Clipe sem 'domains' é rejeitado com BANK_CLIP_NO_DOMAIN (Veto Temático Fail-Closed)
     // ─────────────────────────────────────────────────────────────────────────────
-    console.log('\n[TEST 5/5] Validando comportamento com catálogo 100% não-aprovado...');
+    console.log('\n[TEST 6/7] Validando que clip sem domains é rejeitado com BANK_CLIP_NO_DOMAIN...');
     try {
       const catalog = resetCatalog();
-      catalog.videos.forEach(v => {
-        v.qaStatus = 'quarantined';
-      });
+      const clip = catalog.videos.find(v => v.id === 'IND_PARCEL_CONVEYOR_BELT_01')!;
+      const noDomainClip: VideoCatalogEntry = {
+        ...clip,
+        domains: []
+      };
+      catalog.videos = [noDomainClip];
       VideoRepositoryMatcher.saveCatalog(catalog);
 
       const matchResult = VideoRepositoryMatcher.matchScene({
-        sceneId: 'SC_TEST_ALL_QUARANTINED',
+        sceneId: 'SC_TEST_NO_DOMAIN',
         visualSubject: 'Esteira rolante automatizada transportando pacotes e caixas em centro de distribuicao',
         tags: ['pacote', 'esteira', 'triagem', 'logistica'],
-        requiredCategory: 'industrial'
+        domainTags: ['logistics'],
+        visualMustInclude: ['pacote'],
+        requiredCategory: 'industrial',
+        allowedSources: ['bank']
       }, 'smart');
 
-      if (!matchResult.matched && matchResult.reason.includes('BANK_CLIP_NOT_APPROVED')) {
-        console.log(`  ✅ TESTE 5 PASSOU: Catálogo não-aprovado retornou falha com motivo de confiança (BANK_CLIP_NOT_APPROVED).`);
+      if (!matchResult.matched && matchResult.reason.includes('BANK_CLIP_NO_DOMAIN')) {
+        console.log(`  ✅ TESTE 6 PASSOU: Clip sem domains rejeitado com BANK_CLIP_NO_DOMAIN (${matchResult.reason}).`);
       } else {
-        console.error(`  ❌ FALHA NO TESTE 5: Catálogo 100% não aprovado não falhou com motivo de confiança:`, matchResult);
+        console.error(`  ❌ FALHA NO TESTE 6: Clip sem domains não retornou BANK_CLIP_NO_DOMAIN:`, matchResult);
         allPassed = false;
       }
     } catch (err: any) {
-      console.error(`  ❌ ERRO NO TESTE 5:`, err.message);
+      console.error(`  ❌ ERRO NO TESTE 6:`, err.message);
+      allPassed = false;
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────────
+    // TESTE 7: Clipe com domains ['logistics'] é rejeitado para episódio com domainTags ['gps', 'relativity']
+    // ─────────────────────────────────────────────────────────────────────────────
+    console.log('\n[TEST 7/7] Validando veto temático por BANK_DOMAIN_MISMATCH...');
+    try {
+      resetCatalog();
+
+      const matchResult = VideoRepositoryMatcher.matchScene({
+        sceneId: 'SC_TEST_DOMAIN_MISMATCH',
+        visualSubject: 'Esteira rolante automatizada transportando pacotes e caixas em centro de distribuicao',
+        tags: ['pacote', 'esteira', 'triagem', 'logistica'],
+        domainTags: ['gps', 'relativity', 'atomic_physics'],
+        visualMustInclude: ['pacote'],
+        requiredCategory: 'industrial',
+        allowedSources: ['bank']
+      }, 'smart');
+
+      if (!matchResult.matched && matchResult.reason.includes('BANK_DOMAIN_MISMATCH')) {
+        console.log(`  ✅ TESTE 7 PASSOU: Veto temático barrou clip não relacionado (${matchResult.reason}).`);
+      } else {
+        console.error(`  ❌ FALHA NO TESTE 7: Clip fora do domínio do episódio não foi barrado:`, matchResult);
+        allPassed = false;
+      }
+    } catch (err: any) {
+      console.error(`  ❌ ERRO NO TESTE 7:`, err.message);
       allPassed = false;
     }
 

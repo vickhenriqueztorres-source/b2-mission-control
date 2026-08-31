@@ -34,6 +34,7 @@ export interface VideoCatalogEntry {
   category: VideoCategory | string;
   filename: string; // Caminho relativo dentro de assets/video_repository/
   tags: string[];
+  domains?: string[]; // Domínios temáticos permitidos para veto (ex: ['infrastructure', 'transportation'])
   description: string;
   durationSeconds: number;
   fps: number;
@@ -95,6 +96,7 @@ export interface VideoMatchRequest {
   visualMustNot?: string[];
   allowedSources?: ('firefly' | 'bank' | 'dossier')[];
   targetDurationSeconds?: number;
+  usedAssetIds?: string[] | Set<string>;
 }
 
 export interface VideoMatchResult {

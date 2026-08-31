@@ -114,10 +114,10 @@ export const HSL_BRAND_IDENTITY = {
   NAME: 'O OUTRO LADO',
   SLOGAN: 'O que acontece depois que você clica, compra, liga ou aperta.',
   SIGNATURE: 'INVESTIGAR. REVELAR. COMPREENDER.',
-  DIRECTION: 'INDUSTRIAL X-RAY',
-  AESTHETIC: 'Denis Villeneuve Cyber-Industrial (35mm Anamorphic)',
-  ASPECT_RATIO: '2.39:1',
-  PROMPT_MASTER_TEMPLATE: 'Extreme cinematic 35mm anamorphic still from a Denis Villeneuve film, {SUBJECT}, monumental scale, atmospheric chiaroscuro lighting, deep carbon blacks (#060709), illuminated by glowing sodium-vapor amber reflections (#FF5500) and sharp cyan laser telemetry lights (#00F0FF), dense volumetric fog and steam, wet reflective ground, shallow depth of field, creamy anamorphic bokeh, filmic texture, raw realistic industrial photography, 8k, no text, no human faces --ar 16:9'
+  DIRECTION: 'DOCUMENTARIO DE CAMPO INVESTIGATIVO',
+  AESTHETIC: 'Present-day on-location documentary photography with restrained 35mm texture',
+  ASPECT_RATIO: '16:9',
+  PROMPT_MASTER_TEMPLATE: '{SUBJECT}, present-day on-location investigative documentary photography, current commercially plausible equipment, camera physically present inside the real operation, natural Rec.709 color, moderate contrast, readable shadows, practical available lighting, fine irregular 35mm grain, subtle halation only around real lamps, no futuristic interface, no hologram, no text, no posed faces --ar 16:9'
 } as const;
 
 export const HSL_OFFICIAL_VOICE = {
@@ -132,9 +132,9 @@ export const HSL_OFFICIAL_VOICE = {
 export const HSL_COLOR_TOKENS = {
   CARBON_BLACK: '#060709',       // Fundo mestre, sombras profundas, base low-key (70%+ da área)
   DEEP_STEEL: '#0D0E15',         // Carcaças de máquinas, painéis sob vidro escuro
-  SODIUM_ORANGE: '#FF5500',      // Linha de corte laser, compartimento ativo, duto em neon, alerta
+  SODIUM_ORANGE: '#FF5500',      // Fonte pratica quente, evidencia ou alerta pontual
   SODIUM_VAPOR_ORANGE: '#FF5500',// Alias oficial
-  LASER_CYAN: '#00F0FF',         // HUD, coordenadas GPS, status de pacotes, ondas VLF, telemetria
+  LASER_CYAN: '#00F0FF',         // Uso restrito a telemetria e coordenadas verificaveis
   FROSTED_GLASS: 'rgba(255,255,255,0.08)', // Vidro fosco, painéis translúcidos, camadas
   TITANIUM_WHITE: '#F4F4F0',     // Tipografia principal, títulos, termos de alto contraste
   MUTED_SLATE: '#8A8D9F'         // Metadados, referências regulatórias, timestamps

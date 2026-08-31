@@ -31,3 +31,5 @@ export * from './InfraredPlateScanner3D';
 export * from './AsphaltThermalDeformation3D';
 export * from './FlowMeterPulserSchematicHUD';
 export * from './FlowDiscrepancyHUD';
+export * from './DroneAgroSpecializedScenes';
+export * from './FieldDocumentaryScene';

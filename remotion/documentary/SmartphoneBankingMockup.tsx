@@ -9,9 +9,9 @@ export interface SmartphoneBankingMockupProps {
 }
 
 export const SmartphoneBankingMockup: React.FC<SmartphoneBankingMockupProps> = ({
-  amount = 'R$ 1,00',
-  recipientName = 'CARLOS EDUARDO SILVA',
-  recipientKey = 'pix@exemplo.com.br',
+  amount = '',
+  recipientName = '',
+  recipientKey = '',
   stage = 'confirming'
 }) => {
   const frame = useCurrentFrame();

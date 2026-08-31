@@ -16,11 +16,11 @@ export interface LaserScanDossierProps {
  * varrendo a página e destacando o número ou cláusula crítica.
  */
 export const LaserScanDossier: React.FC<LaserScanDossierProps> = ({
-  documentTitle = 'AUTO DE INFRAÇÃO METROLÓGICA // FRAUDE NA MEDIÇÃO VOLUMÉTRICA',
-  documentSource = 'FONTE: INMETRO / IPEM / PROCESSO ADMINISTRATIVO SANÇÃO',
-  criticalClause = 'DESVIO VOLUMÉTRICO DE -8,0% DETECTADO EM BICO ELETRÔNICO MEDIDOR',
-  clauseContext = 'A perícia constatou a adulteração do circuito eletrônico do cabeçote da bomba de combustível, alterando a contagem de pulsos por litro em desfavor do consumidor sem alterar o visor digital.',
-  stampText = 'PERÍCIA CONCLUÍDA // AUTUAÇÃO',
+  documentTitle = '',
+  documentSource = '',
+  criticalClause = '',
+  clauseContext = '',
+  stampText = '',
   accentColor = '#FF5500'
 }) => {
   const frame = useCurrentFrame();

@@ -27,7 +27,7 @@ export const CinematicKeyframeDossier: React.FC<CinematicKeyframeDossierProps> =
   scanlineColor = '#FF5500',
   accentColor = '#FF5500',
   telemetryColor = '#00F0FF',
-  tagText = 'ANÁLISE DE HARDWARE // O OUTRO LADO'
+  tagText = ''
 }) => {
   const frame = useCurrentFrame();
 
@@ -44,6 +44,8 @@ export const CinematicKeyframeDossier: React.FC<CinematicKeyframeDossierProps> =
     [0.35, 0.75]
   );
 
+  const resolvedSrc = imageSrc ? staticFile(imageSrc) : staticFile('identity/logo.png');
+
   return (
     <AbsoluteFill style={{backgroundColor: '#060709', overflow: 'hidden'}}>
       {/* 1. Imagem 4K em Movimento Parallax 2.5D */}
@@ -53,7 +55,7 @@ export const CinematicKeyframeDossier: React.FC<CinematicKeyframeDossierProps> =
         zoomIntensity={zoomIntensity}
       >
         <img
-          src={staticFile(imageSrc)}
+          src={resolvedSrc}
           alt="dossier"
           style={{
             width: '100%',

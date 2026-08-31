@@ -1,0 +1,242 @@
+[
+  {
+    "sceneId": "AGRO_001",
+    "voiceover": "Na escuridão da meia-noite no Cerrado brasileiro, uma máquina de cem quilos decola sem piloto humano e sem luzes de navegação visíveis.",
+    "visualSubject": "Octocóptero industrial colossal de 100kg decolando no escuro da plantação de soja em 35mm chiaroscuro",
+    "visual_must_include": ["octocopter drone", "soybean field", "night", "carbon fiber frame", "sodium amber reflections"],
+    "visual_must_not": ["human faces", "daylight", "commercial office", "smiling people", "cartoon"],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 8
+  },
+  {
+    "sceneId": "AGRO_002",
+    "voiceover": "A vinte e oito quilômetros por hora e a apenas dois metros e meio do topo das plantas, ela cobre quarenta hectares por hora sem colidir com uma única árvore ou cabo de alta tensão.",
+    "visualSubject": "Drone gigante sobrevoando a plantação rente às folhas em alta velocidade com reflexos de laser ciano",
+    "visual_must_include": ["drone low altitude flight", "laser cyan telemetry", "wet foliage", "motion blur"],
+    "visual_must_not": ["human faces", "daylight", "commercial office"],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 9
+  },
+  {
+    "sceneId": "AGRO_003",
+    "voiceover": "Por trás do mito do drone comum, opera um octocóptero colossal com estrutura tubular em fibra de carbono aeroespacial de dois metros e meio de envergadura.",
+    "visualSubject": "Estrutura tubular de fibra de carbono aeroespacial e chassi de braços dobráveis iluminados em chiaroscuro",
+    "visual_must_include": ["carbon fiber weave", "aerospace tubular arm", "industrial fasteners", "deep steel"],
+    "visual_must_not": ["plastic toy drone", "human faces", "daylight"],
+    "required_category": "matter",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 12
+  },
+  {
+    "sceneId": "AGRO_004",
+    "voiceover": "Cada um dos oito motores elétricos sem escovas gera mais de vinte e cinco quilos de empuxo vertical contínuo.",
+    "visualSubject": "Motor elétrico industrial brushless de alto torque com estator de cobre e hélices de carbono de 50 polegadas",
+    "visual_must_include": ["brushless motor", "copper coils", "heavy duty prop adapter", "sodium amber rim light"],
+    "visual_must_not": ["human faces", "cartoon", "generic toy"],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 7
+  },
+  {
+    "sceneId": "AGRO_005",
+    "voiceover": "A energia vem de pacotes de baterias de polímero de lítio de trinta mil miliamperes-hora, refrigeradas a ar pressurizado e trocadas em geradores móveis em menos de noventa segundos.",
+    "visualSubject": "Estação de troca rápida de baterias industriais de 30.000 mAh instalada em carreta móvel com gerador diesel",
+    "visual_must_include": ["heavy battery pack", "generator station", "industrial cables", "cooling vents"],
+    "visual_must_not": ["human faces", "office desk"],
+    "required_category": "evidence",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 14
+  },
+  {
+    "sceneId": "AGRO_006",
+    "voiceover": "No centro de gravidade, um tanque pressurizado de cinquenta litros alimenta bicos de atomização centrífuga rotativa que giram a vinte mil rotações por minuto.",
+    "visualSubject": "Bico centrífugo rotativo de alta pressão expelindo névoa ultrafina de microgotas iluminadas por laser",
+    "visual_must_include": ["rotary centrifugal nozzle", "pressurized chemical tank", "atomized mist spray", "cyan laser lighting"],
+    "visual_must_not": ["human faces", "garden sprinkler"],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 8
+  },
+  {
+    "sceneId": "AGRO_007",
+    "voiceover": "Mas voar a três metros do solo no breu total exige um sistema sensorial que não depende da visão humana.",
+    "visualSubject": "Cúpula sensorial montada no topo do drone com emissor LiDAR rotativo e antena de navegação protegida",
+    "visual_must_include": ["sensor dome", "lidar pod", "rugged housing", "dark atmosphere chiaroscuro"],
+    "visual_must_not": ["human faces", "smartphone camera"],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 10
+  },
+  {
+    "sceneId": "AGRO_008",
+    "voiceover": "No nariz e na cauda da aeronave, dois módulos de radar de ondas milimétricas de abertura sintética varrem o terreno duzentas vezes por segundo.",
+    "visualSubject": "Módulo de radar de ondas milimétricas de abertura sintética escaneando o relevo através da vegetação densa",
+    "visual_must_include": ["millimeter wave radar module", "synthetic aperture array", "cyan telemetry grid", "night canopy"],
+    "visual_must_not": ["human faces", "weather radar screen"],
+    "required_category": "reveal",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 13
+  },
+  {
+    "sceneId": "AGRO_009",
+    "voiceover": "Acima da estrutura central, um sensor LiDAR de estado sólido emite feixes de laser infravermelho de noventa e cinco nanômetros em trezentos e sessenta graus.",
+    "visualSubject": "Feixes de laser infravermelho e malha de pontos 3D varrendo 360 graus o horizonte noturno da fazenda",
+    "visual_must_include": ["360 lidar point cloud", "dense infrared beams", "terrain contours", "laser cyan dots"],
+    "visual_must_not": ["human faces", "disco laser"],
+    "required_category": "reveal",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 8
+  },
+  {
+    "sceneId": "AGRO_010",
+    "voiceover": "O radar ignora a poeira e o nevoeiro noturno, construindo uma malha topográfica tridimensional do relevo em tempo real com precisão centimétrica.",
+    "visualSubject": "Mapa de relevo tridimensional digital gerado em tempo real com curvas de nível e altitude do terreno",
+    "visual_must_include": ["topographic 3d mesh", "elevation contour lines", "cyan telemetry", "dark carbon background"],
+    "visual_must_not": ["human faces", "google maps mobile screen"],
+    "required_category": "maps",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 12
+  },
+  {
+    "sceneId": "AGRO_011",
+    "voiceover": "Se um fio de alta tensão ou um mourão de cerca entra na zona crítica de proteção, o piloto automático recalcula o vetor de trajetória em vinte milissegundos.",
+    "visualSubject": "Drone desviando suavemente de torre de alta tensão e cerca perimetral detectada pelo radar",
+    "visual_must_include": ["high voltage wire detection", "avoidance vector line", "amber critical alert", "drone pitch change"],
+    "visual_must_not": ["human faces", "plane crash"],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 7
+  },
+  {
+    "sceneId": "AGRO_012",
+    "voiceover": "No entanto, a maior barreira física para a pulverização aérea noturna não é o obstáculo à frente, mas a aerodinâmica sob as hélices.",
+    "visualSubject": "Corte de túnel de vento mostrando os vórtices de ar turbulentos sob as hélices girando a plena carga",
+    "visual_must_include": ["vorticity smoke trails", "downwash turbulence", "aerodynamic stream", "35mm chiaroscuro"],
+    "visual_must_not": ["human faces", "airplane jet engine"],
+    "required_category": "reveal",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 15
+  },
+  {
+    "sceneId": "AGRO_013",
+    "voiceover": "Quando oito hélices de cinquenta polegadas giram em velocidade de corte, elas criam uma coluna de vento descendente de alta velocidade chamada downwash.",
+    "visualSubject": "Coluna descendente de ar maciço comprimindo as copas das plantas de soja com reflexos de vapor de sódio",
+    "visual_must_include": ["massive downwash air column", "flattened crop leaves", "high velocity air vortex", "sodium amber"],
+    "visual_must_not": ["human faces", "hurricane weather"],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 8
+  },
+  {
+    "sceneId": "AGRO_014",
+    "voiceover": "A três metros do solo, esse fluxo colide com a terra e gera o efeito solo, abrindo a copa densa da soja como um leque mecânico.",
+    "visualSubject": "Close macro cinematográfico do dossel da soja se abrindo com a pressão do vento revelando a face inferior das folhas",
+    "visual_must_include": ["soybean canopy opening", "ground effect air bounce", "droplet trajectory", "macro 35mm"],
+    "visual_must_not": ["human faces", "lawn mower"],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 11
+  },
+  {
+    "sceneId": "AGRO_015",
+    "voiceover": "As microgotas de cento e cinquenta mícrons não caem por gravidade: elas são forçadas contra a turbulência para aderir no verso exato da folha, onde as pragas se escondem.",
+    "visualSubject": "Microgotas calibradas de 150 mícrons aderindo na superfície abaxial da folha com iluminação ultravioleta",
+    "visual_must_include": ["droplets on leaf underside", "microscopic impact", "cyan fluorescence", "extreme macro depth of field"],
+    "visual_must_not": ["human faces", "rain drops on window"],
+    "required_category": "reveal",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 7
+  },
+  {
+    "sceneId": "AGRO_016",
+    "voiceover": "Se a altitude variar apenas meio metro, a vorticidade da ponta da asa se desorganiza, e o produto evapora ou deriva para fora da faixa de aplicação.",
+    "visualSubject": "Gráfico de dispersão de deriva e instabilidade de vórtice mostrando a faixa limite de altitude de 2.5 metros",
+    "visual_must_include": ["drift dispersion graph", "vortex shedding model", "altitude tolerance limit", "telemetry HUD"],
+    "visual_must_not": ["human faces", "generic pie chart"],
+    "required_category": "maps",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 14
+  },
+  {
+    "sceneId": "AGRO_017",
+    "voiceover": "Para garantir que nenhuma fileira receba dose dupla ou fique desprotegida, os drones não operam de forma isolada.",
+    "visualSubject": "Enxame de três drones voando em formação escalonada paralela sobre a imensidão da lavoura à noite",
+    "visual_must_include": ["three drones formation", "parallel flight lines", "night agricultural horizon", "beacon lights"],
+    "visual_must_not": ["human faces", "military warjets"],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 8
+  },
+  {
+    "sceneId": "AGRO_018",
+    "voiceover": "Uma estação base de cinemática em tempo real no solo transmite correções de satélite via rádio de ultra-alta frequência para até cinco aeronaves simultâneas.",
+    "visualSubject": "Antena RTK GNSS montada em tripé reforçado no meio do campo emitindo telemetria de rádio UHF",
+    "visual_must_include": ["RTK base station antenna", "rugged field tripod", "UHF radio link", "laser cyan signal beams"],
+    "visual_must_not": ["human faces", "satellite dish television"],
+    "required_category": "evidence",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 13
+  },
+  {
+    "sceneId": "AGRO_019",
+    "voiceover": "A margem de erro na posição horizontal é inferior a dois centímetros e meio ao longo de trajetórias de centenas de hectares.",
+    "visualSubject": "Visualização de faixas de sobreposição RTK com precisão milimétrica de 2.5 cm sobre linhas de plantio",
+    "visual_must_include": ["2.5cm centimeter precision band", "swath path lines", "cyan telemetry coordinates", "crop rows"],
+    "visual_must_not": ["human faces", "road map"],
+    "required_category": "maps",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 7
+  },
+  {
+    "sceneId": "AGRO_020",
+    "voiceover": "Em uma rede em malha contínua, se uma aeronave detecta uma variação abrupta de vento, as outras quatro ajustam sua altura e velocidade automaticamente.",
+    "visualSubject": "Diagrama de malha de comunicação mesh inter-drone com nós conectados e ajuste dinâmico de velocidade",
+    "visual_must_include": ["mesh network interconnect", "dynamic speed telemetry", "wind vector compensation", "cyan and amber nodes"],
+    "visual_must_not": ["human faces", "social network graphic"],
+    "required_category": "reveal",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 12
+  },
+  {
+    "sceneId": "AGRO_021",
+    "voiceover": "Quando a carga de defensivo atinge dez por cento, o drone suspende a missão, marca a coordenada exata com timestamp e retorna à base de recarga sem intervenção humana.",
+    "visualSubject": "Drone pousando suavemente sobre a plataforma de reabastecimento automatizada na caçamba da caminhonete",
+    "visual_must_include": ["automated landing pad", "pickup truck bed mount", "battery swap dock", "sodium vapor amber"],
+    "visual_must_not": ["human faces", "toy helipad"],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 8
+  },
+  {
+    "sceneId": "AGRO_022",
+    "voiceover": "A substituição de tratores pesados de trinta toneladas por frotas elétricas elimina a compactação do solo e reduz o consumo de água em mais de noventa por cento.",
+    "visualSubject": "Comparação gráfica e física entre o rastro de trator de 30 toneladas e o voo sem contato físico dos drones",
+    "visual_must_include": ["soil compaction cross section", "water reduction comparison", "deep steel and carbon black", "evidence card"],
+    "visual_must_not": ["human faces", "tractor dealership commercial"],
+    "required_category": "evidence",
+    "take_type": "KEYFRAME_DOSSIER",
+    "targetSeconds": 14
+  },
+  {
+    "sceneId": "AGRO_023",
+    "voiceover": "Enquanto as cidades dormem, a produção de alimentos em escala industrial foi convertida em um problema puro de dinâmica de fluidos e telemetria autônoma.",
+    "visualSubject": "Plano geral monumental do cerrado à noite com luzes de enxame no horizonte e constelações no céu",
+    "visual_must_include": ["monumental nocturnal landscape", "distant drone telemetry lights", "dense chiaroscuro fog", "35mm anamorphic"],
+    "visual_must_not": ["human faces", "city center"],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 8
+  },
+  {
+    "sceneId": "AGRO_024",
+    "voiceover": "A tecnologia invisível que transforma a agricultura moderna não está na cabine do piloto, mas nos nanossegundos de cálculo entre o radar, o vento e a terra.",
+    "visualSubject": "Logotipo e assinatura visual O OUTRO LADO com drone em voo rasante em 35mm e lasers ciano",
+    "visual_must_include": ["outro lado closing signature", "drone silhouette", "cyan laser beams", "sodium amber reflections"],
+    "visual_must_not": ["human faces", "neon 3d logo spinning"],
+    "required_category": "matter",
+    "take_type": "CINEMATIC_TAKE",
+    "targetSeconds": 11
+  }
+]

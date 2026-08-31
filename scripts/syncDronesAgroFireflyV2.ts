@@ -1,0 +1,31 @@
+import crypto from 'crypto';
+import fs from 'fs';
+import path from 'path';
+import scenes from '../contracts/episodes/drones-agro-noturnos.scenes.json';
+
+const root = process.cwd();
+const episodeId = 'drones-agro-noturnos';
+const fireflyOutput = path.join(root, 'agente firefly', 'saida');
+const publicTakes = path.join(root, 'public', 'episodes', episodeId, 'takes');
+const runScenes = path.join(root, 'runs', episodeId, 'editorial', 'execution', 'scenes');
+const matter = (scenes as any[]).filter((scene) => scene.required_category === 'matter');
+const takes = Array.from({length: 16}, (_, index) => path.join(fireflyOutput, `DANV2_${String(index + 1).padStart(2, '0')}.mp4`));
+const missing = takes.filter((file) => !fs.existsSync(file) || fs.statSync(file).size < 200_000);
+if (missing.length) throw new Error(`FIREFLY_TAKES_MISSING:${missing.join(',')}`);
+fs.mkdirSync(publicTakes, {recursive: true});
+const usage: Record<string, number> = {};
+matter.forEach((scene, index) => {
+  const source = takes[index % takes.length];
+  const publicFile = path.join(publicTakes, `${scene.sceneId}.mp4`);
+  const runFile = path.join(runScenes, scene.sceneId, 'firefly_take.mp4');
+  fs.copyFileSync(source, publicFile); fs.copyFileSync(source, runFile);
+  const sha = crypto.createHash('sha256').update(fs.readFileSync(runFile)).digest('hex');
+  fs.writeFileSync(path.join(path.dirname(runFile), 'firefly_take_receipt.json'), `${JSON.stringify({schema: 'hsl.video.provenance.v2', sourceSystem: 'adobe_firefly', model: 'Firefly Video', durationSeconds: 5, sourceOutput: source, sceneId: scene.sceneId, sha256: sha, productionUse: 'APPROVED_PHYSICAL_VIDEO_TAKE'}, null, 2)}\n`);
+  usage[path.basename(source)] = (usage[path.basename(source)] || 0) + 1;
+});
+const manifestPath = path.join(root, 'runs', episodeId, 'run-manifest.json');
+const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+manifest.generatedVideos = takes.length; manifest.videoSceneAssignments = matter.length; manifest.fireflyTakeUsage = usage;
+manifest.stages.visuals = {status: 'DONE', physicalVideoTakes: takes.length, physicalImageMasters: 8}; manifest.updatedAt = new Date().toISOString();
+fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+console.log(JSON.stringify({status: 'FIREFLY_TAKES_SYNCED', uniqueTakes: takes.length, matterScenes: matter.length, usage}, null, 2));

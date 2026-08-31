@@ -4,12 +4,32 @@ import { AbsoluteFill, interpolate, useCurrentFrame } from 'remotion';
 export interface FlowDiscrepancyHUDProps {
   accentColor?: string;
   telemetryColor?: string;
+  card1Title?: string;
+  card1ValueNumber?: number;
+  card1Unit?: string;
+  card1Subtitle?: string;
+  card2Title?: string;
+  card2ValueNumber?: number;
+  card2Unit?: string;
+  card2Subtitle?: string;
+  bannerLabel?: string;
+  bannerValue?: string;
   durationInFrames: number;
 }
 
 export const FlowDiscrepancyHUD: React.FC<FlowDiscrepancyHUDProps> = ({
   accentColor = '#FF5500',
   telemetryColor = '#00F0FF',
+  card1Title = '',
+  card1ValueNumber,
+  card1Unit = '',
+  card1Subtitle = '',
+  card2Title = '',
+  card2ValueNumber,
+  card2Unit = '',
+  card2Subtitle = '',
+  bannerLabel = '',
+  bannerValue = '',
   durationInFrames
 }) => {
   const frame = useCurrentFrame();
@@ -52,7 +72,7 @@ export const FlowDiscrepancyHUD: React.FC<FlowDiscrepancyHUDProps> = ({
           zIndex: 10
         }}
       >
-        {/* Card 1: Display da Bomba (O que o consumidor vê e paga) */}
+        {/* Card 1 */}
         <div
           style={{
             flex: 1,
@@ -64,16 +84,18 @@ export const FlowDiscrepancyHUD: React.FC<FlowDiscrepancyHUDProps> = ({
             boxShadow: '0 12px 40px rgba(0,0,0,0.8)'
           }}
         >
-          <div
-            style={{
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '12px',
-              color: telemetryColor,
-              letterSpacing: '2px'
-            }}
-          >
-            DISPLAY DIGITAL DA BOMBA
-          </div>
+          {card1Title ? (
+            <div
+              style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '12px',
+                color: telemetryColor,
+                letterSpacing: '2px'
+              }}
+            >
+              {card1Title}
+            </div>
+          ) : null}
           <div
             style={{
               fontFamily: 'Bebas Neue, sans-serif',
@@ -83,20 +105,23 @@ export const FlowDiscrepancyHUD: React.FC<FlowDiscrepancyHUDProps> = ({
               margin: '10px 0'
             }}
           >
-            {displayLiters.toFixed(2)} <span style={{ fontSize: '28px' }}>L</span>
+            {card1ValueNumber !== undefined ? card1ValueNumber.toFixed(2) : displayLiters.toFixed(2)}{' '}
+            {card1Unit ? <span style={{ fontSize: '28px' }}>{card1Unit}</span> : null}
           </div>
-          <div
-            style={{
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '14px',
-              color: '#8A8D9F'
-            }}
-          >
-            VALOR COBRADO: R$ {(displayLiters * 6.15).toFixed(2)}
-          </div>
+          {card1Subtitle ? (
+            <div
+              style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '14px',
+                color: '#8A8D9F'
+              }}
+            >
+              {card1Subtitle}
+            </div>
+          ) : null}
         </div>
 
-        {/* Card 2: Volume Real Entregue no Tanque (A Fraude) */}
+        {/* Card 2 */}
         <div
           style={{
             flex: 1,
@@ -108,16 +133,18 @@ export const FlowDiscrepancyHUD: React.FC<FlowDiscrepancyHUDProps> = ({
             boxShadow: '0 12px 40px rgba(0,0,0,0.8)'
           }}
         >
-          <div
-            style={{
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '12px',
-              color: accentColor,
-              letterSpacing: '2px'
-            }}
-          >
-            VOLUME REAL NO TANQUE (MEDIDO)
-          </div>
+          {card2Title ? (
+            <div
+              style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '12px',
+                color: accentColor,
+                letterSpacing: '2px'
+              }}
+            >
+              {card2Title}
+            </div>
+          ) : null}
           <div
             style={{
               fontFamily: 'Bebas Neue, sans-serif',
@@ -127,58 +154,67 @@ export const FlowDiscrepancyHUD: React.FC<FlowDiscrepancyHUDProps> = ({
               margin: '10px 0'
             }}
           >
-            {realLiters.toFixed(2)} <span style={{ fontSize: '28px' }}>L</span>
+            {card2ValueNumber !== undefined ? card2ValueNumber.toFixed(2) : realLiters.toFixed(2)}{' '}
+            {card2Unit ? <span style={{ fontSize: '28px' }}>{card2Unit}</span> : null}
           </div>
-          <div
-            style={{
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '14px',
-              color: '#F4F4F0'
-            }}
-          >
-            DESVIO FRAUDULENTO: -{deviation.toFixed(1)}% (-{(displayLiters - realLiters).toFixed(2)} L)
-          </div>
+          {card2Subtitle ? (
+            <div
+              style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '14px',
+                color: '#F4F4F0'
+              }}
+            >
+              {card2Subtitle}
+            </div>
+          ) : null}
         </div>
       </div>
 
-      {/* Banner Inferior com Prejuízo Financeiro Instantâneo */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '90px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '900px',
-          padding: '16px 24px',
-          backgroundColor: 'rgba(255, 85, 0, 0.12)',
-          border: `1px solid ${accentColor}`,
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          backdropFilter: 'blur(12px)'
-        }}
-      >
-        <span
+      {/* Banner Inferior */}
+      {(bannerLabel || bannerValue) ? (
+        <div
           style={{
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: '13px',
-            color: '#F4F4F0',
-            fontWeight: 600
+            position: 'absolute',
+            bottom: '90px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '900px',
+            padding: '16px 24px',
+            backgroundColor: 'rgba(255, 85, 0, 0.12)',
+            border: `1px solid ${accentColor}`,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            backdropFilter: 'blur(12px)'
           }}
         >
-          PREJUÍZO DIRETO POR TANQUE DE 50 LITROS:
-        </span>
-        <span
-          style={{
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: '16px',
-            color: accentColor,
-            fontWeight: 800
-          }}
-        >
-          - R$ {financialLoss.toFixed(2)} / ABASTECIMENTO
-        </span>
-      </div>
+          {bannerLabel ? (
+            <span
+              style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '13px',
+                color: '#F4F4F0',
+                fontWeight: 600
+              }}
+            >
+              {bannerLabel}
+            </span>
+          ) : null}
+          {bannerValue ? (
+            <span
+              style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '16px',
+                color: accentColor,
+                fontWeight: 800
+              }}
+            >
+              {bannerValue}
+            </span>
+          ) : null}
+        </div>
+      ) : null}
     </AbsoluteFill>
   );
 };

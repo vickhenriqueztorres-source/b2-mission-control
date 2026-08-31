@@ -1,48 +1,50 @@
-export const HSL_VISUAL_IDENTITY_CONTRACT_VERSION = 'HSL_VISUAL_IDENTITY_V2' as const;
+import {
+  DOCUMENTARY_FIELD_IDENTITY,
+  FUTURISTIC_STYLE_BLACKLIST,
+  GLOBAL_NEGATIVE,
+  IDENTITY_SUFFIX,
+  VISUAL_IDENTITY_VERSION,
+} from './visualIdentity';
+
+/** Compatibility facade for the HSL execution pipeline. */
+export const HSL_VISUAL_IDENTITY_CONTRACT_VERSION = VISUAL_IDENTITY_VERSION;
 
 export const HSL_PREMIUM_MOTION_REFERENCE_SET = Object.freeze({
-  name: 'HSL Premium Motion Reference Set V1',
-  manifestPath: 'assets/hsl/motion-reference-set-v1/manifest.json',
+  name: 'Documentary Field Reference Set V4',
+  manifestPath: 'assets/visual_identity/documentary-field-v4/manifest.json',
   approvedAssetIds: Object.freeze([
-    'BUFFER_AND_FLOW',
-    'FLOW_JOURNEY_MAP',
-    'LAST_METERS',
-    'DELAY_SPREADS',
-    'SYSTEMS_IN_MOTION'
-  ])
+    'OBSERVATIONAL_FIELD',
+    'FIELD_REPORTAGE',
+    'PHYSICAL_EVIDENCE',
+    'OPERATIONAL_SCALE',
+  ]),
 });
 
 export const HSL_VISUAL_IDENTITY_RULES = Object.freeze({
   contractVersion: HSL_VISUAL_IDENTITY_CONTRACT_VERSION,
-  aesthetic: 'KINETIC_POP_DOCUMENTARY',
-  visualStandard: 'cinematic realism + spatial infographic + narrative progression',
-  palette: Object.freeze({
-    background: '#0D0E15',
-    yellow: '#FFE500',
-    blue: '#0038FF',
-    orange: '#FF2E00',
-    white: '#F4F4F0'
-  }),
+  aesthetic: 'DOCUMENTARY_FIELD_INVESTIGATIVE',
+  visualStandard: 'present-day physical reality + observational camera + restrained editorial evidence',
+  distribution: DOCUMENTARY_FIELD_IDENTITY.distribution,
   colorGrammar: Object.freeze({
-    yellow: 'active tracked flow only',
-    blue: 'persistent infrastructure only',
-    orange: 'constraint, blockage or risk only',
-    white: 'exact editorial information added after generation only'
+    rec709: 'natural base with moderate contrast and readable shadows',
+    warm: 'only a practical warm source or one evidence accent',
+    cyan: 'verified telemetry only, never a global grade',
+    white: 'short factual annotation placed over natural negative space',
   }),
   allowedStartFrameSourceModes: Object.freeze([
     'REFERENCE_CONDITIONED_GENERATION',
     'APPROVED_PHOTOGRAPHIC_BASE',
-    'LICENSED_REAL_BASE'
+    'LICENSED_REAL_BASE',
   ]),
   forbiddenStartFrameSourceModes: Object.freeze([
     'PROCEDURAL_PREVIS',
     'FLAT_VECTOR_TEMPLATE',
     'PLACEHOLDER',
-    'LOCAL_PROXY'
+    'LOCAL_PROXY',
   ]),
   minimumTextureBucketRatio: 0.018,
   requireExplicitHumanApproval: true,
-  requireReferenceAssetLineage: true
+  requireReferenceAssetLineage: true,
 });
 
 export interface HslStartFramePromptInput {
@@ -53,39 +55,50 @@ export interface HslStartFramePromptInput {
   readonly negativeSpace?: string;
 }
 
+function normalize(value: string): string {
+  return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
 export function buildHslStartFramePrompt(input: HslStartFramePromptInput): string {
+  const positive = [input.subject, input.composition, input.lens, `subject at ${input.subjectAnchor}`]
+    .filter(Boolean)
+    .join(' ');
+  const normalized = normalize(positive);
+  const forbidden = FUTURISTIC_STYLE_BLACKLIST.find((term) => normalized.includes(normalize(term)));
+  if (forbidden) throw new Error(`HSL_VISUAL_IDENTITY_FUTURISM_FORBIDDEN:${forbidden}`);
+
   const framing = [
     input.composition,
     input.lens,
     `subject at ${input.subjectAnchor}`,
-    input.negativeSpace ? `negative space ${input.negativeSpace}` : null
+    input.negativeSpace ? `natural negative space ${input.negativeSpace}` : null,
   ].filter(Boolean).join(', ');
+
   return [
-    `HSL visual identity contract ${HSL_VISUAL_IDENTITY_CONTRACT_VERSION}.`,
-    `Original Hidden Systems Lab Kinetic Pop-Documentary start frame showing ${input.subject}.`,
-    'Create a photoreal cinematic documentary image built from credible real-world infrastructure, never a flat illustration or generic dark diagram.',
-    `${framing}.`,
-    'Use realistic industrial materials, coherent practical lighting, preserved shadow detail, atmospheric depth, readable geometry and one dominant visual subject.',
-    'Integrate restrained spatial infographic accents into the photographed world: acid yellow only for the active tracked flow, electric blue only for persistent infrastructure, hyper orange only for a real bottleneck, blockage or risk.',
-    'Show the initial state before the main transformation, with one primary luminous focus and enough clean space for later editorial overlays.',
-    'No embedded titles, readable words, numbers, labels, logos, UI panels, presenter, identifiable company, abstract grid template, excessive particles, crushed blacks or multiple competing focal points.',
-    `Minimum visual reference: ${HSL_PREMIUM_MOTION_REFERENCE_SET.name}.`
-  ].join(' ');
+    `${input.subject}, physically present and clearly observable`,
+    framing,
+    'initial state before the main physical action',
+    `Avoid: ${GLOBAL_NEGATIVE.join(', ')}`,
+    IDENTITY_SUFFIX,
+  ].filter(Boolean).join(', ');
 }
 
 export function assertHslStartFramePromptIdentity(prompt: string, shotId: string): void {
   const required: ReadonlyArray<readonly [RegExp, string]> = [
-    [/HSL_VISUAL_IDENTITY_V2/i, 'CONTRACT_VERSION'],
-    [/Kinetic Pop-Documentary/i, 'AESTHETIC'],
-    [/photoreal cinematic documentary/i, 'PHOTOREAL_BASE'],
-    [/acid yellow only for the active tracked flow/i, 'YELLOW_GRAMMAR'],
-    [/electric blue only for persistent infrastructure/i, 'BLUE_GRAMMAR'],
-    [/hyper orange only for a real bottleneck/i, 'ORANGE_GRAMMAR'],
-    [/initial state before the main transformation/i, 'INITIAL_STATE'],
-    [/No embedded titles/i, 'NO_EMBEDDED_TEXT'],
-    [/HSL Premium Motion Reference Set V1/i, 'REFERENCE_SET']
+    [/physically present and clearly observable/i, 'PHYSICAL_SUBJECT_FIRST'],
+    [/initial state before the main physical action/i, 'INITIAL_STATE'],
+    [/present-day on-location investigative documentary photography/i, 'DOCUMENTARY_FIELD_AESTHETIC'],
+    [/natural Rec\.709 color/i, 'REC709_BASE'],
+    [/practical available lighting/i, 'PRACTICAL_LIGHT'],
+    [/no HUD/i, 'NO_HUD'],
+    [/no text/i, 'NO_EMBEDDED_TEXT'],
+    [/--ar 16:9/i, 'ASPECT_RATIO'],
   ];
   for (const [pattern, rule] of required) {
     if (!pattern.test(prompt)) throw new Error(`HSL_VISUAL_IDENTITY_PROMPT_RULE_MISSING:${shotId}:${rule}`);
   }
+  const positivePrompt = prompt.split(/\bAvoid:/i)[0];
+  const normalizedPositive = normalize(positivePrompt);
+  const forbidden = FUTURISTIC_STYLE_BLACKLIST.find((term) => normalizedPositive.includes(normalize(term)));
+  if (forbidden) throw new Error(`HSL_VISUAL_IDENTITY_PROMPT_FORBIDDEN:${shotId}:${forbidden}`);
 }

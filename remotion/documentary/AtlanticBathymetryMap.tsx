@@ -14,7 +14,7 @@ const CABLE_ROUTES = [
 ];
 
 export const AtlanticBathymetryMap: React.FC<AtlanticBathymetryMapProps> = ({
-  title = 'MAPA BATIMÉTRICO ATLÂNTICO // ROTAS SUBMARINAS'
+  title = ''
 }) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();

@@ -13,6 +13,7 @@ export interface DynamicDocumentaryMediaProps {
   sceneId: string;
   mediaPath?: string;
   imagePath?: string;
+  imageSrc?: string;
   kenBurns?: 'crash_push_in' | 'slow_push_in' | 'dramatic_pull_out' | 'pan_right' | 'pan_left' | 'cinematic_drift';
   durationInFrames: number;
   opacity?: number;
@@ -26,6 +27,7 @@ export const DynamicDocumentaryMedia: React.FC<DynamicDocumentaryMediaProps> = (
   sceneId,
   mediaPath,
   imagePath,
+  imageSrc,
   kenBurns = 'slow_push_in',
   durationInFrames,
   opacity = 1.0,
@@ -36,14 +38,20 @@ export const DynamicDocumentaryMedia: React.FC<DynamicDocumentaryMediaProps> = (
 }) => {
   const isDossier = isDossierTake;
   const hasVideo = !isDossier;
-  const videoSrc = mediaPath || `episodes/gasolina-adulterada/takes/${sceneId}.mp4`;
-  const imageSrc = imagePath || `episodes/gasolina-adulterada/takes/${sceneId}.png`;
+  const episodeFolder = sceneId.startsWith('AGRO')
+    ? 'drones-agro'
+    : sceneId.startsWith('GPS')
+    ? 'gps-tempo'
+    : 'gasolina-adulterada';
+
+  const videoSrc = mediaPath || `episodes/${episodeFolder}/takes/${sceneId}.mp4`;
+  const resolvedImageSrc = imageSrc || imagePath || `episodes/${episodeFolder}/images/${sceneId}.png`;
 
   // 1. Cenas do tipo KEYFRAME_DOSSIER: Motion Graphics 2.5D com scanline e HUD
   if (isDossier) {
     return (
       <CinematicKeyframeDossier
-        imageSrc={imageSrc}
+        imageSrc={resolvedImageSrc}
         durationInFrames={durationInFrames}
         motionMode={kenBurns}
         zoomIntensity={zoomIntensity}
@@ -84,7 +92,7 @@ export const DynamicDocumentaryMedia: React.FC<DynamicDocumentaryMediaProps> = (
         zoomIntensity={zoomIntensity}
       >
         <img
-          src={staticFile(imageSrc)}
+          src={staticFile(resolvedImageSrc)}
           alt={sceneId}
           style={{
             width: '100%',

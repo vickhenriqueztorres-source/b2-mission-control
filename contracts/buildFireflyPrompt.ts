@@ -1,5 +1,11 @@
 import { SceneVisualContract } from './sceneVisualContract';
 import { RawSceneInput } from './buildSceneContracts';
+import {
+  FUTURISTIC_STYLE_BLACKLIST,
+  GLOBAL_NEGATIVE,
+  IDENTITY_SUFFIX,
+  LEGACY_STYLE_PREFIX_REGEX,
+} from '../config/visualIdentity';
 
 export interface FireflyPromptOutput {
   sceneId: string;
@@ -27,11 +33,26 @@ export interface FireflyPromptInput {
   targetSeconds?: number;
 }
 
+function normalizeIdentityText(value: string): string {
+  return value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+}
+
+/** Fail closed before a positive scene description can reintroduce the legacy look. */
+export function assertDocumentaryRealityPrompt(input: string, sceneId: string): void {
+  const normalized = normalizeIdentityText(input);
+  const forbidden = FUTURISTIC_STYLE_BLACKLIST.find((term) => normalized.includes(normalizeIdentityText(term)));
+  if (forbidden) {
+    throw new Error(`VISUAL_IDENTITY_FUTURISM_FORBIDDEN:${sceneId}:${forbidden}`);
+  }
+}
+
 /**
- * Constrói o prompt fotorealista 35mm do Firefly para uma cena documental.
+ * Constrói o prompt documental contemporâneo do Firefly para uma cena.
  * REGRA INVIOLÁVEL: O prompt DEVE começar pelo SUBJECT físico substantivo (must_include),
- * seguido por categoria/domínio e SOMENTE DEPOIS pelo look cinematográfico 35mm.
- * PROIBIDO começar com "Denis Villeneuve cinematic industrial".
+ * seguido por contexto real e SOMENTE DEPOIS pela identidade (IDENTITY_SUFFIX).
  */
 export function buildFireflyPrompt(scene: SceneVisualContract | RawSceneInput | FireflyPromptInput): FireflyPromptOutput {
   const sceneId = ('sceneId' in scene && scene.sceneId) ? scene.sceneId : (('scene_id' in scene && scene.scene_id) ? scene.scene_id : 'UNKNOWN_SCENE');
@@ -45,69 +66,39 @@ export function buildFireflyPrompt(scene: SceneVisualContract | RawSceneInput | 
       : (('visual_subject' in scene && (scene as any).visual_subject) ? (scene as any).visual_subject : '')
   );
 
-  // 1. Subject substantivo encabeça o prompt obrigatoriamente
-  const mustIncludeClause = mustInclude.length > 0
-    ? `Detailed authentic close-up of ${mustInclude.join(' and ')}`
-    : 'Detailed authentic physical mechanism';
-
   // Higieniza o visualSubject para remover prefixos de estilo que possam ter sido injetados
   const cleanSubject = rawSubject
-    .replace(/^extreme cinematic 35mm anamorphic still from a denis villeneuve film,?\s*/i, '')
-    .replace(/^cinematic 35mm,?\s*/i, '')
-    .replace(/^denis villeneuve style,?\s*/i, '')
+    .replace(LEGACY_STYLE_PREFIX_REGEX, '')
     .trim();
 
-  const domainAnchor = domainTags.length > 0 ? `context of ${domainTags.join(', ')} infrastructure` : '';
-  const categoryAnchor = `technical category ${category.replace(/_/g, ' ')}`;
+  assertDocumentaryRealityPrompt([cleanSubject, ...mustInclude].join(' '), sceneId);
 
-  // 2. Look Cinematográfico 35mm (aplicado APENAS após o subject substantivo)
-  const cinematicLook = [
-    'monumental industrial scale',
-    'atmospheric chiaroscuro lighting with deep carbon blacks (#060709)',
-    'subtle sodium-vapor amber highlights (#FF5500)',
-    'sharp cyan laser telemetry reflections (#00F0FF)',
-    'dense atmospheric steam and micro-fog',
-    '35mm anamorphic filmic texture with shallow depth of field',
-    'creamy anamorphic bokeh',
-    'raw realistic documentary photography',
-    '8k photoreal'
-  ].join(', ');
+  // 1. Subject substantivo encabeça o prompt obrigatoriamente (visual_must_include em AND + visual_subject)
+  const mustIncludeClause = mustInclude.length > 0
+    ? `${mustInclude.join(' and ')}, physically present and clearly observable`
+    : (cleanSubject ? `${cleanSubject}, physically present and clearly observable` : 'Authentic physical mechanism, clearly observable');
 
-  // Montagem final do prompt
-  const fullPrompt = [
-    mustIncludeClause,
-    cleanSubject ? cleanSubject : null,
-    domainAnchor ? domainAnchor : null,
-    categoryAnchor,
-    cinematicLook,
-    'NO TEXT, NO HUD, NO NUMBERS, NO LOGO, NO HUMAN FACES'
-  ].filter(Boolean).join(', ');
+  const domainAnchor = domainTags.length > 0 ? `real present-day context of ${domainTags.join(', ')}` : '';
+  const categoryAnchor = `documentary evidence category ${category.replace(/_/g, ' ')}`;
 
-  // 3. Negative Prompt estrito
-  const defaultNegatives = [
-    'text',
-    'watermark',
-    'overlay',
-    'hud',
-    'numbers',
-    'labels',
-    'letters',
-    'brand logo',
-    'human face',
-    'people looking at camera',
-    'cgi render',
-    '3d video game',
-    'blurry',
-    'distorted geometry',
-    'cartoon'
-  ];
-
+  // 2. Negative Prompt estrito: união de GLOBAL_NEGATIVE + visual_must_not da cena
   const combinedNegatives = Array.from(new Set([
-    ...mustNot,
-    ...defaultNegatives
+    ...GLOBAL_NEGATIVE,
+    ...mustNot
   ]));
 
   const negativePrompt = combinedNegatives.join(', ');
+
+  // 3. O bot do Firefly aceita um único campo de prompt. Os negativos entram antes
+  // da identidade para que GLOBAL_NEGATIVE seja aplicado e IDENTITY_SUFFIX permaneça por último.
+  const fullPrompt = [
+    mustIncludeClause,
+    cleanSubject && !mustIncludeClause.toLowerCase().includes(cleanSubject.toLowerCase()) ? cleanSubject : null,
+    domainAnchor ? domainAnchor : null,
+    categoryAnchor,
+    `Avoid: ${negativePrompt}`,
+    IDENTITY_SUFFIX
+  ].filter(Boolean).join(', ');
 
   return {
     sceneId,

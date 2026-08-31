@@ -4,12 +4,22 @@ import { AbsoluteFill, interpolate, useCurrentFrame } from 'remotion';
 export interface FlowMeterPulserSchematicHUDProps {
   accentColor?: string;
   telemetryColor?: string;
+  meterKicker?: string;
+  meterTitle?: string;
+  meterSpecs?: string;
+  pulseCounterLabel?: string;
+  pulseUnitText?: string;
   durationInFrames: number;
 }
 
 export const FlowMeterPulserSchematicHUD: React.FC<FlowMeterPulserSchematicHUDProps> = ({
   accentColor = '#FF5500',
   telemetryColor = '#00F0FF',
+  meterKicker = '',
+  meterTitle = '',
+  meterSpecs = '',
+  pulseCounterLabel = '',
+  pulseUnitText = '',
   durationInFrames
 }) => {
   const frame = useCurrentFrame();
@@ -128,16 +138,18 @@ export const FlowMeterPulserSchematicHUD: React.FC<FlowMeterPulserSchematicHUDPr
             boxShadow: '0 8px 32px rgba(0,0,0,0.8)'
           }}
         >
-          <span
-            style={{
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '11px',
-              color: telemetryColor,
-              letterSpacing: '2px'
-            }}
-          >
-            PULSOS TOTAIS
-          </span>
+          {pulseCounterLabel ? (
+            <span
+              style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '11px',
+                color: telemetryColor,
+                letterSpacing: '2px'
+              }}
+            >
+              {pulseCounterLabel}
+            </span>
+          ) : null}
           <span
             style={{
               fontFamily: 'Bebas Neue, sans-serif',
@@ -148,67 +160,77 @@ export const FlowMeterPulserSchematicHUD: React.FC<FlowMeterPulserSchematicHUDPr
           >
             {pulseCount}
           </span>
-          <span
-            style={{
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '10px',
-              color: accentColor,
-              letterSpacing: '1px'
-            }}
-          >
-            200 PULSOS = 1,000 L
-          </span>
+          {pulseUnitText ? (
+            <span
+              style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '10px',
+                color: accentColor,
+                letterSpacing: '1px'
+              }}
+            >
+              {pulseUnitText}
+            </span>
+          ) : null}
         </div>
       </div>
 
-      {/* Card Lateral de Especificação Técnica INMETRO (Anti-Collision: Lado Direito Inferior) */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '100px',
-          right: '80px',
-          width: '380px',
-          padding: '20px',
-          backgroundColor: 'rgba(6, 7, 9, 0.85)',
-          borderLeft: `3px solid ${accentColor}`,
-          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-          backdropFilter: 'blur(10px)',
-          boxShadow: '0 8px 30px rgba(0,0,0,0.9)'
-        }}
-      >
+      {/* Card Lateral de Especificação Técnica (Anti-Collision: Lado Direito Inferior) */}
+      {(meterKicker || meterTitle || meterSpecs) ? (
         <div
           style={{
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: '11px',
-            color: telemetryColor,
-            letterSpacing: '2px',
-            marginBottom: '6px'
+            position: 'absolute',
+            bottom: '100px',
+            right: '80px',
+            width: '380px',
+            padding: '20px',
+            backgroundColor: 'rgba(6, 7, 9, 0.85)',
+            borderLeft: `3px solid ${accentColor}`,
+            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+            boxShadow: '0 8px 30px rgba(0,0,0,0.9)'
           }}
         >
-          METROLOGIA // PORTARIA INMETRO 559
+          {meterKicker ? (
+            <div
+              style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '11px',
+                color: telemetryColor,
+                letterSpacing: '2px',
+                marginBottom: '6px'
+              }}
+            >
+              {meterKicker}
+            </div>
+          ) : null}
+          {meterTitle ? (
+            <div
+              style={{
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '14px',
+                color: '#F4F4F0',
+                fontWeight: 600,
+                lineHeight: '1.4'
+              }}
+            >
+              {meterTitle}
+            </div>
+          ) : null}
+          {meterSpecs ? (
+            <div
+              style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '11px',
+                color: '#8A8D9F',
+                marginTop: '8px'
+              }}
+            >
+              {meterSpecs}
+            </div>
+          ) : null}
         </div>
-        <div
-          style={{
-            fontFamily: 'Inter, sans-serif',
-            fontSize: '14px',
-            color: '#F4F4F0',
-            fontWeight: 600,
-            lineHeight: '1.4'
-          }}
-        >
-          Bloco Medidor de 4 Pistões com Acoplamento Magnético Hall
-        </div>
-        <div
-          style={{
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: '11px',
-            color: '#8A8D9F',
-            marginTop: '8px'
-          }}
-        >
-          ERRO MÁXIMO PERMITIDO: ± 0,5%
-        </div>
-      </div>
+      ) : null}
     </AbsoluteFill>
   );
 };

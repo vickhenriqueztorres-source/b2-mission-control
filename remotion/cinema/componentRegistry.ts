@@ -38,7 +38,12 @@ export const SCENE_COMPONENT_REGISTRY: Record<string, React.ComponentType<any>> 
   ParallaxRackFocus: DocumentaryComponents.ParallaxRackFocus,
   CyberMapTrace: DocumentaryComponents.CyberMapTrace,
   SmartphoneBankingMockup: DocumentaryComponents.SmartphoneBankingMockup,
-  VlfSubmarineAntennaTrace: DocumentaryComponents.VlfSubmarineAntennaTrace
+  VlfSubmarineAntennaTrace: DocumentaryComponents.VlfSubmarineAntennaTrace,
+  FieldDocumentaryScene: DocumentaryComponents.FieldDocumentaryScene,
+  DroneAgroMatterScene: DocumentaryComponents.DroneAgroMatterScene,
+  DroneAgroEvidenceScene: DocumentaryComponents.DroneAgroEvidenceScene,
+  DroneAgroRouteMapScene: DocumentaryComponents.DroneAgroRouteMapScene,
+  DroneAgroTechnicalRevealScene: DocumentaryComponents.DroneAgroTechnicalRevealScene
 };
 
 /**

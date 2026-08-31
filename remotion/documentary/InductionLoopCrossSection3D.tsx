@@ -11,17 +11,24 @@ export interface InductionLoopCrossSection3DProps {
   accentColor?: string;
   telemetryColor?: string;
   activeSensor?: number; // 1, 2 or 3
+  headerTag?: string;
+  headerTitle?: string;
+  headerSubtitle?: string;
+  subterraneanLayers?: string[];
+  diagnosticTitle?: string;
+  diagnosticItems?: Array<{ label: string; value: string; color?: string }>;
   durationInFrames?: number;
 }
 
-/**
- * Raio-X 3D Industrial do Asfalto e Laços Indutivos (Denis Villeneuve Cyber-Industrial)
- * Mostra o corte em ranhuras de diamante, os 3 laços de indução magnética a 3 metros de distância,
- * o campo eletromagnético ativo e os sensores piezoelétricos de quartzo.
- */
 export const InductionLoopCrossSection3D: React.FC<InductionLoopCrossSection3DProps> = ({
   accentColor = '#FF5500',
   telemetryColor = '#00F0FF',
+  headerTag = '',
+  headerTitle = '',
+  headerSubtitle = '',
+  subterraneanLayers = [],
+  diagnosticTitle = '',
+  diagnosticItems = [],
   durationInFrames = 180
 }) => {
   const frame = useCurrentFrame();
@@ -71,43 +78,49 @@ export const InductionLoopCrossSection3D: React.FC<InductionLoopCrossSection3DPr
 
       {/* 2. Cabeçalho Técnico / Telemetria */}
       <div style={{position: 'absolute', top: 70, left: 90, zIndex: 30}}>
-        <div
-          style={{
-            fontSize: 14,
-            color: telemetryColor,
-            letterSpacing: 4,
-            fontWeight: 800,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 10,
-            marginBottom: 6
-          }}
-        >
+        {headerTag ? (
           <div
             style={{
-              width: 8,
-              height: 8,
-              borderRadius: '50%',
-              backgroundColor: accentColor,
-              boxShadow: `0 0 12px ${accentColor}`
+              fontSize: 14,
+              color: telemetryColor,
+              letterSpacing: 4,
+              fontWeight: 800,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 10,
+              marginBottom: 6
             }}
-          />
-          TELEMETRIA SUBTERRÂNEA // CORTE ISOMÉTRICO 3D
-        </div>
-        <div
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: 38,
-            fontWeight: 900,
-            letterSpacing: '-0.02em',
-            textTransform: 'uppercase'
-          }}
-        >
-          SISTEMA DE LAÇOS INDUTIVOS RLC & PIEZOELÉTRICOS
-        </div>
-        <div style={{fontSize: 14, color: '#8A8D9F', letterSpacing: 1.5, marginTop: 4}}>
-          DISTÂNCIA NOMINAL: 3,00 METROS // FREQUÊNCIA DE RESSONÂNCIA: 20 KHZ - 60 KHZ
-        </div>
+          >
+            <div
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
+                backgroundColor: accentColor,
+                boxShadow: `0 0 12px ${accentColor}`
+              }}
+            />
+            {headerTag}
+          </div>
+        ) : null}
+        {headerTitle ? (
+          <div
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 38,
+              fontWeight: 900,
+              letterSpacing: '-0.02em',
+              textTransform: 'uppercase'
+            }}
+          >
+            {headerTitle}
+          </div>
+        ) : null}
+        {headerSubtitle ? (
+          <div style={{fontSize: 14, color: '#8A8D9F', letterSpacing: 1.5, marginTop: 4}}>
+            {headerSubtitle}
+          </div>
+        ) : null}
       </div>
 
       {/* 3. Bloco 3D Isométrico do Asfalto em Corte Transversal */}
@@ -238,53 +251,45 @@ export const InductionLoopCrossSection3D: React.FC<InductionLoopCrossSection3DPr
             transformOrigin: 'top center'
           }}
         >
-          <div style={{fontSize: 12, color: accentColor}}>
-            PROFUNDIDADE: 50 MM (CORTE DIAMANTE)
-          </div>
-          <div style={{fontSize: 12, color: telemetryColor}}>
-            CABO RESINADO COM POLÍMERO EPÓXI
-          </div>
-          <div style={{fontSize: 12, color: '#8A8D9F'}}>
-            BLINDAGEM CONTRA UMIDADE & PRESSÃO
-          </div>
+        {subterraneanLayers && subterraneanLayers.length > 0 ? (
+          subterraneanLayers.map((layer, idx) => (
+            <div key={idx} style={{fontSize: 12, color: idx === 0 ? accentColor : idx === 1 ? telemetryColor : '#8A8D9F'}}>
+              {layer}
+            </div>
+          ))
+        ) : null}
         </div>
       </div>
 
       {/* 4. Painel de Dados Laterais HUD em Vidro Fosco */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 70,
-          right: 90,
-          width: 420,
-          backgroundColor: 'rgba(13, 14, 21, 0.75)',
-          border: '1px solid rgba(255, 255, 255, 0.12)',
-          borderRadius: 8,
-          padding: 24,
-          backdropFilter: 'blur(16px)',
-          boxShadow: '0 20px 40px rgba(0,0,0,0.8)'
-        }}
-      >
-        <div style={{fontSize: 12, color: telemetryColor, letterSpacing: 2, marginBottom: 10}}>
-          DIAGNÓSTICO DO LAÇO ATIVO
+      {(diagnosticTitle || (diagnosticItems && diagnosticItems.length > 0)) ? (
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 70,
+            right: 90,
+            width: 420,
+            backgroundColor: 'rgba(13, 14, 21, 0.75)',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
+            borderRadius: 8,
+            padding: 24,
+            backdropFilter: 'blur(16px)',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.8)'
+          }}
+        >
+          {diagnosticTitle ? (
+            <div style={{fontSize: 12, color: telemetryColor, letterSpacing: 2, marginBottom: 10}}>
+              {diagnosticTitle}
+            </div>
+          ) : null}
+          {diagnosticItems.map((item, idx) => (
+            <div key={idx} style={{display: 'flex', justifyContent: 'space-between', marginBottom: 8}}>
+              <span style={{color: '#8A8D9F'}}>{item.label}:</span>
+              <span style={{color: item.color || '#F4F4F0', fontWeight: 700}}>{item.value}</span>
+            </div>
+          ))}
         </div>
-        <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: 8}}>
-          <span style={{color: '#8A8D9F'}}>INDUTÂNCIA (L):</span>
-          <span style={{color: '#F4F4F0', fontWeight: 700}}>124,5 µH</span>
-        </div>
-        <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: 8}}>
-          <span style={{color: '#8A8D9F'}}>VARIAÇÃO MAGNÉTICA (ΔL/L):</span>
-          <span style={{color: accentColor, fontWeight: 700}}>+ 4,82 %</span>
-        </div>
-        <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: 8}}>
-          <span style={{color: '#8A8D9F'}}>DISTÂNCIA ENTRE LAÇOS:</span>
-          <span style={{color: telemetryColor, fontWeight: 700}}>3,000 m (± 0,001)</span>
-        </div>
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-          <span style={{color: '#8A8D9F'}}>STATUS DE DETECÇÃO:</span>
-          <span style={{color: '#00FF66', fontWeight: 800}}>VEÍCULO EM TRÂNSITO</span>
-        </div>
-      </div>
+      ) : null}
     </AbsoluteFill>
   );
 };

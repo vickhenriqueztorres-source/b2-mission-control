@@ -11,6 +11,12 @@ import {EpisodeGasolina} from './EpisodeGasolina';
 import {EPISODE_GASOLINA_TOTAL_FRAMES} from './episodeGasolinaTimelineData';
 import {EpisodeGps} from './EpisodeGps';
 import {EPISODE_GPS_TOTAL_FRAMES} from './episodeGpsTimelineData';
+import {EpisodeDronesAgro} from './EpisodeDronesAgro';
+import {EPISODE_DRONES_AGRO_TOTAL_FRAMES} from './episodeDronesAgroTimelineData';
+import {EpisodeDronesAgroFieldCut} from './EpisodeDronesAgroFieldCut';
+import {EPISODE_DRONES_AGRO_FIELD_TOTAL_FRAMES} from './episodeDronesAgroFieldTimelineData';
+import {EpisodeDronesAgroNoturnos} from './EpisodeDronesAgroNoturnos';
+import {EPISODE_DRONES_AGRO_NOTURNOS_TOTAL_FRAMES} from './episodeDronesAgroNoturnosTimelineData';
 import {HslThumbnail, HslThumbnailProps} from './HslThumbnail';
 import {HslEpisodeRenderProps} from './types';
 
@@ -19,6 +25,10 @@ import {EPISODE_01_TIMELINE_TOTAL_FRAMES} from './episode01TimelineData';
 import {EPISODE_02_TOTAL_FRAMES} from './episode02TimelineData';
 import {EPISODE_04_TOTAL_FRAMES} from './episode04TimelineData';
 import {EPISODE_05_TOTAL_FRAMES} from './episode05TimelineData';
+import {
+  DOCUMENTARY_MOTION_SHOWCASE_FRAMES,
+  DocumentaryMotionLibraryShowcase,
+} from './motion-documentary';
 
 const defaults: HslEpisodeRenderProps = {
   title: 'O Outro Lado', fps: HSL_FPS, width: HSL_VIDEO_RESOLUTION.WIDTH, height: HSL_VIDEO_RESOLUTION.HEIGHT, totalDurationInFrames: HSL_FPS,
@@ -33,6 +43,14 @@ const thumbnailDefaults: HslThumbnailProps = {
 };
 
 export const RemotionRoot: React.FC = () => <>
+  <Composition
+    id="DocumentaryMotionLibrary"
+    component={DocumentaryMotionLibraryShowcase}
+    durationInFrames={DOCUMENTARY_MOTION_SHOWCASE_FRAMES}
+    fps={30}
+    width={HSL_VIDEO_RESOLUTION.WIDTH}
+    height={HSL_VIDEO_RESOLUTION.HEIGHT}
+  />
   <Composition
     id="Episode01Pix"
     component={Episode01Pix}
@@ -85,6 +103,30 @@ export const RemotionRoot: React.FC = () => <>
     id="EpisodeGps"
     component={EpisodeGps}
     durationInFrames={EPISODE_GPS_TOTAL_FRAMES}
+    fps={HSL_FPS}
+    width={HSL_VIDEO_RESOLUTION.WIDTH}
+    height={HSL_VIDEO_RESOLUTION.HEIGHT}
+  />
+  <Composition
+    id="EpisodeDronesAgro"
+    component={EpisodeDronesAgro}
+    durationInFrames={EPISODE_DRONES_AGRO_TOTAL_FRAMES}
+    fps={HSL_FPS}
+    width={HSL_VIDEO_RESOLUTION.WIDTH}
+    height={HSL_VIDEO_RESOLUTION.HEIGHT}
+  />
+  <Composition
+    id="EpisodeDronesAgroFieldCut"
+    component={EpisodeDronesAgroFieldCut}
+    durationInFrames={EPISODE_DRONES_AGRO_FIELD_TOTAL_FRAMES}
+    fps={HSL_FPS}
+    width={HSL_VIDEO_RESOLUTION.WIDTH}
+    height={HSL_VIDEO_RESOLUTION.HEIGHT}
+  />
+  <Composition
+    id="EpisodeDronesAgroNoturnos"
+    component={EpisodeDronesAgroNoturnos}
+    durationInFrames={EPISODE_DRONES_AGRO_NOTURNOS_TOTAL_FRAMES}
     fps={HSL_FPS}
     width={HSL_VIDEO_RESOLUTION.WIDTH}
     height={HSL_VIDEO_RESOLUTION.HEIGHT}

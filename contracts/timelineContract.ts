@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { HSL_FPS } from '../spec/hsl-spec';
 import { isRegisteredComponent } from '../remotion/cinema/componentRegistry';
+import {DocumentaryMotionRecipeListSchema} from './documentaryMotionContract';
 
 export type SceneTransitionType = 'crossfade' | 'dipToBlack' | 'whipPan' | 'hardCut' | 'laserWipe' | 'wipe' | 'cut';
 export type CameraMotionType = 'pushIn' | 'drift' | 'tension' | 'static' | 'pullOut' | 'panRight' | 'panLeft';
@@ -8,11 +9,63 @@ export type CameraMotionType = 'pushIn' | 'drift' | 'tension' | 'static' | 'pull
 export const SceneTransitionEnum = z.enum(['crossfade', 'dipToBlack', 'whipPan', 'hardCut', 'laserWipe', 'wipe', 'cut']);
 export const CameraMotionEnum = z.enum(['pushIn', 'drift', 'tension', 'static', 'pullOut', 'panRight', 'panLeft']);
 
+export const REQUIRED_EDITORIAL_PROPS_BY_COMPONENT: Record<string, string[]> = {
+  AtomicStopwatch: ['label'],
+  VelocityPhysicsCalculationHUD: ['headerFormula', 'circuitTitle'],
+  TechnicalCutawaySchematic: ['systemTitle', 'compartmentName'],
+  FlowMeterPulserSchematicHUD: ['meterTitle'],
+  LaserScanDossier: ['documentTitle', 'criticalClause'],
+  CyberMapTrace: ['routeTitle'],
+  IndustrialXRayHUD: ['title'],
+  InfraredPlateScanner3D: ['headerTitle'],
+  Iso20022PacketInspector: ['pulserCount'],
+  FlowDiscrepancyHUD: ['card1Title'],
+  InductionLoopCrossSection3D: ['headerTitle'],
+  AsphaltThermalDeformation3D: ['headerTitle'],
+  SubmarineCableCrossSection3D: ['title'],
+  AtlanticBathymetryMap: ['title'],
+  ErbiumOpticalAmplifier: ['title'],
+  BgpFailoverInspector: ['title'],
+  SmartphoneBankingMockup: ['amount'],
+  VlfSubmarineAntennaTrace: ['title']
+};
+
+export const COMPONENT_DEFAULT_SAFE_ZONE: Record<string, string> = {
+  AtomicStopwatch: 'top_center',
+  KineticEditorialCallout: 'bottom_left',
+  KineticNumberCounter: 'bottom_left',
+  DocumentaryTextTyper: 'bottom_left',
+  LaserScanDossier: 'center',
+  TechnicalCutawaySchematic: 'center',
+  VelocityPhysicsCalculationHUD: 'center',
+  FlowMeterPulserSchematicHUD: 'center',
+  IndustrialXRayHUD: 'center',
+  InfraredPlateScanner3D: 'center',
+  Iso20022PacketInspector: 'center',
+  FlowDiscrepancyHUD: 'center',
+  InductionLoopCrossSection3D: 'center',
+  AsphaltThermalDeformation3D: 'center',
+  SubmarineCableCrossSection3D: 'center',
+  AtlanticBathymetryMap: 'center',
+  ErbiumOpticalAmplifier: 'center',
+  BgpFailoverInspector: 'center',
+  SmartphoneBankingMockup: 'center',
+  VlfSubmarineAntennaTrace: 'center'
+};
+
 export const TimelineCalloutSchema = z.object({
-  categoryText: z.string().min(1),
-  mainText: z.string().min(1),
-  subText: z.string().min(1),
-  position: z.enum(['center', 'bottom_left', 'bottom_right', 'top_left', 'top_right', 'center_left']).optional().default('bottom_left')
+  categoryText: z.string().min(2, "O kicker (categoryText) do callout deve ter pelo menos 2 caracteres."),
+  mainText: z.string().min(2, "O título (mainText) do callout deve ter pelo menos 2 caracteres."),
+  subText: z.string().min(2, "O sublabel (subText) do callout deve ter pelo menos 2 caracteres."),
+  position: z.enum(['center', 'bottom_left', 'bottom_right', 'top_left', 'top_right', 'center_left', 'top_center']).optional().default('bottom_left')
+}).superRefine((callout, ctx) => {
+  if (callout.categoryText.trim().toLowerCase() === callout.mainText.trim().toLowerCase()) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: `TIMELINE_CALLOUT_INVALID: O kicker (categoryText: '${callout.categoryText}') e o título (mainText: '${callout.mainText}') não podem ser idênticos.`,
+      path: ['mainText']
+    });
+  }
 });
 
 export const TimelineSceneItemSchema = z.object({
@@ -32,6 +85,7 @@ export const TimelineSceneItemSchema = z.object({
   mediaFile: z.string().optional(),
   visualSubject: z.string().optional(),
   callout: TimelineCalloutSchema.optional(),
+  motionRecipes: DocumentaryMotionRecipeListSchema.optional().default([]),
   integratedText: z.string().optional()
 }).transform((scene, ctx) => {
   // Valida existência do componente no registro oficial
@@ -41,6 +95,53 @@ export const TimelineSceneItemSchema = z.object({
       message: `TIMELINE_UNKNOWN_COMPONENT: O componente '${scene.component}' na cena '${scene.id}' não foi encontrado no registro oficial.`,
       path: ['component']
     });
+  }
+
+  // Valida props editoriais obrigatórias se o componente exigir
+  const requiredProps = REQUIRED_EDITORIAL_PROPS_BY_COMPONENT[scene.component];
+  if (requiredProps && requiredProps.length > 0) {
+    const missing = requiredProps.filter(prop => {
+      const val = scene.props?.[prop];
+      return val === undefined || val === null || (typeof val === 'string' && val.trim() === '');
+    });
+    if (missing.length > 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `TIMELINE_MISSING_EDITORIAL_PROPS: Cena '${scene.id}' usando '${scene.component}' está sem as props editoriais obrigatórias: [${missing.join(', ')}].`,
+        path: ['props']
+      });
+    }
+  }
+
+  const recipes = scene.motionRecipes || [];
+  for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
+    const end = recipe.startSeconds + recipe.durationSeconds;
+    if (end > scene.durationSeconds + 0.001) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `TIMELINE_MOTION_OUTSIDE_SCENE: Motion '${recipe.id}' termina em ${end.toFixed(2)}s, alem da cena '${scene.id}' (${scene.durationSeconds.toFixed(2)}s).`,
+        path: ['motionRecipes', i],
+      });
+    }
+    if (scene.callout && recipe.startSeconds < Math.min(4, scene.durationSeconds) && end > 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `TIMELINE_MOTION_CALLOUT_COLLISION: Motion '${recipe.id}' compete com o callout da cena '${scene.id}'.`,
+        path: ['motionRecipes', i],
+      });
+    }
+    for (let j = i + 1; j < recipes.length; j++) {
+      const other = recipes[j];
+      const overlap = Math.min(end, other.startSeconds + other.durationSeconds) - Math.max(recipe.startSeconds, other.startSeconds);
+      if (overlap > 0.2) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `TIMELINE_MOTION_COLLISION: Motions '${recipe.id}' e '${other.id}' se sobrepoem por ${overlap.toFixed(2)}s na cena '${scene.id}'.`,
+          path: ['motionRecipes', j],
+        });
+      }
+    }
   }
 
   // Atribui câmera padrão inteligente de acordo com o tipo de cena se não foi especificada
@@ -66,13 +167,31 @@ export const HudWindowSchema = z.object({
   id: z.string().optional(),
   componentName: z.string().optional(),
   component: z.string().optional(),
+  zone: z.enum(['top_center', 'bottom_left', 'bottom_right', 'top_left', 'top_right', 'center', 'center_left']).optional(),
   props: z.record(z.string(), z.any()).optional().default({}),
   appearances: z.array(HudAppearanceSchema).max(3, "Máximo de 3 aparições por HUD.").optional(),
   startSeconds: z.number().nonnegative().optional(),
   durationSeconds: z.number().min(6).max(10).optional()
-}).transform((hud) => {
+}).transform((hud, ctx) => {
   const comp = hud.componentName || hud.component || 'HudWindow';
   const id = hud.id || comp;
+
+  // Valida props editoriais obrigatórias para HudWindow se o componente exigir
+  const requiredProps = REQUIRED_EDITORIAL_PROPS_BY_COMPONENT[comp];
+  if (requiredProps && requiredProps.length > 0) {
+    const missing = requiredProps.filter(prop => {
+      const val = hud.props?.[prop];
+      return val === undefined || val === null || (typeof val === 'string' && val.trim() === '');
+    });
+    if (missing.length > 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `TIMELINE_MISSING_EDITORIAL_PROPS: HUD '${id}' usando '${comp}' está sem as props editoriais obrigatórias: [${missing.join(', ')}].`,
+        path: ['props']
+      });
+    }
+  }
+
   return {
     ...hud,
     id,
@@ -97,7 +216,8 @@ export const AudioManifestSchema = z.object({
   ducking: z.boolean().optional().default(true),
   duckedVolume: z.number().min(0).max(1).optional().default(0.12),
   voiceoverTrack: z.string().optional(),
-  roomTone: z.string().optional()
+  roomTone: z.string().optional(),
+  sfxBed: z.string().optional()
 });
 
 export type AudioManifest = z.infer<typeof AudioManifestSchema>;
@@ -195,12 +315,107 @@ export const TimelineContractSchema = z.object({
       i = burstEndIdx;
     }
   }
+
+  // 5. TIMELINE_HUD_COLLISION (Prevenção de colisão de elementos em Safe Zones)
+  interface OccupiedZoneInterval {
+    elementName: string;
+    zone: string;
+    startSeconds: number;
+    endSeconds: number;
+  }
+
+  const occupiedIntervals: OccupiedZoneInterval[] = [];
+  let currentSec = 0;
+
+  scenes.forEach((sc) => {
+    const sceneStart = currentSec;
+    const sceneEnd = currentSec + sc.durationSeconds;
+    currentSec = sceneEnd;
+
+    // Se a cena possui callout declarado
+    if (sc.callout) {
+      const calloutZone = sc.callout.position || 'bottom_left';
+      // Callout fica ativo até 4s ou duração total da cena
+      const calloutEnd = Math.min(sceneEnd, sceneStart + 4.0);
+      occupiedIntervals.push({
+        elementName: `Callout da cena '${sc.id}'`,
+        zone: calloutZone,
+        startSeconds: sceneStart,
+        endSeconds: calloutEnd
+      });
+    }
+
+    (sc.motionRecipes || []).forEach((recipe) => {
+      occupiedIntervals.push({
+        elementName: `Motion '${recipe.id}' da cena '${sc.id}'`,
+        zone: recipe.zone,
+        startSeconds: sceneStart + recipe.startSeconds,
+        endSeconds: sceneStart + recipe.startSeconds + recipe.durationSeconds,
+      });
+    });
+  });
+
+  // Mapeia janelas de HUD
+  (data.hudWindows || []).forEach((hud) => {
+    const comp = hud.componentName || hud.component || 'HudWindow';
+    const hudZone = hud.zone || COMPONENT_DEFAULT_SAFE_ZONE[comp] || 'top_center';
+
+    if (hud.appearances && hud.appearances.length > 0) {
+      hud.appearances.forEach((app, appIdx) => {
+        let startSec = app.startSeconds || 0;
+        if (app.startScene !== undefined && app.startScene < scenes.length) {
+          let accum = 0;
+          for (let s = 0; s < app.startScene; s++) {
+            accum += scenes[s].durationSeconds;
+          }
+          startSec = accum;
+        }
+        const endSec = startSec + app.seconds;
+        occupiedIntervals.push({
+          elementName: `HUD '${hud.id}' (Aparição ${appIdx + 1})`,
+          zone: hudZone,
+          startSeconds: startSec,
+          endSeconds: endSec
+        });
+      });
+    } else if (hud.startSeconds !== undefined && hud.durationSeconds !== undefined) {
+      occupiedIntervals.push({
+        elementName: `HUD '${hud.id}'`,
+        zone: hudZone,
+        startSeconds: hud.startSeconds,
+        endSeconds: hud.startSeconds + hud.durationSeconds
+      });
+    }
+  });
+
+  // Valida interseções de mesma zona
+  for (let i = 0; i < occupiedIntervals.length; i++) {
+    for (let j = i + 1; j < occupiedIntervals.length; j++) {
+      const a = occupiedIntervals[i];
+      const b = occupiedIntervals[j];
+
+      if (a.zone === b.zone) {
+        const overlapStart = Math.max(a.startSeconds, b.startSeconds);
+        const overlapEnd = Math.min(a.endSeconds, b.endSeconds);
+
+        if (overlapStart < overlapEnd - 0.2) {
+          // Há sobreposição temporal significativa na mesma zona
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: `TIMELINE_HUD_COLLISION: Colisão de HUD na zona segura '${a.zone}' entre '${a.elementName}' e '${b.elementName}' no intervalo de ${overlapStart.toFixed(1)}s a ${overlapEnd.toFixed(1)}s. Remaneje a posição ou o tempo dos elementos.`,
+            path: ['hudWindows']
+          });
+        }
+      }
+    }
+  }
 });
 
 export type TimelineContractInput = z.input<typeof TimelineContractSchema>;
 export type TimelineContract = z.infer<typeof TimelineContractSchema>;
 
-export interface CalculatedTimelineScene extends TimelineSceneItem {
+export interface CalculatedTimelineScene extends Omit<TimelineSceneItem, 'motionRecipes'> {
+  motionRecipes?: TimelineSceneItem['motionRecipes'];
   order: number;
   startFrame: number;
   durationFrames: number;

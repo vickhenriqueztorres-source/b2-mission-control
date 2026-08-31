@@ -30,6 +30,6 @@ test('HSL Kling adapter keeps configured duration', () => {
   for (const duration of [5, 10]) {
     const artifact = adaptKlingProviderPrompt('HSL-PILOT-001', generationPackage(duration));
     assert.equal(artifact.semantic_intent_validation.status, 'PASS');
-    assert.match(artifact.provider_prompt, new RegExp(`${duration}-second documentary visualization`));
+    assert.match(artifact.provider_prompt, new RegExp(`${duration}-second present-day on-location documentary take`));
   }
 });

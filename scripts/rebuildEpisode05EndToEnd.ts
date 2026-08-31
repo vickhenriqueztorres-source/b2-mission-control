@@ -7,6 +7,7 @@ import { ElevenLabsAdapter } from '../adapters/elevenLabsAdapter';
 import { PipelineContractGate } from '../pipeline/pipelineContractGate';
 import { PrdComplianceChecker } from '../pipeline/prdComplianceChecker';
 import { ArtifactRegistry } from '../pipeline/artifactRegistry';
+import { buildFireflyPrompt } from '../contracts/buildFireflyPrompt';
 
 const episodeId = 'OOL-EP05-RADAR-ASFALTO';
 const runDir = path.join(process.cwd(), 'runs', episodeId);
@@ -150,8 +151,8 @@ export const EPISODE_05_TIMELINE: SceneTimelineItem[] = ${JSON.stringify(sceneTi
 `;
   fs.writeFileSync(path.join(process.cwd(), 'remotion', 'episode05TimelineData.ts'), timelineTs, 'utf8');
 
-  // 3. Preparação dos Prompts Denis Villeneuve 35mm & Fila do ChatGPT Bot
-  console.log('\n🖼️ [ETAPA 2/6] Compilação dos Prompts Denis Villeneuve 35mm (Fórmula Oficial)...');
+  // 3. Preparacao dos prompts pela identidade global v4.
+  console.log('\n🖼️ [ETAPA 2/6] Compilacao dos Prompts de Documentario de Campo Investigativo...');
   const txtPrompts: string[] = [];
   const jsonlPrompts: string[] = [];
   const fireflyItems: any[] = [];
@@ -163,14 +164,14 @@ export const EPISODE_05_TIMELINE: SceneTimelineItem[] = ${JSON.stringify(sceneTi
     fs.mkdirSync(sceneDir, { recursive: true });
     fs.mkdirSync(pubSceneDir, { recursive: true });
 
-    let promptMaster = '';
     const isDossier = sc.take_type === 'KEYFRAME_DOSSIER';
-
-    if (isDossier && sc.integrated_text) {
-      promptMaster = `Extreme cinematic 35mm anamorphic still from a Denis Villeneuve film, ${sc.visual_subject}, monumental scale, atmospheric chiaroscuro lighting, deep carbon blacks (#060709). Featuring a sharp industrial digital display or metallic embossed faceplate clearly showing the bold text "${sc.integrated_text}" illuminated in glowing sodium-vapor amber (#FF5500) and laser cyan (#00F0FF) telemetry coordinates. Dense volumetric fog and steam, wet metallic reflection, shallow depth of field, creamy anamorphic bokeh, filmic texture, raw realistic industrial photography, 8k, no human faces --ar 16:9`;
-    } else {
-      promptMaster = `Extreme cinematic 35mm anamorphic still from a Denis Villeneuve film, ${sc.visual_subject}, monumental scale, atmospheric chiaroscuro lighting, deep carbon blacks (#060709), illuminated by glowing sodium-vapor amber reflections (#FF5500) and sharp cyan laser telemetry lights (#00F0FF), dense volumetric fog and steam, wet reflective ground, shallow depth of field, creamy anamorphic bokeh, filmic texture, raw realistic industrial photography, 8k, no text, no human faces --ar 16:9`;
-    }
+    const promptMaster = buildFireflyPrompt({
+      sceneId: sc.scene_id,
+      visualSubject: sc.visual_subject,
+      visual_must_include: [sc.visual_subject],
+      visual_must_not: ['embedded readable text', 'floating interface'],
+      required_category: isDossier ? 'documentary_evidence' : 'documentary_field_matter'
+    }).prompt;
 
     fs.writeFileSync(path.join(sceneDir, 'clean_start_frame_prompt.txt'), promptMaster, 'utf8');
 

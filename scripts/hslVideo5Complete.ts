@@ -2,6 +2,7 @@ import 'dotenv/config';
 import fs from 'fs';
 import path from 'path';
 import {spawnSync} from 'child_process';
+import {HSL_VISUAL_IDENTITY_CONTRACT_VERSION} from '../config/hslVisualIdentity';
 
 function writeJson(filePath: string, value: unknown): void {
   fs.mkdirSync(path.dirname(filePath), {recursive: true});
@@ -89,7 +90,7 @@ function main(): void {
         status: 'WAITING_FOR_IDENTITY_LOCKED_START_FRAMES',
         run_root: runRoot,
         required_provenance_manifest: provenancePath,
-        visual_identity_contract: 'HSL_VISUAL_IDENTITY_V2',
+        visual_identity_contract: HSL_VISUAL_IDENTITY_CONTRACT_VERSION,
         updated_at: new Date().toISOString()
       });
       process.stdout.write(`${JSON.stringify({status: 'WAITING_FOR_IDENTITY_LOCKED_START_FRAMES', required_provenance_manifest: provenancePath}, null, 2)}\n`);

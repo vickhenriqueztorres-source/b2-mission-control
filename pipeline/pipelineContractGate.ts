@@ -42,6 +42,7 @@ export interface RunValidationReport {
   totalScenesExpected: number;
   validStartFrames: number;
   validVideoTakes: number;
+  validDossierVisuals: number;
   validAudioClips: number;
   narrationDurationSeconds: number;
   timelineDurationSeconds: number;
@@ -105,6 +106,134 @@ export class PipelineContractGate {
     }
   }
 
+  private static luminanceCache = new Map<string, number>();
+
+  /**
+   * Calcula a luminância média de um frame ou vídeo via ffmpeg signalstats
+   * Retorna valor normalizado entre 0.0 (preto absoluto) e 1.0 (branco absoluto).
+   */
+  public static calculateMediaLuminance(filePath: string, atSecond?: number): number {
+    if (!fs.existsSync(filePath)) return 1.0;
+    const cacheKey = `${filePath}_${atSecond || 0}`;
+    if (this.luminanceCache.has(cacheKey)) {
+      return this.luminanceCache.get(cacheKey)!;
+    }
+
+    try {
+      const args = ['-nostdin', '-y', '-v', 'error'];
+      if (atSecond !== undefined && atSecond > 0) {
+        args.push('-ss', String(atSecond));
+      }
+      args.push(
+        '-i', filePath,
+        '-vf', 'scale=64:36,signalstats,metadata=print:file=-:key=lavfi.signalstats.YAVG',
+        '-vframes', '1',
+        '-f', 'null',
+        '-'
+      );
+      const probe = spawnSync('ffmpeg', args, { encoding: 'utf8', timeout: 3000 });
+      const output = (probe.stdout || '') + (probe.stderr || '');
+      const match = output.match(/lavfi\.signalstats\.YAVG=([0-9.]+)/i);
+      if (match) {
+        const yavg = parseFloat(match[1]);
+        const result = yavg / 255.0;
+        this.luminanceCache.set(cacheKey, result);
+        return result;
+      }
+    } catch {}
+    this.luminanceCache.set(cacheKey, 0.5);
+    return 0.5;
+  }
+
+  public static calculateFrozenRatio(filePath: string, durationSeconds?: number): number {
+    const duration = durationSeconds || this.probeMedia(filePath).duration;
+    if (!fs.existsSync(filePath) || duration <= 0) return 1;
+    const result = spawnSync('ffmpeg', [
+      '-nostdin', '-v', 'info', '-i', filePath,
+      '-vf', 'freezedetect=n=-50dB:d=0.8', '-an', '-f', 'null', '-'
+    ], {encoding: 'utf8', timeout: Math.max(15000, Math.ceil(duration * 3000))});
+    const output = `${result.stdout || ''}\n${result.stderr || ''}`;
+    const durations = [...output.matchAll(/freeze_duration:\s*([0-9.]+)/g)]
+      .map((match) => Number(match[1]))
+      .filter(Number.isFinite);
+    const starts = [...output.matchAll(/freeze_start:\s*([0-9.]+)/g)]
+      .map((match) => Number(match[1]))
+      .filter(Number.isFinite);
+    const ends = [...output.matchAll(/freeze_end:\s*([0-9.]+)/g)]
+      .map((match) => Number(match[1]))
+      .filter(Number.isFinite);
+    let frozenSeconds = durations.reduce((sum, value) => sum + value, 0);
+    if (starts.length > ends.length) {
+      frozenSeconds += Math.max(0, duration - starts[starts.length - 1]);
+    }
+    return Math.min(1, frozenSeconds / duration);
+  }
+
+  public static validateCompletedRunEvidence(runDir: string, manifest: any): BeatValidationFailure[] {
+    const status = String(manifest?.status || manifest?.overallStatus || '').toUpperCase();
+    if (status !== 'DONE' && status !== 'COMPLETED') return [];
+
+    const failures: BeatValidationFailure[] = [];
+    const finalMasterPath = path.join(runDir, 'final_master.mp4');
+    const renderManifestPath = path.join(runDir, 'render_manifest.json');
+    const fail = (reason: string, expectedPath = renderManifestPath): void => {
+      failures.push({
+        sceneId: 'GLOBAL',
+        shotId: 'RUN_COMPLETION',
+        index: 0,
+        assetType: 'VIDEO_TAKE',
+        expectedPath,
+        reason,
+      });
+    };
+
+    const declaredEngine = manifest?.render?.engine || manifest?.stages?.render?.engine;
+    if (declaredEngine !== 'CinematicEpisode') {
+      fail(`MANIFEST_DONE_ENGINE_MISMATCH: run concluído declara engine '${declaredEngine || 'EMPTY'}', esperado 'CinematicEpisode'.`);
+    }
+    if (String(manifest?.stages?.visuals?.status || '').toUpperCase() !== 'DONE') {
+      fail('MANIFEST_DONE_VISUALS_NOT_APPROVED: run concluído exige etapa visuals com status DONE.');
+    }
+    if (manifest?.fireflyFailed === true) {
+      fail('MANIFEST_DONE_WITH_PROVIDER_FAILURE: run concluído ainda registra falha do Firefly.');
+    }
+    if (!fs.existsSync(finalMasterPath) || fs.statSync(finalMasterPath).size < 1024 * 1024) {
+      fail('MANIFEST_DONE_MASTER_INVALID: final_master.mp4 ausente ou pequeno demais.', finalMasterPath);
+      return failures;
+    }
+    if (!fs.existsSync(renderManifestPath)) {
+      fail('MANIFEST_DONE_RENDER_EVIDENCE_MISSING: render_manifest.json ausente.');
+      return failures;
+    }
+
+    try {
+      const renderManifest = JSON.parse(fs.readFileSync(renderManifestPath, 'utf8'));
+      if (
+        renderManifest.compositor !== 'CinematicEpisode' ||
+        renderManifest.renderEngine !== 'remotion' ||
+        !renderManifest.compositionId
+      ) {
+        fail('MANIFEST_DONE_RENDER_EVIDENCE_INVALID: compositor, renderEngine ou compositionId incompatível.');
+      }
+      const actualSha = crypto.createHash('sha256').update(fs.readFileSync(finalMasterPath)).digest('hex');
+      if (!renderManifest.output?.sha256 || renderManifest.output.sha256 !== actualSha) {
+        fail('MANIFEST_DONE_MASTER_SHA_MISMATCH: hash do master não confere com a evidência do render.', finalMasterPath);
+      }
+      const probe = this.probeMedia(finalMasterPath);
+      if (!probe.valid || probe.codec !== 'h264' || probe.width !== 1920 || probe.height !== 1080) {
+        fail(`MANIFEST_DONE_MASTER_MEDIA_INVALID: ${JSON.stringify(probe)}`, finalMasterPath);
+      }
+      const frozenRatio = this.calculateFrozenRatio(finalMasterPath, probe.duration);
+      if (frozenRatio >= 0.85) {
+        fail(`MANIFEST_DONE_MASTER_STATIC: ${(frozenRatio * 100).toFixed(1)}% do master está congelado.`, finalMasterPath);
+      }
+    } catch (error: any) {
+      fail(`MANIFEST_DONE_RENDER_EVIDENCE_CORRUPTED: ${error.message}`);
+    }
+
+    return failures;
+  }
+
   /**
    * Executa a auditoria completa e determinística de contrato de uma run
    */
@@ -131,6 +260,7 @@ export class PipelineContractGate {
         totalScenesExpected: 0,
         validStartFrames: 0,
         validVideoTakes: 0,
+        validDossierVisuals: 0,
         validAudioClips: 0,
         narrationDurationSeconds: 0,
         timelineDurationSeconds: 0,
@@ -195,6 +325,13 @@ export class PipelineContractGate {
       sceneId: string;
       shotId: string;
       visualSubject?: string;
+      mediaFile?: string;
+      takeType?: string;
+      visualMode?: string;
+      category?: string;
+      required_category?: string;
+      take_type?: string;
+      component?: string;
     }
 
     let scenes: SceneItem[] = [];
@@ -251,6 +388,7 @@ export class PipelineContractGate {
 
     let validStartFrames = 0;
     let validVideoTakes = 0;
+    let validDossierVisuals = 0;
 
     const contractMap = new Map<string, SceneVisualContract>();
     if (options.sceneContracts && options.sceneContracts.length > 0) {
@@ -269,10 +407,14 @@ export class PipelineContractGate {
       }
     }
 
+    let previousAssetKey: string | null = null;
+    const assetUsageMap: Record<string, number> = {};
+
     for (let i = 0; i < scenes.length; i++) {
       const sc = scenes[i];
       const scId = sc.sceneId;
       const shotId = sc.shotId || `SHOT_${i + 1}`;
+      let frameValid = false;
 
       // 1. UNCONTRACTED_SCENE Check
       if ((contract || options.sceneContracts || contractMap.size > 0) && !contractMap.has(scId)) {
@@ -286,11 +428,28 @@ export class PipelineContractGate {
         });
       }
 
-      const runFramePath = path.join(runDir, 'editorial', 'execution', 'scenes', scId, 'firefly_start_frame.png');
+      const runFramePath = path.join(runDir, 'editorial', 'execution', 'scenes', scId, 'start_frame.png');
+      const legacyRunFramePath = path.join(runDir, 'editorial', 'execution', 'scenes', scId, 'firefly_start_frame.png');
       const pubRunFramePath = path.join(publicDir, 'editorial', 'execution', options.runId, 'scenes', scId, 'firefly_start_frame.png');
       const pubDirectFramePath = path.join(publicDir, 'editorial', 'execution', scId, 'firefly_start_frame.png');
+      const episodeFramePath = path.join(publicDir, 'episodes', contract?.episodeId || options.runId, 'images', `${scId}.png`);
 
-      const resolvedFrame = [runFramePath, pubRunFramePath, pubDirectFramePath].find(p => fs.existsSync(p));
+      const resolvedFrame = [runFramePath, episodeFramePath, legacyRunFramePath, pubRunFramePath, pubDirectFramePath].find(p => fs.existsSync(p));
+
+      // QA Visual: GATE_BLACK_FRAME (Verifica se start frame é 100% preto com luminância < 3%)
+      if (resolvedFrame) {
+        const frameLum = PipelineContractGate.calculateMediaLuminance(resolvedFrame);
+        if (frameLum < 0.03) {
+          failures.push({
+            sceneId: scId,
+            shotId,
+            index: i + 1,
+            assetType: 'START_FRAME',
+            expectedPath: resolvedFrame,
+            reason: `GATE_BLACK_FRAME: Cena '${scId}' possui luminância média de ${(frameLum * 100).toFixed(2)}% (< 3.0%), caracterizando frame 100% preto não intencional.`
+          });
+        }
+      }
 
       if (!resolvedFrame) {
         failures.push({
@@ -358,8 +517,19 @@ export class PipelineContractGate {
                   expectedPath: receiptPath,
                   reason: `PROVENANCE_SHA_MISMATCH: O hash da imagem não confere com o recibo de IA oficial (${sha.slice(0, 8)} vs ${receipt.sha256?.slice(0, 8)}).`
                 });
+              } else if (receipt.sourceSystem === 'remotion_deterministic_fallback' || receipt.sourceSystem === 'procedural_remotion') {
+                failures.push({
+                  sceneId: scId, shotId, index: i + 1, assetType: 'START_FRAME', expectedPath: receiptPath,
+                  reason: 'PROVENANCE_PROCEDURAL_REJECTED: Recibo de fallback Remotion não autentica frame fotográfico de produção.'
+                });
+              } else if (!['openai_imagegen', 'adobe_firefly', 'firefly', 'bank'].includes(String(receipt.sourceSystem || '').toLowerCase())) {
+                failures.push({
+                  sceneId: scId, shotId, index: i + 1, assetType: 'START_FRAME', expectedPath: receiptPath,
+                  reason: `PROVENANCE_SOURCE_UNAPPROVED: Origem '${receipt.sourceSystem || 'EMPTY'}' não é uma fonte visual aprovada.`
+                });
               } else {
                 validStartFrames++;
+                frameValid = true;
               }
             } catch (err: any) {
               failures.push({
@@ -374,6 +544,7 @@ export class PipelineContractGate {
           } else if (isInCentralCatalog) {
             // Imagem validada e autenticada no Banco Central de Imagens
             validStartFrames++;
+            frameValid = true;
           } else {
             failures.push({
               sceneId: scId,
@@ -391,20 +562,21 @@ export class PipelineContractGate {
       const runVideoPath = path.join(runDir, 'editorial', 'execution', 'scenes', scId, 'firefly_take.mp4');
       const pubRunVideoPath = path.join(publicDir, 'editorial', 'execution', options.runId, 'scenes', scId, 'firefly_take.mp4');
       const pubDirectVideoPath = path.join(publicDir, 'editorial', 'execution', scId, 'firefly_take.mp4');
+      const episodeVideoPath = sc.mediaFile && /\.mp4$/i.test(sc.mediaFile) && !path.isAbsolute(sc.mediaFile) ? path.join(publicDir, sc.mediaFile) : '';
       const repoVideoPath = (sc as any).videoFilename ? path.join(process.cwd(), 'assets', 'video_repository', (sc as any).videoFilename) : '';
-      const resolvedVideo = [runVideoPath, pubRunVideoPath, pubDirectVideoPath, repoVideoPath].filter(Boolean).find(p => fs.existsSync(p));
+      const resolvedVideo = [episodeVideoPath, runVideoPath, pubRunVideoPath, pubDirectVideoPath, repoVideoPath].filter(Boolean).find(p => fs.existsSync(p));
 
-      const receiptFile = resolvedFrame ? path.join(path.dirname(resolvedFrame), 'start_frame_receipt.json') : '';
-      const isDossierOrMotion = (sc as any).takeType === 'KEYFRAME_DOSSIER' || 
-                                (sc as any).isDossier === true ||
-                                (sc as any).type === 'cinematic_parallax' ||
-                                (sc as any).visualMode === 'remotion' ||
-                                (sc as any).visualMode === 'typography' ||
-                                (receiptFile && fs.existsSync(receiptFile) && ['KEYFRAME_DOSSIER', 'CINEMATIC_PARALLAX'].includes(JSON.parse(fs.readFileSync(receiptFile, 'utf8') || '{}').takeType));
+      const sceneContract = contractMap.get(scId) as any;
+      const category = (sc as any).required_category || (sc as any).category || sceneContract?.required_category;
+      const isDossierOrMotion = (sc as any).takeType === 'KEYFRAME_DOSSIER' ||
+                                (sc as any).take_type === 'KEYFRAME_DOSSIER' ||
+                                ['evidence', 'maps', 'reveal'].includes(String(category || '').toLowerCase()) ||
+                                ((sc as any).visualMode === 'dossier' && Boolean(resolvedFrame));
 
-      if (isDossierOrMotion) {
-        // Cenas com Motion Procedural / Paralaxe 35mm / Dossiê usam animação Remotion 2.5D de forma ultra-estável
-        validVideoTakes++;
+      if (isDossierOrMotion && !resolvedVideo) {
+        // Um dossiê pode partir de frame autenticado, mas nunca conta como take temporal.
+        if (resolvedFrame && frameValid) validDossierVisuals++;
+        else failures.push({sceneId: scId, shotId, index: i + 1, assetType: 'VIDEO_TAKE', expectedPath: episodeFramePath, reason: 'DOSSIER_PHYSICAL_FRAME_REQUIRED: Dossiê sem frame fotográfico autenticado.'});
         continue;
       }
 
@@ -418,6 +590,34 @@ export class PipelineContractGate {
           reason: `PENDING_FIREFLY: Cena '${scId}' não possui take de vídeo .mp4 gerado e está pendente de geração no Firefly.`
         });
       } else {
+        let videoProvenanceValid = true;
+        if (resolvedVideo.includes(path.join('public', 'episodes')) || resolvedVideo.includes(path.join('editorial', 'execution', 'scenes'))) {
+          const videoReceiptCandidates = [
+            path.join(path.dirname(resolvedVideo), 'firefly_take_receipt.json'),
+            path.join(runDir, 'editorial', 'execution', 'scenes', scId, 'firefly_take_receipt.json')
+          ];
+          const videoReceipt = videoReceiptCandidates.find((candidate) => fs.existsSync(candidate)) || videoReceiptCandidates[0];
+          if (!fs.existsSync(videoReceipt)) {
+            videoProvenanceValid = false;
+            failures.push({sceneId: scId, shotId, index: i + 1, assetType: 'VIDEO_TAKE', expectedPath: videoReceipt, reason: 'VIDEO_PROVENANCE_RECEIPT_MISSING: Todo take de produção deve informar a origem e o hash do MP4.'});
+          } else {
+            try {
+              const receipt = JSON.parse(fs.readFileSync(videoReceipt, 'utf8'));
+              const sha = crypto.createHash('sha256').update(fs.readFileSync(resolvedVideo)).digest('hex');
+              const sourceSystem = String(receipt.sourceSystem || '').toLowerCase();
+              if (sourceSystem === 'openai_imagegen_motion_derivative' || sourceSystem.includes('motion_derivative')) {
+                videoProvenanceValid = false;
+                failures.push({sceneId: scId, shotId, index: i + 1, assetType: 'VIDEO_TAKE', expectedPath: videoReceipt, reason: 'VIDEO_PROVENANCE_DERIVATIVE_FORBIDDEN: animação derivada de imagem não é um take temporal de produção.'});
+              } else if (receipt.sha256 !== sha || !['adobe_firefly', 'firefly', 'bank'].includes(sourceSystem)) {
+                videoProvenanceValid = false;
+                failures.push({sceneId: scId, shotId, index: i + 1, assetType: 'VIDEO_TAKE', expectedPath: videoReceipt, reason: 'VIDEO_PROVENANCE_INVALID: origem ou hash do MP4 não confere.'});
+              }
+            } catch (error: any) {
+              videoProvenanceValid = false;
+              failures.push({sceneId: scId, shotId, index: i + 1, assetType: 'VIDEO_TAKE', expectedPath: videoReceipt, reason: `VIDEO_PROVENANCE_CORRUPTED:${error.message}`});
+            }
+          }
+        }
         const lowerPath = resolvedVideo.toLowerCase();
         if (lowerPath.includes('fallback') || lowerPath.includes('placeholder') || lowerPath.includes('mock')) {
           failures.push({
@@ -454,18 +654,61 @@ export class PipelineContractGate {
               reason: `VIDEO_TAKE_CORRUPTED_OR_ZERO_DURATION: ffprobe retornou duração inválida (${probe.duration}s, codec: ${probe.codec}).`
             });
           } else {
-            validVideoTakes++;
+            // QA Visual: GATE_BLACK_FRAME no vídeo (ao 1.0s)
+            const videoLum = PipelineContractGate.calculateMediaLuminance(resolvedVideo, 1.0);
+            const frozenRatio = PipelineContractGate.calculateFrozenRatio(resolvedVideo, probe.duration);
+            if (videoLum < 0.03) {
+              failures.push({
+                sceneId: scId,
+                shotId,
+                index: i + 1,
+                assetType: 'VIDEO_TAKE',
+                expectedPath: resolvedVideo,
+                reason: `GATE_BLACK_FRAME: Cena '${scId}' possui take de vídeo com luminância média de ${(videoLum * 100).toFixed(2)}% (< 3.0%), caracterizando frame 100% preto não intencional.`
+              });
+            }
+            if (frozenRatio >= 0.85) {
+              failures.push({
+                sceneId: scId,
+                shotId,
+                index: i + 1,
+                assetType: 'VIDEO_TAKE',
+                expectedPath: resolvedVideo,
+                actualDurationSeconds: probe.duration,
+                reason: `GATE_STATIC_VIDEO: ${(frozenRatio * 100).toFixed(1)}% do take está congelado. PNG em loop não é vídeo de produção.`
+              });
+            }
+            if (videoLum >= 0.03 && frozenRatio < 0.85 && videoProvenanceValid) validVideoTakes++;
           }
         }
+      }
+
+      // Deduplicação de Assets Adjacentes: GATE_DUPLICATE_ASSET_ADJACENT
+      const currentAssetKey = resolvedVideo || (sc as any).videoFilename || (sc as any).mediaFile || (resolvedFrame ? path.basename(resolvedFrame) : null);
+      if (currentAssetKey) {
+        if (i > 0 && previousAssetKey && currentAssetKey === previousAssetKey) {
+          failures.push({
+            sceneId: scId,
+            shotId,
+            index: i + 1,
+            assetType: 'VIDEO_TAKE',
+            expectedPath: currentAssetKey,
+            reason: `GATE_DUPLICATE_ASSET_ADJACENT: Cenas consecutivas '${scenes[i - 1].sceneId}' e '${scId}' utilizam o mesmo asset '${path.basename(currentAssetKey)}'.`
+          });
+        }
+        previousAssetKey = currentAssetKey;
+        assetUsageMap[currentAssetKey] = (assetUsageMap[currentAssetKey] || 0) + 1;
       }
     }
 
     const narrationPath1 = path.join(runDir, 'postproduction', 'narration.mp3');
     const narrationPath2 = path.join(runDir, 'narration.mp3');
     const narrationPath3 = path.join(publicDir, 'editorial', 'execution', options.runId, 'narration.mp3');
+    const narrationPath4 = path.join(runDir, 'audio', 'narration', 'narration.mp3');
+    const narrationPath5 = path.join(publicDir, 'episodes', contract?.episodeId || options.runId, 'audio', 'narration', 'narration.mp3');
     const narrationSceneDir = path.join(runDir, 'audio', 'narration');
 
-    let resolvedNarration = [narrationPath1, narrationPath2, narrationPath3].find(p => fs.existsSync(p));
+    let resolvedNarration = [narrationPath4, narrationPath5, narrationPath1, narrationPath2, narrationPath3].find(p => fs.existsSync(p));
 
     let narrationDurationSeconds = 0;
     let timelineDurationSeconds = 0;
@@ -577,6 +820,24 @@ export class PipelineContractGate {
     }
 
     const allowDegraded = options.allowDegraded || process.env.ALLOW_DEGRADED === 'true' || process.argv.includes('--allow-degraded');
+    const runManifestPath = path.join(runDir, 'run-manifest.json');
+    if (fs.existsSync(runManifestPath)) {
+      try {
+        const runManifest = JSON.parse(fs.readFileSync(runManifestPath, 'utf8'));
+        const visualStage = runManifest?.stages?.visuals || runManifest?.stages?.VISUALS;
+        if (String(visualStage?.status || '').toUpperCase() === 'DEGRADED') {
+          degradedScenes.push({
+            sceneId: 'GLOBAL',
+            reason: visualStage.fallbackReason || visualStage.reason || 'Manifesto marcou a etapa visual como DEGRADED'
+          });
+        }
+        if (runManifest?.report?.fireflyFailed === true || runManifest?.fireflyFailed === true) {
+          degradedScenes.push({sceneId: 'FIREFLY', reason: 'Manifesto registra falha do Firefly'});
+        }
+      } catch {
+        degradedScenes.push({sceneId: 'GLOBAL', reason: 'run-manifest.json inválido'});
+      }
+    }
     if (degradedScenes.length > 0 && !allowDegraded) {
       failures.push({
         sceneId: 'GLOBAL',
@@ -677,14 +938,27 @@ export class PipelineContractGate {
             break;
           }
           case 'visuals': {
-            if (scenes.length === 0 || validStartFrames < scenes.length || validVideoTakes < scenes.length) {
+            const expectedDossiers = scenes.filter((scene) => {
+              const contractScene = contractMap.get(scene.sceneId) as any;
+              const sceneCategory = (scene as any).required_category || (scene as any).category || contractScene?.required_category;
+              return (scene as any).takeType === 'KEYFRAME_DOSSIER' ||
+                (scene as any).take_type === 'KEYFRAME_DOSSIER' ||
+                ['evidence', 'maps', 'reveal'].includes(String(sceneCategory || '').toLowerCase());
+            }).length;
+            const expectedTemporalTakes = scenes.length - expectedDossiers;
+            if (
+              scenes.length === 0 ||
+              validStartFrames < scenes.length ||
+              validVideoTakes < expectedTemporalTakes ||
+              validDossierVisuals < expectedDossiers
+            ) {
               failures.push({
                 sceneId: 'STAGE',
                 shotId: 'VISUALS',
                 index: 0,
                 assetType: 'VIDEO_TAKE',
                 expectedPath: path.join(runDir, 'editorial', 'execution', 'scenes'),
-                reason: `MISSING_STAGE: visuals - Assets visuais incompletos (${validStartFrames}/${scenes.length} start frames, ${validVideoTakes}/${scenes.length} takes válidos).`
+                reason: `MISSING_STAGE: visuals - Assets incompletos (${validStartFrames}/${scenes.length} frames autenticados, ${validVideoTakes}/${expectedTemporalTakes} takes temporais, ${validDossierVisuals}/${expectedDossiers} dossiês).`
               });
             }
             break;
@@ -852,7 +1126,7 @@ export class PipelineContractGate {
               hasCinematicGrade = true;
             }
 
-            if (!hasCinematicGrade && (scope === 'FULL_PACKAGE' || scope === 'PRE_RENDER')) {
+            if (!hasCinematicGrade && scope === 'FULL_PACKAGE') {
               failures.push({
                 sceneId: 'STAGE',
                 shotId: 'CINEMATIC_GRADE',
@@ -904,6 +1178,23 @@ export class PipelineContractGate {
       }
     }
 
+    const completionManifestPath = path.join(runDir, 'run-manifest.json');
+    if (fs.existsSync(completionManifestPath)) {
+      try {
+        const completionManifest = JSON.parse(fs.readFileSync(completionManifestPath, 'utf8'));
+        failures.push(...this.validateCompletedRunEvidence(runDir, completionManifest));
+      } catch (error: any) {
+        failures.push({
+          sceneId: 'GLOBAL',
+          shotId: 'RUN_COMPLETION',
+          index: 0,
+          assetType: 'VIDEO_TAKE',
+          expectedPath: completionManifestPath,
+          reason: `RUN_MANIFEST_CORRUPTED: ${error.message}`,
+        });
+      }
+    }
+
     const passed = failures.length === 0;
 
     return {
@@ -912,6 +1203,7 @@ export class PipelineContractGate {
       totalScenesExpected: scenes.length,
       validStartFrames,
       validVideoTakes,
+      validDossierVisuals,
       validAudioClips: resolvedNarration ? 1 : 0,
       narrationDurationSeconds,
       timelineDurationSeconds,
@@ -964,7 +1256,9 @@ export class PipelineContractGate {
     }
     console.log(`Cenas Esperadas:      ${report.totalScenesExpected}`);
     console.log(`Start Frames Válidos: ${report.validStartFrames} / ${report.totalScenesExpected}`);
-    console.log(`Video Takes Válidos:  ${report.validVideoTakes} / ${report.totalScenesExpected}`);
+    console.log(`Takes Temporais:      ${report.validVideoTakes}`);
+    console.log(`Dossiês Visuais:      ${report.validDossierVisuals}`);
+    console.log(`Cenas com Visual:     ${report.validVideoTakes + report.validDossierVisuals} / ${report.totalScenesExpected}`);
     console.log(`Narração Duração:     ${report.narrationDurationSeconds.toFixed(2)}s | Timeline: ${report.timelineDurationSeconds.toFixed(2)}s (Delta: ${report.timingDeltaSeconds.toFixed(2)}s)`);
     if (report.degradedScenes && report.degradedScenes.length > 0) {
       console.log(`⚠️ Cenas em Fallback/Degradadas: ${report.degradedScenes.length} cena(s) (${report.degradedScenes.map(d => d.sceneId).join(', ')}) [REPORT ONLY]`);

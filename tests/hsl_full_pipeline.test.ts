@@ -76,7 +76,7 @@ test('complete editorial and cinematic chain produces approved execution contrac
       if (shot.visual_mode === 'generated_ai') {
         assert.equal(shot.visual_identity_contract_version, HSL_VISUAL_IDENTITY_CONTRACT_VERSION);
         assert.equal(shot.required_visual_reference_set, HSL_PREMIUM_MOTION_REFERENCE_SET.name);
-        assert.match(shot.start_frame_prompt, /HSL_VISUAL_IDENTITY_V2/);
+        assert.match(shot.start_frame_prompt, /present-day on-location investigative documentary photography/i);
       }
       if (shot.visual_mode === 'remotion') {
         assert.equal(shot.motion_design.schema, 'hsl.motion-design.v2');
@@ -126,7 +126,7 @@ test('start-frame runtime requires physical 16:9 files, approval hashes and crea
       source_mode: 'REFERENCE_CONDITIONED_GENERATION',
       generator: 'TEST_REFERENCE_CONDITIONED_GENERATOR',
       identity_contract_version: HSL_VISUAL_IDENTITY_CONTRACT_VERSION,
-      reference_asset_ids: ['LAST_METERS']
+      reference_asset_ids: ['OBSERVATIONAL_FIELD']
     }))
   });
   const approvalPath = path.join(base, 'approval.json');
@@ -148,13 +148,20 @@ test('start-frame runtime requires physical 16:9 files, approval hashes and crea
   assert.deepEqual(prepared.jobNames, generatedShotIds.map((shotId) => `${shotId}_TAKE_01`));
   const guide = JSON.parse(fs.readFileSync(prepared.masterGuidePath, 'utf8'));
   assert.equal(guide.aspect_ratio, '16:9');
-  assert.equal(guide.resolution, '720p');
+  assert.equal(guide.resolution, '1080p');
   assert.equal(guide.items.length, generatedShotIds.length);
   assert.match(guide.items[0].prompt, /provided first frame/i);
-  await assert.rejects(
-    new HslFireflyGenerationRuntime().dispatch('HSL-E2E-TEST', prepared, {} as never),
-    /HSL_PAID_FIREFLY_DISPATCH_NOT_AUTHORIZED/
-  );
+  const previousPaidDispatch = process.env.HSL_ALLOW_PAID_FIREFLY_DISPATCH;
+  delete process.env.HSL_ALLOW_PAID_FIREFLY_DISPATCH;
+  try {
+    await assert.rejects(
+      new HslFireflyGenerationRuntime().dispatch('HSL-E2E-TEST', prepared, {} as never),
+      /HSL_PAID_FIREFLY_DISPATCH_NOT_AUTHORIZED/
+    );
+  } finally {
+    if (previousPaidDispatch === undefined) delete process.env.HSL_ALLOW_PAID_FIREFLY_DISPATCH;
+    else process.env.HSL_ALLOW_PAID_FIREFLY_DISPATCH = previousPaidDispatch;
+  }
 });
 
 test('postproduction runtime renders a real Remotion documentary segment and passes ffprobe', async () => {

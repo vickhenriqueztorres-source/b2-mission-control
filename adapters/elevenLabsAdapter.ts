@@ -7,6 +7,9 @@ import { Logger } from '../event-hub/logger';
 import { AgentTelemetryAdapter } from './agentTelemetryAdapter';
 import { spawnSync } from 'child_process';
 
+export const OFFICIAL_CHRIS_VOICE_ID = 'iP95p4xoKVk53GoZ742B';
+export const OFFICIAL_ELEVENLABS_MODEL_ID = 'eleven_multilingual_v2';
+
 export interface ElevenLabsSynthesizeOptions {
   voiceId?: string;
   modelId?: string;
@@ -23,8 +26,14 @@ export class ElevenLabsAdapter extends BaseAdapter {
   constructor() {
     super('ElevenLabsAdapter');
     this.apiKey = process.env.ELEVENLABS_API_KEY || '';
-    this.voiceId = process.env.ELEVENLABS_VOICE_ID || 'iP95p4xoKVk53GoZ742B'; // Chris
-    this.modelId = process.env.ELEVENLABS_MODEL_ID || 'eleven_multilingual_v2';
+    this.voiceId = process.env.ELEVENLABS_VOICE_ID || OFFICIAL_CHRIS_VOICE_ID;
+    this.modelId = process.env.ELEVENLABS_MODEL_ID || OFFICIAL_ELEVENLABS_MODEL_ID;
+    if (this.voiceId !== OFFICIAL_CHRIS_VOICE_ID) {
+      throw new Error(`ELEVENLABS_OFFICIAL_CHRIS_REQUIRED:${this.voiceId}`);
+    }
+    if (this.modelId !== OFFICIAL_ELEVENLABS_MODEL_ID) {
+      throw new Error(`ELEVENLABS_OFFICIAL_MODEL_REQUIRED:${this.modelId}`);
+    }
     this.telemetry = AgentTelemetryAdapter.getInstance();
   }
 
@@ -46,6 +55,10 @@ export class ElevenLabsAdapter extends BaseAdapter {
   ): Promise<{ outputPath: string; durationSeconds: number }> {
     const voiceId = options?.voiceId || this.voiceId;
     const modelId = options?.modelId || this.modelId;
+    if (voiceId !== OFFICIAL_CHRIS_VOICE_ID || modelId !== OFFICIAL_ELEVENLABS_MODEL_ID) {
+      throw new Error('ELEVENLABS_OFFICIAL_CHRIS_CONFIGURATION_REQUIRED');
+    }
+    if (!this.apiKey) throw new Error('ELEVENLABS_API_KEY_REQUIRED');
     const stability = options?.stability ?? 0.50;
     const similarityBoost = options?.similarityBoost ?? 0.80;
 

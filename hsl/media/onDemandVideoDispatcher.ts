@@ -118,7 +118,7 @@ export class OnDemandVideoDispatcher {
       durationSeconds: options.durationSeconds || 8.0,
       fps: 30,
       resolution: '1920x1080',
-      colorTone: 'Chiaroscuro / Sodium Amber (#FF5500)',
+      colorTone: 'Chiaroscuro / Sodium Amber',
       recommendedMotion: options.recommendedMotion || 'slow_push_in',
       sha256,
       provenance: 'firefly_ai',

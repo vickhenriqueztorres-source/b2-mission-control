@@ -166,8 +166,8 @@ export class ImageRepositoryManager {
           const targetFrame = [framePath1, framePath2].find(p => fs.existsSync(p));
 
           if (targetFrame) {
-            let prompt = 'Denis Villeneuve 35mm Industrial X-Ray';
-            let tags: string[] = ['35mm', 'industrial', scId.toLowerCase()];
+            let prompt = 'Present-day on-location investigative documentary, natural Rec.709, practical available light';
+            let tags: string[] = ['documentary-field-v4', '35mm', scId.toLowerCase()];
 
             const receiptPath = path.join(sceneDir, 'start_frame_receipt.json');
             if (fs.existsSync(receiptPath)) {

@@ -7,6 +7,7 @@ import { ElevenLabsAdapter } from '../adapters/elevenLabsAdapter';
 import { PipelineContractGate } from '../pipeline/pipelineContractGate';
 import { PrdComplianceChecker } from '../pipeline/prdComplianceChecker';
 import { ArtifactRegistry } from '../pipeline/artifactRegistry';
+import { buildFireflyPrompt } from '../contracts/buildFireflyPrompt';
 
 const episodeId = 'OOL-EP04-GPS-TEMPO';
 const runDir = path.join(process.cwd(), 'runs', episodeId);
@@ -137,8 +138,8 @@ export const EPISODE_04_TIMELINE: SceneTimelineItem[] = ${JSON.stringify(sceneTi
 `;
   fs.writeFileSync(path.join(process.cwd(), 'remotion', 'episode04TimelineData.ts'), timelineTs, 'utf8');
 
-  // 3. Preparação dos Start Frames e Prompts 35mm Chiaroscuro
-  console.log('\n🖼️ [ETAPA 2/7] Prompts e Start Frames Denis Villeneuve 35mm...');
+  // 3. Preparacao dos start frames pela identidade global v4.
+  console.log('\n🖼️ [ETAPA 2/7] Prompts de Documentario de Campo Investigativo...');
   const fireflyItems: Array<{
     name: string;
     image: string;
@@ -154,11 +155,16 @@ export const EPISODE_04_TIMELINE: SceneTimelineItem[] = ${JSON.stringify(sceneTi
     const sceneDir = path.join(executionDir, sc.scene_id);
     fs.mkdirSync(sceneDir, { recursive: true });
 
-    // Salva o prompt mestre 35mm
-    const promptMaster = `Extreme cinematic 35mm anamorphic still from a Denis Villeneuve film, ${sc.visual_subject}, monumental scale, atmospheric chiaroscuro lighting, deep carbon blacks (#060709), illuminated by glowing sodium-vapor amber reflections (#FF5500) and sharp cyan laser telemetry lights (#00F0FF), dense volumetric fog and steam, wet reflective ground, shallow depth of field, creamy anamorphic bokeh, filmic texture, raw realistic industrial photography, 8k, no text, no human faces --ar 16:9`;
+    const promptMaster = buildFireflyPrompt({
+      sceneId: sc.scene_id,
+      visualSubject: sc.visual_subject,
+      visual_must_include: [sc.visual_subject],
+      visual_must_not: ['embedded readable text'],
+      required_category: 'documentary_field_evidence'
+    }).prompt;
     fs.writeFileSync(path.join(sceneDir, 'clean_start_frame_prompt.txt'), promptMaster, 'utf8');
 
-    const motionPrompt = `Slow cinematic dolly push-in, subtle 35mm anamorphic camera drift, gentle atmospheric volumetric haze moving, practical chiaroscuro reflections, smooth physical motion, no text, no human faces`;
+    const motionPrompt = 'Physical observational camera movement with subtle shoulder drift and human reframing, preserve the real subject and practical lighting, no permanent digital push-in, zoom loop, fake parallax, text or posed faces';
     fs.writeFileSync(path.join(sceneDir, 'firefly_motion_prompt.txt'), motionPrompt, 'utf8');
 
     fireflyItems.push({

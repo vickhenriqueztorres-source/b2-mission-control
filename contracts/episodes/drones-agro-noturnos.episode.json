@@ -1,0 +1,31 @@
+{
+  "episodeId": "drones-agro-noturnos",
+  "title": "Como os Drones Gigantes do Agro Operam Sozinhos à Noite",
+  "theme": "Operação noturna automatizada de drones agrícolas pesados",
+  "domainTags": [
+    "agriculture",
+    "drone",
+    "aerospace",
+    "autonomous",
+    "night-ops",
+    "precision-spraying",
+    "lidar",
+    "industrial"
+  ],
+  "targetDurationSeconds": 494.2300000000001,
+  "minDurationRatio": 0.9,
+  "minScenes": 50,
+  "requiredStages": [
+    "narration",
+    "visuals",
+    "sfx",
+    "music",
+    "mix",
+    "thumbnail",
+    "render",
+    "cinematic_grade"
+  ],
+  "voiceProfile": "ElevenLabs Chris iP95p4xoKVk53GoZ742B",
+  "musicMood": "cyber-industrial restrained",
+  "sfxDensity": "narrative sparse"
+}

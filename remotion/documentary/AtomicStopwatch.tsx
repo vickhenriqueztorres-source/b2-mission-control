@@ -12,10 +12,10 @@ export interface AtomicStopwatchProps {
 
 export const AtomicStopwatch: React.FC<AtomicStopwatchProps> = ({
   startMs = 0,
-  endMs = 1400,
+  endMs = 1000,
   durationInFrames = 60,
-  label = 'TEMPO DE LIQUIDAÇÃO ATÔMICA',
-  sublabel = 'DESDE O TOQUE ATÉ O CRÉDITO NA CONTA DESTINO'
+  label = '',
+  sublabel = ''
 }) => {
   const frame = useCurrentFrame();
 

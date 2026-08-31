@@ -16,10 +16,10 @@ export interface VlfSubmarineAntennaTraceProps {
  * soltando o cabo de transmissão que penetra nas águas até o submarino.
  */
 export const VlfSubmarineAntennaTrace: React.FC<VlfSubmarineAntennaTraceProps> = ({
-  title = 'PROPAGAÇÃO DE ONDAS VLF // PENETRAÇÃO OCEÂNICA',
-  altitudeLabel = 'ALTITUDE: 31.000 FT (CURVAS DE SUSTENTAÇÃO)',
-  oceanDepthLabel = 'PROFUNDIDADE: -120M (SUBMARINO SSBN)',
-  antennaLengthLabel = 'EXTENSÃO DO CABO: 5 MILHAS (8 KM)',
+  title = '',
+  altitudeLabel = '',
+  oceanDepthLabel = '',
+  antennaLengthLabel = '',
   accentColor = '#FF5500',
   telemetryColor = '#00F0FF'
 }) => {

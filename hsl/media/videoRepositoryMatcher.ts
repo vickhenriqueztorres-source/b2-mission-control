@@ -8,6 +8,7 @@ import {
   VideoMatchResult,
   VideoExecutionMode
 } from './types';
+import { MIN_RESOLUTION, STOCK_TAG_BLACKLIST, ALLOWED_COLOR_TONES } from '../../config/visualIdentity';
 
 export class VideoRepositoryMatcher {
   private static catalogCache: VideoCatalog | null = null;
@@ -177,7 +178,7 @@ export class VideoRepositoryMatcher {
    */
   /**
    * Realiza matching inteligente e governado de uma cena contra o repositório central
-   * com verificação estrita de fail-fast na ordem canônica.
+   * com verificação estrita de fail-fast na ordem canônica da identidade Dossiê do Sistema v3.0.
    */
   public static matchScene(
     request: VideoMatchRequest,
@@ -205,7 +206,6 @@ export class VideoRepositoryMatcher {
       };
     }
 
-    // matchText = subject + domainTags + must_include (NUNCA estilo Villeneuve)
     const substantiveQueryTokens = new Set([
       ...this.tokenize(request.visualSubject || ''),
       ...(request.domainTags || []).flatMap(t => this.tokenize(t)),
@@ -217,6 +217,10 @@ export class VideoRepositoryMatcher {
     const mustNotTokens = (request.visualMustNot || []).flatMap(t => this.tokenize(t));
     const domainTokens = (request.domainTags || []).flatMap(t => this.tokenize(t));
 
+    const usedAssetIdsSet = request.usedAssetIds
+      ? (request.usedAssetIds instanceof Set ? request.usedAssetIds : new Set(request.usedAssetIds))
+      : new Set<string>();
+
     let bestMatch: VideoCatalogEntry | null = null;
     let highestScore = 0;
     let highestRawScore = 0;
@@ -224,6 +228,8 @@ export class VideoRepositoryMatcher {
     let lastRejectionReason = 'BANK_CLIP_UNINDEXED: Nenhum clip compatível encontrado no banco.';
 
     for (const video of catalog.videos) {
+      if (!video || !video.filename) continue;
+
       // 1. BANK_CLIP_UNINDEXED (Arquivo físico não existe)
       const candidatePaths = [
         path.join(this.REPO_PATH, video.filename),
@@ -236,41 +242,92 @@ export class VideoRepositoryMatcher {
         continue;
       }
 
-      // Portão de Confiança & Procedência (Fail-Closed)
+      // 2. BANK_CLIP_LOW_RES: Resolução < MIN_RESOLUTION (1920x1080)
+      const [w, h] = (video.resolution || '').split('x').map(Number);
+      if (!w || !h || w < MIN_RESOLUTION.width || h < MIN_RESOLUTION.height) {
+        lastRejectionReason = `BANK_CLIP_LOW_RES: Clip '${video.id}' possui resolução '${video.resolution || 'indefinida'}' inferior ao mínimo exigido (${MIN_RESOLUTION.width}x${MIN_RESOLUTION.height}).`;
+        continue;
+      }
+
+      // 3. BANK_CLIP_STOCK_AESTHETIC: qualquer tag na STOCK_TAG_BLACKLIST
+      const allVideoTokens = new Set([
+        ...(video.tags || []).flatMap(t => this.tokenize(t)),
+        ...this.tokenize(video.description || '')
+      ]);
+      const blacklistedTag = STOCK_TAG_BLACKLIST.find(bt =>
+        allVideoTokens.has(bt.toLowerCase()) || (video.tags || []).some(t => t.toLowerCase() === bt.toLowerCase())
+      );
+      if (blacklistedTag) {
+        lastRejectionReason = `BANK_CLIP_STOCK_AESTHETIC: Clip '${video.id}' contém tag/estética de banco stock proibida ('${blacklistedTag}').`;
+        continue;
+      }
+
+      // 4. BANK_CLIP_BAD_TONE: colorTone fora de ALLOWED_COLOR_TONES
+      if (!video.colorTone) {
+        lastRejectionReason = `BANK_CLIP_BAD_TONE: Clip '${video.id}' não possui colorTone definido.`;
+        continue;
+      }
+      const normTone = video.colorTone.toLowerCase().replace(/[^a-z0-9\-]/g, ' ');
+      const toneTokens = this.tokenize(normTone);
+      const toneMatched = ALLOWED_COLOR_TONES.some(at =>
+        normTone.includes(at) || toneTokens.some(tt => at.includes(tt))
+      );
+      if (!toneMatched) {
+        lastRejectionReason = `BANK_CLIP_BAD_TONE: Clip '${video.id}' possui colorTone '${video.colorTone}' fora dos tons permitidos [${ALLOWED_COLOR_TONES.join(', ')}].`;
+        continue;
+      }
+
+      // 5. Portão de Confiança & Procedência (Fail-Closed)
       if (video.qaStatus !== 'approved') {
         lastRejectionReason = `BANK_CLIP_NOT_APPROVED: Clip '${video.id}' tem qaStatus '${video.qaStatus ?? 'ausente'}' (exigido: approved).`;
         continue;
       }
-      if (!video.provenance) {
-        lastRejectionReason = `BANK_CLIP_NO_PROVENANCE: Clip '${video.id}' sem procedência declarada.`;
+      if (!video.provenance || video.provenance.trim().length === 0) {
+        lastRejectionReason = `BANK_CLIP_NO_PROVENANCE: Clip '${video.id}' sem procedência declarada ou não auditada.`;
+        continue;
+      }
+
+      // 6. BANK_CLIP_NO_DOMAIN: Veto Temático Fail-Closed
+      if (!video.domains || video.domains.length === 0) {
+        lastRejectionReason = `BANK_CLIP_NO_DOMAIN: Clip '${video.id}' não possui domains declarados no catálogo.`;
+        continue;
+      }
+
+      // 7. BANK_CLIP_ALREADY_USED: Deduplicação
+      if (usedAssetIdsSet.has(video.id)) {
+        lastRejectionReason = `BANK_CLIP_ALREADY_USED: Clip '${video.id}' já foi utilizado em cena anterior neste episódio.`;
         continue;
       }
 
       const clipTagTokens = new Set([
         ...(video.tags || []).flatMap(t => this.tokenize(t)),
+        ...(video.domains || []).flatMap(d => this.tokenize(d)),
         ...this.tokenize(video.description || ''),
         ...this.tokenize(video.category || '')
       ]);
 
-      // 2. BANK_DOMAIN_MISMATCH (clip.tags ∩ episode.domainTags vazio)
+      const clipDomainTokens = new Set((video.domains || []).flatMap(d => this.tokenize(d)));
+
+      // 8. BANK_DOMAIN_MISMATCH (clip.domains ∩ episode.domainTags vazio)
       if (domainTokens.length > 0) {
-        const hasDomainOverlap = domainTokens.some(dt => clipTagTokens.has(dt));
+        const hasDomainOverlap = domainTokens.some(dt => clipDomainTokens.has(dt));
         if (!hasDomainOverlap) {
-          lastRejectionReason = `BANK_DOMAIN_MISMATCH: Clip '${video.id}' não possui interseção com domainTags do episódio [${domainTokens.join(', ')}].`;
+          lastRejectionReason = `BANK_DOMAIN_MISMATCH: Clip '${video.id}' com domínios [${(video.domains || []).join(', ')}] não possui interseção com domainTags do episódio [${domainTokens.join(', ')}].`;
           continue;
         }
       }
 
-      // 3. BANK_SUBJECT_MISS (clip.tags ∩ visual_must_include vazio)
+      // 9. BANK_SUBJECT_MISS (visual_must_include: TODOS os tokens presentes - AND estrito)
       if (mustIncludeTokens.length > 0) {
-        const hasSubjectOverlap = mustIncludeTokens.some(mit => clipTagTokens.has(mit));
-        if (!hasSubjectOverlap) {
-          lastRejectionReason = `BANK_SUBJECT_MISS: Clip '${video.id}' não contém nenhum dos termos obrigatórios [${mustIncludeTokens.join(', ')}].`;
+        const allMustIncludePresent = mustIncludeTokens.every(mit => clipTagTokens.has(mit));
+        if (!allMustIncludePresent) {
+          const missingTokens = mustIncludeTokens.filter(mit => !clipTagTokens.has(mit));
+          lastRejectionReason = `BANK_SUBJECT_MISS: Clip '${video.id}' não contém todos os termos obrigatórios (faltam: [${missingTokens.join(', ')}]).`;
           continue;
         }
       }
 
-      // 4. BANK_FORBIDDEN_TAG (clip.tags ∩ visual_must_not não vazio)
+      // 10. BANK_FORBIDDEN_TAG (clip.tags ∩ visual_must_not não vazio)
       if (mustNotTokens.length > 0) {
         const forbiddenFound = mustNotTokens.find(fnt => clipTagTokens.has(fnt));
         if (forbiddenFound) {
@@ -279,7 +336,7 @@ export class VideoRepositoryMatcher {
         }
       }
 
-      // 5. BANK_CATEGORY_MISS
+      // 11. BANK_CATEGORY_MISS
       if (request.requiredCategory) {
         const reqCat = request.requiredCategory.toLowerCase().trim();
         const vidCat = (video.category || '').toLowerCase().trim();
@@ -289,7 +346,7 @@ export class VideoRepositoryMatcher {
         }
       }
 
-      // 6. BANK_SCORE_LOW (cálculo substantivo)
+      // 12. Scoring substantivo sobre sobreviventes
       let score = 0;
       for (const tag of video.tags || []) {
         const normTag = tag.toLowerCase().trim();
@@ -334,7 +391,7 @@ export class VideoRepositoryMatcher {
       };
     }
 
-    // 7. BANK_SOURCE_NOT_ALLOWED
+    // 13. BANK_SOURCE_NOT_ALLOWED
     if (request.allowedSources && !request.allowedSources.includes('bank')) {
       return {
         sceneId: request.sceneId,
@@ -345,7 +402,7 @@ export class VideoRepositoryMatcher {
       };
     }
 
-    // 8. HIT
+    // 14. HIT
     return {
       sceneId: request.sceneId,
       matched: true,
@@ -451,7 +508,7 @@ export class VideoRepositoryMatcher {
   }
 
   /**
-   * Avalia todas as cenas de um plano de edição
+   * Avalia todas as cenas de um plano de edição com deduplicação de clipes
    */
   public static matchAllScenes(
     requests: VideoMatchRequest[],
@@ -462,7 +519,21 @@ export class VideoRepositoryMatcher {
     totalOnDemandNeeded: number;
     totalFallback: number;
   } {
-    const matchedResults = requests.map(req => this.matchScene(req, mode));
+    const usedAssetIds = new Set<string>();
+    const matchedResults: VideoMatchResult[] = [];
+
+    for (const req of requests) {
+      const result = this.matchScene({
+        ...req,
+        usedAssetIds
+      }, mode);
+
+      if (result.matched && result.videoEntry?.id) {
+        usedAssetIds.add(result.videoEntry.id);
+      }
+      matchedResults.push(result);
+    }
+
     const totalMatched = matchedResults.filter(r => r.recommendedAction === 'USE_MATCHED_VIDEO').length;
     const totalOnDemandNeeded = matchedResults.filter(r => r.recommendedAction === 'DISPATCH_FIREFLY_ON_DEMAND').length;
     const totalFallback = matchedResults.filter(r => r.recommendedAction === 'FALLBACK_REMOTION_PARALLAX').length;

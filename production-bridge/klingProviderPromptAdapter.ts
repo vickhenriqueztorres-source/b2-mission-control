@@ -1,6 +1,7 @@
 import crypto from 'crypto';
+import {GLOBAL_NEGATIVE, IDENTITY_SUFFIX} from '../config/visualIdentity';
 
-export const KLING_PROVIDER_PROMPT_ADAPTER_VERSION = 'hsl-kling-provider-prompt-adapter-v3';
+export const KLING_PROVIDER_PROMPT_ADAPTER_VERSION = 'hsl-documentary-field-provider-prompt-adapter-v4';
 
 export interface KlingPromptMotionPackage {
   shot_id: string;
@@ -50,15 +51,16 @@ export function adaptKlingProviderPrompt(
   const intent = buildIntent(motionPackage);
   const duration = Number(motionPackage.generation_duration_seconds);
   const providerPrompt = [
-    `Landscape 16:9 hyper-realistic ${duration}-second documentary visualization.`,
+    `Landscape 16:9 ${duration}-second present-day on-location documentary take.`,
     `Use the provided first frame as the exact visual starting point for ${motionPackage.shot_id}.`,
     `Primary action: ${intent.primaryAction}.`,
     `Start state: ${intent.startState}.`,
     `Motion change: ${String(motionPackage.motion_change || '').trim()}.`,
     `End state: ${intent.endState}.`,
-    'Preserve the industrial structure, machine geometry, material scale, lighting direction and spatial relationships visible in the first frame.',
-    `Camera: ${intent.cameraIntent}. Denis Villeneuve 35mm anamorphic documentary cinematography, shallow depth of field, creamy bokeh, clean architectural framing.`,
-    'Carbon black (#060709) and deep steel (#0D0E15) chiaroscuro industrial palette with glowing sodium-vapor amber reflections (#FF5500) and sharp laser cyan telemetry lights (#00F0FF), dense volumetric fog and steam, slow continuous mechanical movement and hyper-realistic industrial textures.',
+    'Preserve the real structure, equipment geometry, material scale, practical lighting direction and spatial relationships visible in the first frame.',
+    `Camera: ${intent.cameraIntent}. Physical observational camera movement with subtle human reframing; no permanent digital push-in, zoom loop or fake parallax.`,
+    IDENTITY_SUFFIX,
+    `Avoid: ${GLOBAL_NEGATIVE.join(', ')}.`,
     'No human faces looking at camera. No presenter. No dialogue. No readable text, logos, brand marks, news graphics or fabricated documentary evidence.',
     'Do not add machinery, workers, locations or operations that are not required by the declared action or supported by the first frame.'
   ].join('\n\n');

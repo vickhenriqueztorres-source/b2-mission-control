@@ -4,7 +4,7 @@ export const HSL_BRAND = {
   tagline: 'O que acontece depois que você clica, compra, liga ou aperta.',
   secondaryTagline: 'Investigar. Revelar. Compreender.',
   promise: 'Revelar a infraestrutura invisível que opera 24/7 no Brasil, acompanhando uma única unidade do ponto de origem ao destino final.',
-  theme: 'Industrial X-Ray',
+  theme: 'Documentario de Campo Investigativo',
   format: {
     aspectRatio: '16:9',
     master: { width: 3840, height: 2160, fps: 30 },
@@ -12,11 +12,11 @@ export const HSL_BRAND = {
     safeMarginPx1080: 64
   },
   colors: {
-    background: '#060709', // Carbon Black (base void)
+    background: '#060709', // Neutral deep black for natural negative space
     surface: 'rgba(255, 255, 255, 0.05)',
     surfaceBorder: 'rgba(255, 85, 0, 0.3)',
-    orange: '#FF5500', // Sodium-Vapor Orange (interior revelado, laser cut, gargalos)
-    cyan: '#00F0FF', // Laser Cyan (fluxo de dados, telemetria)
+    orange: '#FF5500', // Practical warm source or one evidence/risk accent
+    cyan: '#00F0FF', // Verified telemetry only
     frostedGlass: 'rgba(255, 255, 255, 0.08)',
     textPrimary: '#F4F4F5', // Titanium White (títulos e peso)
     textMuted: '#71717A', // Muted Slate (telemetria e suporte)
@@ -53,14 +53,14 @@ export const HSL_BRAND = {
 export const OUTRO_LADO_BRAND = HSL_BRAND;
 
 export const HSL_KLING_MODIFIER = [
-  'documentary cinematography',
-  '35mm anamorphic lens',
-  'dramatic moody lighting dominated by deep carbon black (#060709) and fiery sodium-vapor orange (#FF5500) glowing accents',
-  'subtle cyan highlights (#00F0FF)',
-  'volumetric steam and haze',
-  'slow controlled tracking shot',
-  'photorealistic metal textures',
-  'high dynamic range',
-  'no human faces visible',
-  'pristine cinematic framing --motion 3'
+  'present-day on-location investigative documentary',
+  'physical observational camera with a 35mm documentary lens',
+  'natural Rec.709 color, moderate contrast and readable shadows',
+  'practical available light preserved',
+  'fine irregular 35mm grain and subtle lamp-only halation',
+  'real atmosphere only when caused by dust, vapor, spray or weather',
+  'current commercially plausible equipment',
+  'no permanent digital push-in, zoom loop or fake parallax',
+  'no hologram, floating HUD, decorative laser, dominant neon or staged fog',
+  'no posed human faces, text or logos --motion 2'
 ].join(', ');

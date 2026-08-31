@@ -15,15 +15,10 @@ export interface TechnicalCutawaySchematicProps {
  * Esquema técnico 3D com corte transversal (Cutaway / X-Ray) e chamada HUD ancorada.
  */
 export const TechnicalCutawaySchematic: React.FC<TechnicalCutawaySchematicProps> = ({
-  systemTitle = 'BLOCO MEDIDOR HIDRÁULICO // 4 PISTÕES DE DESLOCAMENTO POSITIVO',
-  compartmentName = 'CÂMARA DE MEDIÇÃO VOLUMÉTRICA & ACOPLAMENTO MAGNÉTICO',
-  compartmentSpecs = [
-    'DESLOCAMENTO: 0,500 L POR CICLO COMPLETO',
-    'RESOLUÇÃO: 200 PULSOS POR LITRO (DISCO ÓPTICO)',
-    'TOLERÂNCIA INMETRO: ±0,5% (PORTARIA 559)',
-    'ACIONAMENTO: ACOPLAMENTO MAGNÉTICO BLINDADO'
-  ],
-  schematicTag = 'CORTE TRANSVERSAL METROLÓGICO // INMETRO',
+  systemTitle = '',
+  compartmentName = '',
+  compartmentSpecs = [],
+  schematicTag = '',
   accentColor = '#FF5500',
   telemetryColor = '#00F0FF'
 }) => {

@@ -155,12 +155,12 @@ export class VeoMotionDirectorAgent {
       'Do not add objects, people, logos, extra arrows or new text.',
       'Do not turn the shot into a flat diagram, title card, dark grid template or abstract UI screen.',
       'No cuts, morphing, explosive flare, excessive haze or particles covering the subject.',
-      'Keep blue infrastructure stable; move yellow only; use orange only for a constraint.',
+      'Preserve natural location color; orange may mark one constraint and cyan may appear only for verified telemetry.',
       'End in a clean readable state with the principal subject unobstructed.'
     ];
     const audio = this.audioIntent(input.family);
     const prompt = [
-      `Use the provided first frame image as the exact first frame of a ${duration}-second premium cinematic documentary motion graphic built on photoreal infrastructure, not a flat diagram.`,
+      `Use the provided first frame image as the exact first frame of a ${duration}-second present-day documentary evidence take built on a real photographed environment, not a flat diagram.`,
       `Motion language: ${input.family.replace(/_/g, ' ').toLowerCase()}.`,
       'Preserve the real scene, material texture, depth, lighting and camera plausibility; animate only the intended spatial flow or mechanism.',
       ...beats.map((beat, index) => `Beat ${index + 1} at ${beat.at_percent}%: ${beat.action}.`),
@@ -171,7 +171,7 @@ export class VeoMotionDirectorAgent {
     ].join(' ');
     return {
       model: 'Veo 3.1 Fast', status: 'VEO_MOTION_CONTRACT_READY', duration_seconds: duration,
-      resolution: '720p', aspect_ratio: '16:9',
+      resolution: '1080p', aspect_ratio: '16:9',
       generate_audio: input.audioStrategy === 'VEO_NATIVE' || input.audioStrategy === 'HYBRID',
       motion_family: input.family, beats,
       audio_intent: {include_dialogue: false, include_music: false, description: audio},
